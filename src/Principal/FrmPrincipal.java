@@ -7,7 +7,7 @@ package Principal;
 
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
-import SE.usuario.MostrarEmpleados;
+import SE.usuario.empleados.MostrarEmpleados;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 

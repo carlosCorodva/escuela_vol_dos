@@ -17,21 +17,22 @@ public class JoinEmpleados {
     private String cedula;
     private String direccion;
     private String convecional;
-    private Date fecha_nacimiento;
+    private String fecha_nacimiento;
     private String telefono_dos;
     private String correo;
     private String contrasena;
-    private Long estado;
+    private String estado;
     private Long copia_cedula;
     private Long servicio_basico;
     private Long copia_titulo;
     private Long id_rol;
     private String rol;
+    private String observacion;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, Date fecha_nacimiento, String telefono_dos, String correo, String contrasena, Long estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -47,7 +48,9 @@ public class JoinEmpleados {
         this.copia_titulo = copia_titulo;
         this.id_rol = id_rol;
         this.rol = rol;
+        this.observacion = observacion;
     }
+
 
     public Long getId_usuario() {
         return id_usuario;
@@ -89,14 +92,6 @@ public class JoinEmpleados {
         this.convecional = convecional;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
     public String getTelefono_dos() {
         return telefono_dos;
     }
@@ -119,14 +114,6 @@ public class JoinEmpleados {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public Long getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Long estado) {
-        this.estado = estado;
     }
 
     public Long getCopia_cedula() {
@@ -167,6 +154,30 @@ public class JoinEmpleados {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public String getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(String fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
     
 }

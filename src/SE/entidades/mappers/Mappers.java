@@ -27,12 +27,13 @@ public class Mappers {
             obj.setCopia_cedula(rs.getLong("Copia_cedula"));
             obj.setCorreo(rs.getString("Correo"));
             obj.setDireccion(rs.getString("Direccion"));
-            obj.setEstado(rs.getLong("Estado"));
-            obj.setFecha_nacimiento(rs.getDate("Fecha_nacimiento"));
+            obj.setEstado(rs.getString("Estado"));
+            obj.setFecha_nacimiento(rs.getString("Fecha_nacimiento"));
             obj.setId_rol(rs.getLong("Id_rol"));
             obj.setRol(rs.getString("Rol"));
             obj.setServicio_basico(rs.getLong("Servicio_basico"));
             obj.setTelefono_dos(rs.getString("Telefono_dos"));
+            obj.setCopia_titulo(rs.getLong("Copia_titulo"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);

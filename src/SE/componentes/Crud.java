@@ -62,12 +62,51 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call empleados() }");
+                    "{ call us_mostrar_empleados() }");
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);
                 valor.add(obj);
             }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String CrearEmpleado(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_crear_empleados(?,?,?,?,?,?,?,?,?,?,?,?)}");
+            pro.setString(1, us.getCedula());
+            pro.setString(2, us.getApellidos_nombres());
+            pro.setString(3, us.getDireccion());
+            pro.setString(4, us.getFecha_nacimiento());
+            pro.setString(5, us.getConvecional());
+            pro.setString(6, us.getTelefono_dos());
+            pro.setString(7, us.getCorreo());
+            pro.setString(8, us.getRol());
+            pro.setLong(9, us.getCopia_cedula());
+            pro.setLong(10, us.getCopia_titulo());
+            pro.setString(11, us.getObservacion());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
             con.commit();
         } catch (Exception e) {
             try {
