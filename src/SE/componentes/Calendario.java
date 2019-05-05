@@ -22,4 +22,8 @@ public class Calendario {
             return null;
         }
     }
+
+    public void setFormato(SimpleDateFormat Formato) {
+        this.Formato = Formato;
+    }
 }

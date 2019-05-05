@@ -8,9 +8,11 @@ package SE.componentes;
 import SE.entidades.join.JoinEmpleados;
 import java.util.ArrayList;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -29,31 +31,38 @@ public class Tablas {
 
     }
     
+    public static void filtro(String valor, JTable Tabla) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        Tabla.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + valor));
+    }
+    
     public static void cargarJoinUsuario(JTable Tabla, ArrayList<JoinEmpleados> lista) {
 
-        int[] a = {10, 30, 150, 72, 20, 70, 30};
+        int[] a = {10, 30, 150, 72, 20, 70, 30,30};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"CÓDIGO","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
-            "CORREO", "CARGO"};
-        String[] Filas = new String[7];
+        String[] Co = {"        CÓDIGO","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
+            "CORREO", "CARGO","     ESTADO"};
+        String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = "" + lista.get(i).getId_usuario().toString();
+            Filas[0] = "" + lista.get(i).getId_usuario();
             Filas[2] = lista.get(i).getApellidos_nombres();
             Filas[1] = lista.get(i).getCedula();
             Filas[3] = lista.get(i).getDireccion();
             Filas[4] = lista.get(i).getConvecional();
             Filas[5] = lista.get(i).getCorreo();
             Filas[6] = lista.get(i).getRol();
+            Filas[7] = lista.get(i).getEstado();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
-            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
             Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
@@ -66,6 +75,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr1);
         }
     }
 }

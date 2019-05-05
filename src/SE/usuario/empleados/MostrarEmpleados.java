@@ -8,7 +8,11 @@ package SE.usuario.empleados;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,14 +25,18 @@ public class MostrarEmpleados extends javax.swing.JDialog {
      */
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> listar = null;
-    
+    ArrayList<JoinEmpleados> listar2 = null;
+    JoinEmpleados objeto = null;
+
     public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
-        listar = crud.listarEmpleados();
-        Tablas.cargarJoinUsuario(jTable1, listar);
+        listar = crud.listarEmpleadosActivos();
+        Tablas.cargarJoinUsuario(jtEmpleados, listar);
+        btnBuscar.setEnabled(false);
+        txtBuscar.setEnabled(false);
     }
 
     /**
@@ -42,20 +50,23 @@ public class MostrarEmpleados extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jtEmpleados = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
+        btnBuscar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        cbFiltro = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtEmpleados.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -66,26 +77,32 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 76, Short.MAX_VALUE)
-        );
+        jtEmpleados.setRowHeight(25);
+        jtEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtEmpleadosMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtEmpleados);
 
         jToolBar1.setRollover(true);
 
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/buscar32.png"))); // NOI18N
+        btnBuscar.setText("  BUSCAR  ");
+        btnBuscar.setFocusable(false);
+        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnBuscar);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
-        jButton4.setText("NUEVO");
+        jButton4.setText("  NUEVO  ");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -96,15 +113,17 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         });
         jToolBar1.add(jButton4);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado_32.png"))); // NOI18N
-        jButton2.setText("ELIMINAR");
+        jButton2.setText("  ELIMINAR  ");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir_32.png"))); // NOI18N
-        jButton1.setText("SALIR");
+        jButton1.setText("  SALIR  ");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,29 +134,66 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         });
         jToolBar1.add(jButton1);
 
+        jLabel1.setBackground(new java.awt.Color(0, 51, 204));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("USUARIOS");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel1.setOpaque(true);
+
+        txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+
+        cbFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "ACTIVO", "INACTIVO", "CODIGO", "CEDULA", "APELLIDOS/NOMB" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,15 +211,148 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
+        int r = JOptionPane.showConfirmDialog(null, "¿Desea salir del módulo usuario?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        } else {
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true);
         ne.setVisible(true);
-        listar = crud.listarEmpleados();
-        Tablas.cargarJoinUsuario(jTable1, listar);
+        listar = crud.listarEmpleadosActivos();
+        Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    public JoinEmpleados devuelveObjetoEmpleado(String datos, ArrayList<JoinEmpleados> listarobj) {
+        JoinEmpleados objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
+
+    private void jtEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpleadosMousePressed
+        int i = 0;
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtEmpleados.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    cbFiltro.setSelectedIndex(0);
+                    listar = crud.listarEmpleadosActivos();
+                    Tablas.cargarJoinUsuario(jtEmpleados, listar);
+                }
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jtEmpleadosMousePressed
+    public void filtro() {
+        JoinEmpleados je = new JoinEmpleados();
+        int pos = cbFiltro.getSelectedIndex();
+        String f = txtBuscar.getText();
+        try {
+            if (pos == 0) {
+                listar = crud.listarEmpleadosActivos();
+            }
+            if (pos == 1) {
+                listar = crud.listarEmpleadosActivos();
+
+            }
+            if (pos == 2) {
+                listar = crud.listarEmpleadosInactivos();
+            }
+            if (pos == 3) {
+                je.setId_usuario(Long.valueOf(f));
+                listar = crud.filtroEmpleadoId(je);
+                txtBuscar.setText("");
+            }
+            if (pos == 4) {
+                je.setCedula(f);
+                listar = crud.filtroEmpleadoCedula(je);
+                txtBuscar.setText("");
+            }
+            if (pos == 5) {
+                je.setApellidos_nombres(f);
+                listar = crud.filtroEmpleadoApeNomb(je);
+                txtBuscar.setText("");
+            }
+            Tablas.cargarJoinUsuario(jtEmpleados, listar);
+        } catch (Exception e) {
+            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
+        int pos = cbFiltro.getSelectedIndex();
+        if (pos == 0) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(false);
+            btnBuscar.setEnabled(false);
+            listar = crud.listarEmpleadosActivos();
+        }
+        if (pos == 1) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(false);
+            btnBuscar.setEnabled(false);
+            listar = crud.listarEmpleadosActivos();
+
+        }
+        if (pos == 2) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(false);
+            btnBuscar.setEnabled(false);
+            listar = crud.listarEmpleadosInactivos();
+        }
+        if (pos == 3) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(true);
+            btnBuscar.setEnabled(true);
+            listar = crud.listarEmpleadosActivos();
+        }
+        if (pos == 4) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(true);
+            btnBuscar.setEnabled(true);
+            listar = crud.listarEmpleadosActivos();
+        }
+        if (pos == 5) {
+            txtBuscar.setText("");
+            txtBuscar.setEnabled(true);
+            btnBuscar.setEnabled(true);
+            listar = crud.listarEmpleadosActivos();
+        }
+        Tablas.cargarJoinUsuario(jtEmpleados, listar);
+    }//GEN-LAST:event_cbFiltroActionPerformed
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        filtro();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            filtro();
+        }
+    }//GEN-LAST:event_txtBuscarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -209,13 +398,16 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTable jtEmpleados;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

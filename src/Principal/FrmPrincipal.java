@@ -8,6 +8,7 @@ package Principal;
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
 import SE.usuario.empleados.MostrarEmpleados;
+import SE.usuario.empleados.NuevoEmpleado;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
@@ -129,13 +130,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        MostrarEmpleados mu = new MostrarEmpleados(new javax.swing.JFrame(), true);
-        mu.setVisible(true);
+        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true);
+        ne.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados mu = new MostrarEmpleados(new javax.swing.JFrame(), true);
-        mu.setVisible(true);
+        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true);
+        me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
