@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.empleados;
+package SE.usuario.matriculas;
 
+import SE.usuario.empleados.*;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class MostrarEmpleados extends javax.swing.JDialog {
+public class MostrarAlumnos extends javax.swing.JDialog {
 
     /**
      * Creates new form MostrarUsuario
@@ -28,7 +29,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     ArrayList<JoinEmpleados> listar2 = null;
     JoinEmpleados objeto = null;
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
+    public MostrarAlumnos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -101,7 +102,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         jToolBar1.add(btnBuscar);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/usuario32_2.png"))); // NOI18N
         jButton4.setText("  NUEVO  ");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -143,7 +144,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("USUARIOS");
+        jLabel1.setText("MATRICULACIÓN");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setOpaque(true);
 
@@ -158,7 +159,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         });
 
         cbFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "ACTIVO", "INACTIVO", "CODIGO", "CEDULA", "APELLIDOS/NOMB" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "CODIGO", "MATRICULA", "APELLIDOS/NOMB", "CEDULA" }));
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -259,7 +260,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
 
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarAlumnos.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtEmpleadosMousePressed
     public void filtro() {
@@ -287,14 +288,9 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 listar = crud.filtroEmpleadoCedula(je);
                 txtBuscar.setText("");
             }
-            if (pos == 5) {
-                je.setApellidos_nombres(f);
-                listar = crud.filtroEmpleadoApeNomb(je);
-                txtBuscar.setText("");
-            }
             Tablas.cargarJoinUsuario(jtEmpleados, listar);
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarAlumnos.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -326,12 +322,6 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             listar = crud.listarEmpleadosActivos();
         }
         if (pos == 4) {
-            txtBuscar.setText("");
-            txtBuscar.setEnabled(true);
-            btnBuscar.setEnabled(true);
-            listar = crud.listarEmpleadosActivos();
-        }
-        if (pos == 5) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
@@ -394,21 +384,23 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarEmpleados dialog = new MostrarEmpleados(new javax.swing.JFrame(), true);
+                MostrarAlumnos dialog = new MostrarAlumnos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

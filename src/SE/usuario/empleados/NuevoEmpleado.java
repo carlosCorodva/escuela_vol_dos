@@ -9,6 +9,7 @@ import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -22,11 +23,9 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
-//    ArrayList<Usuario_S> listar = null;
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
     Calendario cal = new Calendario();
-//    ArrayList<Genero> lista1 = crud.listarGenero();
-//    ArrayList<Rol_U> lista2 = crud.listarRol();
+    String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "",es = "";
 
     /**
      * Creates new form Registrar
@@ -80,6 +79,17 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         jrRuc = new javax.swing.JRadioButton();
         lbRuc = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jcLenguaje = new javax.swing.JCheckBox();
+        jcMatematicas = new javax.swing.JCheckBox();
+        jcInformaticas = new javax.swing.JCheckBox();
+        jcCiencias = new javax.swing.JCheckBox();
+        jcEstudios = new javax.swing.JCheckBox();
+        jcIngles = new javax.swing.JCheckBox();
+        jcecArtistica = new javax.swing.JCheckBox();
+        jcEFisica = new javax.swing.JCheckBox();
+        jcProyectos = new javax.swing.JCheckBox();
+        jcDesarrollo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -199,6 +209,11 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
+        cbCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCargoActionPerformed(evt);
+            }
+        });
         cbCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbCargoKeyPressed(evt);
@@ -344,41 +359,120 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(45, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "MATERIAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        jcLenguaje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcLenguaje.setText("LENGUA Y LITERATURA");
+
+        jcMatematicas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcMatematicas.setText("MATEMATICAS");
+
+        jcInformaticas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcInformaticas.setText("INFORMATICA");
+
+        jcCiencias.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcCiencias.setText("CIENCIAS NATURALES");
+
+        jcEstudios.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcEstudios.setText("ESTUDIOS SOCIALES");
+
+        jcIngles.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcIngles.setText("INGLES");
+
+        jcecArtistica.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcecArtistica.setText("ED. CULT. Y ARTISTICA");
+
+        jcEFisica.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcEFisica.setText("EDUCACION FISICA");
+
+        jcProyectos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcProyectos.setText("PROYECTOS ESCOLARES");
+
+        jcDesarrollo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jcDesarrollo.setText("DES. HUM. INTEGRAL");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcLenguaje)
+                    .addComponent(jcMatematicas)
+                    .addComponent(jcInformaticas)
+                    .addComponent(jcCiencias)
+                    .addComponent(jcEstudios)
+                    .addComponent(jcIngles)
+                    .addComponent(jcecArtistica)
+                    .addComponent(jcEFisica)
+                    .addComponent(jcProyectos)
+                    .addComponent(jcDesarrollo))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jcLenguaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcMatematicas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcInformaticas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcCiencias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcEstudios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcIngles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcecArtistica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcEFisica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcProyectos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcDesarrollo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(224, 224, 224)
-                        .addComponent(btnSalir))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148)
+                .addComponent(btnSalir)
+                .addGap(303, 303, 303))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnGuardar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -503,7 +597,38 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
-    
+    public void cbox(boolean valor) {
+        jcCiencias.setSelected(valor);
+        jcDesarrollo.setSelected(valor);
+        jcEFisica.setSelected(valor);
+        jcEstudios.setSelected(valor);
+        jcInformaticas.setSelected(valor);
+        jcIngles.setSelected(valor);
+        jcLenguaje.setSelected(valor);
+        jcMatematicas.setSelected(valor);
+        jcProyectos.setSelected(valor);
+        jcecArtistica.setSelected(valor);
+    }
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+        int pos = cbCargo.getSelectedIndex();
+
+        if (pos == 0) {
+            cbox(false);
+        }
+        if (pos == 1) {
+            cbox(true);
+        }
+        if (pos == 2) {
+            cbox(true);
+        }
+        if (pos == 3) {
+            cbox(false);
+        }
+        if (pos == 4) {
+            cbox(false);
+        }
+    }//GEN-LAST:event_cbCargoActionPerformed
+
     public void Habilitar(boolean valor) {
         txtApellidos.setEnabled(valor);
         txtTelefono1.setEnabled(valor);
@@ -519,35 +644,47 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         cbxCopiaTitulo.setEnabled(valor);
         jrRuc.setEnabled(valor);
     }
-    
+
     public void Guardar() {
         String fecha = cal.getFecha(dtFecha);
-        String obs,cedula;
+        String obs, cedula;
         Long cc, ct;
+
+        if (jcCiencias.isSelected()==true) { cn = "A"; } else{ cn = "I"; }
+        if(jcDesarrollo.isSelected()==true) {dhi = "A";}else{dhi = "I";}
+        if(jcEFisica.isSelected()==true) {ef = "A";}else{ef = "I";}
+        if(jcEstudios.isSelected()==true) {es = "A";}else{es = "I";}
+        if(jcInformaticas.isSelected()==true) {inf = "A";}else{inf = "I"; }
+        if(jcIngles.isSelected()==true) {ing = "A";}else{ing = "I";}
+        if(jcLenguaje.isSelected()==true) {ll = "A";}else{ll = "I";}
+        if(jcMatematicas.isSelected()==true) { m = "A";}else{m = "I";}
+        if(jcProyectos.isSelected()==true) {pe = "A";}else{pe = "I";}
+        if(jcecArtistica.isSelected()==true) { eca = "A";}else{eca = "I";}
+        
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
             cc = Long.valueOf(0);
         }
-        
+
         if (cbxCopiaTitulo.isSelected()) {
             ct = Long.valueOf(1);
         } else {
             ct = Long.valueOf(0);
         }
-        
+
         if (txtObservacion.getText().length() < 1) {
             obs = "NUEVO USUARIO";
         } else {
             obs = txtObservacion.getText();
         }
-        
+
         if (jrRuc.isSelected()) {
-            cedula=txtCedula.getText()+lbRuc.getText();
+            cedula = txtCedula.getText() + lbRuc.getText();
         } else {
-            cedula=txtCedula.getText();
+            cedula = txtCedula.getText();
         }
-        
+
         if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
         } else if (txtTelefono1.getText().length() < 9) {
@@ -564,7 +701,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
             String nombApe = txtApellidos.getText() + " " + txtNombres.getText();
-            
+
             JoinEmpleados obj = new JoinEmpleados();
             obj.setApellidos_nombres(nombApe);
             obj.setCedula(cedula);
@@ -577,9 +714,25 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
+            
+            us_permiso_empleado us = new us_permiso_empleado();
+            us.setEstado_pe(ll);
+            us.setEstado_pe(m);
+            us.setEstado_pe(inf);
+            us.setEstado_pe(cn);
+            us.setEstado_pe(ing);
+            us.setEstado_pe(eca);
+            us.setEstado_pe(ef);
+            us.setEstado_pe(pe);
+            us.setEstado_pe(dhi);
+            us.setEstado_pe(es);
+            
             try {
                 String a = crud.CrearEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
+                
+                crud.CrearPermisosMaterias(us);
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
@@ -664,9 +817,20 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JCheckBox jcCiencias;
+    private javax.swing.JCheckBox jcDesarrollo;
+    private javax.swing.JCheckBox jcEFisica;
+    private javax.swing.JCheckBox jcEstudios;
+    private javax.swing.JCheckBox jcInformaticas;
+    private javax.swing.JCheckBox jcIngles;
+    private javax.swing.JCheckBox jcLenguaje;
+    private javax.swing.JCheckBox jcMatematicas;
+    private javax.swing.JCheckBox jcProyectos;
+    private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JRadioButton jrRuc;
     private javax.swing.JLabel lbRuc;
     private javax.swing.JTextField txtApellidos;
