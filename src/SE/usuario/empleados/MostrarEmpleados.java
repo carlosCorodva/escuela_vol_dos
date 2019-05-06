@@ -304,7 +304,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-            listar = crud.listarEmpleadosActivos();
+//            listar = crud.listarEmpleadosActivos();
         }
         if (pos == 1) {
             txtBuscar.setText("");

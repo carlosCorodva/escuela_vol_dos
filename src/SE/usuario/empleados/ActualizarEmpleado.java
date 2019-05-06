@@ -10,6 +10,7 @@ import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.componentes.Fecha;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
     Calendario cal = new Calendario();
     JoinEmpleados emp = null;
-    private Date fecha1 = null;
+    String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
      * Creates new form Registrar
@@ -205,6 +206,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
+        cbCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCargoActionPerformed(evt);
+            }
+        });
         cbCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbCargoKeyPressed(evt);
@@ -279,9 +285,9 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                                         .addComponent(jLabel7)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(2, 2, 2)
                                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(txtNombres))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,6 +635,37 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         fecha();
     }//GEN-LAST:event_btnAddActionPerformed
+    public void cbox(boolean valor) {
+        jcCiencias.setSelected(valor);
+        jcDesarrollo.setSelected(valor);
+        jcEFisica.setSelected(valor);
+        jcEstudios.setSelected(valor);
+        jcInformaticas.setSelected(valor);
+        jcIngles.setSelected(valor);
+        jcLenguaje.setSelected(valor);
+        jcMatematicas.setSelected(valor);
+        jcProyectos.setSelected(valor);
+        jcecArtistica.setSelected(valor);
+    }
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+//        int pos = cbCargo.getSelectedIndex();
+//
+////        if (pos == 0) {
+////            cbox(false);
+////        }
+//        if (pos == 1) {
+//            cbox(true);
+//        }
+//        if (pos == 2) {
+//            cbox(true);
+//        }
+//        if (pos == 3) {
+//            cbox(false);
+//        }
+//        if (pos == 4) {
+//            cbox(false);
+//        }
+    }//GEN-LAST:event_cbCargoActionPerformed
 
     public void Habilitar(boolean valor) {
         txtNombres.setEnabled(valor);
@@ -647,11 +684,74 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         cbEstado.setEnabled(valor);
         dtFecha.setEnabled(valor);
         btnAdd.setEnabled(valor);
+        
+        jcCiencias.setEnabled(valor);
+        jcDesarrollo.setEnabled(valor);
+        jcEFisica.setEnabled(valor);
+        jcEstudios.setEnabled(valor);
+        jcInformaticas.setEnabled(valor);
+        jcIngles.setEnabled(valor);
+        jcLenguaje.setEnabled(valor);
+        jcMatematicas.setEnabled(valor);
+        jcProyectos.setEnabled(valor);
+        jcecArtistica.setEnabled(valor);
     }
 
     public void Guardar() {
         String obs;
         Long cc, ct;
+
+        if (jcCiencias.isSelected() == true) {
+            cn = "A";
+        }if (jcCiencias.isSelected() == false){
+            cn = "I";
+        }
+        if (jcDesarrollo.isSelected() == true) {
+            dhi = "A";
+        }if (jcDesarrollo.isSelected() == false) {
+            dhi = "I";
+        }
+        if (jcEFisica.isSelected() == true) {
+            ef = "A";
+        }if (jcEFisica.isSelected() == false){
+            ef = "I";
+        }
+        if (jcEstudios.isSelected() == true) {
+            es = "A";
+        }if (jcEstudios.isSelected() == false){
+            es = "I";
+        }
+        if (jcInformaticas.isSelected() == true) {
+            inf = "A";
+        }if (jcInformaticas.isSelected() == false) {
+            inf = "I";
+        }
+        if (jcIngles.isSelected() == true) {
+            ing = "A";
+        }if (jcIngles.isSelected() == false) {
+            ing = "I";
+        }
+        if (jcLenguaje.isSelected() == true) {
+            ll = "A";
+        }if (jcLenguaje.isSelected() == false){
+            ll = "I";
+        }
+        if (jcMatematicas.isSelected() == true) {
+            m = "A";
+        }if (jcMatematicas.isSelected() == false){
+            m = "I";
+        }
+        if (jcProyectos.isSelected() == true) {
+            pe = "A";
+        }if (jcProyectos.isSelected() == false) {
+            pe = "I";
+        }
+        if (jcecArtistica.isSelected() == true) {
+            eca = "A";
+        }if (jcecArtistica.isSelected() == false) {
+            eca = "I";
+        }
+
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -699,9 +799,27 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             obj.setCopia_titulo(ct);
             obj.setEstado(cbEstado.getSelectedItem().toString());
             obj.setId_usuario(emp.getId_usuario());
+            
+            us_permiso_empleado us = new us_permiso_empleado();
+            us.setEstado_pe(ll);
+            us.setEstado_pe2(m);
+            us.setEstado_pe3(inf);
+            us.setEstado_pe4(cn);
+            us.setEstado_pe5(ing);
+            us.setEstado_pe6(eca);
+            us.setEstado_pe7(ef);
+            us.setEstado_pe8(pe);
+            us.setEstado_pe9(dhi);
+            us.setEstado_pe10(es);
+            us.setId_usuario(emp.getId_usuario());
+            
+            System.out.println(ll+m+inf+cn+ing+eca+ef+pe+dhi+es+emp.getId_usuario());
+            
             try {
                 String a = crud.ActualizarEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
+                
+                crud.ActualizarPermisosMaterias(us);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }

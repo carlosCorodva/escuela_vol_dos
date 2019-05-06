@@ -643,6 +643,17 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
         jrRuc.setEnabled(valor);
+        
+        jcCiencias.setEnabled(valor);
+        jcDesarrollo.setEnabled(valor);
+        jcEFisica.setEnabled(valor);
+        jcEstudios.setEnabled(valor);
+        jcInformaticas.setEnabled(valor);
+        jcIngles.setEnabled(valor);
+        jcLenguaje.setEnabled(valor);
+        jcMatematicas.setEnabled(valor);
+        jcProyectos.setEnabled(valor);
+        jcecArtistica.setEnabled(valor);
     }
 
     public void Guardar() {
@@ -717,15 +728,15 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
-            us.setEstado_pe(m);
-            us.setEstado_pe(inf);
-            us.setEstado_pe(cn);
-            us.setEstado_pe(ing);
-            us.setEstado_pe(eca);
-            us.setEstado_pe(ef);
-            us.setEstado_pe(pe);
-            us.setEstado_pe(dhi);
-            us.setEstado_pe(es);
+            us.setEstado_pe2(m);
+            us.setEstado_pe3(inf);
+            us.setEstado_pe4(cn);
+            us.setEstado_pe5(ing);
+            us.setEstado_pe6(eca);
+            us.setEstado_pe7(ef);
+            us.setEstado_pe8(pe);
+            us.setEstado_pe9(dhi);
+            us.setEstado_pe10(es);
             
             try {
                 String a = crud.CrearEmpleado(obj);

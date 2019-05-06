@@ -294,15 +294,52 @@ public class Crud {
             CallableStatement pro = con.prepareCall(
                     "{ call us_permisos_materias_crear(?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getEstado_pe());
-            pro.setString(2, us.getEstado_pe());
-            pro.setString(3, us.getEstado_pe());
-            pro.setString(4, us.getEstado_pe());
-            pro.setString(5, us.getEstado_pe());
-            pro.setString(6, us.getEstado_pe());
-            pro.setString(7, us.getEstado_pe());
-            pro.setString(8, us.getEstado_pe());
-            pro.setString(9, us.getEstado_pe());
-            pro.setString(10, us.getEstado_pe());
+            pro.setString(2, us.getEstado_pe2());
+            pro.setString(3, us.getEstado_pe3());
+            pro.setString(4, us.getEstado_pe4());
+            pro.setString(5, us.getEstado_pe5());
+            pro.setString(6, us.getEstado_pe6());
+            pro.setString(7, us.getEstado_pe7());
+            pro.setString(8, us.getEstado_pe8());
+            pro.setString(9, us.getEstado_pe9());
+            pro.setString(10, us.getEstado_pe10());
+            pro.executeUpdate();
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String ActualizarPermisosMaterias(us_permiso_empleado us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_permisos_materias_actualizar(?,?,?,?,?,?,?,?,?,?,?)}");
+            pro.setString(1, us.getEstado_pe());
+            pro.setString(2, us.getEstado_pe2());
+            pro.setString(3, us.getEstado_pe3());
+            pro.setString(4, us.getEstado_pe4());
+            pro.setString(5, us.getEstado_pe5());
+            pro.setString(6, us.getEstado_pe6());
+            pro.setString(7, us.getEstado_pe7());
+            pro.setString(8, us.getEstado_pe8());
+            pro.setString(9, us.getEstado_pe9());
+            pro.setString(10, us.getEstado_pe10());
+            pro.setLong(11, us.getId_usuario());
+            System.out.println(us.getEstado_pe());
             pro.executeUpdate();
             con.commit();
         } catch (Exception e) {
