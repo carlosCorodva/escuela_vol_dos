@@ -7,8 +7,10 @@ package Principal;
 
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
+import SE.entidades.join.JoinEmpleados;
 import SE.usuario.empleados.MostrarEmpleados;
 import SE.usuario.empleados.NuevoEmpleado;
+import SE.usuario.empleados.NuevoEmpleadoDos;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
@@ -22,17 +24,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     Variables fondo = new Variables();
-    private static final String TITLE = "Principal";
+    private static final String TITLE = "NOMBRE";
+    JoinEmpleados em = null;
     
-    public FrmPrincipal() {
+    public FrmPrincipal(JoinEmpleados emp) {
         initComponents();
         jToolBar1.setEnabled(false);
-        this.setTitle(fondo.getTitle() + TITLE );
+        this.setTitle(fondo.getTitle() + TITLE +"---USUARIO"+" ---"+emp.getUsuario()+"---");
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
+        lbNum.setText(emp.getId_usuario().toString());
+        lbUsuario.setText(emp.getUsuario());
+        em=emp;
 //        pnlBanner.setBackground(fondo.getColor());
+    }
+    public FrmPrincipal() {
+        initComponents();
     }
 
     /**
@@ -47,6 +56,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btnEmpleados = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lbUsuario = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbNum = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -77,6 +91,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("USUARIO: ");
+
+        lbUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbUsuario.setText("jLabel2");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("IDENTIFICADOR:");
+
+        lbNum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbNum.setText("   ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbNum, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbNum)
+                    .addComponent(jLabel1)
+                    .addComponent(lbUsuario)))
+        );
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -114,12 +166,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 546, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 519, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -130,12 +184,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true);
+        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true,em);
         ne.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true);
+        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true,em);
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -177,12 +231,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbNum;
+    private javax.swing.JLabel lbUsuario;
     // End of variables declaration//GEN-END:variables
 }

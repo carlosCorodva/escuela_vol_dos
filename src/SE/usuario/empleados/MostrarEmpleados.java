@@ -27,8 +27,9 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     ArrayList<JoinEmpleados> listar = null;
     ArrayList<JoinEmpleados> listar2 = null;
     JoinEmpleados objeto = null;
+    JoinEmpleados em = null;
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
+    public MostrarEmpleados(java.awt.Frame parent, boolean modal,JoinEmpleados empl) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -37,6 +38,12 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
         btnBuscar.setEnabled(false);
         txtBuscar.setEnabled(false);
+        lbId.setText(empl.getId_usuario().toString());
+        em=empl;
+    }
+    public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
     }
 
     /**
@@ -59,6 +66,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         cbFiltro = new javax.swing.JComboBox<>();
+        lbId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -165,6 +173,8 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             }
         });
 
+        lbId.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,11 +185,17 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbId)
+                        .addGap(86, 86, 86)))
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -187,7 +203,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,7 +211,9 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbId)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -224,7 +242,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true);
+        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true,em);
         ne.setVisible(true);
         listar = crud.listarEmpleadosActivos();
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
@@ -304,7 +322,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-//            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivos();
         }
         if (pos == 1) {
             txtBuscar.setText("");
@@ -431,6 +449,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable jtEmpleados;
+    private javax.swing.JLabel lbId;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

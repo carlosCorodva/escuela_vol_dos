@@ -30,15 +30,21 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public NuevoEmpleado(java.awt.Frame parent, boolean modal) {
+    public NuevoEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados emp) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         Habilitar(false);
         lbRuc.setText("   ");
+            lbId.setText(emp.getId_usuario().toString());
+//        lbId.setText(emp.getId_usuario().toString());
 //        imagenes();
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
+    }
+    public NuevoEmpleado(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
     }
 
     /**
@@ -90,6 +96,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         jcEFisica = new javax.swing.JCheckBox();
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
+        lbId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -434,6 +441,8 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lbId.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -446,7 +455,9 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addContainerGap(23, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addComponent(lbId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148)
                 .addComponent(btnSalir)
@@ -460,10 +471,15 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnGuardar))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalir)
+                            .addComponent(btnGuardar)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lbId)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -821,6 +837,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JRadioButton jrRuc;
+    private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbRuc;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;

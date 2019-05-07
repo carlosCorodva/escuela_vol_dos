@@ -5,55 +5,48 @@
  */
 package SE.usuario.empleados;
 
-import Principal.Calendar;
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
-import SE.componentes.Fecha;
-import SE.componentes.Tablas;
+import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author alumno
  */
-public class ActualizarEmpleado extends javax.swing.JDialog {
+public class NuevoEmpleadoDos extends javax.swing.JDialog {
 
-    //  || or;
+    //|| or;
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
-    ArrayList<us_permiso_empleado> listar = null;
     Calendario cal = new Calendario();
-    JoinEmpleados emp = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
      * Creates new form Registrar
+     *
+     * @param parent
+     * @param modal
      */
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
+    public NuevoEmpleadoDos(java.awt.Frame parent, boolean modal, JoinEmpleados emp) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         Habilitar(false);
+        lbRuc.setText("   ");
+        lbId.setText(emp.getId_usuario().toString());
+//        imagenes();
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
-        emp = empleado;
-        formulario();
-        tablaEstado();
-        chbx();
-        lbId.setText(empleado.getId_usuario().toString());
-        jtEstado.setVisible(false);
-        lbId.setVisible(false);
     }
 
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal) {
+    public NuevoEmpleadoDos(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -72,10 +65,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
         txtNombres = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        dtFecha = new com.toedter.calendar.JDateChooser();
         txtTelefono1 = new javax.swing.JTextField();
         txtTelefono2 = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
@@ -86,17 +80,14 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         cbCargo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        cbEstado = new javax.swing.JComboBox<>();
-        dtFecha = new com.toedter.calendar.JDateChooser();
-        txtFecha = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtEstado = new javax.swing.JTable();
+        jrRuc = new javax.swing.JRadioButton();
+        lbRuc = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jcLenguaje = new javax.swing.JCheckBox();
         jcMatematicas = new javax.swing.JCheckBox();
@@ -127,7 +118,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 
         btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
-        btnGuardar.setText("ACTUALIZAR");
+        btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -135,10 +126,10 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         });
 
         jLabel1.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ACTUALIZAR EMPLEADO");
+        jLabel1.setText("REGISTRAR EMPLEADO");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setOpaque(true);
 
@@ -147,24 +138,34 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("OBSERVACION");
 
-        txtCedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCedulaKeyTyped(evt);
+        txtNombres.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombresFocusLost(evt);
             }
         });
-
-        txtNombres.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombresKeyTyped(evt);
             }
         });
 
-        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtApellidos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidosFocusLost(evt);
+            }
+        });
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDireccionKeyTyped(evt);
+                txtApellidosKeyTyped(evt);
+            }
+        });
+
+        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusLost(evt);
             }
         });
 
@@ -185,6 +186,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         txtObservacion.setColumns(20);
         txtObservacion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtObservacion.setRows(5);
+        txtObservacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObservacionFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtObservacion);
 
         cbxCopiaCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -220,7 +226,10 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jLabel8.setText("CEDULA");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("APELIDOS Y NOMBRES");
+        jLabel9.setText("NOMBRES");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("APELLIDOS");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("DIRECCION");
@@ -234,15 +243,23 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("CORREO");
 
-        cbEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE ESTADO...", "ACTIVO", "INACTIVO" }));
-
-        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/add16.png"))); // NOI18N
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        jrRuc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jrRuc.setText("RUC");
+        jrRuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                jrRucActionPerformed(evt);
+            }
+        });
+
+        lbRuc.setText("       ");
+
+        txtCedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
             }
         });
 
@@ -253,56 +270,46 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel15))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txtTelefono1)
-                                    .addComponent(txtCedula))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel16))
-                                        .addGap(86, 86, 86)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTelefono2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                            .addComponent(txtCorreo)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(txtNombres))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxCopiaCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxCopiaTitulo)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                        .addComponent(jLabel8)
                         .addGap(18, 18, 18)
+                        .addComponent(jrRuc)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombres)
+                            .addComponent(txtApellidos)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel15))
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxCopiaCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxCopiaTitulo)
+                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
@@ -311,28 +318,23 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(37, 37, 37)
+                        .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxCopiaCedula)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxCopiaTitulo))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel9)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15)
-                            .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel16))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -340,55 +342,31 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                                 .addComponent(jLabel17))
                             .addComponent(jLabel11)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jrRuc)
+                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbRuc)
+                                .addComponent(jLabel7)))
+                        .addGap(13, 13, 13)
+                        .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxCopiaCedula))
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(cbxCopiaTitulo)
-                                .addGap(5, 5, 5)))))
+                        .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(45, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/desbloquear32.png"))); // NOI18N
-        jButton1.setText("HABILITAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jtEstado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jtEstado);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "MATERIAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -472,44 +450,40 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbId)
-                        .addGap(106, 106, 106)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(163, 163, 163)
-                        .addComponent(btnSalir)
-                        .addGap(226, 226, 226)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))))
+                .addGap(23, 23, 23)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(lbId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148)
+                .addComponent(btnSalir)
+                .addGap(303, 303, 303))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 20, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)
-                        .addComponent(lbId))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalir)
+                            .addComponent(btnGuardar)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lbId)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -526,102 +500,12 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void tablaEstado() {
-        us_permiso_empleado je = new us_permiso_empleado();
-        je.setId_usuario(Long.valueOf(lbId.getText()));
-        listar = crud.TablaEstadoChbx(je);
-        Tablas.cargarTablaEstadoChbx(jtEstado, listar);
-    }
-
-    public void chbx() {
-
-        String leng = "" + jtEstado.getValueAt(0, 0).toString();
-        String mat = "" + jtEstado.getValueAt(1, 0).toString();
-        String info = "" + jtEstado.getValueAt(2, 0).toString();
-        String cie = "" + jtEstado.getValueAt(3, 0).toString();
-        String est = "" + jtEstado.getValueAt(4, 0).toString();
-        String ingl = "" + jtEstado.getValueAt(5, 0).toString();
-        String ecart = "" + jtEstado.getValueAt(6, 0).toString();
-        String proe = "" + jtEstado.getValueAt(7, 0).toString();
-        String dhint = "" + jtEstado.getValueAt(8, 0).toString();
-        String efis = "" + jtEstado.getValueAt(9, 0).toString();
-        if ("A".equals(leng)) {
-//            System.out.println("chbx3");
-            jcLenguaje.setSelected(true);
-//            System.out.println("leng: " + jtEstado.getValueAt(0, 0));
-        }
-
-        if ("A".equals(mat)) {
-            jcMatematicas.setSelected(true);
-        }
-
-        if ("A".equals(info)) {
-            jcInformaticas.setSelected(true);
-        }
-
-        if ("A".equals(cie)) {
-            jcCiencias.setSelected(true);
-        }
-
-        if ("A".equals(est)) {
-            jcEstudios.setSelected(true);
-        }
-
-        if ("A".equals(ingl)) {
-            jcIngles.setSelected(true);
-        }
-
-        if ("A".equals(ecart)) {
-            jcecArtistica.setSelected(true);
-        }
-
-        if ("A".equals(proe)) {
-            jcEFisica.setSelected(true);
-        }
-
-        if ("A".equals(dhint)) {
-            jcProyectos.setSelected(true);
-        }
-
-        if ("A".equals(efis)) {
-            jcDesarrollo.setSelected(true);
-        }
-    }
-
-    public void formulario() {
-        lbId.setText(emp.getId_usuario().toString());
-        txtCedula.setText(emp.getCedula());
-        txtCorreo.setText(emp.getCorreo());
-        txtDireccion.setText(emp.getDireccion());
-        txtNombres.setText(emp.getApellidos_nombres());
-        txtObservacion.setText(emp.getObservacion());
-        txtTelefono1.setText(emp.getConvecional());
-        txtTelefono2.setText(emp.getTelefono_dos());
-        txtFecha.setText(emp.getFecha_nacimiento());
-        if ("ACTIVO".equals(emp.getEstado())) {
-            cbEstado.setSelectedItem("ACTIVO");
-        } else {
-            cbEstado.setSelectedItem("INACTIVO");
-        }
-        if (emp.getCopia_cedula() == 1) {
-            cbxCopiaCedula.setSelected(true);
-        }
-        if (emp.getCopia_titulo() == 1) {
-            cbxCopiaTitulo.setSelected(true);
-        }
-        if ("ADMINISTRADOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("ADMINISTRADOR/A");
-        }
-        if ("RECTOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("RECTOR/A");
-        }
-        if ("PROFESOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("PROFESOR/A");
-        }
-        if ("SECRETARIO/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("SECRETARIO/A");
-        }
-    }
+//    public void imagenes(){
+//        ImageIcon logo = new ImageIcon(getClass().getResource("/img/cliente.png"));
+//        Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
+//        lbImagen.setIcon(fondoLogo);
+//        this.repaint();
+//    }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Guardar();
@@ -631,6 +515,14 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
+        if (Validaciones.validarCedulaEmpedos(lista, txtCedula.getText())) {
+            Habilitar(true);
+        } else {
+            Habilitar(false);
+        }
+    }//GEN-LAST:event_txtCedulaKeyReleased
+
     private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
         char c = evt.getKeyChar();
         if (Character.isDigit(c)) {
@@ -639,13 +531,13 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtNombresKeyTyped
 
-    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+    private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
         char c = evt.getKeyChar();
         if (Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_txtDireccionKeyTyped
+    }//GEN-LAST:event_txtApellidosKeyTyped
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         char c = evt.getKeyChar();
@@ -679,16 +571,29 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbCargoKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Habilitar(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-    public void fecha() {
-        String fecha = cal.getFecha(dtFecha);
-        System.out.println(fecha);
-    }
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        fecha();
-    }//GEN-LAST:event_btnAddActionPerformed
+    private void jrRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrRucActionPerformed
+        if (jrRuc.isSelected()) {
+            lbRuc.setText("001");
+        } else {
+            lbRuc.setText("   ");
+        }
+    }//GEN-LAST:event_jrRucActionPerformed
+
+    private void txtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombresFocusLost
+        txtNombres.setText(txtNombres.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombresFocusLost
+
+    private void txtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidosFocusLost
+        txtApellidos.setText(txtApellidos.getText().toUpperCase());
+    }//GEN-LAST:event_txtApellidosFocusLost
+
+    private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
+        txtDireccion.setText(txtDireccion.getText().toUpperCase());
+    }//GEN-LAST:event_txtDireccionFocusLost
+
+    private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
+        txtObservacion.setText(txtObservacion.getText().toUpperCase());
+    }//GEN-LAST:event_txtObservacionFocusLost
     public void cbox(boolean valor) {
         jcCiencias.setSelected(valor);
         jcDesarrollo.setSelected(valor);
@@ -702,42 +607,39 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jcecArtistica.setSelected(valor);
     }
     private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-//        int pos = cbCargo.getSelectedIndex();
-//
-////        if (pos == 0) {
-////            cbox(false);
-////        }
-//        if (pos == 1) {
-//            cbox(true);
-//        }
-//        if (pos == 2) {
-//            cbox(true);
-//        }
-//        if (pos == 3) {
-//            cbox(false);
-//        }
-//        if (pos == 4) {
-//            cbox(false);
-//        }
+        int pos = cbCargo.getSelectedIndex();
+
+        if (pos == 0) {
+            cbox(false);
+        }
+        if (pos == 1) {
+            cbox(true);
+        }
+        if (pos == 2) {
+            cbox(true);
+        }
+        if (pos == 3) {
+            cbox(false);
+        }
+        if (pos == 4) {
+            cbox(false);
+        }
     }//GEN-LAST:event_cbCargoActionPerformed
 
     public void Habilitar(boolean valor) {
-        txtNombres.setEnabled(valor);
+        txtApellidos.setEnabled(valor);
         txtTelefono1.setEnabled(valor);
         txtTelefono2.setEnabled(valor);
         txtCorreo.setEnabled(valor);
         txtDireccion.setEnabled(valor);
         txtObservacion.setEnabled(valor);
         txtNombres.setEnabled(valor);
-        txtFecha.setEnabled(valor);
+        dtFecha.setEnabled(valor);
         cbCargo.setEnabled(valor);
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
-        txtCedula.setEnabled(valor);
-        cbEstado.setEnabled(valor);
-        dtFecha.setEnabled(valor);
-        btnAdd.setEnabled(valor);
+        jrRuc.setEnabled(valor);
 
         jcCiencias.setEnabled(valor);
         jcDesarrollo.setEnabled(valor);
@@ -752,67 +654,58 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     }
 
     public void Guardar() {
-        String obs;
+        String fecha = cal.getFecha(dtFecha);
+        String obs, cedula;
         Long cc, ct;
 
         if (jcCiencias.isSelected() == true) {
             cn = "A";
-        }
-        if (jcCiencias.isSelected() == false) {
+        } else {
             cn = "I";
         }
         if (jcDesarrollo.isSelected() == true) {
             dhi = "A";
-        }
-        if (jcDesarrollo.isSelected() == false) {
+        } else {
             dhi = "I";
         }
         if (jcEFisica.isSelected() == true) {
             ef = "A";
-        }
-        if (jcEFisica.isSelected() == false) {
+        } else {
             ef = "I";
         }
         if (jcEstudios.isSelected() == true) {
             es = "A";
-        }
-        if (jcEstudios.isSelected() == false) {
+        } else {
             es = "I";
         }
         if (jcInformaticas.isSelected() == true) {
             inf = "A";
-        }
-        if (jcInformaticas.isSelected() == false) {
+        } else {
             inf = "I";
         }
         if (jcIngles.isSelected() == true) {
             ing = "A";
-        }
-        if (jcIngles.isSelected() == false) {
+        } else {
             ing = "I";
         }
         if (jcLenguaje.isSelected() == true) {
             ll = "A";
-        }
-        if (jcLenguaje.isSelected() == false) {
+        } else {
             ll = "I";
         }
         if (jcMatematicas.isSelected() == true) {
             m = "A";
-        }
-        if (jcMatematicas.isSelected() == false) {
+        } else {
             m = "I";
         }
         if (jcProyectos.isSelected() == true) {
             pe = "A";
-        }
-        if (jcProyectos.isSelected() == false) {
+        } else {
             pe = "I";
         }
         if (jcecArtistica.isSelected() == true) {
             eca = "A";
-        }
-        if (jcecArtistica.isSelected() == false) {
+        } else {
             eca = "I";
         }
 
@@ -821,20 +714,27 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         } else {
             cc = Long.valueOf(0);
         }
+
         if (cbxCopiaTitulo.isSelected()) {
             ct = Long.valueOf(1);
         } else {
             ct = Long.valueOf(0);
         }
+
         if (txtObservacion.getText().length() < 1) {
             obs = "NUEVO USUARIO";
         } else {
             obs = txtObservacion.getText();
         }
-        if (cbEstado.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un estado valido");
-        } else if (txtNombres.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "Ingrese un nombre y apellido válido ");
+
+        if (jrRuc.isSelected()) {
+            cedula = txtCedula.getText() + lbRuc.getText();
+        } else {
+            cedula = txtCedula.getText();
+        }
+
+        if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
         } else if (txtTelefono1.getText().length() < 9) {
             JOptionPane.showMessageDialog(null, "Ingrese un número de contacto válido ");
         } else if (txtTelefono1.getText().length() > 12) {
@@ -845,24 +745,23 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingrese una dirección válida ");
         } else if (cbCargo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un cargo válido");
-        } else if (txtFecha.getText().length() < 1) {
+        } else if (fecha == null) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
+            String nombApe = txtApellidos.getText() + " " + txtNombres.getText();
 
             JoinEmpleados obj = new JoinEmpleados();
-            obj.setApellidos_nombres(txtNombres.getText());
-            obj.setCedula(txtCedula.getText());
+            obj.setApellidos_nombres(nombApe);
+            obj.setCedula(cedula);
             obj.setCorreo(txtCorreo.getText());
             obj.setDireccion(txtDireccion.getText());
             obj.setObservacion(obs);
-            obj.setFecha_nacimiento(txtFecha.getText());
+            obj.setFecha_nacimiento(fecha);
             obj.setConvecional(txtTelefono1.getText());
             obj.setTelefono_dos(txtTelefono2.getText());
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
-            obj.setEstado(cbEstado.getSelectedItem().toString());
-            obj.setId_usuario(emp.getId_usuario());
 
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
@@ -875,17 +774,28 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             us.setEstado_pe8(pe);
             us.setEstado_pe9(dhi);
             us.setEstado_pe10(es);
-            us.setId_usuario(emp.getId_usuario());
 
             try {
-                String a = crud.ActualizarEmpleado(obj);
+                String a = crud.CrearEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
 
-                crud.ActualizarPermisosMaterias(us);
+                crud.CrearPermisosMaterias(us);
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-            setVisible(false);
+            txtApellidos.setText("");
+            txtCedula.setText("");
+            txtTelefono2.setText("");
+            txtTelefono1.setText("");
+            txtCorreo.setText("");
+            txtDireccion.setText("");
+            txtNombres.setText("");
+            txtObservacion.setText("");
+            cbCargo.setSelectedIndex(0);
+            cbxCopiaCedula.setSelected(false);
+            cbxCopiaTitulo.setSelected(false);
+            dtFecha.setDateFormatString("");
         }
     }
 
@@ -906,13 +816,13 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoDos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoDos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoDos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoDos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -934,7 +844,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarEmpleado dialog = new ActualizarEmpleado(new javax.swing.JFrame(), true);
+                NuevoEmpleadoDos dialog = new NuevoEmpleadoDos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -947,16 +857,14 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbCargo;
-    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxCopiaTitulo;
     private com.toedter.calendar.JDateChooser dtFecha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -969,7 +877,6 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JCheckBox jcCiencias;
     private javax.swing.JCheckBox jcDesarrollo;
     private javax.swing.JCheckBox jcEFisica;
@@ -980,12 +887,13 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcMatematicas;
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
-    private javax.swing.JTable jtEstado;
+    private javax.swing.JRadioButton jrRuc;
     private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbRuc;
+    private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextArea txtObservacion;
     private javax.swing.JTextField txtTelefono1;

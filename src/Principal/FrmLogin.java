@@ -2,6 +2,7 @@ package Principal;
 
 import SE.entidades.us_usuario;
 import SE.componentes.Crud;
+import SE.entidades.join.JoinEmpleados;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -15,12 +16,14 @@ import javax.swing.Icon;
 public class FrmLogin extends javax.swing.JFrame {
 
     Crud cr = new Crud();
+    ArrayList<JoinEmpleados> listar = null;
+    JoinEmpleados objeto = null;
 
     public FrmLogin() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        
+        listar = cr.listarEmpleadosActivos();
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +57,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("CONTRASEÑA:");
 
-        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -169,7 +172,17 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    public JoinEmpleados devuelveObjeto(String datos, ArrayList<JoinEmpleados> listarobj) {
+        JoinEmpleados objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getUsuario())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+        
+    }
     
     public void iniciarSesion() {
         
@@ -178,7 +191,7 @@ public class FrmLogin extends javax.swing.JFrame {
         } else if (txtContrasenia.getText().length() < 2) {
             JOptionPane.showMessageDialog(null, "Ingrese una contraseña válida");
         } else {
-            us_usuario obj = new us_usuario();
+            JoinEmpleados obj = new JoinEmpleados();
             obj.setUsuario(txtUsuario.getText());
             obj.setContrasena(txtContrasenia.getText());
             System.out.println("contraseña " + txtContrasenia.getText());
@@ -186,15 +199,15 @@ public class FrmLogin extends javax.swing.JFrame {
                 String a = cr.Iniciar_sesion(obj);
 //                JOptionPane.showMessageDialog(this, a);
                 if ("s".equals(a)) {
-//                    objeto = devuelveObjeto(txtUsuario.getText(), listar);
-//                    if (objeto != null) {
-                        //System.out.println("holaaaaa");
-                        FrmPrincipal acc = new FrmPrincipal(/*objeto, objeto.getCargo()*/);
+                    objeto = devuelveObjeto(txtUsuario.getText(), listar);
+                    if (objeto != null) {
+//                        System.out.println("holaaaaa");
+                        FrmPrincipal acc = new FrmPrincipal(objeto);
                         acc.setVisible(true);
                         dispose();
-//                        listar.clear();
-//                        listar = cr.get_listar_usuario();
-//                    }
+                        listar.clear();
+                        listar = cr.listarEmpleadosActivos();
+                    }
                 }else{
                     JOptionPane.showMessageDialog(this, "Usuario no existe!!!");
                     txtUsuario.setText("");
@@ -210,17 +223,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         iniciarSesion();
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-//    public Listar_usuario devuelveObjeto(String datos, ArrayList<Listar_usuario> listarobj) {
-//        Listar_usuario objeto1 = null;
-//        for (int i = 0; i < listarobj.size(); i++) {
-//            if (datos.equals(listarobj.get(i).getCorreo())) {
-//                objeto1 = listarobj.get(i);
-//                break;
-//            }
-//        }
-//        return objeto1;
-//    }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);

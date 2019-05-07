@@ -29,12 +29,12 @@ public class JoinEmpleados {
     private String rol;
     private String observacion;
     private Date fecha_nacimiento_date;
-    private String estado_pe;
+    private String usuario;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String estado_pe) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -52,18 +52,16 @@ public class JoinEmpleados {
         this.rol = rol;
         this.observacion = observacion;
         this.fecha_nacimiento_date = fecha_nacimiento_date;
-        this.estado_pe = estado_pe;
+        this.usuario = usuario;
     }
 
-    public String getEstado_pe() {
-        return estado_pe;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setEstado_pe(String estado_pe) {
-        this.estado_pe = estado_pe;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
-
-    
 
     public Date getFecha_nacimiento_date() {
         return fecha_nacimiento_date;
@@ -72,9 +70,6 @@ public class JoinEmpleados {
     public void setFecha_nacimiento_date(Date fecha_nacimiento_date) {
         this.fecha_nacimiento_date = fecha_nacimiento_date;
     }
-
-    
-
 
     public Long getId_usuario() {
         return id_usuario;

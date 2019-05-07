@@ -27,7 +27,7 @@ public class Crud {
     PreparedStatement ps;
     Conexion c = new Conexion();
     
-    public String Iniciar_sesion(us_usuario us) {
+    public String Iniciar_sesion(JoinEmpleados us) {
         String valor = null;
         try {
             con = c.conectar();

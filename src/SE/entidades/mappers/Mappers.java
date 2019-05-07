@@ -36,7 +36,7 @@ public class Mappers {
             obj.setTelefono_dos(rs.getString("Telefono_dos"));
             obj.setCopia_titulo(rs.getLong("Copia_titulo"));
             obj.setObservacion(rs.getString("Observacion"));
-//            obj.setEstado_pe(rs.getString("Estado_pe"));
+            obj.setUsuario(rs.getString("Usuario"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
