@@ -30,11 +30,12 @@ public class JoinEmpleados {
     private String observacion;
     private Date fecha_nacimiento_date;
     private String usuario;
+    private Long id_usuarioDos;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -53,6 +54,15 @@ public class JoinEmpleados {
         this.observacion = observacion;
         this.fecha_nacimiento_date = fecha_nacimiento_date;
         this.usuario = usuario;
+        this.id_usuarioDos = id_usuarioDos;
+    }
+
+    public Long getId_usuarioDos() {
+        return id_usuarioDos;
+    }
+
+    public void setId_usuarioDos(Long id_usuarioDos) {
+        this.id_usuarioDos = id_usuarioDos;
     }
 
     public String getUsuario() {

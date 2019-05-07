@@ -37,7 +37,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
+    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado, JoinEmpleados empl) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -48,9 +48,9 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         formulario();
         tablaEstado();
         chbx();
-        lbId.setText(empleado.getId_usuario().toString());
+        lbId.setText(empl.getId_usuario().toString());
         jtEstado.setVisible(false);
-        lbId.setVisible(false);
+//        lbId.setVisible(false);
     }
 
     public ActualizarEmpleado(java.awt.Frame parent, boolean modal) {
@@ -863,6 +863,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             obj.setCopia_titulo(ct);
             obj.setEstado(cbEstado.getSelectedItem().toString());
             obj.setId_usuario(emp.getId_usuario());
+            obj.setId_usuarioDos(Long.valueOf(lbId.getText()));
 
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);

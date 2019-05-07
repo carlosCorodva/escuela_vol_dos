@@ -719,6 +719,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
+            obj.setId_usuario(Long.valueOf(lbId.getText()));
             
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);

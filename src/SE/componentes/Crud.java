@@ -123,7 +123,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_crear_empleados(?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call us_crear_empleados(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -135,6 +135,7 @@ public class Crud {
             pro.setLong(9, us.getCopia_cedula());
             pro.setLong(10, us.getCopia_titulo());
             pro.setString(11, us.getObservacion());
+            pro.setLong(12, us.getId_usuario());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -161,7 +162,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_actualizar_empleados(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call us_actualizar_empleados(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -175,6 +176,7 @@ public class Crud {
             pro.setString(11, us.getObservacion());
             pro.setString(12, us.getEstado());
             pro.setLong(13, us.getId_usuario());
+            pro.setLong(14, us.getId_usuarioDos());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
