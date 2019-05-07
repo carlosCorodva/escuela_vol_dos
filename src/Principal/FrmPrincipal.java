@@ -35,7 +35,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
-        lbNum.setText(emp.getId_usuario().toString());
+        lbNum.setText("#"+emp.getId_usuario().toString());
         lbUsuario.setText(emp.getUsuario());
         em=emp;
 //        pnlBanner.setBackground(fondo.getColor());
@@ -56,6 +56,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btnEmpleados = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUsuario = new javax.swing.JLabel();
@@ -65,6 +67,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -73,8 +82,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnEmpleados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
-        btnEmpleados.setText("EMPLEADOS");
+        btnEmpleados.setText("  EMPLEADOS  ");
         btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEmpleados.setFocusable(false);
         btnEmpleados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -86,11 +96,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnEmpleados);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usaurio_32.png"))); // NOI18N
-        jButton2.setText("jButton2");
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/carpeta add 32.png"))); // NOI18N
+        jButton2.setText("  MATRICULA  ");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificar 32.png"))); // NOI18N
+        jButton1.setText("  CALIFICACION  ");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/lista 32.png"))); // NOI18N
+        jButton3.setText("  CALIFICACION  ");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton3);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("USUARIO: ");
@@ -133,7 +160,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("USAURIOS");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem2.setText("EMPLEADOS");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,10 +173,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("MATRICULA");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem3.setText("ALUMNOS");
+        jMenu2.add(jMenuItem3);
+
         jMenuBar1.add(jMenu2);
 
+        jMenu6.setText("CALIFICACION");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem6.setText("CALIFICACION");
+        jMenu6.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu4.setText("CURSOS");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem4.setText("CURSOS");
+        jMenu4.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("MATERIAS");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem5.setText("MATERIAS");
+        jMenu5.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu5);
+
         jMenu3.setText("AYUDA");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem1.setText("SALIR");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -230,15 +293,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbNum;
