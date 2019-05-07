@@ -181,14 +181,6 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 txtObservacionFocusLost(evt);
             }
         });
-        txtObservacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtObservacionKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtObservacionKeyTyped(evt);
-            }
-        });
         jScrollPane1.setViewportView(txtObservacion);
 
         cbxCopiaCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -528,14 +520,6 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtApellidosKeyTyped
 
-    private void txtObservacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtObservacionKeyTyped
-
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         char c = evt.getKeyChar();
         if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
@@ -549,12 +533,6 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             Guardar();
         }
     }//GEN-LAST:event_txtCorreoKeyPressed
-
-    private void txtObservacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Guardar();
-        }
-    }//GEN-LAST:event_txtObservacionKeyPressed
 
     private void cbxCopiaTituloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxCopiaTituloKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {

@@ -6,6 +6,7 @@
 package SE.entidades.mappers;
 
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,6 +36,21 @@ public class Mappers {
             obj.setTelefono_dos(rs.getString("Telefono_dos"));
             obj.setCopia_titulo(rs.getLong("Copia_titulo"));
             obj.setObservacion(rs.getString("Observacion"));
+//            obj.setEstado_pe(rs.getString("Estado_pe"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
+    public static us_permiso_empleado getEmpleadosPermisosFromResultSet(ResultSet rs) {
+        us_permiso_empleado obj = new us_permiso_empleado();
+        try {
+//            obj.setId_usuario(rs.getLong("Id_usuario"));
+//            obj.setId_permiso(rs.getLong("Id_permiso"));
+            obj.setEstado_pe(rs.getString("Estado_pe"));
+//            obj.setId_materia(rs.getLong("Id_materia"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);

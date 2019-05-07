@@ -6,6 +6,7 @@
 package SE.componentes;
 
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -77,6 +78,27 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
             Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr1);
+        }
+    }
+    
+    public static void cargarTablaEstadoChbx(JTable Tabla, ArrayList<us_permiso_empleado> lista) {
+
+        int[] a = {15};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"ESTADO"};
+        String[] Filas = new String[1];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getEstado_pe();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
         }
     }
 }

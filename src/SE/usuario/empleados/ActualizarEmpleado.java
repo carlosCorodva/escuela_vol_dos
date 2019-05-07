@@ -9,6 +9,7 @@ import Principal.Calendar;
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.componentes.Fecha;
+import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
@@ -25,9 +26,10 @@ import javax.swing.JOptionPane;
  */
 public class ActualizarEmpleado extends javax.swing.JDialog {
 
-    //|| or;
+    //  || or;
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
+    ArrayList<us_permiso_empleado> listar = null;
     Calendario cal = new Calendario();
     JoinEmpleados emp = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
@@ -41,10 +43,13 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         Habilitar(false);
-//        fecha();
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         emp = empleado;
         formulario();
+        tablaEstado();
+        chbx();
+        jtEstado.setVisible(false);
+        jlId.setVisible(false);
     }
 
     public ActualizarEmpleado(java.awt.Frame parent, boolean modal) {
@@ -90,7 +95,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         btnAdd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtEstado = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jcLenguaje = new javax.swing.JCheckBox();
         jcMatematicas = new javax.swing.JCheckBox();
@@ -102,6 +107,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jcEFisica = new javax.swing.JCheckBox();
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
+        jlId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -178,14 +184,6 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         txtObservacion.setColumns(20);
         txtObservacion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtObservacion.setRows(5);
-        txtObservacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtObservacionKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtObservacionKeyTyped(evt);
-            }
-        });
         jScrollPane1.setViewportView(txtObservacion);
 
         cbxCopiaCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -378,7 +376,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtEstado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -389,7 +387,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jtEstado);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "MATERIAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -467,27 +465,32 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jlId.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(163, 163, 163)
-                .addComponent(btnSalir)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlId)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(163, 163, 163)
+                        .addComponent(btnSalir)
+                        .addGap(226, 226, 226)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(34, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,10 +502,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalir)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSalir)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addComponent(jlId))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -521,7 +525,70 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void tablaEstado() {
+        us_permiso_empleado je = new us_permiso_empleado();
+        je.setId_usuario(Long.valueOf(jlId.getText()));
+        listar = crud.TablaEstadoChbx(je);
+        Tablas.cargarTablaEstadoChbx(jtEstado, listar);
+    }
+
+    public void chbx() {
+
+        String leng = "" + jtEstado.getValueAt(0, 0).toString();
+        String mat = "" + jtEstado.getValueAt(1, 0).toString();
+        String info = "" + jtEstado.getValueAt(2, 0).toString();
+        String cie = "" + jtEstado.getValueAt(3, 0).toString();
+        String est = "" + jtEstado.getValueAt(4, 0).toString();
+        String ingl = "" + jtEstado.getValueAt(5, 0).toString();
+        String ecart = "" + jtEstado.getValueAt(6, 0).toString();
+        String proe = "" + jtEstado.getValueAt(7, 0).toString();
+        String dhint = "" + jtEstado.getValueAt(8, 0).toString();
+        String efis = "" + jtEstado.getValueAt(9, 0).toString();
+        if ("A".equals(leng)) {
+//            System.out.println("chbx3");
+            jcLenguaje.setSelected(true);
+//            System.out.println("leng: " + jtEstado.getValueAt(0, 0));
+        }
+
+        if ("A".equals(mat)) {
+            jcMatematicas.setSelected(true);
+        }
+
+        if ("A".equals(info)) {
+            jcInformaticas.setSelected(true);
+        }
+
+        if ("A".equals(cie)) {
+            jcCiencias.setSelected(true);
+        }
+
+        if ("A".equals(est)) {
+            jcEstudios.setSelected(true);
+        }
+
+        if ("A".equals(ingl)) {
+            jcIngles.setSelected(true);
+        }
+
+        if ("A".equals(ecart)) {
+            jcecArtistica.setSelected(true);
+        }
+
+        if ("A".equals(proe)) {
+            jcEFisica.setSelected(true);
+        }
+
+        if ("A".equals(dhint)) {
+            jcProyectos.setSelected(true);
+        }
+
+        if ("A".equals(efis)) {
+            jcDesarrollo.setSelected(true);
+        }
+    }
+
     public void formulario() {
+        jlId.setText(emp.getId_usuario().toString());
         txtCedula.setText(emp.getCedula());
         txtCorreo.setText(emp.getCorreo());
         txtDireccion.setText(emp.getDireccion());
@@ -579,14 +646,6 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
-    private void txtObservacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtObservacionKeyTyped
-
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         char c = evt.getKeyChar();
         if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
@@ -600,12 +659,6 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             Guardar();
         }
     }//GEN-LAST:event_txtCorreoKeyPressed
-
-    private void txtObservacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Guardar();
-        }
-    }//GEN-LAST:event_txtObservacionKeyPressed
 
     private void cbxCopiaTituloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxCopiaTituloKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -684,7 +737,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         cbEstado.setEnabled(valor);
         dtFecha.setEnabled(valor);
         btnAdd.setEnabled(valor);
-        
+
         jcCiencias.setEnabled(valor);
         jcDesarrollo.setEnabled(valor);
         jcEFisica.setEnabled(valor);
@@ -703,52 +756,62 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 
         if (jcCiencias.isSelected() == true) {
             cn = "A";
-        }if (jcCiencias.isSelected() == false){
+        }
+        if (jcCiencias.isSelected() == false) {
             cn = "I";
         }
         if (jcDesarrollo.isSelected() == true) {
             dhi = "A";
-        }if (jcDesarrollo.isSelected() == false) {
+        }
+        if (jcDesarrollo.isSelected() == false) {
             dhi = "I";
         }
         if (jcEFisica.isSelected() == true) {
             ef = "A";
-        }if (jcEFisica.isSelected() == false){
+        }
+        if (jcEFisica.isSelected() == false) {
             ef = "I";
         }
         if (jcEstudios.isSelected() == true) {
             es = "A";
-        }if (jcEstudios.isSelected() == false){
+        }
+        if (jcEstudios.isSelected() == false) {
             es = "I";
         }
         if (jcInformaticas.isSelected() == true) {
             inf = "A";
-        }if (jcInformaticas.isSelected() == false) {
+        }
+        if (jcInformaticas.isSelected() == false) {
             inf = "I";
         }
         if (jcIngles.isSelected() == true) {
             ing = "A";
-        }if (jcIngles.isSelected() == false) {
+        }
+        if (jcIngles.isSelected() == false) {
             ing = "I";
         }
         if (jcLenguaje.isSelected() == true) {
             ll = "A";
-        }if (jcLenguaje.isSelected() == false){
+        }
+        if (jcLenguaje.isSelected() == false) {
             ll = "I";
         }
         if (jcMatematicas.isSelected() == true) {
             m = "A";
-        }if (jcMatematicas.isSelected() == false){
+        }
+        if (jcMatematicas.isSelected() == false) {
             m = "I";
         }
         if (jcProyectos.isSelected() == true) {
             pe = "A";
-        }if (jcProyectos.isSelected() == false) {
+        }
+        if (jcProyectos.isSelected() == false) {
             pe = "I";
         }
         if (jcecArtistica.isSelected() == true) {
             eca = "A";
-        }if (jcecArtistica.isSelected() == false) {
+        }
+        if (jcecArtistica.isSelected() == false) {
             eca = "I";
         }
 
@@ -799,7 +862,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             obj.setCopia_titulo(ct);
             obj.setEstado(cbEstado.getSelectedItem().toString());
             obj.setId_usuario(emp.getId_usuario());
-            
+
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
             us.setEstado_pe2(m);
@@ -812,13 +875,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
             us.setEstado_pe9(dhi);
             us.setEstado_pe10(es);
             us.setId_usuario(emp.getId_usuario());
-            
-            System.out.println(ll+m+inf+cn+ing+eca+ef+pe+dhi+es+emp.getId_usuario());
-            
+
             try {
                 String a = crud.ActualizarEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
-                
+
                 crud.ActualizarPermisosMaterias(us);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
@@ -908,7 +969,6 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JCheckBox jcCiencias;
     private javax.swing.JCheckBox jcDesarrollo;
     private javax.swing.JCheckBox jcEFisica;
@@ -919,6 +979,8 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcMatematicas;
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
+    private javax.swing.JLabel jlId;
+    private javax.swing.JTable jtEstado;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;

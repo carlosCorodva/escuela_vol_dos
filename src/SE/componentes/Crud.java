@@ -339,8 +339,38 @@ public class Crud {
             pro.setString(9, us.getEstado_pe9());
             pro.setString(10, us.getEstado_pe10());
             pro.setLong(11, us.getId_usuario());
-            System.out.println(us.getEstado_pe());
             pro.executeUpdate();
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public ArrayList<us_permiso_empleado> TablaEstadoChbx(us_permiso_empleado ca) {
+       ArrayList<us_permiso_empleado> valor = new ArrayList<us_permiso_empleado>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_tabla_chbx(?)}");
+            pro.setLong(1, ca.getId_usuario());
+              rs = pro.executeQuery();
+              while (rs.next()) {
+                us_permiso_empleado obj = Mappers.getEmpleadosPermisosFromResultSet(rs);
+                valor.add(obj);
+            }
             con.commit();
         } catch (Exception e) {
             try {
