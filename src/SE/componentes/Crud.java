@@ -390,4 +390,65 @@ public class Crud {
         }
         return valor;
     }
+    
+    public String ConfirmarClave(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_clave_confirmar(?,?,?)}");
+            pro.setLong(1, us.getId_usuario());
+            pro.setString(2, us.getContrasena());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String ActualizarUsuario(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_clave_mantenimiento(?,?,?,?)}");
+            pro.setLong(1, us.getId_usuario());
+            pro.setString(2, us.getUsuario());
+            pro.setString(3, us.getContrasena());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

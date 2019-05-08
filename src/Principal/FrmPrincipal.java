@@ -8,6 +8,7 @@ package Principal;
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
 import SE.entidades.join.JoinEmpleados;
+import SE.usuario.clave.ConfirmacionClave;
 import SE.usuario.empleados.MostrarEmpleados;
 import SE.usuario.empleados.NuevoEmpleado;
 import SE.usuario.empleados.NuevoEmpleadoDos;
@@ -66,6 +67,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -171,6 +173,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem7.setText("CAMBIAR CLAVE");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("MATRICULA");
@@ -256,6 +267,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        ConfirmacionClave cc = new ConfirmacionClave(new javax.swing.JFrame(), true,em);
+        cc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +327,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbNum;
