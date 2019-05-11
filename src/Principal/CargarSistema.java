@@ -114,7 +114,7 @@ public final class CargarSistema extends javax.swing.JFrame {
                     System.exit(0);
                 } else {
                     dispose();
-                    FrmLogin fl = new FrmLogin();
+                    SeleccionEmpresa fl = new SeleccionEmpresa();
                     fl.setVisible(true);
                 }
             } catch (ClassNotFoundException ex) {

@@ -1,31 +1,35 @@
 package Principal;
 
-import SE.entidades.us_usuario;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
-import java.awt.Color;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
 
 public class FrmLogin extends javax.swing.JFrame {
 
     Crud cr = new Crud();
     ArrayList<JoinEmpleados> listar = null;
     JoinEmpleados objeto = null;
+    JoinEmpleados sucursal = null;
 
-    public FrmLogin() {
+    public FrmLogin(JoinEmpleados es) {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         listar = cr.listarEmpleadosActivos();
+        sucursal = es;
+        System.out.println("eys:"+"  "+es.getId_sucursal());
+//        lbEmpresa.setVisible(false);
+        lbEmpresa.setText(sucursal.getId_empresa().toString());
+//        lbSucursal.setVisible(false);
+        lbSucursal.setText(sucursal.getId_sucursal().toString());
     }
-
+public FrmLogin() {
+        initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +44,8 @@ public class FrmLogin extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         lblPresentacion = new javax.swing.JLabel();
         lblCabecera = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -104,17 +110,25 @@ public class FrmLogin extends javax.swing.JFrame {
         lblCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCabecera.setText("LOGIN");
 
+        lbEmpresa.setText("empresa");
+
+        lbSucursal.setText("sucursal");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblPresentacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
+                        .addComponent(lblPresentacion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(lbEmpresa)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,15 +141,27 @@ public class FrmLogin extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtUsuario)
-                                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(lblCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbSucursal)
+                        .addGap(81, 81, 81))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbEmpresa)
+                            .addComponent(lbSucursal))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -179,6 +205,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 objeto1 = listarobj.get(i);
                 break;
             }
+            System.out.println("4");
         }
         return objeto1;
         
@@ -194,12 +221,15 @@ public class FrmLogin extends javax.swing.JFrame {
             JoinEmpleados obj = new JoinEmpleados();
             obj.setUsuario(txtUsuario.getText());
             obj.setContrasena(txtContrasenia.getText());
+            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             System.out.println("contraseña " + txtContrasenia.getText());
             try {
                 String a = cr.Iniciar_sesion(obj);
+                System.out.println("mensaje: "+a);
 //                JOptionPane.showMessageDialog(this, a);
                 if ("s".equals(a)) {
                     objeto = devuelveObjeto(txtUsuario.getText(), listar);
+                    System.out.println("holaaaaa");
                     if (objeto != null) {
 //                        System.out.println("holaaaaa");
                         FrmPrincipal acc = new FrmPrincipal(objeto);
@@ -293,6 +323,9 @@ public class FrmLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new FrmLogin().setVisible(true);
+//        });
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmLogin().setVisible(true);
@@ -307,6 +340,8 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbEmpresa;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JLabel lblCabecera;
     private javax.swing.JLabel lblPresentacion;
     private javax.swing.JPasswordField txtContrasenia;
