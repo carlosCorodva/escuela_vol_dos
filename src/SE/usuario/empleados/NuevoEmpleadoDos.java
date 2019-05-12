@@ -23,7 +23,7 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
-    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
+    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
     Calendario cal = new Calendario();
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
@@ -41,7 +41,8 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
         Habilitar(false);
         lbRuc.setText("   ");
         lbId.setText(emp.getId_usuario().toString());
-//        imagenes();
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(emp.getId_sucursal().toString());
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
     }
 
@@ -100,6 +101,8 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
         lbId = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -446,6 +449,10 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
 
         lbId.setText("jLabel2");
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -464,7 +471,11 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148)
                 .addComponent(btnSalir)
-                .addGap(303, 303, 303))
+                .addGap(222, 222, 222)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbEmpresa)
+                    .addComponent(lbSucursal))
+                .addGap(40, 40, 40))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,13 +487,18 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalir)
-                            .addComponent(btnGuardar)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(lbId)))
+                        .addComponent(lbId))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbEmpresa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbSucursal))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSalir)
+                                .addComponent(btnGuardar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -889,8 +905,10 @@ public class NuevoEmpleadoDos extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JRadioButton jrRuc;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbRuc;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;

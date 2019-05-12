@@ -23,9 +23,9 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
-    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
+    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
     Calendario cal = new Calendario();
-    String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "",es = "";
+    String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
      * Creates new form Registrar
@@ -37,11 +37,12 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         Habilitar(false);
         lbRuc.setText("   ");
-            lbId.setText(emp.getId_usuario().toString());
-//        lbId.setText(emp.getId_usuario().toString());
-//        imagenes();
+        lbId.setText(emp.getId_usuario().toString());
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(emp.getId_sucursal().toString());
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
     }
+
     public NuevoEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -97,6 +98,8 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
         lbId = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -443,6 +446,10 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 
         lbId.setText("jLabel2");
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -461,7 +468,11 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148)
                 .addComponent(btnSalir)
-                .addGap(303, 303, 303))
+                .addGap(223, 223, 223)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbEmpresa)
+                    .addComponent(lbSucursal))
+                .addGap(39, 39, 39))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,13 +484,18 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalir)
-                            .addComponent(btnGuardar)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(lbId)))
+                        .addComponent(lbId))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbEmpresa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbSucursal))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSalir)
+                                .addComponent(btnGuardar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -637,7 +653,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
         jrRuc.setEnabled(valor);
-        
+
         jcCiencias.setEnabled(valor);
         jcDesarrollo.setEnabled(valor);
         jcEFisica.setEnabled(valor);
@@ -655,17 +671,57 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         String obs, cedula;
         Long cc, ct;
 
-        if (jcCiencias.isSelected()==true) { cn = "A"; } else{ cn = "I"; }
-        if(jcDesarrollo.isSelected()==true) {dhi = "A";}else{dhi = "I";}
-        if(jcEFisica.isSelected()==true) {ef = "A";}else{ef = "I";}
-        if(jcEstudios.isSelected()==true) {es = "A";}else{es = "I";}
-        if(jcInformaticas.isSelected()==true) {inf = "A";}else{inf = "I"; }
-        if(jcIngles.isSelected()==true) {ing = "A";}else{ing = "I";}
-        if(jcLenguaje.isSelected()==true) {ll = "A";}else{ll = "I";}
-        if(jcMatematicas.isSelected()==true) { m = "A";}else{m = "I";}
-        if(jcProyectos.isSelected()==true) {pe = "A";}else{pe = "I";}
-        if(jcecArtistica.isSelected()==true) { eca = "A";}else{eca = "I";}
-        
+        if (jcCiencias.isSelected() == true) {
+            cn = "A";
+        } else {
+            cn = "I";
+        }
+        if (jcDesarrollo.isSelected() == true) {
+            dhi = "A";
+        } else {
+            dhi = "I";
+        }
+        if (jcEFisica.isSelected() == true) {
+            ef = "A";
+        } else {
+            ef = "I";
+        }
+        if (jcEstudios.isSelected() == true) {
+            es = "A";
+        } else {
+            es = "I";
+        }
+        if (jcInformaticas.isSelected() == true) {
+            inf = "A";
+        } else {
+            inf = "I";
+        }
+        if (jcIngles.isSelected() == true) {
+            ing = "A";
+        } else {
+            ing = "I";
+        }
+        if (jcLenguaje.isSelected() == true) {
+            ll = "A";
+        } else {
+            ll = "I";
+        }
+        if (jcMatematicas.isSelected() == true) {
+            m = "A";
+        } else {
+            m = "I";
+        }
+        if (jcProyectos.isSelected() == true) {
+            pe = "A";
+        } else {
+            pe = "I";
+        }
+        if (jcecArtistica.isSelected() == true) {
+            eca = "A";
+        } else {
+            eca = "I";
+        }
+
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -720,7 +776,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
             obj.setId_usuario(Long.valueOf(lbId.getText()));
-            
+
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
             us.setEstado_pe2(m);
@@ -732,13 +788,13 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             us.setEstado_pe8(pe);
             us.setEstado_pe9(dhi);
             us.setEstado_pe10(es);
-            
+
             try {
                 String a = crud.CrearEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
-                
+
                 crud.CrearPermisosMaterias(us);
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
@@ -838,8 +894,10 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JRadioButton jrRuc;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbRuc;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
