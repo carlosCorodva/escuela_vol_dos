@@ -92,4 +92,24 @@ public class Mappers {
         }
         return obj;
     }
+    public static JoinEmpleados getEmpresa2FromResultSet(ResultSet rs) {
+        JoinEmpleados obj = new JoinEmpleados();
+        try {
+            obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static JoinEmpleados getSucursal2FromResultSet(ResultSet rs) {
+        JoinEmpleados obj = new JoinEmpleados();
+        try {
+            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }

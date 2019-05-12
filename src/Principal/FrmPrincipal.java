@@ -27,32 +27,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     Variables fondo = new Variables();
     private static final String TITLE = "NOMBRE";
-    JoinEmpleados em = null;
-    em_empresa empresa = null;
-    em_sucursal sucursal = null;
-    
-    public FrmPrincipal(JoinEmpleados emp) {
+    JoinEmpleados us = null;
+    JoinEmpleados suc = null;
+    JoinEmpleados emp = null;
+
+    public FrmPrincipal(JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
         initComponents();
+        us = usuario;
+        suc = sucursal;
+        emp = empresa;
+        this.setTitle(fondo.getTitle() + TITLE + "---USUARIO" + " ---" + emp.getNombre_comercial_em() + "---");
+        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
-        lbEmpresa.setText(emp.getId_empresa().toString());
-        lbSucursal.setText(emp.getId_sucursal().toString());
-        this.setTitle(fondo.getTitle() + TITLE +"---USUARIO"+" ---"+emp.getUsuario()+"---");
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
-        this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
-        lbNum.setText("#"+emp.getId_usuario().toString());
-        lbUsuario.setText(emp.getUsuario());
-        em=emp;
-//        pnlBanner.setBackground(fondo.getColor());
+        System.out.println("prueba: " + emp.getNombre_comercial_em());
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(suc.getId_sucursal().toString());
+        lbIdUsuario.setText(TITLE);
     }
 
     public FrmPrincipal() {
         initComponents();
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +73,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbNum = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
+        lbIdUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -174,6 +173,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lbSucursal.setText("sucursal");
 
+        lbIdUsuario.setText("usuario");
+
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("USAURIOS");
@@ -258,16 +259,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbEmpresa)
-                    .addComponent(lbSucursal))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbIdUsuario)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbEmpresa)
+                        .addComponent(lbSucursal)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186)
+                .addGap(113, 113, 113)
+                .addComponent(lbIdUsuario)
+                .addGap(59, 59, 59)
                 .addComponent(lbEmpresa)
                 .addGap(61, 61, 61)
                 .addComponent(lbSucursal)
@@ -283,17 +288,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true,em);
+        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true, us);
         ne.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true,em);
+        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us);
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ConfirmacionClave cc = new ConfirmacionClave(new javax.swing.JFrame(), true,em);
+        ConfirmacionClave cc = new ConfirmacionClave(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
@@ -356,6 +361,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbEmpresa;
+    private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbNum;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JLabel lbUsuario;

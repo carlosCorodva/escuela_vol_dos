@@ -44,11 +44,12 @@ public class JoinEmpleados {
     private String direccion_su;
     private String correo_su;
     private String estado_su;
+    private String codigo_usuario;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String codigo_usuario) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -81,6 +82,15 @@ public class JoinEmpleados {
         this.direccion_su = direccion_su;
         this.correo_su = correo_su;
         this.estado_su = estado_su;
+        this.codigo_usuario = codigo_usuario;
+    }
+
+    public String getCodigo_usuario() {
+        return codigo_usuario;
+    }
+
+    public void setCodigo_usuario(String codigo_usuario) {
+        this.codigo_usuario = codigo_usuario;
     }
 
     public Long getId_empresa() {

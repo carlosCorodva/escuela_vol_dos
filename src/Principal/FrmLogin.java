@@ -14,26 +14,26 @@ public class FrmLogin extends javax.swing.JFrame {
     JoinEmpleados sucursal = null;
     ArrayList<JoinEmpleados> listar = null;
 
-    public FrmLogin(JoinEmpleados es) {
+    public FrmLogin(/*JoinEmpleados es*/) {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        sucursal = es;
-        System.out.println("eys:" + "  " + es.getId_sucursal());
+//        sucursal = es;
+//        System.out.println("eys:" + "  " + es.getId_sucursal());
 //        lbEmpresa.setVisible(false);
-        lbEmpresa.setText(sucursal.getId_empresa().toString());
+//        lbEmpresa.setText(sucursal.getId_empresa().toString());
 //        lbSucursal.setVisible(false);
-        lbSucursal.setText(sucursal.getId_sucursal().toString());
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = cr.listarEmpleadosActivos(je);
+//        lbSucursal.setText(sucursal.getId_sucursal().toString());
+//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = cr.listarEmpleadosActivosInicio();
     }
 
-    public FrmLogin() {
-        initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-    }
+//    public FrmLogin() {
+//        initComponents();
+//        this.setResizable(false);
+//        this.setLocationRelativeTo(null);
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -210,6 +210,7 @@ public class FrmLogin extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getUsuario())) {
                 objeto1 = listarobj.get(i);
+                System.out.println("usuario objeto: "+listarobj.get(i).getUsuario());
                 break;
             }
             System.out.println("4");
@@ -228,7 +229,7 @@ public class FrmLogin extends javax.swing.JFrame {
             JoinEmpleados obj = new JoinEmpleados();
             obj.setUsuario(txtUsuario.getText());
             obj.setContrasena(txtContrasenia.getText());
-            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             System.out.println("contraseña " + txtContrasenia.getText());
             try {
                 String a = cr.Iniciar_sesion(obj);
@@ -238,22 +239,25 @@ public class FrmLogin extends javax.swing.JFrame {
                     objeto = devuelveObjeto(txtUsuario.getText(), listar);
                     System.out.println("holaaaaa");
                     if (objeto != null) {
-//                        System.out.println("holaaaaa");
-                        FrmPrincipal acc = new FrmPrincipal(objeto);
+                        System.out.println("holaaaaa2");
+                        SeleccionEmpresa acc = new SeleccionEmpresa(objeto);
                         acc.setVisible(true);
                         dispose();
-                        listar.clear();
-                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                        listar = cr.listarEmpleadosActivos(je);
-//                        listar = cr.listarEmpleadosActivosInicio();
+//                        listar.clear();
+                        System.out.println("holaaaaa3");
+                        listar = cr.listarEmpleadosActivosInicio();
+//                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//                        listar = cr.listarEmpleadosActivos(je);
                     }
                 } else {
+                    System.out.println("else");
                     JOptionPane.showMessageDialog(this, "USUARIO INACTIVO O NO EXISTE!");
                     txtUsuario.setText("");
                     txtContrasenia.setText("");
                 }
             } catch (Exception e) {
+                System.out.println("excepcion");
                 JOptionPane.showMessageDialog(this, e);
             }
 

@@ -18,7 +18,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class Combos {
 
-    private static Object[] arregloEmpresa(ArrayList<em_empresa> lista) {
+    private static Object[] arregloEmpresa(ArrayList<JoinEmpleados> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
         arreglo[0] = "SELECCIONE EMPRESA...";
         for (int i = 0; i < lista.size(); i++) {
@@ -28,7 +28,7 @@ public class Combos {
 
     }
 
-    public static DefaultComboBoxModel listarComboEmpresa(ArrayList<em_empresa> lista) {
+    public static DefaultComboBoxModel listarComboEmpresa(ArrayList<JoinEmpleados> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloEmpresa(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);

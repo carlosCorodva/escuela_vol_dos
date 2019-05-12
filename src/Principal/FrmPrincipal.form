@@ -161,9 +161,12 @@
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbSucursal" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbIdUsuario" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbSucursal" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -173,7 +176,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+              <Component id="lbIdUsuario" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Component id="lbSucursal" min="-2" max="-2" attributes="0"/>
@@ -332,6 +337,11 @@
     <Component class="javax.swing.JLabel" name="lbSucursal">
       <Properties>
         <Property name="text" type="java.lang.String" value="sucursal"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbIdUsuario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="usuario"/>
       </Properties>
     </Component>
   </SubComponents>

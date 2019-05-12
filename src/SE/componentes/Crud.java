@@ -1,4 +1,3 @@
-
 package SE.componentes;
 
 import SE.entidades.em_empresa;
@@ -23,23 +22,23 @@ import java.util.logging.Logger;
  * @author carlos
  */
 public class Crud {
-    
+
     Connection con = null;
     java.sql.Statement st = null;
     ResultSet rs = null;
     PreparedStatement ps;
     Conexion c = new Conexion();
-    
+
     public String Iniciar_sesion(JoinEmpleados us) {
         String valor = null;
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call login(?,?,?,?) }");
+                    "{ call login(?,?,?) }");
             pro.setString(1, us.getUsuario());
             pro.setString(2, us.getContrasena());
-            pro.setLong(3, us.getId_sucursal());
+//            pro.setLong(3, us.getId_sucursal());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -60,7 +59,7 @@ public class Crud {
         }
         return valor;
     }
-        
+
     public ArrayList<JoinEmpleados> listarEmpleadosActivos(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -92,7 +91,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<JoinEmpleados> listarEmpleadosActivosInicio() {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -122,14 +121,16 @@ public class Crud {
         }
         return valor;
     }
-    
-    public ArrayList<JoinEmpleados> listarEmpleadosInactivos() {
+
+    public ArrayList<JoinEmpleados> listarEmpleadosInactivos(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_mostrar_empleados_inactivos() }");
+                    "{ call us_mostrar_empleados_inactivos(?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);
@@ -152,7 +153,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String CrearEmpleado(JoinEmpleados us) {
         String valor = null;
         try {
@@ -192,6 +193,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String ActualizarEmpleado(JoinEmpleados us) {
         String valor = null;
         try {
@@ -233,7 +235,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<JoinEmpleados> filtroEmpleadoId(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -264,6 +266,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinEmpleados> filtroEmpleadoApeNomb(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -294,6 +297,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinEmpleados> filtroEmpleadoCedula(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -324,6 +328,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String CrearPermisosMaterias(us_permiso_empleado us) {
         String valor = null;
         try {
@@ -359,6 +364,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String ActualizarPermisosMaterias(us_permiso_empleado us) {
         String valor = null;
         try {
@@ -395,17 +401,17 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<us_permiso_empleado> TablaEstadoChbx(us_permiso_empleado ca) {
-       ArrayList<us_permiso_empleado> valor = new ArrayList<us_permiso_empleado>();
+        ArrayList<us_permiso_empleado> valor = new ArrayList<us_permiso_empleado>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
                     "{ call us_tabla_chbx(?)}");
             pro.setLong(1, ca.getId_usuario());
-              rs = pro.executeQuery();
-              while (rs.next()) {
+            rs = pro.executeQuery();
+            while (rs.next()) {
                 us_permiso_empleado obj = Mappers.getEmpleadosPermisosFromResultSet(rs);
                 valor.add(obj);
             }
@@ -426,7 +432,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String ConfirmarClave(JoinEmpleados us) {
         String valor = null;
         try {
@@ -456,7 +462,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String ActualizarUsuario(JoinEmpleados us) {
         String valor = null;
         try {
@@ -487,49 +493,81 @@ public class Crud {
         }
         return valor;
     }
-    
-    public ArrayList<em_empresa> empresaCombo() {
-        ArrayList<em_empresa> lista = new ArrayList<em_empresa>();
-        try {
-            con = c.conectar();
-            con.setAutoCommit(false);
-            CallableStatement prcProcedimientoAlmacenado = con.prepareCall(
-                    "{ call em_cargar_combo_empresa() }");
-            prcProcedimientoAlmacenado.execute();
-            rs = prcProcedimientoAlmacenado.getResultSet();
-            while (rs.next()) {
-                em_empresa obj = Mappers.getEmpresaFromResultSet(rs);
-                lista.add(obj);
-            }
-            con.commit();
-        } catch (Exception e) {
-            try {
-                con.rollback();
-                e.printStackTrace();
-            } catch (SQLException ex) {
-                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return lista;
-    }
-    public ArrayList<JoinEmpleados> sucursalCombo(JoinEmpleados es) {
+
+//    public ArrayList<em_empresa> empresaCombo() {
+//        ArrayList<em_empresa> lista = new ArrayList<em_empresa>();
+//        try {
+//            con = c.conectar();
+//            con.setAutoCommit(false);
+//            CallableStatement prcProcedimientoAlmacenado = con.prepareCall(
+//                    "{ call em_cargar_combo_empresa() }");
+//            prcProcedimientoAlmacenado.execute();
+//            rs = prcProcedimientoAlmacenado.getResultSet();
+//            while (rs.next()) {
+//                em_empresa obj = Mappers.getEmpresaFromResultSet(rs);
+//                lista.add(obj);
+//            }
+//            con.commit();
+//        } catch (Exception e) {
+//            try {
+//                con.rollback();
+//                e.printStackTrace();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return lista;
+//    }
+//    public ArrayList<JoinEmpleados> sucursalCombo(JoinEmpleados es) {
+//        ArrayList<JoinEmpleados> lista = new ArrayList<JoinEmpleados>();
+//        try {
+//            con = c.conectar();
+//            con.setAutoCommit(false);
+//            CallableStatement pro = con.prepareCall(
+//                    "{ call em_cargar_combo_sucursal(?) }");
+//            pro.setString(1, es.getNombre_comercial_su());
+//            pro.execute();
+//            rs = pro.getResultSet();
+//            while (rs.next()) {
+//                JoinEmpleados obj = Mappers.getSucursalFromResultSet(rs);
+//                lista.add(obj);
+//            }
+//            con.commit();
+//        } catch (Exception e) {
+//            try {
+//                con.rollback();
+//                e.printStackTrace();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return lista;
+//    }
+    public ArrayList<JoinEmpleados> empresaComboDos(JoinEmpleados je) {
         ArrayList<JoinEmpleados> lista = new ArrayList<JoinEmpleados>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
-            CallableStatement prcProcedimientoAlmacenado = con.prepareCall(
-                    "{ call em_cargar_combo_sucursal(?) }");
-               prcProcedimientoAlmacenado.setString(1, es.getNombre_comercial_su());
-            prcProcedimientoAlmacenado.execute();
-            rs = prcProcedimientoAlmacenado.getResultSet();
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_cargar_combo_empresa_dos(?,?) }");
+            pro.setString(1, je.getUsuario());
+            pro.setString(2, je.getContrasena());
+            pro.execute();
+            rs = pro.getResultSet();
             while (rs.next()) {
-                JoinEmpleados obj = Mappers.getSucursalFromResultSet(rs);
+                JoinEmpleados obj = Mappers.getEmpresa2FromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();
@@ -550,5 +588,36 @@ public class Crud {
         return lista;
     }
 
-    
+    public ArrayList<JoinEmpleados> sucursalComboDos(JoinEmpleados je) {
+        ArrayList<JoinEmpleados> lista = new ArrayList<JoinEmpleados>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_cargar_combo_sucursal_dos(?,?) }");
+            pro.setString(1, je.getUsuario());
+            pro.setString(2, je.getContrasena());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                JoinEmpleados obj = Mappers.getSucursal2FromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
 }

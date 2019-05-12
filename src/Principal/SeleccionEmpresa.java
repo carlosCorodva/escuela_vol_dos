@@ -23,21 +23,43 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     /**
      * Creates new form Empresa
      */
-    Crud crud = new Crud();//em_sucursal
-    ArrayList<em_empresa> empresa = crud.empresaCombo();
+    Crud crud = new Crud();
+    ArrayList<JoinEmpleados> empresa = null;
     ArrayList<JoinEmpleados> sucursal = null;
-    ArrayList<JoinEmpresaSucursal> empresaSucursal = null;
-    ArrayList<JoinEmpleados> listar = null;
+    ArrayList<JoinEmpleados> usuario = null;
+//    ArrayList<JoinEmpresaSucursal> empresaSucursal = null;
+//    ArrayList<JoinEmpleados> listar = null;
 //    em_empresa objeto = null;
-    JoinEmpleados objeto = null;
+    JoinEmpleados objSucursal = null;
+    JoinEmpleados objEmpresa = null;
+    JoinEmpleados objUsuario = null;
+    JoinEmpleados obj = null;
     JoinEmpleados es = new JoinEmpleados();
+
+    public SeleccionEmpresa(JoinEmpleados objeto) {
+        System.out.println("1");
+        initComponents();
+        obj = objeto;
+        System.out.println("2");
+        setLocationRelativeTo(null);
+        cbSucursal.setEnabled(false);
+        System.out.println("3");
+        es.setUsuario(objeto.getUsuario());
+        es.setContrasena(objeto.getContrasena());
+        System.out.println("4  " + objeto.getUsuario() + "  " + objeto.getContrasena());
+        System.out.println("5  " + objeto.getNombre_comercial_em() + "  " + objeto.getId_empresa());
+        System.out.println("4  " + objeto.getNombre_comercial_su() + "  " + objeto.getId_sucursal());
+        empresa = crud.empresaComboDos(es);
+        cbEmpresa.setModel(Combos.listarComboEmpresa(empresa));
+        usuario = crud.listarEmpleadosActivosInicio();
+        lbEmpresa.setText(obj.getId_empresa().toString());
+        lbSucursal.setText(obj.getId_sucursal().toString());
+        lbUsuario.setText(obj.getId_usuario().toString());
+    }
 
     public SeleccionEmpresa() {
         initComponents();
         setLocationRelativeTo(null);
-        cbSucursal.setEnabled(false);
-        listar = crud.listarEmpleadosActivosInicio();
-        cbEmpresa.setModel(Combos.listarComboEmpresa(empresa));
     }
 
     /**
@@ -54,6 +76,9 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         cbSucursal = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lbEmpresa = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -69,6 +94,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         });
 
         cbSucursal.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        cbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE SUCURSAL..." }));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/database 32.png"))); // NOI18N
@@ -88,22 +114,38 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
             }
         });
 
+        lbEmpresa.setText("empresa");
+
+        lbSucursal.setText("sucursal");
+
+        lbUsuario.setText("usuario");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jButton1)
                         .addGap(55, 55, 55)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(lbEmpresa)
+                        .addGap(70, 70, 70)
+                        .addComponent(lbSucursal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbUsuario)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,7 +155,12 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
                 .addComponent(cbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(cbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEmpresa)
+                    .addComponent(lbSucursal)
+                    .addComponent(lbUsuario))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -135,16 +182,17 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmpresaActionPerformed
-        String cbEmpr = cbEmpresa.getSelectedItem().toString();
         int pos = cbEmpresa.getSelectedIndex();
 
         if (pos == 0) {
             JOptionPane.showMessageDialog(this, "ELIJA UNA EMPRESA");
             cbSucursal.setEnabled(false);
+            cbSucursal.setSelectedIndex(0);
         } else {
             cbSucursal.setEnabled(true);
-            es.setNombre_comercial_su(cbEmpr);
-            sucursal = crud.sucursalCombo(es);
+            es.setUsuario(obj.getUsuario());
+            es.setContrasena(obj.getContrasena());
+            sucursal = crud.sucursalComboDos(es);
             cbSucursal.setModel(Combos.listarComboSucursal(sucursal));
             cbSucursal.setSelectedIndex(1);
         }
@@ -155,37 +203,63 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getNombre_comercial_su())) {
                 objeto1 = listarobj.get(i);
-                System.out.println("objeto suc:" + listarobj.get(i).getNombre_comercial_su());
+                System.out.println("objeto sucursal:" + listarobj.get(i).getNombre_comercial_su());
                 break;
             }
         }
         return objeto1;
-
+    }
+    public JoinEmpleados ObjetoUsaurio(String datos, ArrayList<JoinEmpleados> listarobj) {
+        JoinEmpleados objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
+                objeto1 = listarobj.get(i);
+                System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
+                break;
+            }
+        }
+        return objeto1;
+    }
+    public JoinEmpleados ObjetoEmpresa(String datos, ArrayList<JoinEmpleados> listarobj) {
+        JoinEmpleados objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getNombre_comercial_em())) {
+                objeto1 = listarobj.get(i);
+                System.out.println("objeto empresa:" + listarobj.get(i).getNombre_comercial_em());
+                break;
+            }
+        }
+        return objeto1;
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ingresarSistema();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void ingresarSistema() {
         int po = cbEmpresa.getSelectedIndex();
         int po2 = cbSucursal.getSelectedIndex();
-        String cbEmpres = cbEmpresa.getSelectedItem().toString();
         String cbSuc = cbSucursal.getSelectedItem().toString();
+        String cbemp = cbEmpresa.getSelectedItem().toString();
         if (po == 0) {
             JOptionPane.showMessageDialog(this, "ELIJA UNA EMPRESA");
         } else if (po2 == 0) {
             JOptionPane.showMessageDialog(this, "ELIJA UNA SUCURSAL");
         } else {
             System.out.println("holaaaaa");
-            //            objeto = ObjetoEmpresa(cbEmpres, empresa);
-            objeto = ObjetoSucursal(cbSuc, listar);
-            System.out.println("holaaaaa "+objeto.getNombre_comercial_su());
-            if (objeto != null) {
-                //                        System.out.println("holaaaaa");
-                FrmLogin acc = new FrmLogin(objeto);
-                System.out.println("holaaaaa "+objeto.getNombre_comercial_su());
+            objSucursal = ObjetoSucursal(cbSuc, sucursal);
+            objEmpresa = ObjetoEmpresa(cbemp, empresa);
+            objUsuario = ObjetoUsaurio(lbUsuario.getText(), usuario);
+            System.out.println("holaaaaa " + objSucursal.getNombre_comercial_su());
+            if (objSucursal != null) {
+                System.out.println("holaaaaa");
+                FrmPrincipal acc = new FrmPrincipal(objSucursal,objEmpresa,objUsuario);
+//                System.out.println("holaaaaa " + objeto.getId_usuario());
                 acc.setVisible(true);
                 dispose();
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
@@ -231,5 +305,8 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbEmpresa;
+    private javax.swing.JLabel lbSucursal;
+    private javax.swing.JLabel lbUsuario;
     // End of variables declaration//GEN-END:variables
 }

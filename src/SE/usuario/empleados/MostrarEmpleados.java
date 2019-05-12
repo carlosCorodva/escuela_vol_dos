@@ -322,11 +322,12 @@ public class MostrarEmpleados extends javax.swing.JDialog {
 //                listar = crud.listarEmpleadosActivosInicio();
             }
             if (pos == 2) {
-                listar = crud.listarEmpleadosInactivos();
+                listar = crud.listarEmpleadosInactivos(je);
             }
             if (pos == 3) {
-                je.setId_usuario(Long.valueOf(f));
-                listar = crud.filtroEmpleadoId(je);
+                JoinEmpleados jo = new JoinEmpleados();
+                jo.setId_usuario(Long.valueOf(f));
+                listar = crud.filtroEmpleadoId(jo);
                 txtBuscar.setText("");
             }
             if (pos == 4) {
@@ -368,7 +369,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-            listar = crud.listarEmpleadosInactivos();
+            listar = crud.listarEmpleadosInactivos(je);
         }
         if (pos == 3) {
             txtBuscar.setText("");
