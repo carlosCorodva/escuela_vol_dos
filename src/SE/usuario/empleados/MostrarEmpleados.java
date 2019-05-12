@@ -249,7 +249,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿Desea salir del módulo usuario?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO USUARIO?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
         } else {

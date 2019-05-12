@@ -9,27 +9,32 @@ import java.util.ArrayList;
 public class FrmLogin extends javax.swing.JFrame {
 
     Crud cr = new Crud();
-    ArrayList<JoinEmpleados> listar = null;
+    JoinEmpleados je = new JoinEmpleados();
     JoinEmpleados objeto = null;
     JoinEmpleados sucursal = null;
+    ArrayList<JoinEmpleados> listar = null;
 
     public FrmLogin(JoinEmpleados es) {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        listar = cr.listarEmpleadosActivosInicio();
         sucursal = es;
-        System.out.println("eys:"+"  "+es.getId_sucursal());
+        System.out.println("eys:" + "  " + es.getId_sucursal());
 //        lbEmpresa.setVisible(false);
         lbEmpresa.setText(sucursal.getId_empresa().toString());
 //        lbSucursal.setVisible(false);
         lbSucursal.setText(sucursal.getId_sucursal().toString());
+        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = cr.listarEmpleadosActivos(je);
     }
-public FrmLogin() {
+
+    public FrmLogin() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,15 +215,15 @@ public FrmLogin() {
             System.out.println("4");
         }
         return objeto1;
-        
+
     }
-    
+
     public void iniciarSesion() {
-        
+
         if (txtUsuario.getText().length() < 4) {
-            JOptionPane.showMessageDialog(null, "Ingrese un usuario válido");
+            JOptionPane.showMessageDialog(null, "INGRESE UN USUARIO VALIDO");
         } else if (txtContrasenia.getText().length() < 2) {
-            JOptionPane.showMessageDialog(null, "Ingrese una contraseña válida");
+            JOptionPane.showMessageDialog(null, "INGRESE UNA CONTRASEÑA VALIDA");
         } else {
             JoinEmpleados obj = new JoinEmpleados();
             obj.setUsuario(txtUsuario.getText());
@@ -227,7 +232,7 @@ public FrmLogin() {
             System.out.println("contraseña " + txtContrasenia.getText());
             try {
                 String a = cr.Iniciar_sesion(obj);
-                System.out.println("mensaje: "+a);
+                System.out.println("mensaje: " + a);
 //                JOptionPane.showMessageDialog(this, a);
                 if ("s".equals(a)) {
                     objeto = devuelveObjeto(txtUsuario.getText(), listar);
@@ -238,10 +243,13 @@ public FrmLogin() {
                         acc.setVisible(true);
                         dispose();
                         listar.clear();
-                        listar = cr.listarEmpleadosActivosInicio();
+                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                        listar = cr.listarEmpleadosActivos(je);
+//                        listar = cr.listarEmpleadosActivosInicio();
                     }
-                }else{
-                    JOptionPane.showMessageDialog(this, "Usuario no existe!!!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "USUARIO INACTIVO O NO EXISTE!");
                     txtUsuario.setText("");
                     txtContrasenia.setText("");
                 }
