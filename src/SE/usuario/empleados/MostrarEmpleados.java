@@ -40,6 +40,8 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         txtBuscar.setEnabled(false);
         lbId.setText(empl.getId_usuario().toString());
         em=empl;
+        lbEmpresa.setText(em.getId_empresa().toString());
+        lbSucursal.setText(em.getId_sucursal().toString());
     }
     public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
