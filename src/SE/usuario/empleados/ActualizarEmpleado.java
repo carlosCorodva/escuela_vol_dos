@@ -5,19 +5,14 @@
  */
 package SE.usuario.empleados;
 
-import Principal.Calendar;
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
-import SE.componentes.Fecha;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

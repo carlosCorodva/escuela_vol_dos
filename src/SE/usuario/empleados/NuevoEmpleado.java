@@ -747,7 +747,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         }
 
         if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN NOMBRE O APELLIDO VALIDO");
         } else if (txtTelefono1.getText().length() < 9) {
             JOptionPane.showMessageDialog(null, "Ingrese un número de contacto válido ");
         } else if (txtTelefono1.getText().length() > 12) {
