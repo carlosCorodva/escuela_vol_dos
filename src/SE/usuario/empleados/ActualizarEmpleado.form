@@ -59,7 +59,12 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                           <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbSucursal" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="6" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
@@ -91,6 +96,11 @@
                           <Component id="lbId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lbSucursal" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -730,6 +740,16 @@
         <Component class="javax.swing.JLabel" name="lbId">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbEmpresa">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="empresa"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbSucursal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="sucursal"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -282,7 +282,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto,em);
+                    ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
@@ -400,7 +400,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
         if (objeto != null) {
             System.out.println("holaaaaa");
-            ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto,em);
+            ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto);
             acc.setVisible(true);
             listar.clear();
             cbFiltro.setSelectedIndex(0);

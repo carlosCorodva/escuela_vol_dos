@@ -28,7 +28,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 
     //  || or;
     Crud crud = new Crud();
-    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivos();
+    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
     ArrayList<us_permiso_empleado> listar = null;
     Calendario cal = new Calendario();
     JoinEmpleados emp = null;
@@ -37,7 +37,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado, JoinEmpleados empl) {
+    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -48,8 +48,9 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         formulario();
         tablaEstado();
         chbx();
-        lbId.setText(empl.getId_usuario().toString());
+        lbId.setText(emp.getId_usuario().toString());
         jtEstado.setVisible(false);
+        lbEmpresa.setText(eca);
 //        lbId.setVisible(false);
     }
 
@@ -109,6 +110,8 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
         lbId = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -468,6 +471,10 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 
         lbId.setText("jLabel2");
 
+        lbEmpresa.setText("empresa");
+
+        lbSucursal.setText("sucursal");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -484,7 +491,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                         .addComponent(jButton1)
                         .addGap(163, 163, 163)
                         .addComponent(btnSalir)
-                        .addGap(226, 226, 226)
+                        .addGap(126, 126, 126)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbEmpresa)
+                            .addComponent(lbSucursal))
+                        .addGap(59, 59, 59)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -508,7 +519,11 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)
                         .addComponent(lbId))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbEmpresa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbSucursal)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -982,7 +997,9 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JTable jtEstado;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
