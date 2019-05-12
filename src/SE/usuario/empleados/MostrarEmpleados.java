@@ -34,7 +34,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
-        listar = crud.listarEmpleadosActivos();
+        listar = crud.listarEmpleadosActivosInicio();
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
         btnBuscar.setEnabled(false);
         txtBuscar.setEnabled(false);
@@ -259,7 +259,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true,em);
         ne.setVisible(true);
-        listar = crud.listarEmpleadosActivos();
+        listar = crud.listarEmpleadosActivosInicio();
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -286,7 +286,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
-                    listar = crud.listarEmpleadosActivos();
+                    listar = crud.listarEmpleadosActivosInicio();
                     Tablas.cargarJoinUsuario(jtEmpleados, listar);
                 }
 
@@ -301,10 +301,10 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         String f = txtBuscar.getText();
         try {
             if (pos == 0) {
-                listar = crud.listarEmpleadosActivos();
+                listar = crud.listarEmpleadosActivosInicio();
             }
             if (pos == 1) {
-                listar = crud.listarEmpleadosActivos();
+                listar = crud.listarEmpleadosActivosInicio();
 
             }
             if (pos == 2) {
@@ -337,13 +337,13 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 1) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
 
         }
         if (pos == 2) {
@@ -356,19 +356,19 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 4) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 5) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
         }
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }//GEN-LAST:event_cbFiltroActionPerformed
@@ -404,7 +404,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             acc.setVisible(true);
             listar.clear();
             cbFiltro.setSelectedIndex(0);
-            listar = crud.listarEmpleadosActivos();
+            listar = crud.listarEmpleadosActivosInicio();
             Tablas.cargarJoinUsuario(jtEmpleados, listar);
         }
         }

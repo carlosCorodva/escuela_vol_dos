@@ -64,6 +64,7 @@ public FrmLogin() {
         jLabel3.setText("CONTRASEÑA:");
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        txtUsuario.setText("ccordova");
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -76,6 +77,7 @@ public FrmLogin() {
         });
 
         txtContrasenia.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtContrasenia.setText("12345");
         txtContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContraseniaKeyPressed(evt);

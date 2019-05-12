@@ -61,13 +61,15 @@ public class Crud {
         return valor;
     }
         
-    public ArrayList<JoinEmpleados> listarEmpleadosActivos() {
+    public ArrayList<JoinEmpleados> listarEmpleadosActivos(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_mostrar_empleados_activos() }");
+                    "{ call us_mostrar_empleados_activos(?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);
