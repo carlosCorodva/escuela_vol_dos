@@ -17,7 +17,7 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        listar = cr.listarEmpleadosActivos();
+        listar = cr.listarEmpleadosActivosInicio();
         sucursal = es;
         System.out.println("eys:"+"  "+es.getId_sucursal());
 //        lbEmpresa.setVisible(false);
@@ -236,8 +236,7 @@ public FrmLogin() {
                         acc.setVisible(true);
                         dispose();
                         listar.clear();
-//                        JoinEmpleados je = new JoinEmpleados();
-//                        listar = cr.listarEmpleadosActivos();
+                        listar = cr.listarEmpleadosActivosInicio();
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Usuario no existe!!!");
