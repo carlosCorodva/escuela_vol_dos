@@ -67,6 +67,8 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         txtBuscar = new javax.swing.JTextField();
         cbFiltro = new javax.swing.JComboBox<>();
         lbId = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -175,6 +177,10 @@ public class MostrarEmpleados extends javax.swing.JDialog {
 
         lbId.setText("jLabel2");
 
+        lbEmpresa.setText("empresa");
+
+        lbSucursal.setText("sucursal");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -194,6 +200,10 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(lbSucursal)
+                        .addGap(53, 53, 53)
+                        .addComponent(lbEmpresa)
+                        .addGap(41, 41, 41)
                         .addComponent(lbId)
                         .addGap(86, 86, 86)))
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,7 +223,10 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbId)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbId)
+                            .addComponent(lbEmpresa)
+                            .addComponent(lbSucursal))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -449,7 +462,9 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable jtEmpleados;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
