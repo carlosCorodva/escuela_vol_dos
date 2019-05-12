@@ -236,7 +236,8 @@ public FrmLogin() {
                         acc.setVisible(true);
                         dispose();
                         listar.clear();
-                        listar = cr.listarEmpleadosActivos();
+//                        JoinEmpleados je = new JoinEmpleados();
+//                        listar = cr.listarEmpleadosActivos();
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Usuario no existe!!!");

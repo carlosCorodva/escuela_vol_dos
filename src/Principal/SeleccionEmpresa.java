@@ -36,7 +36,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         cbSucursal.setEnabled(false);
-        listar = crud.listarEmpleadosActivos();
+        listar = crud.listarEmpleadosActivosInicio();
         cbEmpresa.setModel(Combos.listarComboEmpresa(empresa));
     }
 
