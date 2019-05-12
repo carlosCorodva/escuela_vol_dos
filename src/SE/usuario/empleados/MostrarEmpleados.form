@@ -67,7 +67,7 @@
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="lbEmpresa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="lbId" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbIdUsuario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -93,7 +93,7 @@
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbId" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbIdUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbSucursal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -267,9 +267,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbId">
+        <Component class="javax.swing.JLabel" name="lbIdUsuario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
+            <Property name="text" type="java.lang.String" value="usaurio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbEmpresa">

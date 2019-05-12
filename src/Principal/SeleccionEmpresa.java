@@ -54,7 +54,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         usuario = crud.listarEmpleadosActivosInicio();
         lbEmpresa.setText(obj.getId_empresa().toString());
         lbSucursal.setText(obj.getId_sucursal().toString());
-        lbUsuario.setText(obj.getId_usuario().toString());
+//        lbUsuario.setText(obj.getUsuario());
     }
 
     public SeleccionEmpresa() {
@@ -95,6 +95,11 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
 
         cbSucursal.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         cbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE SUCURSAL..." }));
+        cbSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSucursalActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/database 32.png"))); // NOI18N
@@ -212,7 +217,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     public JoinEmpleados ObjetoUsaurio(String datos, ArrayList<JoinEmpleados> listarobj) {
         JoinEmpleados objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
+            if (datos.equals(listarobj.get(i).getUsuario())) {
                 objeto1 = listarobj.get(i);
                 System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
                 break;
@@ -264,6 +269,20 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSucursalActionPerformed
+        JoinEmpleados is = new JoinEmpleados();
+            is.setUsuario(obj.getUsuario());
+            is.setContrasena(obj.getContrasena());
+            is.setNombre_comercial_su(cbSucursal.getSelectedItem().toString());
+            String a = crud.validarUsuario(is);
+            if (a==null) {
+                System.out.println("null");
+            } else {
+                lbUsuario.setText(a);
+                System.out.println("else"+a);
+            }
+    }//GEN-LAST:event_cbSucursalActionPerformed
 
     /**
      * @param args the command line arguments

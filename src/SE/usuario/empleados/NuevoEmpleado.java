@@ -25,19 +25,28 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
     Calendario cal = new Calendario();
+    JoinEmpleados us = null;
+    JoinEmpleados suc = null;
+    JoinEmpleados emp = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
      * Creates new form Registrar
      */
-    public NuevoEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados emp) {
+    public NuevoEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
+        us = usuario;
+        suc = sucursal;
+        emp = empresa;
         this.setLocationRelativeTo(null);
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(suc.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
         Habilitar(false);
         lbRuc.setText("   ");
-        lbId.setText(emp.getId_usuario().toString());
+        lbIdUsuario.setText(emp.getId_usuario().toString());
         lbEmpresa.setText(emp.getId_empresa().toString());
         lbSucursal.setText(emp.getId_sucursal().toString());
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
@@ -97,7 +106,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         jcEFisica = new javax.swing.JCheckBox();
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
-        lbId = new javax.swing.JLabel();
+        lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
 
@@ -444,7 +453,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lbId.setText("jLabel2");
+        lbIdUsuario.setText("jLabel2");
 
         lbSucursal.setText("sucursal");
 
@@ -463,7 +472,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(lbId)
+                .addComponent(lbIdUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148)
@@ -485,7 +494,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(lbId))
+                        .addComponent(lbIdUsuario))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,7 +784,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
-            obj.setId_usuario(Long.valueOf(lbId.getText()));
+            obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
 
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
@@ -895,7 +904,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JRadioButton jrRuc;
     private javax.swing.JLabel lbEmpresa;
-    private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbRuc;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtApellidos;

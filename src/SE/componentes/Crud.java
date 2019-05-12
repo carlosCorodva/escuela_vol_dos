@@ -620,4 +620,35 @@ public class Crud {
         }
         return lista;
     }
+
+public String validarUsuario(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_validar_usuario_combos(?,?,?,?) }");
+            pro.setString(1, us.getUsuario());
+            pro.setString(2, us.getContrasena());
+            pro.setString(3, us.getNombre_comercial_su());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }    
 }

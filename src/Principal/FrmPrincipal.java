@@ -42,10 +42,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
-        System.out.println("prueba: " + emp.getNombre_comercial_em());
-        lbEmpresa.setText(emp.getId_empresa().toString());
-        lbSucursal.setText(suc.getId_sucursal().toString());
-        lbIdUsuario.setText(TITLE);
+        System.out.println("empresa: " + empresa.getNombre_comercial_em()+"   "+empresa.getId_empresa());
+        System.out.println("sucursal: " + sucursal.getNombre_comercial_su()+"   "+sucursal.getId_sucursal());
+        System.out.println("usuario: " + usuario.getUsuario()+"   "+usuario.getId_usuario() + usuario.getId_empresa()+usuario.getId_sucursal());
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
     }
 
     public FrmPrincipal() {
@@ -288,12 +290,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true, us);
+        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true, us/*,suc,emp*/);
         ne.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us);
+        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us,suc,emp);
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

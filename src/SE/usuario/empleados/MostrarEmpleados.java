@@ -27,20 +27,24 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     ArrayList<JoinEmpleados> listar = null;
     ArrayList<JoinEmpleados> listar2 = null;
     JoinEmpleados objeto = null;
-    JoinEmpleados em = null;
     JoinEmpleados je = new JoinEmpleados();
+    JoinEmpleados us = null;
+    JoinEmpleados suc = null;
+    JoinEmpleados emp = null;
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal, JoinEmpleados empl) {
+    public MostrarEmpleados(java.awt.Frame parent, boolean modal, JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
+        us = usuario;
+        suc = sucursal;
+        emp = empresa;
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
         btnBuscar.setEnabled(false);
         txtBuscar.setEnabled(false);
-        lbId.setText(empl.getId_usuario().toString());
-        em = empl;
-        lbEmpresa.setText(em.getId_empresa().toString());
-        lbSucursal.setText(em.getId_sucursal().toString());
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(suc.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarEmpleadosActivos(je);
@@ -72,7 +76,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         cbFiltro = new javax.swing.JComboBox<>();
-        lbId = new javax.swing.JLabel();
+        lbIdUsuario = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
 
@@ -181,7 +185,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             }
         });
 
-        lbId.setText("jLabel2");
+        lbIdUsuario.setText("usaurio");
 
         lbEmpresa.setText("empresa");
 
@@ -210,7 +214,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                         .addGap(53, 53, 53)
                         .addComponent(lbEmpresa)
                         .addGap(41, 41, 41)
-                        .addComponent(lbId)
+                        .addComponent(lbIdUsuario)
                         .addGap(86, 86, 86)))
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -230,7 +234,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                             .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbId)
+                            .addComponent(lbIdUsuario)
                             .addComponent(lbEmpresa)
                             .addComponent(lbSucursal))))
                 .addGap(18, 18, 18)
@@ -261,7 +265,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true, em);
+        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true, us,suc,emp);
         ne.setVisible(true);
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
@@ -487,7 +491,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable jtEmpleados;
     private javax.swing.JLabel lbEmpresa;
-    private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
