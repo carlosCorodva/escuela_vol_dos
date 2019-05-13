@@ -56,13 +56,13 @@ public class ActualizarMaterias extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("ACTUALIZAR");
+        jLabel1.setText("MATERIA");
 
         txtCaja.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
-        btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
+        btnActualizar.setText("GUARDAR");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -92,11 +92,11 @@ public class ActualizarMaterias extends javax.swing.JDialog {
                         .addGap(31, 31, 31)
                         .addComponent(txtCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(60, 60, 60)
                         .addComponent(btnActualizar)
-                        .addGap(35, 35, 35)
+                        .addGap(36, 36, 36)
                         .addComponent(btnCancelar)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbIdUsuario)
