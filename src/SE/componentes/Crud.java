@@ -5,6 +5,7 @@ import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinEmpresaSucursal;
+import SE.entidades.ma_paralelo;
 import SE.entidades.mappers.Mappers;
 import SE.entidades.us_permiso_empleado;
 import SE.entidades.us_usuario;
@@ -626,7 +627,7 @@ public class Crud {
         return lista;
     }
 
-public String validarUsuario(JoinEmpleados us) {
+    public String validarUsuario(JoinEmpleados us) {
         String valor = null;
         try {
             con = c.conectar();
@@ -655,8 +656,9 @@ public String validarUsuario(JoinEmpleados us) {
             }
         }
         return valor;
-    }    
-public ArrayList<ca_materia> listarMaterias() {
+    }
+
+    public ArrayList<ca_materia> listarMaterias() {
         ArrayList<ca_materia> valor = new ArrayList<ca_materia>();
         try {
             con = c.conectar();
@@ -685,7 +687,8 @@ public ArrayList<ca_materia> listarMaterias() {
         }
         return valor;
     }
-public String actualizarMateria(ca_materia us) {
+
+    public String actualizarMateria(ca_materia us) {
         String valor = null;
         try {
             con = c.conectar();
@@ -713,5 +716,35 @@ public String actualizarMateria(ca_materia us) {
             }
         }
         return valor;
-    }    
+    }
+    
+    public ArrayList<ma_paralelo> listarCursos() {
+        ArrayList<ma_paralelo> valor = new ArrayList<ma_paralelo>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_paralelo_mostrar() }");
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                ma_paralelo obj = Mappers.getCursosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

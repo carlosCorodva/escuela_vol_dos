@@ -7,6 +7,7 @@ package Principal;
 
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
+import SE.cursos.MostrarCursos;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
@@ -220,6 +221,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem4.setText("CURSOS");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuBar1.add(jMenu4);
@@ -308,6 +314,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MostrarMaterias mm = new MostrarMaterias(new javax.swing.JFrame(), true,us);
         mm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        MostrarCursos mc = new MostrarCursos(new javax.swing.JFrame(), true,us);
+        mc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

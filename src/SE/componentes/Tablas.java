@@ -7,6 +7,7 @@ package SE.componentes;
 
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.ma_paralelo;
 import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -126,6 +127,35 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
             Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        }
+    }
+    public static void cargarTablacurso(JTable Tabla, ArrayList<ma_paralelo> lista) {
+
+        int[] a = {8,28,40};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"           ID","       MATERIAS","      ESTADO"};
+        String[] Filas = new String[3];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getId_paralelo();
+            Filas[1] = lista.get(i).getParalelo();
+//            Filas[2] = lista.get(i).getParalelo_obs();
+            Filas[2] = lista.get(i).getEstado();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
+//            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+//            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
         }
     }
 }

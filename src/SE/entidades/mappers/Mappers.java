@@ -9,6 +9,7 @@ import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.ma_paralelo;
 import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,6 +119,19 @@ public class Mappers {
         try {
             obj.setId_materia(rs.getLong("Id_materia"));
             obj.setMateria(rs.getString("Materia"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static ma_paralelo getCursosFromResultSet(ResultSet rs) {
+        ma_paralelo obj = new ma_paralelo();
+        try {
+            obj.setId_paralelo(rs.getLong("Id_paralelo"));
+            obj.setParalelo(rs.getString("Paralelo"));
+            obj.setParalelo_obs(rs.getString("Paralelo_obs"));
+            obj.setEstado(rs.getString("Estado"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
