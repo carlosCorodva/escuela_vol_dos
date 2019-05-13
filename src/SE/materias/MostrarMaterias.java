@@ -9,7 +9,12 @@ import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
+import SE.usuario.empleados.ActualizarEmpleado;
+import SE.usuario.empleados.MostrarEmpleados;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,16 +28,18 @@ public class MostrarMaterias extends javax.swing.JDialog {
     Crud crud = new Crud();
     ArrayList<ca_materia> listar = null;
     JoinEmpleados us = null;
-    
-    public MostrarMaterias(java.awt.Frame parent, boolean modal,JoinEmpleados usuario) {
+    ca_materia objeto = null;
+
+    public MostrarMaterias(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         listar = crud.listarMaterias();
         Tablas.cargarTablaMateria(jtMaterias, listar);
-        us=usuario;
+        us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
     }
+
     public MostrarMaterias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -57,6 +64,7 @@ public class MostrarMaterias extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -77,6 +85,11 @@ public class MostrarMaterias extends javax.swing.JDialog {
             }
         ));
         jtMaterias.setRowHeight(25);
+        jtMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtMateriasMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtMaterias);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -146,7 +159,7 @@ public class MostrarMaterias extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -157,8 +170,41 @@ public class MostrarMaterias extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        ActualizarMaterias am = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
+        am.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public ca_materia devuelveObjetoEmpleado(String datos, ArrayList<ca_materia> listarobj) {
+        ca_materia objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getId_materia().toString())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
+
+    private void jtMateriasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMateriasMousePressed
+        int i = 0;
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtMaterias.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarMaterias acc = new ActualizarMaterias(new javax.swing.JFrame(), true,us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    listar = crud.listarMaterias();
+                    Tablas.cargarTablaMateria(jtMaterias, listar);
+                }
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jtMateriasMousePressed
 
     /**
      * @param args the command line arguments
