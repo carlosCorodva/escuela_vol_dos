@@ -136,7 +136,7 @@ public class ConfirmacionClave extends javax.swing.JDialog {
         String a = crud.ConfirmarClave(je);
         if ("A".equals(a)) {
             this.setVisible(false);
-            CambioClave cc = new CambioClave(new javax.swing.JFrame(), true,em);
+            CambioPas cc = new CambioPas(new javax.swing.JFrame(), true,em);
             cc.setVisible(true);
             
         } else {
