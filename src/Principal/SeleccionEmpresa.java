@@ -217,7 +217,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     public JoinEmpleados ObjetoUsaurio(String datos, ArrayList<JoinEmpleados> listarobj) {
         JoinEmpleados objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getUsuario())) {
+            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
                 objeto1 = listarobj.get(i);
                 System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
                 break;
@@ -252,14 +252,17 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ELIJA UNA SUCURSAL");
         } else {
             System.out.println("holaaaaa");
-            objSucursal = ObjetoSucursal(cbSuc, sucursal);
-            objEmpresa = ObjetoEmpresa(cbemp, empresa);
+//            objSucursal = ObjetoSucursal(cbSuc, sucursal);
+//            objEmpresa = ObjetoEmpresa(cbemp, empresa);
             objUsuario = ObjetoUsaurio(lbUsuario.getText(), usuario);
-            System.out.println("holaaaaa " + objSucursal.getNombre_comercial_su());
-            if (objSucursal != null) {
+//            System.out.println("holaaaaa " + objSucursal.getNombre_comercial_su());
+            if (/*objSucursal*/objUsuario != null) {
                 System.out.println("holaaaaa");
-                FrmPrincipal acc = new FrmPrincipal(objSucursal,objEmpresa,objUsuario);
-//                System.out.println("holaaaaa " + objeto.getId_usuario());
+                System.out.println("empresa " + objUsuario.getNombre_comercial_em());
+                System.out.println("sucursal " + objUsuario.getNombre_comercial_su());
+                System.out.println("usuario " + objUsuario.getUsuario());
+                FrmPrincipal acc = new FrmPrincipal(/*objSucursal,objEmpresa,*/objUsuario);
+                System.out.println("holaaaaa " + objUsuario.getId_usuario());
                 acc.setVisible(true);
                 dispose();
             }

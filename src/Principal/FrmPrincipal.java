@@ -31,19 +31,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     JoinEmpleados suc = null;
     JoinEmpleados emp = null;
 
-    public FrmPrincipal(JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
+    public FrmPrincipal(/*JoinEmpleados sucursal, JoinEmpleados empresa,*/ JoinEmpleados usuario) {
         initComponents();
         us = usuario;
-        suc = sucursal;
-        emp = empresa;
-        this.setTitle(fondo.getTitle() + TITLE + "---USUARIO" + " ---" + emp.getNombre_comercial_em() + "---");
+//        suc = sucursal;
+//        emp = empresa;
+        this.setTitle(fondo.getTitle() + TITLE + "---USUARIO" + " ---" + us.getNombre_comercial_em() + "---");
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
-        System.out.println("empresa: " + empresa.getNombre_comercial_em()+"   "+empresa.getId_empresa());
-        System.out.println("sucursal: " + sucursal.getNombre_comercial_su()+"   "+sucursal.getId_sucursal());
+//        System.out.println("empresa: " + empresa.getNombre_comercial_em()+"   "+empresa.getId_empresa());
+//        System.out.println("sucursal: " + sucursal.getNombre_comercial_su()+"   "+sucursal.getId_sucursal());
         System.out.println("usuario: " + usuario.getUsuario()+"   "+usuario.getId_usuario() + usuario.getId_empresa()+usuario.getId_sucursal());
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
@@ -295,7 +295,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us,suc,emp);
+        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us/*,suc,emp*/);
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

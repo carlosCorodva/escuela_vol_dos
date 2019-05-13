@@ -32,12 +32,12 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     JoinEmpleados suc = null;
     JoinEmpleados emp = null;
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal, JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
+    public MostrarEmpleados(java.awt.Frame parent, boolean modal, /*JoinEmpleados sucursal, JoinEmpleados empresa,*/ JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         us = usuario;
-        suc = sucursal;
-        emp = empresa;
+//        suc = sucursal;
+//        emp = empresa;
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
         btnBuscar.setEnabled(false);
@@ -265,7 +265,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true, us,suc,emp);
+        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true, us/*,suc,emp*/);
         ne.setVisible(true);
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));

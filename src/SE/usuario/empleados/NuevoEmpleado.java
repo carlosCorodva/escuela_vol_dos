@@ -33,13 +33,13 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public NuevoEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados sucursal, JoinEmpleados empresa, JoinEmpleados usuario) {
+    public NuevoEmpleado(java.awt.Frame parent, boolean modal, /*JoinEmpleados sucursal, JoinEmpleados empresa,*/ JoinEmpleados usuario) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         us = usuario;
-        suc = sucursal;
-        emp = empresa;
+//        suc = sucursal;
+//        emp = empresa;
         this.setLocationRelativeTo(null);
         lbEmpresa.setText(emp.getId_empresa().toString());
         lbSucursal.setText(suc.getId_sucursal().toString());
