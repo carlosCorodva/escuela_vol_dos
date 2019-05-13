@@ -1,5 +1,6 @@
 package SE.componentes;
 
+import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
@@ -571,7 +572,7 @@ public class Crud {
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
-                JoinEmpleados obj = Mappers.getEmpresa2FromResultSet(rs);
+                JoinEmpleados obj = Mappers.getEmpresaFromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();
@@ -604,7 +605,7 @@ public class Crud {
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
-                JoinEmpleados obj = Mappers.getSucursal2FromResultSet(rs);
+                JoinEmpleados obj = Mappers.getSucursalFromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();
@@ -635,6 +636,64 @@ public String validarUsuario(JoinEmpleados us) {
             pro.setString(1, us.getUsuario());
             pro.setString(2, us.getContrasena());
             pro.setString(3, us.getNombre_comercial_su());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }    
+public ArrayList<ca_materia> listarMaterias() {
+        ArrayList<ca_materia> valor = new ArrayList<ca_materia>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_materia_mostrar() }");
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                ca_materia obj = Mappers.getMateriaFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+public String actualizarMateria(ca_materia us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_materia_actualizar(?,?,?) }");
+            pro.setString(1, us.getMateria());
+            pro.setLong(2, us.getId_materia());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");

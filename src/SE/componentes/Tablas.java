@@ -5,6 +5,7 @@
  */
 package SE.componentes;
 
+import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Tablas {
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"        CÓDIGO","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
+        String[] Co = {"        ID","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
             "CORREO", "CARGO","SUCURSAL","     ESTADO"};
         String[] Filas = new String[9];
         model = new DefaultTableModel(null, Co);
@@ -102,6 +103,29 @@ public class Tablas {
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        }
+    }
+    public static void cargarTablaMateria(JTable Tabla, ArrayList<ca_materia> lista) {
+
+        int[] a = {5,250};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"        ID","MATERIAS"};
+        String[] Filas = new String[2];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getId_materia();
+            Filas[1] = lista.get(i).getMateria();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
         }
     }
 }

@@ -10,6 +10,7 @@ import SE.componentes.Variables;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.materias.MostrarMaterias;
 import SE.usuario.clave.ConfirmacionClave;
 import SE.usuario.empleados.MostrarEmpleados;
 import SE.usuario.empleados.NuevoEmpleadoDos;
@@ -228,6 +229,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem5.setText("MATERIAS");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
@@ -297,6 +303,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ConfirmacionClave cc = new ConfirmacionClave(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        MostrarMaterias mm = new MostrarMaterias(new javax.swing.JFrame(), true,us);
+        mm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

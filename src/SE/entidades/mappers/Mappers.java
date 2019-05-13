@@ -5,6 +5,7 @@
  */
 package SE.entidades.mappers;
 
+import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
@@ -72,8 +73,28 @@ public class Mappers {
         }
         return obj;
     }
-    public static em_empresa getEmpresaFromResultSet(ResultSet rs) {
-        em_empresa obj = new em_empresa();
+//    public static em_empresa getEmpresaFromResultSet(ResultSet rs) {
+//        em_empresa obj = new em_empresa();
+//        try {
+//            obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return obj;
+//    }
+//    public static JoinEmpleados getSucursalFromResultSet(ResultSet rs) {
+//        JoinEmpleados obj = new JoinEmpleados();
+//        try {
+//            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return obj;
+//    }
+    public static JoinEmpleados getEmpresaFromResultSet(ResultSet rs) {
+        JoinEmpleados obj = new JoinEmpleados();
         try {
             obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
 
@@ -92,20 +113,11 @@ public class Mappers {
         }
         return obj;
     }
-    public static JoinEmpleados getEmpresa2FromResultSet(ResultSet rs) {
-        JoinEmpleados obj = new JoinEmpleados();
+    public static ca_materia getMateriaFromResultSet(ResultSet rs) {
+        ca_materia obj = new ca_materia();
         try {
-            obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return obj;
-    }
-    public static JoinEmpleados getSucursal2FromResultSet(ResultSet rs) {
-        JoinEmpleados obj = new JoinEmpleados();
-        try {
-            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+            obj.setId_materia(rs.getLong("Id_materia"));
+            obj.setMateria(rs.getString("Materia"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
