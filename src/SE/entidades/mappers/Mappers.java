@@ -10,6 +10,7 @@ import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
+import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,6 +133,18 @@ public class Mappers {
             obj.setParalelo(rs.getString("Paralelo"));
             obj.setParalelo_obs(rs.getString("Paralelo_obs"));
             obj.setEstado_pa(rs.getString("Estado_pa"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static ma_periodo getPeriodosFromResultSet(ResultSet rs) {
+        ma_periodo obj = new ma_periodo();
+        try {
+            obj.setId_periodo(rs.getLong("Id_periodo"));
+            obj.setPeriodo(rs.getString("Periodo"));
+            obj.setEstado_pe(rs.getString("Estado_pe"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);

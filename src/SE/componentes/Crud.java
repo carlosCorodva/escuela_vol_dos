@@ -3,6 +3,7 @@ package SE.componentes;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
+import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
 import SE.entidades.us_permiso_empleado;
 import java.sql.CallableStatement;
@@ -788,6 +789,35 @@ public class Crud {
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<ma_periodo> listarPeriodos() {
+        ArrayList<ma_periodo> valor = new ArrayList<ma_periodo>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_periodo_mostrar() }");
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                ma_periodo obj = Mappers.getPeriodosFromResultSet(rs);
+                valor.add(obj);
+            }
             con.commit();
         } catch (Exception e) {
             try {

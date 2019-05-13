@@ -8,6 +8,7 @@ package SE.componentes;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
+import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -156,6 +157,32 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
 //            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
 //            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
+        }
+    }
+    public static void cargarTablaPeriodo(JTable Tabla, ArrayList<ma_periodo> lista) {
+
+        int[] a = {8,28,30};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"           ID","       PERIODO","      ESTADO"};
+        String[] Filas = new String[3];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getId_periodo();
+            Filas[1] = lista.get(i).getPeriodo();
+            Filas[2] = lista.get(i).getEstado_pe();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
         }
     }
 }
