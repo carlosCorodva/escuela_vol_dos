@@ -170,8 +170,23 @@ public class MostrarMaterias extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        ActualizarMaterias am = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
-        am.setVisible(true);
+//        ActualizarMaterias am = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
+//        am.setVisible(true);
+        int i = 0;
+        try {
+            i = jtMaterias.getSelectedRow();
+            objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
+            if (objeto != null) {
+                System.out.println("holaaaaa");
+                ActualizarMaterias acc = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
+                acc.setVisible(true);
+                listar.clear();
+                listar = crud.listarMaterias();
+                Tablas.cargarTablaMateria(jtMaterias, listar);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     public ca_materia devuelveObjetoEmpleado(String datos, ArrayList<ca_materia> listarobj) {
@@ -193,7 +208,7 @@ public class MostrarMaterias extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarMaterias acc = new ActualizarMaterias(new javax.swing.JFrame(), true,us, objeto);
+                    ActualizarMaterias acc = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     listar = crud.listarMaterias();

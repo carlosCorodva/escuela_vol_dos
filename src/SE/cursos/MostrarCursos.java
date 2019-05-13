@@ -174,10 +174,25 @@ public class MostrarCursos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        ActualizarCursos am = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
-        am.setVisible(true);
-        listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtMaterias, listar);
+//        ActualizarCursos am = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
+//        am.setVisible(true);
+//        listar = crud.listarCursos();
+//        Tablas.cargarTablacurso(jtMaterias, listar);
+        int i = 0;
+        try {
+            i = jtMaterias.getSelectedRow();
+            objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
+            if (objeto != null) {
+                System.out.println("holaaaaa");
+                ActualizarCursos acc = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
+                acc.setVisible(true);
+                listar.clear();
+                listar = crud.listarCursos();
+                Tablas.cargarTablacurso(jtMaterias, listar);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     public ma_paralelo devuelveObjetoEmpleado(String datos, ArrayList<ma_paralelo> listarobj) {
@@ -199,7 +214,7 @@ public class MostrarCursos extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarCursos acc = new ActualizarCursos(new javax.swing.JFrame(), true,us, objeto);
+                    ActualizarCursos acc = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     listar = crud.listarCursos();
