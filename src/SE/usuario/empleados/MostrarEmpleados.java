@@ -174,7 +174,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         });
 
         cbFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "ACTIVO", "INACTIVO", "CODIGO", "CEDULA", "APELLIDOS/NOMB" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "ACTIVO", "INACTIVO", "CEDULA", "APELLIDOS/NOMB" }));
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -325,18 +325,16 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 listar = crud.listarEmpleadosInactivos(je);
             }
             if (pos == 3) {
-                JoinEmpleados jo = new JoinEmpleados();
-                jo.setId_usuario(Long.valueOf(f));
-                listar = crud.filtroEmpleadoId(jo);
-                txtBuscar.setText("");
-            }
-            if (pos == 4) {
                 je.setCedula(f);
+                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoCedula(je);
                 txtBuscar.setText("");
             }
-            if (pos == 5) {
+            if (pos == 4) {
                 je.setApellidos_nombres(f);
+                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoApeNomb(je);
                 txtBuscar.setText("");
             }

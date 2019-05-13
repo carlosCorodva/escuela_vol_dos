@@ -25,7 +25,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
     Calendario cal = new Calendario();
-    JoinEmpleados us = null;
+    JoinEmpleados usu = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
@@ -35,16 +35,16 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
-        us = usuario;
+        usu = usuario;
         this.setLocationRelativeTo(null);
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
+        lbEmpresa.setText(usu.getId_empresa().toString());
+        lbSucursal.setText(usu.getId_sucursal().toString());
+        lbIdUsuario.setText(usu.getId_usuario().toString());
         Habilitar(false);
         lbRuc.setText("   ");
-        lbIdUsuario.setText(us.getId_usuario().toString());
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(usu.getId_usuario().toString());
+        lbEmpresa.setText(usu.getId_empresa().toString());
+        lbSucursal.setText(usu.getId_sucursal().toString());
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
     }
 

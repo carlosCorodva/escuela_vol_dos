@@ -273,8 +273,10 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_mostrar_emp_ape_nomb(?)}");
+                    "{ call us_mostrar_emp_ape_nomb(?,?,?)}");
             pro.setString(1, je.getApellidos_nombres());
+            pro.setLong(2, je.getId_empresa());
+            pro.setLong(3, je.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);
@@ -304,8 +306,10 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_mostrar_emp_cedula(?)}");
+                    "{ call us_mostrar_emp_cedula(?,?,?)}");
             pro.setString(1, je.getCedula());
+            pro.setLong(2, je.getId_empresa());
+            pro.setLong(3, je.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);

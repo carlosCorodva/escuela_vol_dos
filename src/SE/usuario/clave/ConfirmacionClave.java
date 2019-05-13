@@ -61,6 +61,7 @@ public class ConfirmacionClave extends javax.swing.JDialog {
         jLabel1.setText("CONFIRMAR CONTRSEÑA");
 
         txtClave.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtClave.setText("12345");
         txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtClaveKeyPressed(evt);
