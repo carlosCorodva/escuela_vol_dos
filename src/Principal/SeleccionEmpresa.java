@@ -37,18 +37,18 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     JoinEmpleados es = new JoinEmpleados();
 
     public SeleccionEmpresa(JoinEmpleados objeto) {
-        System.out.println("1");
+//        System.out.println("1");
         initComponents();
         obj = objeto;
-        System.out.println("2");
+//        System.out.println("2");
         setLocationRelativeTo(null);
         cbSucursal.setEnabled(false);
-        System.out.println("3");
+//        System.out.println("3");
         es.setUsuario(objeto.getUsuario());
         es.setContrasena(objeto.getContrasena());
-        System.out.println("4  " + objeto.getUsuario() + "  " + objeto.getContrasena());
-        System.out.println("5  " + objeto.getNombre_comercial_em() + "  " + objeto.getId_empresa());
-        System.out.println("4  " + objeto.getNombre_comercial_su() + "  " + objeto.getId_sucursal());
+//        System.out.println("4  " + objeto.getUsuario() + "  " + objeto.getContrasena());
+//        System.out.println("5  " + objeto.getNombre_comercial_em() + "  " + objeto.getId_empresa());
+//        System.out.println("4  " + objeto.getNombre_comercial_su() + "  " + objeto.getId_sucursal());
         empresa = crud.empresaComboDos(es);
         cbEmpresa.setModel(Combos.listarComboEmpresa(empresa));
         usuario = crud.listarEmpleadosActivosInicio();
@@ -208,7 +208,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getNombre_comercial_su())) {
                 objeto1 = listarobj.get(i);
-                System.out.println("objeto sucursal:" + listarobj.get(i).getNombre_comercial_su());
+//                System.out.println("objeto sucursal:" + listarobj.get(i).getNombre_comercial_su());
                 break;
             }
         }
@@ -219,7 +219,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
                 objeto1 = listarobj.get(i);
-                System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
+//                System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
                 break;
             }
         }
@@ -230,7 +230,7 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getNombre_comercial_em())) {
                 objeto1 = listarobj.get(i);
-                System.out.println("objeto empresa:" + listarobj.get(i).getNombre_comercial_em());
+//                System.out.println("objeto empresa:" + listarobj.get(i).getNombre_comercial_em());
                 break;
             }
         }
@@ -257,12 +257,12 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
             objUsuario = ObjetoUsaurio(lbUsuario.getText(), usuario);
 //            System.out.println("holaaaaa " + objSucursal.getNombre_comercial_su());
             if (/*objSucursal*/objUsuario != null) {
-                System.out.println("holaaaaa");
-                System.out.println("empresa " + objUsuario.getNombre_comercial_em());
-                System.out.println("sucursal " + objUsuario.getNombre_comercial_su());
-                System.out.println("usuario " + objUsuario.getUsuario());
+//                System.out.println("holaaaaa");
+//                System.out.println("empresa " + objUsuario.getNombre_comercial_em());
+//                System.out.println("sucursal " + objUsuario.getNombre_comercial_su());
+//                System.out.println("usuario " + objUsuario.getUsuario());
                 FrmPrincipal acc = new FrmPrincipal(/*objSucursal,objEmpresa,*/objUsuario);
-                System.out.println("holaaaaa " + objUsuario.getId_usuario());
+//                System.out.println("holaaaaa " + objUsuario.getId_usuario());
                 acc.setVisible(true);
                 dispose();
             }
