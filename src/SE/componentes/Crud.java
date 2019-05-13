@@ -750,11 +750,41 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_actualizar(?,?,?,?,?) }");
+                    "{ call ma_paralelo_actualizar(?,?,?,?,?,?) }");
             pro.setString(1, us.getParalelo());
             pro.setLong(2, us.getId_paralelo());
             pro.setLong(3, us.getId_actualizacion());
             pro.setString(4, us.getParalelo_obs());
+            pro.setString(5, us.getEstado_pa());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String crearCursos(ma_paralelo us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_paralelo_crear(?,?,?) }");
+            pro.setString(1, us.getParalelo());
+            pro.setLong(2, us.getId_actualizacion());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");

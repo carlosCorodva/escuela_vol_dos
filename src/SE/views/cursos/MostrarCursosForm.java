@@ -116,6 +116,11 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         btnNuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/add32.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,10 +179,6 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-//        ActualizarCursos am = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
-//        am.setVisible(true);
-//        listar = crud.listarCursos();
-//        Tablas.cargarTablacurso(jtMaterias, listar);
         int i = 0;
         try {
             i = jtMaterias.getSelectedRow();
@@ -193,6 +194,8 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         } catch (Exception e) {
             Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
+        listar = crud.listarCursos();
+        Tablas.cargarTablacurso(jtMaterias, listar);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     public ma_paralelo devuelveObjetoEmpleado(String datos, ArrayList<ma_paralelo> listarobj) {
@@ -226,6 +229,13 @@ public class MostrarCursosForm extends javax.swing.JDialog {
             Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtMateriasMousePressed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        CrearCursosForm cc = new CrearCursosForm(new javax.swing.JFrame(), true, us);
+        cc.setVisible(true);
+        listar = crud.listarCursos();
+        Tablas.cargarTablacurso(jtMaterias, listar);
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     /**
      * @param args the command line arguments
