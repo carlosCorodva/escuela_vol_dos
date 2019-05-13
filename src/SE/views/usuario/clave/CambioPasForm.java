@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.clave;
+package SE.views.usuario.clave;
 
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
@@ -13,21 +13,21 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class CambioPas extends javax.swing.JDialog {
+public class CambioPasForm extends javax.swing.JDialog {
 
     /**
      * Creates new form CambioPas
      */
     Crud crud = new Crud();
     JoinEmpleados em = null;
-    public CambioPas(java.awt.Frame parent, boolean modal, JoinEmpleados empl) {
+    public CambioPasForm(java.awt.Frame parent, boolean modal, JoinEmpleados empl) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         txtUsuario.setText(empl.getUsuario());
         em = empl;
     }
-    public CambioPas(java.awt.Frame parent, boolean modal) {
+    public CambioPasForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -213,20 +213,21 @@ public void mantenimiento() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CambioPas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambioPasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CambioPas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambioPasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CambioPas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambioPasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CambioPas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambioPasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CambioPas dialog = new CambioPas(new javax.swing.JFrame(), true);
+                CambioPasForm dialog = new CambioPasForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

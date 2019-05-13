@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.clave;
+package SE.views.usuario.clave;
 
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class ConfirmacionClave extends javax.swing.JDialog {
+public class ConfirmacionClaveForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ConfirmacionClave
@@ -23,13 +23,13 @@ public class ConfirmacionClave extends javax.swing.JDialog {
     JoinEmpleados em = null;
     
     
-    public ConfirmacionClave(java.awt.Frame parent, boolean modal,JoinEmpleados empl) {
+    public ConfirmacionClaveForm(java.awt.Frame parent, boolean modal,JoinEmpleados empl) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         em=empl;
     }
-    public ConfirmacionClave(java.awt.Frame parent, boolean modal) {
+    public ConfirmacionClaveForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -136,7 +136,7 @@ public class ConfirmacionClave extends javax.swing.JDialog {
         String a = crud.ConfirmarClave(je);
         if ("A".equals(a)) {
             this.setVisible(false);
-            CambioPas cc = new CambioPas(new javax.swing.JFrame(), true,em);
+            CambioPasForm cc = new CambioPasForm(new javax.swing.JFrame(), true,em);
             cc.setVisible(true);
             
         } else {
@@ -178,20 +178,21 @@ public class ConfirmacionClave extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfirmacionClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfirmacionClaveForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfirmacionClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfirmacionClaveForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfirmacionClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfirmacionClaveForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfirmacionClave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfirmacionClaveForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConfirmacionClave dialog = new ConfirmacionClave(new javax.swing.JFrame(), true);
+                ConfirmacionClaveForm dialog = new ConfirmacionClaveForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

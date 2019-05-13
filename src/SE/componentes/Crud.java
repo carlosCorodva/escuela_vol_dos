@@ -1,14 +1,10 @@
 package SE.componentes;
 
 import SE.entidades.ca_materia;
-import SE.entidades.em_empresa;
-import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.join.JoinEmpresaSucursal;
 import SE.entidades.ma_paralelo;
 import SE.entidades.mappers.Mappers;
 import SE.entidades.us_permiso_empleado;
-import SE.entidades.us_usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -694,9 +690,10 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ca_materia_actualizar(?,?,?) }");
+                    "{ call ca_materia_actualizar(?,?,?,?) }");
             pro.setString(1, us.getMateria());
             pro.setLong(2, us.getId_materia());
+            pro.setLong(3, us.getId_actualizacion());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -730,6 +727,37 @@ public class Crud {
                 ma_paralelo obj = Mappers.getCursosFromResultSet(rs);
                 valor.add(obj);
             }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String actualizarCursos(ma_paralelo us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_paralelo_actualizar(?,?,?,?,?) }");
+            pro.setString(1, us.getParalelo());
+            pro.setLong(2, us.getId_paralelo());
+            pro.setLong(3, us.getId_actualizacion());
+            pro.setString(4, us.getParalelo_obs());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
             con.commit();
         } catch (Exception e) {
             try {

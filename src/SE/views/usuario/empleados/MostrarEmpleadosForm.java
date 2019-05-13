@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.empleados;
+package SE.views.usuario.empleados;
 
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class MostrarEmpleados extends javax.swing.JDialog {
+public class MostrarEmpleadosForm extends javax.swing.JDialog {
 
     /**
      * Creates new form MostrarUsuario
@@ -30,7 +30,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     JoinEmpleados je = new JoinEmpleados();
     JoinEmpleados us = null;
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public MostrarEmpleadosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         us = usuario;
@@ -47,7 +47,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }
 
-    public MostrarEmpleados(java.awt.Frame parent, boolean modal) {
+    public MostrarEmpleadosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -261,7 +261,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NuevoEmpleado ne = new NuevoEmpleado(new javax.swing.JFrame(), true, us/*,suc,emp*/);
+        NuevoEmpleadoForm ne = new NuevoEmpleadoForm(new javax.swing.JFrame(), true, us/*,suc,emp*/);
         ne.setVisible(true);
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
@@ -289,7 +289,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto);
+                    ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
@@ -302,7 +302,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
 
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtEmpleadosMousePressed
     public void filtro() {
@@ -340,7 +340,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             }
             Tablas.cargarJoinUsuario(jtEmpleados, listar);
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -420,7 +420,7 @@ public class MostrarEmpleados extends javax.swing.JDialog {
             objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
                 System.out.println("holaaaaa");
-                ActualizarEmpleado acc = new ActualizarEmpleado(new javax.swing.JFrame(), true, objeto);
+                ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true, objeto);
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);
@@ -447,21 +447,23 @@ public class MostrarEmpleados extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MostrarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarEmpleados dialog = new MostrarEmpleados(new javax.swing.JFrame(), true);
+                MostrarEmpleadosForm dialog = new MostrarEmpleadosForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

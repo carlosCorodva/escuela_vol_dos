@@ -7,14 +7,14 @@ package Principal;
 
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
-import SE.cursos.MostrarCursos;
+import SE.views.cursos.MostrarCursosForm;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
-import SE.materias.MostrarMaterias;
-import SE.usuario.clave.ConfirmacionClave;
-import SE.usuario.empleados.MostrarEmpleados;
-import SE.usuario.empleados.NuevoEmpleadoDos;
+import SE.views.materias.MostrarMateriasForm;
+import SE.views.usuario.clave.ConfirmacionClaveForm;
+import SE.views.usuario.empleados.MostrarEmpleadosForm;
+import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
@@ -306,27 +306,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        NuevoEmpleadoDos ne = new NuevoEmpleadoDos(new javax.swing.JFrame(), true, us);
+        NuevoEmpleadoDosForm ne = new NuevoEmpleadoDosForm(new javax.swing.JFrame(), true, us);
         ne.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MostrarEmpleados me = new MostrarEmpleados(new javax.swing.JFrame(), true, us);
+        MostrarEmpleadosForm me = new MostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ConfirmacionClave cc = new ConfirmacionClave(new javax.swing.JFrame(), true, us);
+        ConfirmacionClaveForm cc = new ConfirmacionClaveForm(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        MostrarMaterias mm = new MostrarMaterias(new javax.swing.JFrame(), true,us);
+        MostrarMateriasForm mm = new MostrarMateriasForm(new javax.swing.JFrame(), true,us);
         mm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        MostrarCursos mc = new MostrarCursos(new javax.swing.JFrame(), true,us);
+        MostrarCursosForm mc = new MostrarCursosForm(new javax.swing.JFrame(), true,us);
         mc.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

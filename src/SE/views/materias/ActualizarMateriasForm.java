@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.materias;
+package SE.views.materias;
 
 import SE.componentes.Crud;
 import SE.entidades.ca_materia;
@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class ActualizarMaterias extends javax.swing.JDialog {
+public class ActualizarMateriasForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ActualizarMaterias
      */
     Crud crud = new Crud();
     ca_materia cm = null;
-    public ActualizarMaterias(java.awt.Frame parent, boolean modal,JoinEmpleados usuario,ca_materia materia) {
+    public ActualizarMateriasForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario,ca_materia materia) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -29,7 +29,7 @@ public class ActualizarMaterias extends javax.swing.JDialog {
         lbIdUsuario.setText(usuario.getId_usuario().toString());
         txtCaja.setText(cm.getMateria());
     }
-    public ActualizarMaterias(java.awt.Frame parent, boolean modal) {
+    public ActualizarMateriasForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -139,7 +139,8 @@ public void actualizar() {
         String text = txtCaja.getText();
             ca_materia mm = new ca_materia();
             mm.setMateria(text);
-            mm.setId_materia(Long.valueOf(lbIdUsuario.getText()));
+            mm.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+            mm.setId_materia(cm.getId_materia());
             String a = crud.actualizarMateria(mm);
             JOptionPane.showMessageDialog(this, a);
             setVisible(false);
@@ -165,20 +166,21 @@ public void actualizar() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarMaterias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarMaterias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarMaterias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarMaterias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarMaterias dialog = new ActualizarMaterias(new javax.swing.JFrame(), true);
+                ActualizarMateriasForm dialog = new ActualizarMateriasForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

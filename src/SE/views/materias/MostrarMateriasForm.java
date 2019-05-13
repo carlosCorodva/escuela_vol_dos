@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.cursos;
+package SE.views.materias;
 
-import SE.materias.*;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.ma_paralelo;
-import SE.usuario.empleados.MostrarEmpleados;
+import SE.views.usuario.empleados.ActualizarEmpleadoForm;
+import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,27 +20,27 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class MostrarCursos extends javax.swing.JDialog {
+public class MostrarMateriasForm extends javax.swing.JDialog {
 
     /**
      * Creates new form MostrarMaterias
      */
     Crud crud = new Crud();
-    ArrayList<ma_paralelo> listar = null;
+    ArrayList<ca_materia> listar = null;
     JoinEmpleados us = null;
-    ma_paralelo objeto = null;
+    ca_materia objeto = null;
 
-    public MostrarCursos(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public MostrarMateriasForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtMaterias, listar);
+        listar = crud.listarMaterias();
+        Tablas.cargarTablaMateria(jtMaterias, listar);
         us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
     }
 
-    public MostrarCursos(java.awt.Frame parent, boolean modal) {
+    public MostrarMateriasForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -60,10 +59,9 @@ public class MostrarCursos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMaterias = new javax.swing.JTable();
-        btnSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -74,7 +72,7 @@ public class MostrarCursos extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CURSOS");
+        jLabel1.setText("MATERIAS");
         jLabel1.setOpaque(true);
 
         jtMaterias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -94,12 +92,12 @@ public class MostrarCursos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jtMaterias);
 
-        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
-        btnSalir.setText("SALIR");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -114,27 +112,26 @@ public class MostrarCursos extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel2");
 
-        btnNuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/add32.png"))); // NOI18N
-        btnNuevo.setText("NUEVO");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(btnActualizar)
+                        .addGap(76, 76, 76)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,16 +139,15 @@ public class MostrarCursos extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lbIdUsuario))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(lbIdUsuario)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnSalir)
-                    .addComponent(btnNuevo))
+                    .addComponent(jButton1)
+                    .addComponent(btnActualizar))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -169,36 +165,34 @@ public class MostrarCursos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-//        ActualizarCursos am = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
+//        ActualizarMaterias am = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
 //        am.setVisible(true);
-//        listar = crud.listarCursos();
-//        Tablas.cargarTablacurso(jtMaterias, listar);
         int i = 0;
         try {
             i = jtMaterias.getSelectedRow();
             objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
                 System.out.println("holaaaaa");
-                ActualizarCursos acc = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
+                ActualizarMateriasForm acc = new ActualizarMateriasForm(new javax.swing.JFrame(), true, us, objeto);
                 acc.setVisible(true);
                 listar.clear();
-                listar = crud.listarCursos();
-                Tablas.cargarTablacurso(jtMaterias, listar);
+                listar = crud.listarMaterias();
+                Tablas.cargarTablaMateria(jtMaterias, listar);
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    public ma_paralelo devuelveObjetoEmpleado(String datos, ArrayList<ma_paralelo> listarobj) {
-        ma_paralelo objeto1 = null;
+    public ca_materia devuelveObjetoEmpleado(String datos, ArrayList<ca_materia> listarobj) {
+        ca_materia objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getId_paralelo().toString())) {
+            if (datos.equals(listarobj.get(i).getId_materia().toString())) {
                 objeto1 = listarobj.get(i);
                 break;
             }
@@ -214,16 +208,16 @@ public class MostrarCursos extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarCursos acc = new ActualizarCursos(new javax.swing.JFrame(), true, us, objeto);
+                    ActualizarMateriasForm acc = new ActualizarMateriasForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    listar = crud.listarCursos();
-                    Tablas.cargarTablacurso(jtMaterias, listar);
+                    listar = crud.listarMaterias();
+                    Tablas.cargarTablaMateria(jtMaterias, listar);
                 }
 
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleados.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtMateriasMousePressed
 
@@ -244,13 +238,13 @@ public class MostrarCursos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostrarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostrarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostrarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MostrarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarMateriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -258,7 +252,7 @@ public class MostrarCursos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarCursos dialog = new MostrarCursos(new javax.swing.JFrame(), true);
+                MostrarMateriasForm dialog = new MostrarMateriasForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -272,8 +266,7 @@ public class MostrarCursos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

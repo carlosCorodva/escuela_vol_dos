@@ -12,17 +12,37 @@ package SE.entidades;
 public class ma_paralelo {
     private Long id_paralelo;
     private String paralelo;
-    private String estado;
+    private String estado_pa;
     private String paralelo_obs;
+    private Long id_creacion;
+    private Long id_actualizacion;
 
     public ma_paralelo() {
     }
 
-    public ma_paralelo(Long id_paralelo, String paralelo, String estado, String paralelo_obs) {
+    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion) {
         this.id_paralelo = id_paralelo;
         this.paralelo = paralelo;
-        this.estado = estado;
+        this.estado_pa = estado_pa;
         this.paralelo_obs = paralelo_obs;
+        this.id_creacion = id_creacion;
+        this.id_actualizacion = id_actualizacion;
+    }
+
+    public Long getId_creacion() {
+        return id_creacion;
+    }
+
+    public void setId_creacion(Long id_creacion) {
+        this.id_creacion = id_creacion;
+    }
+
+    public Long getId_actualizacion() {
+        return id_actualizacion;
+    }
+
+    public void setId_actualizacion(Long id_actualizacion) {
+        this.id_actualizacion = id_actualizacion;
     }
 
     public Long getId_paralelo() {
@@ -41,13 +61,14 @@ public class ma_paralelo {
         this.paralelo = paralelo;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstado_pa() {
+        return estado_pa;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstado_pa(String stado_pa) {
+        this.estado_pa = stado_pa;
     }
+
 
     public String getParalelo_obs() {
         return paralelo_obs;

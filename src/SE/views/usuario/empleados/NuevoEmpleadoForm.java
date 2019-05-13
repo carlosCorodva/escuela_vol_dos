@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.empleados;
+package SE.views.usuario.empleados;
 
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class NuevoEmpleado extends javax.swing.JDialog {
+public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
@@ -31,7 +31,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public NuevoEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public NuevoEmpleadoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -48,7 +48,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
     }
 
-    public NuevoEmpleado(java.awt.Frame parent, boolean modal) {
+    public NuevoEmpleadoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -835,14 +835,22 @@ public class NuevoEmpleado extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -855,7 +863,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoEmpleado dialog = new NuevoEmpleado(new javax.swing.JFrame(), true);
+                NuevoEmpleadoForm dialog = new NuevoEmpleadoForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

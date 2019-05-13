@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.cursos;
+package SE.views.cursos;
 
-import SE.materias.*;
 import SE.componentes.Crud;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
@@ -16,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class ActualizarCursos extends javax.swing.JDialog {
+public class ActualizarCursosForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ActualizarMaterias
@@ -24,7 +23,7 @@ public class ActualizarCursos extends javax.swing.JDialog {
     Crud crud = new Crud();
     ma_paralelo cm = null;
 
-    public ActualizarCursos(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_paralelo paralelo) {
+    public ActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_paralelo paralelo) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -33,7 +32,7 @@ public class ActualizarCursos extends javax.swing.JDialog {
         form();
     }
 
-    public ActualizarCursos(java.awt.Frame parent, boolean modal) {
+    public ActualizarCursosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -178,7 +177,7 @@ public class ActualizarCursos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 public void form() {
-        String est = cm.getEstado();
+        String est = cm.getEstado_pa();
         txtCurso.setText(cm.getParalelo());
         txtObser.setText(cm.getParalelo_obs());
         if ("ACTIVO".equals(est)) {
@@ -192,10 +191,13 @@ public void form() {
     }//GEN-LAST:event_btnActualizarActionPerformed
     public void actualizar() {
         String text = txtCurso.getText();
-        ca_materia mm = new ca_materia();
-        mm.setMateria(text);
-        mm.setId_materia(Long.valueOf(lbIdUsuario.getText()));
-        String a = crud.actualizarMateria(mm);
+        ma_paralelo mp = new ma_paralelo();
+        mp.setParalelo(text);
+        mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+        mp.setId_paralelo(cm.getId_paralelo());
+        mp.setParalelo_obs(txtObser.getText());
+        mp.setEstado_pa(cbEstado.getSelectedItem().toString());
+        String a = crud.actualizarCursos(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
     }
@@ -220,21 +222,23 @@ public void form() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarCursos dialog = new ActualizarCursos(new javax.swing.JFrame(), true);
+                ActualizarCursosForm dialog = new ActualizarCursosForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

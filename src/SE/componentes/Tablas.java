@@ -145,7 +145,7 @@ public class Tablas {
             Filas[0] = ""+lista.get(i).getId_paralelo();
             Filas[1] = lista.get(i).getParalelo();
 //            Filas[2] = lista.get(i).getParalelo_obs();
-            Filas[2] = lista.get(i).getEstado();
+            Filas[2] = lista.get(i).getEstado_pa();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);

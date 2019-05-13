@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.usuario.empleados;
+package SE.views.usuario.empleados;
 
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author alumno
  */
-public class ActualizarEmpleado extends javax.swing.JDialog {
+public class ActualizarEmpleadoForm extends javax.swing.JDialog {
 
     //  || or;
     Crud crud = new Crud();
@@ -32,7 +32,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
+    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -49,7 +49,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
 //        lbId.setVisible(false);
     }
 
-    public ActualizarEmpleado(java.awt.Frame parent, boolean modal) {
+    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal) {
         initComponents();
     }
 
@@ -917,14 +917,30 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarEmpleadoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -945,7 +961,7 @@ public class ActualizarEmpleado extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarEmpleado dialog = new ActualizarEmpleado(new javax.swing.JFrame(), true);
+                ActualizarEmpleadoForm dialog = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
