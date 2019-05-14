@@ -23,7 +23,6 @@ public class CrearCursosForm extends javax.swing.JDialog {
      * Creates new form ActualizarMaterias
      */
     Crud crud = new Crud();
-    ArrayList<ma_paralelo> listar = null;
 
     public CrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);

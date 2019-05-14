@@ -170,22 +170,24 @@ public class MostrarMateriasForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-//        ActualizarMaterias am = new ActualizarMaterias(new javax.swing.JFrame(), true, us, objeto);
-//        am.setVisible(true);
-        int i = 0;
-        try {
-            i = jtMaterias.getSelectedRow();
-            objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
-            if (objeto != null) {
-                System.out.println("holaaaaa");
-                ActualizarMateriasForm acc = new ActualizarMateriasForm(new javax.swing.JFrame(), true, us, objeto);
-                acc.setVisible(true);
-                listar.clear();
-                listar = crud.listarMaterias();
-                Tablas.cargarTablaMateria(jtMaterias, listar);
+        int i = jtMaterias.getSelectedRow();
+        if (jtMaterias.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            try {
+                i = jtMaterias.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarMateriasForm acc = new ActualizarMateriasForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    listar = crud.listarMaterias();
+                    Tablas.cargarTablaMateria(jtMaterias, listar);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(MostrarMateriasForm.class.getName()).log(Level.SEVERE, null, e);
             }
-        } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -217,7 +219,7 @@ public class MostrarMateriasForm extends javax.swing.JDialog {
 
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarMateriasForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtMateriasMousePressed
 

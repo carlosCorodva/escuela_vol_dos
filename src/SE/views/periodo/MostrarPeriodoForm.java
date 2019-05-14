@@ -9,7 +9,11 @@ import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_periodo;
+import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,18 +26,24 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
      */
     Crud crud = new Crud();
     ArrayList<ma_periodo> listar = null;
-    public MostrarPeriodoForm(java.awt.Frame parent, boolean modal/*, JoinEmpleados usuario*/) {
+    ma_periodo objeto = null;
+    JoinEmpleados us = null;
+
+    public MostrarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbIdUsuario.setText(usuario.getId_usuario().toString());
+        us = usuario;
         listar = crud.listarPeriodos();
         Tablas.cargarTablaPeriodo(jtPeriodo, listar);
     }
-    
-//    public PeriodoParcialForm(java.awt.Frame parent, boolean modal) {
-//        super(parent, modal);
-//        initComponents();
-//    }
+
+    public MostrarPeriodoForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,6 +87,11 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
             }
         ));
         jtPeriodo.setRowHeight(25);
+        jtPeriodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtPeriodoMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtPeriodo);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -89,6 +104,11 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         });
 
         txtFiltro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("BUSCAR");
@@ -105,6 +125,11 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         lbIdUsuario.setText("jLabel3");
 
@@ -164,14 +189,76 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public ma_periodo devuelveObjetoEmpleado(String datos, ArrayList<ma_periodo> listarobj) {
+        ma_periodo objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getPeriodo())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        CrearPeriodoForm pp = new CrearPeriodoForm(new javax.swing.JFrame(), true);
+        CrearPeriodoForm pp = new CrearPeriodoForm(new javax.swing.JFrame(), true, us);
         pp.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int i = jtPeriodo.getSelectedRow();
+        if (jtPeriodo.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            try {
+                i = jtPeriodo.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtPeriodo.getValueAt(i, 1).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarPeriodoForm acc = new ActualizarPeriodoForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    listar = crud.listarPeriodos();
+                    Tablas.cargarTablaPeriodo(jtPeriodo, listar);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(MostrarPeriodoForm.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void jtPeriodoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPeriodoMousePressed
+        int i = 0;
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtPeriodo.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtPeriodo.getValueAt(i, 1).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarPeriodoForm acc = new ActualizarPeriodoForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    listar = crud.listarPeriodos();
+                    Tablas.cargarTablaPeriodo(jtPeriodo, listar);
+                }
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarPeriodoForm.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jtPeriodoMousePressed
+
+    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
+        try {
+            Tablas.filtro(txtFiltro.getText(), jtPeriodo);
+        } catch (Exception e) {
+            Logger.getLogger(MostrarPeriodoForm.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_txtFiltroKeyPressed
 
     /**
      * @param args the command line arguments

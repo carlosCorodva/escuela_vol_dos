@@ -12,6 +12,7 @@ import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.materias.MostrarMateriasForm;
+import SE.views.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
@@ -209,6 +210,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem8.setText("PERIODO LECTIVO");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -329,6 +335,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MostrarCursosForm mc = new MostrarCursosForm(new javax.swing.JFrame(), true,us);
         mc.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        MostrarPeriodoForm mp = new MostrarPeriodoForm(new javax.swing.JFrame(), true,us);
+        mp.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -37,7 +37,6 @@ public class Crud {
                     "{ call login(?,?,?) }");
             pro.setString(1, us.getUsuario());
             pro.setString(2, us.getContrasena());
-//            pro.setLong(3, us.getId_sucursal());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -818,6 +817,67 @@ public class Crud {
                 ma_periodo obj = Mappers.getPeriodosFromResultSet(rs);
                 valor.add(obj);
             }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String CrearPeriodo(ma_periodo us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_periodo_crear(?,?,?) }");
+            pro.setString(1, us.getPeriodo());
+            pro.setLong(2, us.getId_creacion());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String ActualizarPeriodo(ma_periodo us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_periodo_actualizar(?,?,?,?,?) }");
+            pro.setString(1, us.getPeriodo());
+            pro.setLong(2, us.getId_creacion());
+            pro.setLong(3, us.getId_periodo());
+            pro.setString(4, us.getEstado_pe());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
             con.commit();
         } catch (Exception e) {
             try {

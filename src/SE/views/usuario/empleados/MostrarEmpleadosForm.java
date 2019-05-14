@@ -296,8 +296,7 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
                     je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                     je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                     listar = crud.listarEmpleadosActivos(je);
-//                    listar = crud.listarEmpleadosActivosInicio();
-//                    Tablas.cargarJoinUsuario(jtEmpleados, listar);
+                    Tablas.cargarJoinUsuario(jtEmpleados, listar);
                 }
 
             }
@@ -314,27 +313,25 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
         try {
             if (pos == 0) {
                 listar = crud.listarEmpleadosActivos(je);
-//                listar = crud.listarEmpleadosActivosInicio();
             }
             if (pos == 1) {
 
                 listar = crud.listarEmpleadosActivos(je);
-//                listar = crud.listarEmpleadosActivosInicio();
             }
             if (pos == 2) {
                 listar = crud.listarEmpleadosInactivos(je);
             }
             if (pos == 3) {
                 je.setCedula(f);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoCedula(je);
                 txtBuscar.setText("");
             }
             if (pos == 4) {
                 je.setApellidos_nombres(f);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoApeNomb(je);
                 txtBuscar.setText("");
             }
@@ -353,14 +350,12 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
             listar = crud.listarEmpleadosActivos(je);
-//            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 1) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
             listar = crud.listarEmpleadosActivos(je);
-//            listar = crud.listarEmpleadosActivosInicio();
 
         }
         if (pos == 2) {
@@ -374,21 +369,18 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
             listar = crud.listarEmpleadosActivos(je);
-//            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 4) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
             listar = crud.listarEmpleadosActivos(je);
-//            listar = crud.listarEmpleadosActivosInicio();
         }
         if (pos == 5) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
             listar = crud.listarEmpleadosActivos(je);
-//            listar = crud.listarEmpleadosActivosInicio();
         }
         Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }//GEN-LAST:event_cbFiltroActionPerformed
@@ -415,7 +407,7 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int i = jtEmpleados.getSelectedRow();
         if (jtEmpleados.isRowSelected(i) == false) {
-            JOptionPane.showMessageDialog(this, "Seleccione un registro");
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
         } else {
             objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
@@ -424,7 +416,9 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);
-                listar = crud.listarEmpleadosActivosInicio();
+                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                listar = crud.listarEmpleadosActivos(je);
                 Tablas.cargarJoinUsuario(jtEmpleados, listar);
             }
         }

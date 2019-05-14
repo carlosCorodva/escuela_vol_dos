@@ -35,7 +35,7 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtMaterias, listar);
+        Tablas.cargarTablacurso(jtCursos, listar);
         us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
     }
@@ -58,7 +58,7 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtMaterias = new javax.swing.JTable();
+        jtCursos = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
@@ -76,8 +76,8 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         jLabel1.setText("CURSOS");
         jLabel1.setOpaque(true);
 
-        jtMaterias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
+        jtCursos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,13 +85,13 @@ public class MostrarCursosForm extends javax.swing.JDialog {
 
             }
         ));
-        jtMaterias.setRowHeight(25);
-        jtMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtCursos.setRowHeight(25);
+        jtCursos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtMateriasMousePressed(evt);
+                jtCursosMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jtMaterias);
+        jScrollPane1.setViewportView(jtCursos);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
@@ -179,23 +179,26 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        int i = 0;
-        try {
-            i = jtMaterias.getSelectedRow();
-            objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
-            if (objeto != null) {
-                System.out.println("holaaaaa");
-                ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
-                acc.setVisible(true);
-                listar.clear();
-                listar = crud.listarCursos();
-                Tablas.cargarTablacurso(jtMaterias, listar);
+        int i = jtCursos.getSelectedRow();
+        if (jtCursos.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            try {
+                objeto = devuelveObjetoEmpleado(jtCursos.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    listar = crud.listarCursos();
+                    Tablas.cargarTablacurso(jtCursos, listar);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
             }
-        } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
+            listar = crud.listarCursos();
+            Tablas.cargarTablacurso(jtCursos, listar);
         }
-        listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtMaterias, listar);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     public ma_paralelo devuelveObjetoEmpleado(String datos, ArrayList<ma_paralelo> listarobj) {
@@ -209,32 +212,32 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         return objeto1;
     }
 
-    private void jtMateriasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMateriasMousePressed
+    private void jtCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCursosMousePressed
         int i = 0;
         try {
             if (evt.getClickCount() == 2) {
-                i = jtMaterias.getSelectedRow();
-                objeto = devuelveObjetoEmpleado(jtMaterias.getValueAt(i, 0).toString(), listar);
+                i = jtCursos.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtCursos.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
                     ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     listar = crud.listarCursos();
-                    Tablas.cargarTablacurso(jtMaterias, listar);
+                    Tablas.cargarTablacurso(jtCursos, listar);
                 }
 
             }
         } catch (Exception e) {
             Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
         }
-    }//GEN-LAST:event_jtMateriasMousePressed
+    }//GEN-LAST:event_jtCursosMousePressed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         CrearCursosForm cc = new CrearCursosForm(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
         listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtMaterias, listar);
+        Tablas.cargarTablacurso(jtCursos, listar);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     /**
@@ -289,7 +292,7 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtMaterias;
+    private javax.swing.JTable jtCursos;
     private javax.swing.JLabel lbIdUsuario;
     // End of variables declaration//GEN-END:variables
 }
