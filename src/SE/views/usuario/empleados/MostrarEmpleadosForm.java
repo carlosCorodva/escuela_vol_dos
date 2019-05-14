@@ -261,13 +261,13 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NuevoEmpleadoForm ne = new NuevoEmpleadoForm(new javax.swing.JFrame(), true, us/*,suc,emp*/);
+        NuevoEmpleadoForm ne = new NuevoEmpleadoForm(new javax.swing.JFrame(), true, us);
         ne.setVisible(true);
+//        cbFiltro.setSelectedIndex(0);
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarEmpleadosActivos(je);
-//        listar = crud.listarEmpleadosActivosInicio();
-//        Tablas.cargarJoinUsuario(jtEmpleados, listar);
+        Tablas.cargarJoinUsuario(jtEmpleados, listar);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public JoinEmpleados devuelveObjetoEmpleado(String datos, ArrayList<JoinEmpleados> listarobj) {
@@ -289,7 +289,7 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true, objeto);
+                    ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true,us, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
@@ -412,7 +412,7 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
             objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
                 System.out.println("holaaaaa");
-                ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true, objeto);
+                ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true,us, objeto);
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);

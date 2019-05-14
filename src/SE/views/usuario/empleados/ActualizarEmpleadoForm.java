@@ -27,26 +27,29 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     ArrayList<us_permiso_empleado> listar = null;
     Calendario cal = new Calendario();
     JoinEmpleados emp = null;
+    JoinEmpleados us = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal, JoinEmpleados empleado) {
+    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        emp = empleado;
+        us=usuario;
         Habilitar(false);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
-        emp = empleado;
         formulario();
         tablaEstado();
         chbx();
-        lbId.setText(emp.getId_usuario().toString());
+        lbIdEmpleado.setText(emp.getId_usuario().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
         jtEstado.setVisible(false);
-        lbEmpresa.setText(eca);
-//        lbId.setVisible(false);
+        lbEmpresa.setText(emp.getId_empresa().toString());
+        lbSucursal.setText(emp.getId_sucursal().toString());
     }
 
     public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal) {
@@ -104,9 +107,10 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         jcEFisica = new javax.swing.JCheckBox();
         jcProyectos = new javax.swing.JCheckBox();
         jcDesarrollo = new javax.swing.JCheckBox();
-        lbId = new javax.swing.JLabel();
+        lbIdEmpleado = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
+        lbIdUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -464,11 +468,13 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lbId.setText("jLabel2");
+        lbIdEmpleado.setText("empleado");
 
         lbEmpresa.setText("empresa");
 
         lbSucursal.setText("sucursal");
+
+        lbIdUsuario.setText("usuario");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -479,18 +485,21 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbId)
-                        .addGap(106, 106, 106)
+                        .addGap(14, 14, 14)
+                        .addComponent(lbIdEmpleado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbIdUsuario)
+                        .addGap(48, 48, 48)
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(163, 163, 163)
                         .addComponent(btnSalir)
-                        .addGap(126, 126, 126)
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbEmpresa)
                             .addComponent(lbSucursal))
-                        .addGap(59, 59, 59)
+                        .addGap(127, 127, 127)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -513,7 +522,11 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)
-                        .addComponent(lbId))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbIdEmpleado)
+                                .addComponent(lbIdUsuario))
+                            .addGap(5, 5, 5)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbEmpresa)
@@ -538,7 +551,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
 
     public void tablaEstado() {
         us_permiso_empleado je = new us_permiso_empleado();
-        je.setId_usuario(Long.valueOf(lbId.getText()));
+        je.setId_usuario(Long.valueOf(lbIdEmpleado.getText()));
         listar = crud.TablaEstadoChbx(je);
         Tablas.cargarTablaEstadoChbx(jtEstado, listar);
     }
@@ -599,7 +612,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     }
 
     public void formulario() {
-        lbId.setText(emp.getId_usuario().toString());
+        lbIdEmpleado.setText(emp.getId_usuario().toString());
         txtCedula.setText(emp.getCedula());
         txtCorreo.setText(emp.getCorreo());
         txtDireccion.setText(emp.getDireccion());
@@ -858,43 +871,51 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         } else if (txtFecha.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
-
+try {
             JoinEmpleados obj = new JoinEmpleados();
             obj.setApellidos_nombres(txtNombres.getText());
             obj.setCedula(txtCedula.getText());
             obj.setCorreo(txtCorreo.getText());
             obj.setDireccion(txtDireccion.getText());
             obj.setObservacion(obs);
+            System.out.println("obs: "+obs);
             obj.setFecha_nacimiento(txtFecha.getText());
+            System.out.println("fecha: "+txtFecha.getText());
             obj.setConvecional(txtTelefono1.getText());
             obj.setTelefono_dos(txtTelefono2.getText());
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
+            System.out.println("cc: "+cc);
             obj.setCopia_titulo(ct);
+            System.out.println("ct: "+ct);
             obj.setEstado(cbEstado.getSelectedItem().toString());
             obj.setId_usuario(emp.getId_usuario());
-            obj.setId_usuarioDos(Long.valueOf(lbId.getText()));
+            System.out.println("id1: "+emp.getId_usuario());
+            obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
+            System.out.println("id2: "+lbIdUsuario.getText());
+            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
-            us_permiso_empleado us = new us_permiso_empleado();
-            us.setEstado_pe(ll);
-            us.setEstado_pe2(m);
-            us.setEstado_pe3(inf);
-            us.setEstado_pe4(cn);
-            us.setEstado_pe5(ing);
-            us.setEstado_pe6(eca);
-            us.setEstado_pe7(ef);
-            us.setEstado_pe8(pe);
-            us.setEstado_pe9(dhi);
-            us.setEstado_pe10(es);
-            us.setId_usuario(emp.getId_usuario());
+            us_permiso_empleado usp = new us_permiso_empleado();
+            usp.setEstado_pe(ll);
+            usp.setEstado_pe2(m);
+            usp.setEstado_pe3(inf);
+            usp.setEstado_pe4(cn);
+            usp.setEstado_pe5(ing);
+            usp.setEstado_pe6(eca);
+            usp.setEstado_pe7(ef);
+            usp.setEstado_pe8(pe);
+            usp.setEstado_pe9(dhi);
+            usp.setEstado_pe10(es);
+            usp.setId_usuario(emp.getId_usuario());
 
-            try {
+            
                 String a = crud.ActualizarEmpleado(obj);
+                System.out.println("try: "+a);
                 JOptionPane.showMessageDialog(this, a);
 
-                crud.ActualizarPermisosMaterias(us);
+                crud.ActualizarPermisosMaterias(usp);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
+                JOptionPane.showMessageDialog(this, "catch"+e);
             }
             setVisible(false);
         }
@@ -1009,7 +1030,8 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcecArtistica;
     private javax.swing.JTable jtEstado;
     private javax.swing.JLabel lbEmpresa;
-    private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbIdEmpleado;
+    private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;

@@ -781,6 +781,8 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
+//            obj.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
