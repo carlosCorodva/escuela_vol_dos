@@ -105,8 +105,11 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
 
         txtFiltro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFiltroKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyTyped(evt);
             }
         });
 
@@ -252,13 +255,22 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jtPeriodoMousePressed
 
-    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        char c = evt.getKeyChar();
+        char barra ='-';
+        if (/*fue dificil pero funciona XD*/((!Character.isDigit(c) && !Character.isAlphabetic(c)) && (Character.isSpaceChar(c) || c!=barra)) ) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
         try {
             Tablas.filtro(txtFiltro.getText(), jtPeriodo);
         } catch (Exception e) {
             Logger.getLogger(MostrarPeriodoForm.class.getName()).log(Level.SEVERE, null, e);
         }
-    }//GEN-LAST:event_txtFiltroKeyPressed
+    }//GEN-LAST:event_txtFiltroKeyReleased
 
     /**
      * @param args the command line arguments
