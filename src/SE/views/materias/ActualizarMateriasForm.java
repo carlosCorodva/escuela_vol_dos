@@ -59,6 +59,16 @@ public class ActualizarMateriasForm extends javax.swing.JDialog {
         jLabel1.setText("MATERIA");
 
         txtCaja.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtCaja.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCajaFocusLost(evt);
+            }
+        });
+        txtCaja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCajaKeyTyped(evt);
+            }
+        });
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
@@ -148,6 +158,18 @@ public void actualizar() {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCajaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCajaFocusLost
+        txtCaja.setText(txtCaja.getText().toUpperCase());
+    }//GEN-LAST:event_txtCajaFocusLost
+
+    private void txtCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCajaKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCajaKeyTyped
 
     /**
      * @param args the command line arguments

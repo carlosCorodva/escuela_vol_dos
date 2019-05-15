@@ -6,11 +6,8 @@
 package SE.views.cursos;
 
 import SE.componentes.Crud;
-import SE.componentes.Tablas;
-import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**

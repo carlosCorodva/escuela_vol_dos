@@ -67,6 +67,11 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         jLabel1.setText("CURSO");
 
         txtCurso.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtCurso.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCursoFocusLost(evt);
+            }
+        });
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
@@ -99,6 +104,11 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
 
         txtObser.setColumns(20);
         txtObser.setRows(5);
+        txtObser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObserFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtObser);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -204,6 +214,14 @@ public void form() {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCursoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCursoFocusLost
+        txtCurso.setText(txtCurso.getText().toUpperCase());
+    }//GEN-LAST:event_txtCursoFocusLost
+
+    private void txtObserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObserFocusLost
+        txtObser.setText(txtObser.getText().toUpperCase());
+    }//GEN-LAST:event_txtObserFocusLost
 
     /**
      * @param args the command line arguments

@@ -11,6 +11,7 @@ import SE.views.cursos.MostrarCursosForm;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.materias.MostrarMateriasForm;
 import SE.views.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
@@ -189,6 +190,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem9.setText("EMPRESAS");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem9);
 
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -356,6 +362,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MostrarPeriodoForm mp = new MostrarPeriodoForm(new javax.swing.JFrame(), true,us);
         mp.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        MostrarEmpresaForm me = new MostrarEmpresaForm(new javax.swing.JFrame(), true,us);
+        me.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

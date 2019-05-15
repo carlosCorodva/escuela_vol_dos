@@ -104,6 +104,11 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         });
 
         txtFiltro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFiltro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFiltroFocusLost(evt);
+            }
+        });
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyReleased(evt);
@@ -271,6 +276,10 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
             Logger.getLogger(MostrarPeriodoForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_txtFiltroKeyReleased
+
+    private void txtFiltroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFiltroFocusLost
+        txtFiltro.setText(txtFiltro.getText().toUpperCase());
+    }//GEN-LAST:event_txtFiltroFocusLost
 
     /**
      * @param args the command line arguments

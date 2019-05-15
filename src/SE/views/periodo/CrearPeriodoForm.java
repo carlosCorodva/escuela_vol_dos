@@ -65,6 +65,18 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("AÑO LECTIVO");
 
+        txtInicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInicioKeyTyped(evt);
+            }
+        });
+
+        txtFin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFinKeyTyped(evt);
+            }
+        });
+
         btnInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/infor 32.png"))); // NOI18N
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +191,22 @@ public void guardar() {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtInicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtInicioKeyTyped
+
+    private void txtFinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFinKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFinKeyTyped
 
     /**
      * @param args the command line arguments

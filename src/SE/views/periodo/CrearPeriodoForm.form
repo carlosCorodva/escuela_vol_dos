@@ -127,8 +127,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtInicio">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInicioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFin">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFinKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnInfo">
           <Properties>

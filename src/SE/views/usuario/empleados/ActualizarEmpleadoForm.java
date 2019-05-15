@@ -157,6 +157,11 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         });
 
         txtNombres.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombresFocusLost(evt);
+            }
+        });
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombresKeyTyped(evt);
@@ -164,6 +169,11 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         });
 
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusLost(evt);
+            }
+        });
         txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDireccionKeyTyped(evt);
@@ -187,6 +197,11 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         txtObservacion.setColumns(20);
         txtObservacion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtObservacion.setRows(5);
+        txtObservacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtObservacionFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtObservacion);
 
         cbxCopiaCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -744,6 +759,18 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
 //            cbox(false);
 //        }
     }//GEN-LAST:event_cbCargoActionPerformed
+
+    private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
+        txtObservacion.setText(txtObservacion.getText().toUpperCase());
+    }//GEN-LAST:event_txtObservacionFocusLost
+
+    private void txtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombresFocusLost
+        txtNombres.setText(txtNombres.getText().toUpperCase());
+    }//GEN-LAST:event_txtNombresFocusLost
+
+    private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
+        txtDireccion.setText(txtDireccion.getText().toUpperCase());
+    }//GEN-LAST:event_txtDireccionFocusLost
 
     public void Habilitar(boolean valor) {
         txtNombres.setEnabled(valor);

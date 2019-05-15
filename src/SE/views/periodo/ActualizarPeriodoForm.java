@@ -20,10 +20,10 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
     /**
      * Creates new form PeriodoParcialCrearForm
      */
-    
     ma_periodo mp = null;
     Crud crud = new Crud();
-    public ActualizarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario,ma_periodo periodo) {
+
+    public ActualizarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_periodo periodo) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -31,14 +31,14 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
         mp = periodo;
         form();
     }
-    
+
     public ActualizarPeriodoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    public void form(){
+
+    public void form() {
         txtCaja.setText(mp.getPeriodo());
         String cbox = mp.getEstado_pe();
         if ("INICIADO".equals(cbox)) {
@@ -73,6 +73,13 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("PERIODO LECTIVO");
+
+        txtCaja.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCaja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCajaKeyTyped(evt);
+            }
+        });
 
         btnInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/infor 32.png"))); // NOI18N
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +179,13 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
-public void actualizar() {
+    public void actualizar() {
+        String texto = txtCaja.getText();
+        if (texto.length() <= 8) {
+            JOptionPane.showMessageDialog(this, "FORMATO NO VALIDO");
+        } else {
+
+        }
         String text = txtCaja.getText();
         ma_periodo map = new ma_periodo();
         map.setPeriodo(text);
@@ -186,6 +199,24 @@ public void actualizar() {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         actualizar();
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCajaKeyTyped
+//        char c = evt.getKeyChar();
+//        char barra = '-';
+//        if (/*fue dificil pero funciona XD*/(!Character.isDigit(c) && (Character.isSpaceChar(c) || c != barra))) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
+char c = evt.getKeyChar();
+        int caja= txtCaja.getText().length();
+        char barra = '-';
+        for(int i = 0; i < caja; i++){
+            if (i > 7||((!Character.isDigit(c) && (Character.isSpaceChar(c) || c != barra)))) {
+                getToolkit().beep();
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtCajaKeyTyped
 
     /**
      * @param args the command line arguments

@@ -151,4 +151,35 @@ public class Mappers {
         }
         return obj;
     }
+    public static em_empresa getMostrarEmpresaFromResultSet(ResultSet rs) {
+        em_empresa obj = new em_empresa();
+        try {
+            obj.setId_empresa(rs.getLong("Id_empresa"));
+            obj.setCorreo_em(rs.getString("Correo_em"));
+            obj.setDireccion_em(rs.getString("Direccion_em"));
+//            obj.setEstado_em(rs.getString("Estado_em"));
+            obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
+            obj.setRuc_em(rs.getString("Ruc_em"));
+            obj.setTelefono_em(rs.getString("Telefono_em"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static em_sucursal getMostrarSucursalFromResultSet(ResultSet rs) {
+        em_sucursal obj = new em_sucursal();
+        try {
+            obj.setId_sucursal(rs.getLong("Id_sucursal"));
+            obj.setCorreo_su(rs.getString("Correo_su"));
+            obj.setDireccion_su(rs.getString("Direccion_su"));
+            obj.setEstado_su(rs.getString("Estado_su"));
+            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+            obj.setTelefono_su(rs.getString("Telefono_su"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }

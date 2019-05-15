@@ -51,8 +51,8 @@ public class CambioPasForm extends javax.swing.JDialog {
         txtUsuario = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         txtConfir = new javax.swing.JTextField();
-        txtActualizar = new javax.swing.JButton();
-        txtCancelar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,24 +88,29 @@ public class CambioPasForm extends javax.swing.JDialog {
         jLabel4.setText("CONFIRMAR CONTRASEÑA");
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusLost(evt);
+            }
+        });
 
         txtContra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtConfir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        txtActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
-        txtActualizar.setText("ACTUALIZAR");
-        txtActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
+        btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtActualizarActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
-        txtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
-        txtCancelar.setText("CANCELAR");
-        txtCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCancelarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -118,9 +123,9 @@ public class CambioPasForm extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(txtActualizar)
+                        .addComponent(btnActualizar)
                         .addGap(75, 75, 75)
-                        .addComponent(txtCancelar))
+                        .addComponent(btnCancelar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,8 +157,8 @@ public class CambioPasForm extends javax.swing.JDialog {
                     .addComponent(txtConfir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtActualizar)
-                    .addComponent(txtCancelar))
+                    .addComponent(btnActualizar)
+                    .addComponent(btnCancelar))
                 .addGap(23, 23, 23))
         );
 
@@ -189,13 +194,17 @@ public void mantenimiento() {
             txtContra.setText("");
         }
     }
-    private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
-    }//GEN-LAST:event_txtCancelarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActualizarActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         mantenimiento();
-    }//GEN-LAST:event_txtActualizarActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusLost
+        txtUsuario.setText(txtUsuario.getText().toUpperCase());
+    }//GEN-LAST:event_txtUsuarioFocusLost
 
     /**
      * @param args the command line arguments
@@ -241,14 +250,14 @@ public void mantenimiento() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton txtActualizar;
-    private javax.swing.JButton txtCancelar;
     private javax.swing.JTextField txtConfir;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtUsuario;

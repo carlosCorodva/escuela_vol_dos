@@ -147,6 +147,11 @@ public class NuevoEmpleadoDosForm extends javax.swing.JDialog {
                 txtNombresFocusLost(evt);
             }
         });
+        txtNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresActionPerformed(evt);
+            }
+        });
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombresKeyTyped(evt);
@@ -641,6 +646,10 @@ public class NuevoEmpleadoDosForm extends javax.swing.JDialog {
             cbox(false);
         }
     }//GEN-LAST:event_cbCargoActionPerformed
+
+    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresActionPerformed
 
     public void Habilitar(boolean valor) {
         txtApellidos.setEnabled(valor);
