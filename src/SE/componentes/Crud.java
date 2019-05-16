@@ -900,4 +900,71 @@ public class Crud {
         }
         return valor;
     }
+    
+    public ArrayList<em_empresa> MostrarEmpresaUna(em_empresa je) {
+        ArrayList<em_empresa> lista = new ArrayList<em_empresa>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_empresa_mostrar_una(?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                em_empresa obj = Mappers.getMostrarEmpresaFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    
+    public String ActualizarEmpresa(em_empresa us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_empresa_actualizar(?,?,?,?,?,?,?,?) }");
+            pro.setString(1, us.getNombre_comercial_em());
+            pro.setString(2, us.getTelefono_em());
+            pro.setString(3, us.getDireccion_em());
+            pro.setString(4, us.getCorreo_em());
+            pro.setLong(5, us.getUsuario_actualizacion());
+            pro.setLong(6, us.getId_empresa());
+            pro.setString(7, us.getRuc_em());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

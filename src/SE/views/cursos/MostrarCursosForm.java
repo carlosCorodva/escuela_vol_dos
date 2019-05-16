@@ -175,7 +175,12 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        setVisible(false);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO EMPRESA?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        } else {
+
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -194,7 +199,7 @@ public class MostrarCursosForm extends javax.swing.JDialog {
                     Tablas.cargarTablacurso(jtCursos, listar);
                 }
             } catch (Exception e) {
-                Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(MostrarCursosForm.class.getName()).log(Level.SEVERE, null, e);
             }
             listar = crud.listarCursos();
             Tablas.cargarTablacurso(jtCursos, listar);
@@ -229,7 +234,7 @@ public class MostrarCursosForm extends javax.swing.JDialog {
 
             }
         } catch (Exception e) {
-            Logger.getLogger(MostrarEmpleadosForm.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(MostrarCursosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtCursosMousePressed
 

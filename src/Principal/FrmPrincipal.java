@@ -11,6 +11,7 @@ import SE.views.cursos.MostrarCursosForm;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.views.empresa.MostrarEmpresaUnoForm;
 import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.materias.MostrarMateriasForm;
 import SE.views.periodo.MostrarPeriodoForm;
@@ -78,6 +79,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -189,13 +191,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem9.setText("EMPRESAS");
+        jMenuItem9.setText("CREAR EMPRESAS");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
             }
         });
         jMenu7.add(jMenuItem9);
+
+        jMenuItem12.setText("ACTUALIZAR EMPRESA");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem12);
 
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem10.setText("SUCURSALES");
@@ -368,6 +378,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         me.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        MostrarEmpresaUnoForm ae = new MostrarEmpresaUnoForm(new javax.swing.JFrame(), true,us);
+        ae.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -421,6 +436,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

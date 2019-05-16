@@ -166,7 +166,12 @@ public class MostrarMateriasForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO EMPRESA?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        } else {
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
