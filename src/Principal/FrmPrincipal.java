@@ -13,6 +13,7 @@ import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.empresa.MostrarEmpresaUnoForm;
 import SE.views.empresa.MostrarEmpresaForm;
+import SE.views.empresa.MostrarSucursalesForm;
 import SE.views.materias.MostrarMateriasForm;
 import SE.views.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
@@ -93,6 +94,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -199,6 +201,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem9);
 
+        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem12.setText("ACTUALIZAR EMPRESA");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +212,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem10.setText("SUCURSALES");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem10);
 
         jMenuItem11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -291,6 +299,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu8.setText("REPORTES");
+        jMenu8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuBar1.add(jMenu8);
 
         jMenu3.setText("AYUDA");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -383,6 +395,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ae.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        MostrarSucursalesForm ms = new MostrarSucursalesForm(new javax.swing.JFrame(), true,us);
+        ms.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,6 +449,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;

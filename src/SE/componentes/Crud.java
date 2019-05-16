@@ -2,6 +2,7 @@ package SE.componentes;
 
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
+import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
@@ -947,6 +948,135 @@ public class Crud {
             pro.setLong(5, us.getUsuario_actualizacion());
             pro.setLong(6, us.getId_empresa());
             pro.setString(7, us.getRuc_em());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public ArrayList<em_sucursal> ListarSucursales(em_sucursal su) {
+        ArrayList<em_sucursal> valor = new ArrayList<em_sucursal>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_sucursal_mostrar(?) }");
+            pro.setLong(1, su.getId_empresa());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                em_sucursal obj = Mappers.getMostrarSucursalFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String ActualizarSucursal(em_sucursal us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_sucursal_actualizar(?,?,?,?,?,?,?,?) }");
+            pro.setString(1, us.getNombre_comercial_su());
+            pro.setString(2, us.getTelefono_su());
+            pro.setString(3, us.getDireccion_su());
+            pro.setString(4, us.getCorreo_su());
+            pro.setLong(5, us.getUsuario_actualizacion());
+            pro.setLong(6, us.getId_sucursal());
+            pro.setString(7, us.getEstado_su());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String CrearSucursal(em_sucursal us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_sucursal_crear(?,?,?,?,?,?,?) }");
+            pro.setString(1, us.getNombre_comercial_su());
+            pro.setString(2, us.getTelefono_su());
+            pro.setString(3, us.getDireccion_su());
+            pro.setString(4, us.getCorreo_su());
+            pro.setLong(5, us.getUsuario_creacion());
+            pro.setLong(6, us.getId_empresa());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String CerrarSucursal(em_sucursal us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_sucursal_cerrar(?,?,?) }");
+            pro.setLong(1, us.getUsuario_actualizacion());
+            pro.setLong(2, us.getId_sucursal());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");

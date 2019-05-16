@@ -176,6 +176,7 @@ public class Mappers {
             obj.setEstado_su(rs.getString("Estado_su"));
             obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
             obj.setTelefono_su(rs.getString("Telefono_su"));
+            obj.setEstado_su(rs.getString("Estado_su"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
