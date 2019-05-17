@@ -7,10 +7,7 @@ package Principal;
 
 import SE.componentes.Combos;
 import SE.componentes.Crud;
-import SE.entidades.em_empresa;
-import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.join.JoinEmpresaSucursal;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -27,11 +24,8 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     ArrayList<JoinEmpleados> empresa = null;
     ArrayList<JoinEmpleados> sucursal = null;
     ArrayList<JoinEmpleados> usuario = null;
-//    ArrayList<JoinEmpresaSucursal> empresaSucursal = null;
-//    ArrayList<JoinEmpleados> listar = null;
-//    em_empresa objeto = null;
-    JoinEmpleados objSucursal = null;
-    JoinEmpleados objEmpresa = null;
+//    JoinEmpleados objSucursal = null;
+//    JoinEmpleados objEmpresa = null;
     JoinEmpleados objUsuario = null;
     JoinEmpleados obj = null;
     JoinEmpleados es = new JoinEmpleados();

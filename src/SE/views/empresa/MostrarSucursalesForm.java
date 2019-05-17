@@ -35,26 +35,27 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         lbIdUsuario.setText(usuario.getId_usuario().toString());
         lbEmpresa.setText(usuario.getId_empresa().toString());
-        us=usuario;
+        us = usuario;
         formulario();
         sucursales();
     }
+
     public MostrarSucursalesForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    public void sucursales(){
+
+    public void sucursales() {
         em_sucursal su = new em_sucursal();
         su.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         listar = crud.ListarSucursales(su);
         Tablas.cargarTablaSucursal(jtSucursal, listar);
     }
-    
-    public void formulario(){
-        txtEmpresa.setText("EMPRESA: "+us.getNombre_comercial_em());
-        txtRuc.setText("RUC: "+us.getRuc_em());
+
+    public void formulario() {
+        txtEmpresa.setText("EMPRESA: " + us.getNombre_comercial_em());
+        txtRuc.setText("RUC: " + us.getRuc_em());
         txtEmpresa.setEditable(false);
         txtRuc.setEditable(false);
     }
@@ -133,6 +134,11 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         txtEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -222,9 +228,9 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
         }
         return objeto1;
     }
-    
+
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        CrearSucursalesForm ce = new CrearSucursalesForm(new javax.swing.JFrame(), true,us);
+        CrearSucursalesForm ce = new CrearSucursalesForm(new javax.swing.JFrame(), true, us);
         ce.setVisible(true);
         sucursales();
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -248,6 +254,26 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
             Logger.getLogger(MostrarSucursalesForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtSucursalMousePressed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int i = jtSucursal.getSelectedRow();
+        if (jtSucursal.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            try {
+                objeto = devuelveObjetoEmpleado(jtSucursal.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarSucursalesForm acc = new ActualizarSucursalesForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    sucursales();
+                }
+            } catch (Exception e) {
+                Logger.getLogger(MostrarSucursalesForm.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments

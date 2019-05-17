@@ -14,6 +14,7 @@ import SE.entidades.join.JoinEmpleados;
 import SE.views.empresa.MostrarEmpresaUnoForm;
 import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.empresa.MostrarSucursalesForm;
+import SE.views.empresa.inactivos.MostrarInactivosForm;
 import SE.views.materias.MostrarMateriasForm;
 import SE.views.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
@@ -221,6 +222,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem11.setText("INACTIVOS");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem11);
 
         jMenu1.add(jMenu7);
@@ -399,6 +405,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MostrarSucursalesForm ms = new MostrarSucursalesForm(new javax.swing.JFrame(), true,us);
         ms.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        MostrarInactivosForm mi = new MostrarInactivosForm(new javax.swing.JFrame(), true,us);
+        mi.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments

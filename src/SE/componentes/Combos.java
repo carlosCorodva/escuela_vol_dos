@@ -5,10 +5,8 @@
  */
 package SE.componentes;
 
-import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.join.JoinEmpresaSucursal;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -52,6 +50,27 @@ public class Combos {
     public static DefaultComboBoxModel listarComboSucursal(ArrayList<JoinEmpleados> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloSucursal(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for (int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    
+    private static Object[] arregloSucursalParaInactivos(ArrayList<em_sucursal> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "SELECCIONE SUSCURSAL...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getNombre_comercial_su();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboSucursalParaInactivos(ArrayList<em_sucursal> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloSucursalParaInactivos(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);
         for (int i = 0; i < arreglo.length; i++) {
             model.addElement(arreglo[i]);

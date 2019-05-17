@@ -183,4 +183,15 @@ public class Mappers {
         }
         return obj;
     }
+    
+    public static em_sucursal getSucursalParaInactivosFromResultSet(ResultSet rs) {
+        em_sucursal obj = new em_sucursal();
+        try {
+            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }
