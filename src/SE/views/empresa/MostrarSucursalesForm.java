@@ -134,6 +134,10 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
 
+        txtEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        txtRuc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         lbEmpresa.setText("empresa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -143,11 +147,11 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(lbEmpresa)
-                .addGap(55, 55, 55)
+                .addGap(60, 60, 60)
                 .addComponent(btnCrear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(119, 119, 119)
                 .addComponent(btnActualizar)
-                .addGap(114, 114, 114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(67, 67, 67)
                 .addComponent(lbIdUsuario)

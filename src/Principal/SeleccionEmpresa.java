@@ -46,15 +46,12 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
 //        System.out.println("3");
         es.setUsuario(objeto.getUsuario());
         es.setContrasena(objeto.getContrasena());
-//        System.out.println("4  " + objeto.getUsuario() + "  " + objeto.getContrasena());
-//        System.out.println("5  " + objeto.getNombre_comercial_em() + "  " + objeto.getId_empresa());
-//        System.out.println("4  " + objeto.getNombre_comercial_su() + "  " + objeto.getId_sucursal());
         empresa = crud.empresaComboDos(es);
         cbEmpresa.setModel(Combos.listarComboEmpresa(empresa));
         usuario = crud.listarEmpleadosActivosInicio();
         lbEmpresa.setText(obj.getId_empresa().toString());
         lbSucursal.setText(obj.getId_sucursal().toString());
-//        lbUsuario.setText(obj.getUsuario());
+        cbEmpresa.setSelectedIndex(1);
     }
 
     public SeleccionEmpresa() {
