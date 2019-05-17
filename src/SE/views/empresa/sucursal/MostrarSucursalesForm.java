@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.empresa;
+package SE.views.empresa.sucursal;
 
+import SE.views.empresa.sucursal.CrearSucursalesForm;
+import SE.views.empresa.sucursal.ActualizarSucursalesForm;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.em_empresa;

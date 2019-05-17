@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.empresa.inactivos;
+package SE.views.empresa;
 
 import SE.componentes.Calendario;
 import SE.componentes.Combos;
@@ -37,14 +37,15 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleadoInactivosForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario, JoinEmpleados empleado) {
+    public ActualizarEmpleadoInactivosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         emp = empleado;
-        us=usuario;
+        us = usuario;
         Habilitar(false);
+        cbCargo.setEnabled(false);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         formulario();
         tablaEstado();
@@ -60,8 +61,8 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     public ActualizarEmpleadoInactivosForm(java.awt.Frame parent, boolean modal) {
         initComponents();
     }
-    
-    public void from(){
+
+    public void from() {
         suc.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         sucursal = crud.sucursalComboParaInactivos(suc);
         cbSucursales.setModel(Combos.listarComboSucursalParaInactivos(sucursal));
@@ -234,11 +235,6 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
-        cbCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCargoActionPerformed(evt);
-            }
-        });
         cbCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbCargoKeyPressed(evt);
@@ -276,7 +272,11 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         });
 
         cbSucursales.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbSucursales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSucursalesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -331,10 +331,12 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cbSucursales, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbCargo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(6, 6, 6))))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -399,9 +401,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -551,7 +551,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))))
+                        .addContainerGap(38, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,26 +770,6 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         jcProyectos.setSelected(valor);
         jcecArtistica.setSelected(valor);
     }
-    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-//        int pos = cbCargo.getSelectedIndex();
-//
-////        if (pos == 0) {
-////            cbox(false);
-////        }
-//        if (pos == 1) {
-//            cbox(true);
-//        }
-//        if (pos == 2) {
-//            cbox(true);
-//        }
-//        if (pos == 3) {
-//            cbox(false);
-//        }
-//        if (pos == 4) {
-//            cbox(false);
-//        }
-    }//GEN-LAST:event_cbCargoActionPerformed
-
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
@@ -802,6 +782,12 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         txtDireccion.setText(txtDireccion.getText().toUpperCase());
     }//GEN-LAST:event_txtDireccionFocusLost
 
+    private void cbSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSucursalesActionPerformed
+//        if (cbCargo.getSelectedIndex()==1) {
+//            cbCargo.setEnabled(true);
+//        }
+    }//GEN-LAST:event_cbSucursalesActionPerformed
+
     public void Habilitar(boolean valor) {
         txtNombres.setEnabled(valor);
         txtTelefono1.setEnabled(valor);
@@ -811,7 +797,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         txtObservacion.setEnabled(valor);
         txtNombres.setEnabled(valor);
         txtFecha.setEnabled(valor);
-        cbCargo.setEnabled(valor);
+//        cbCargo.setEnabled(valor);
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
@@ -819,6 +805,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         cbEstado.setEnabled(valor);
         dtFecha.setEnabled(valor);
         btnAdd.setEnabled(valor);
+        cbSucursales.setEnabled(valor);
 
         jcCiencias.setEnabled(valor);
         jcDesarrollo.setEnabled(valor);
@@ -830,6 +817,12 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         jcMatematicas.setEnabled(valor);
         jcProyectos.setEnabled(valor);
         jcecArtistica.setEnabled(valor);
+        
+        if (cbCargo.getSelectedIndex() == 1) {
+            cbCargo.setEnabled(false);
+        } else {
+            cbCargo.setEnabled(true);
+        }
     }
 
     public void Guardar() {
@@ -929,51 +922,50 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         } else if (txtFecha.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
-try {
-            JoinEmpleados obj = new JoinEmpleados();
-            obj.setApellidos_nombres(txtNombres.getText());
-            obj.setCedula(txtCedula.getText());
-            obj.setCorreo(txtCorreo.getText());
-            obj.setDireccion(txtDireccion.getText());
-            obj.setObservacion(obs);
-            System.out.println("obs: "+obs);
-            obj.setFecha_nacimiento(txtFecha.getText());
-            System.out.println("fecha: "+txtFecha.getText());
-            obj.setConvecional(txtTelefono1.getText());
-            obj.setTelefono_dos(txtTelefono2.getText());
-            obj.setRol(cbCargo.getSelectedItem().toString());
-            obj.setCopia_cedula(cc);
-            System.out.println("cc: "+cc);
-            obj.setCopia_titulo(ct);
-            System.out.println("ct: "+ct);
-            obj.setEstado(cbEstado.getSelectedItem().toString());
-            obj.setId_usuario(emp.getId_usuario());
-            System.out.println("id1: "+emp.getId_usuario());
-            obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
-            System.out.println("id2: "+lbIdUsuario.getText());
-            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            try {
+                JoinEmpleados obj = new JoinEmpleados();
+                obj.setApellidos_nombres(txtNombres.getText());
+                obj.setCedula(txtCedula.getText());
+                obj.setCorreo(txtCorreo.getText());
+                obj.setDireccion(txtDireccion.getText());
+                obj.setObservacion(obs);
+                System.out.println("obs: " + obs);
+                obj.setFecha_nacimiento(txtFecha.getText());
+                System.out.println("fecha: " + txtFecha.getText());
+                obj.setConvecional(txtTelefono1.getText());
+                obj.setTelefono_dos(txtTelefono2.getText());
+                obj.setRol(cbCargo.getSelectedItem().toString());
+                obj.setCopia_cedula(cc);
+                System.out.println("cc: " + cc);
+                obj.setCopia_titulo(ct);
+                System.out.println("ct: " + ct);
+                obj.setEstado(cbEstado.getSelectedItem().toString());
+                obj.setId_usuario(emp.getId_usuario());
+                System.out.println("id1: " + emp.getId_usuario());
+                obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
+                System.out.println("id2: " + lbIdUsuario.getText());
+                obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
-            us_permiso_empleado usp = new us_permiso_empleado();
-            usp.setEstado_pe(ll);
-            usp.setEstado_pe2(m);
-            usp.setEstado_pe3(inf);
-            usp.setEstado_pe4(cn);
-            usp.setEstado_pe5(ing);
-            usp.setEstado_pe6(eca);
-            usp.setEstado_pe7(ef);
-            usp.setEstado_pe8(pe);
-            usp.setEstado_pe9(dhi);
-            usp.setEstado_pe10(es);
-            usp.setId_usuario(emp.getId_usuario());
+                us_permiso_empleado usp = new us_permiso_empleado();
+                usp.setEstado_pe(ll);
+                usp.setEstado_pe2(m);
+                usp.setEstado_pe3(inf);
+                usp.setEstado_pe4(cn);
+                usp.setEstado_pe5(ing);
+                usp.setEstado_pe6(eca);
+                usp.setEstado_pe7(ef);
+                usp.setEstado_pe8(pe);
+                usp.setEstado_pe9(dhi);
+                usp.setEstado_pe10(es);
+                usp.setId_usuario(emp.getId_usuario());
 
-            
                 String a = crud.ActualizarEmpleado(obj);
-                System.out.println("try: "+a);
+                System.out.println("try: " + a);
                 JOptionPane.showMessageDialog(this, a);
 
                 crud.ActualizarPermisosMaterias(usp);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "catch"+e);
+                JOptionPane.showMessageDialog(this, "catch" + e);
             }
             setVisible(false);
         }

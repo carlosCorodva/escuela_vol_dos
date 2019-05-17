@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.empresa.inactivos;
+package SE.views.empresa;
 
+import SE.views.empresa.ActualizarEmpleadoInactivosForm;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
