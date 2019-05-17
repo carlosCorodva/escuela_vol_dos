@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.cursos;
+package SE.views.matricula.cursos;
 
 import SE.componentes.Crud;
-import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
 import javax.swing.JOptionPane;
@@ -15,24 +14,21 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class ActualizarCursosForm extends javax.swing.JDialog {
+public class CrearCursosForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ActualizarMaterias
      */
     Crud crud = new Crud();
-    ma_paralelo cm = null;
 
-    public ActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_paralelo paralelo) {
+    public CrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        cm = paralelo;
         lbIdUsuario.setText(usuario.getId_usuario().toString());
-        form();
     }
 
-    public ActualizarCursosForm(java.awt.Frame parent, boolean modal) {
+    public CrearCursosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -52,11 +48,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cbEstado = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtObser = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -67,11 +58,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         jLabel1.setText("CURSO");
 
         txtCurso.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        txtCurso.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCursoFocusLost(evt);
-            }
-        });
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
@@ -93,84 +79,38 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel2");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("ESTADO");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("OBSERVACION");
-
-        cbEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
-
-        txtObser.setColumns(20);
-        txtObser.setRows(5);
-        txtObser.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtObserFocusLost(evt);
-            }
-        });
-        jScrollPane1.setViewportView(txtObser);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1))))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addComponent(lbIdUsuario)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37)
+                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(lbIdUsuario)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnActualizar)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addComponent(lbIdUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIdUsuario))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizar)
                     .addComponent(btnCancelar))
-                .addGap(33, 33, 33))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,42 +126,22 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void form() {
-        String est = cm.getEstado_pa();
-        txtCurso.setText(cm.getParalelo());
-        txtObser.setText(cm.getParalelo_obs());
-        if ("ACTIVO".equals(est)) {
-            cbEstado.setSelectedIndex(0);
-        } else {
-            cbEstado.setSelectedIndex(1);
-        }
-    }
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        actualizar();
+        guardar();
     }//GEN-LAST:event_btnActualizarActionPerformed
-    public void actualizar() {
+    public void guardar() {
         String text = txtCurso.getText();
         ma_paralelo mp = new ma_paralelo();
         mp.setParalelo(text);
         mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
-        mp.setId_paralelo(cm.getId_paralelo());
-        mp.setParalelo_obs(txtObser.getText());
-        mp.setEstado_pa(cbEstado.getSelectedItem().toString());
-        String a = crud.actualizarCursos(mp);
+        String a = crud.crearCursos(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txtCursoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCursoFocusLost
-        txtCurso.setText(txtCurso.getText().toUpperCase());
-    }//GEN-LAST:event_txtCursoFocusLost
-
-    private void txtObserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObserFocusLost
-        txtObser.setText(txtObser.getText().toUpperCase());
-    }//GEN-LAST:event_txtObserFocusLost
 
     /**
      * @param args the command line arguments
@@ -240,14 +160,18 @@ public void form() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearCursosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -256,7 +180,7 @@ public void form() {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarCursosForm dialog = new ActualizarCursosForm(new javax.swing.JFrame(), true);
+                CrearCursosForm dialog = new CrearCursosForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -271,14 +195,9 @@ public void form() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JTextField txtCurso;
-    private javax.swing.JTextArea txtObser;
     // End of variables declaration//GEN-END:variables
 }

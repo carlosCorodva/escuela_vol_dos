@@ -7,7 +7,7 @@ package Principal;
 
 import SE.componentes.Fondo;
 import SE.componentes.Variables;
-import SE.views.cursos.MostrarCursosForm;
+import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
@@ -16,7 +16,7 @@ import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.empresa.sucursal.MostrarSucursalesForm;
 import SE.views.empresa.MostrarInactivosForm;
 import SE.views.materias.MostrarMateriasForm;
-import SE.views.periodo.MostrarPeriodoForm;
+import SE.views.matricula.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
@@ -65,10 +65,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        btnEmpleados = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnContra = new javax.swing.JButton();
+        btnMatricula = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
+        btnCalificacion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUsuario = new javax.swing.JLabel();
@@ -104,42 +104,47 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/carpeta add 32.png"))); // NOI18N
-        jButton2.setText("  MATRICULA  ");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificar 32.png"))); // NOI18N
-        jButton1.setText("  EMPRESA  ");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
-
-        btnEmpleados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
-        btnEmpleados.setText("  USUARIO  ");
-        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnEmpleados.setFocusable(false);
-        btnEmpleados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEmpleados.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        btnContra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/contra 32.png"))); // NOI18N
+        btnContra.setText("  ACTUALIZAR  ");
+        btnContra.setFocusable(false);
+        btnContra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnContra.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmpleadosActionPerformed(evt);
+                btnContraActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnEmpleados);
+        jToolBar1.add(btnContra);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/lista 32.png"))); // NOI18N
-        jButton3.setText("  CALIFICACION  ");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btnMatricula.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnMatricula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/carpeta add 32.png"))); // NOI18N
+        btnMatricula.setText("  MATRICULA  ");
+        btnMatricula.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMatricula.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnMatricula);
+
+        btnUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
+        btnUsuario.setText("  USUARIO  ");
+        btnUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnUsuario.setFocusable(false);
+        btnUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuarioActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnUsuario);
+
+        btnCalificacion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCalificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/lista 32.png"))); // NOI18N
+        btnCalificacion.setText("  CALIFICACION  ");
+        btnCalificacion.setFocusable(false);
+        btnCalificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCalificacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCalificacion);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("USUARIO: ");
@@ -241,7 +246,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem7.setText("CAMBIAR CLAVE");
+        jMenuItem7.setText("ACTUALIZAR CLAVE");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -361,10 +366,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         NuevoEmpleadoDosForm ne = new NuevoEmpleadoDosForm(new javax.swing.JFrame(), true, us);
         ne.setVisible(true);
-    }//GEN-LAST:event_btnEmpleadosActionPerformed
+    }//GEN-LAST:event_btnUsuarioActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         MostrarEmpleadosForm me = new MostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
@@ -411,6 +416,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mi.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void btnContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContraActionPerformed
+        ConfirmacionClaveForm cc = new ConfirmacionClaveForm(new javax.swing.JFrame(), true, us);
+        cc.setVisible(true);
+    }//GEN-LAST:event_btnContraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,10 +457,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEmpleados;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCalificacion;
+    private javax.swing.JButton btnContra;
+    private javax.swing.JButton btnMatricula;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
