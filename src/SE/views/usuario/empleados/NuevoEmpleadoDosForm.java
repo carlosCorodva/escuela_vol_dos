@@ -218,7 +218,7 @@ public class NuevoEmpleadoDosForm extends javax.swing.JDialog {
         });
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -637,7 +637,7 @@ public class NuevoEmpleadoDosForm extends javax.swing.JDialog {
             cbox(true);
         }
         if (pos == 2) {
-            cbox(true);
+            cbox(false);
         }
         if (pos == 3) {
             cbox(false);

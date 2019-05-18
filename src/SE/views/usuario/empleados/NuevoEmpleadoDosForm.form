@@ -430,10 +430,10 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="SELECCIONE CARGO..."/>
-                    <StringItem index="1" value="ADMINISTRADOR/A"/>
-                    <StringItem index="2" value="RECTOR/A"/>
-                    <StringItem index="3" value="PROFESOR/A"/>
-                    <StringItem index="4" value="SECRETARIO/A"/>
+                    <StringItem index="1" value="RECTOR/A"/>
+                    <StringItem index="2" value="PROFESOR/A"/>
+                    <StringItem index="3" value="SECRETARIO/A"/>
+                    <StringItem index="4" value="PASANTE"/>
                   </StringArray>
                 </Property>
               </Properties>

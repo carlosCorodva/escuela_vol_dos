@@ -1157,4 +1157,47 @@ public class Crud {
         }
         return lista;
     }
+    
+    public String ActualizarEmpleadoInactivo(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call em_empresa_cambio_sucursal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            pro.setString(1, us.getCedula());
+            pro.setString(2, us.getApellidos_nombres());
+            pro.setString(3, us.getDireccion());
+            pro.setString(4, us.getFecha_nacimiento());
+            pro.setString(5, us.getConvecional());
+            pro.setString(6, us.getTelefono_dos());
+            pro.setString(7, us.getCorreo());
+            pro.setString(8, us.getRol());
+            pro.setLong(9, us.getCopia_cedula());
+            pro.setLong(10, us.getCopia_titulo());
+            pro.setString(11, us.getObservacion());
+            pro.setString(12, us.getEstado());
+            pro.setLong(13, us.getId_usuario());
+            pro.setLong(14, us.getId_usuarioDos());
+            pro.setString(15, us.getNombre_comercial_su());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

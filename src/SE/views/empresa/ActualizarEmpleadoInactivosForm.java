@@ -234,7 +234,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         });
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
         cbCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbCargoKeyPressed(evt);
@@ -758,18 +758,18 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         fecha();
     }//GEN-LAST:event_btnAddActionPerformed
-    public void cbox(boolean valor) {
-        jcCiencias.setSelected(valor);
-        jcDesarrollo.setSelected(valor);
-        jcEFisica.setSelected(valor);
-        jcEstudios.setSelected(valor);
-        jcInformaticas.setSelected(valor);
-        jcIngles.setSelected(valor);
-        jcLenguaje.setSelected(valor);
-        jcMatematicas.setSelected(valor);
-        jcProyectos.setSelected(valor);
-        jcecArtistica.setSelected(valor);
-    }
+//    public void cbox(boolean valor) {
+//        jcCiencias.setSelected(valor);
+//        jcDesarrollo.setSelected(valor);
+//        jcEFisica.setSelected(valor);
+//        jcEstudios.setSelected(valor);
+//        jcInformaticas.setSelected(valor);
+//        jcIngles.setSelected(valor);
+//        jcLenguaje.setSelected(valor);
+//        jcMatematicas.setSelected(valor);
+//        jcProyectos.setSelected(valor);
+//        jcecArtistica.setSelected(valor);
+//    }
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
@@ -797,7 +797,6 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         txtObservacion.setEnabled(valor);
         txtNombres.setEnabled(valor);
         txtFecha.setEnabled(valor);
-//        cbCargo.setEnabled(valor);
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
@@ -901,26 +900,28 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
             ct = Long.valueOf(0);
         }
         if (txtObservacion.getText().length() < 1) {
-            obs = "NUEVO USUARIO";
+            obs = "SUCURSAL ANTERIOR: "+us.getNombre_comercial_su();
         } else {
             obs = txtObservacion.getText();
         }
         if (cbEstado.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un estado valido");
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN ESTADO VALIDO");
         } else if (txtNombres.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "Ingrese un nombre y apellido válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN NOMBRE Y APELLIDO VALIDO ");
         } else if (txtTelefono1.getText().length() < 9) {
-            JOptionPane.showMessageDialog(null, "Ingrese un número de contacto válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN NUMERO DE CONTACTO VALIDO ");
         } else if (txtTelefono1.getText().length() > 12) {
-            JOptionPane.showMessageDialog(null, "Exede la cantidad de numeros válidos permitidos para celular");
+            JOptionPane.showMessageDialog(null, "EXHEDE LA CANTIDAD DE NUMEROS VALIDOS PERMITIDOS PARA CELULAR");
         } else if (txtCorreo.getText().length() < 5) {
-            JOptionPane.showMessageDialog(null, "Ingrese un correo válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN CORREO VALIDO ");
         } else if (txtDireccion.getText().length() < 4) {
-            JOptionPane.showMessageDialog(null, "Ingrese una dirección válida ");
+            JOptionPane.showMessageDialog(null, "INGRESE UNA DIRECCION VALIDO");
         } else if (cbCargo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione un cargo válido");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CARGO VALIDO");
         } else if (txtFecha.getText().length() < 1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UNA FECHA");
+        }else if (cbSucursales.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UNA SUCURSAL");
         } else {
             try {
                 JoinEmpleados obj = new JoinEmpleados();
@@ -929,22 +930,16 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                 obj.setCorreo(txtCorreo.getText());
                 obj.setDireccion(txtDireccion.getText());
                 obj.setObservacion(obs);
-                System.out.println("obs: " + obs);
                 obj.setFecha_nacimiento(txtFecha.getText());
-                System.out.println("fecha: " + txtFecha.getText());
                 obj.setConvecional(txtTelefono1.getText());
                 obj.setTelefono_dos(txtTelefono2.getText());
                 obj.setRol(cbCargo.getSelectedItem().toString());
                 obj.setCopia_cedula(cc);
-                System.out.println("cc: " + cc);
                 obj.setCopia_titulo(ct);
-                System.out.println("ct: " + ct);
                 obj.setEstado(cbEstado.getSelectedItem().toString());
                 obj.setId_usuario(emp.getId_usuario());
-                System.out.println("id1: " + emp.getId_usuario());
                 obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
-                System.out.println("id2: " + lbIdUsuario.getText());
-                obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                obj.setNombre_comercial_su(cbSucursales.getSelectedItem().toString());
 
                 us_permiso_empleado usp = new us_permiso_empleado();
                 usp.setEstado_pe(ll);
@@ -959,7 +954,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                 usp.setEstado_pe10(es);
                 usp.setId_usuario(emp.getId_usuario());
 
-                String a = crud.ActualizarEmpleado(obj);
+                String a = crud.ActualizarEmpleadoInactivo(obj);
                 System.out.println("try: " + a);
                 JOptionPane.showMessageDialog(this, a);
 

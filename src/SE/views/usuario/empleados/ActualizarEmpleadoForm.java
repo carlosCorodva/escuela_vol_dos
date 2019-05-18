@@ -41,6 +41,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         emp = empleado;
         us=usuario;
         Habilitar(false);
+        cbCargo.setEnabled(false);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         formulario();
         tablaEstado();
@@ -221,7 +222,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         });
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A" }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -660,6 +661,9 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         if ("SECRETARIO/A".equals(emp.getRol())) {
             cbCargo.setSelectedItem("SECRETARIO/A");
         }
+        if ("PASANTE".equals(emp.getRol())) {
+            cbCargo.setSelectedItem("PASANTE");
+        }
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -741,23 +745,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         jcecArtistica.setSelected(valor);
     }
     private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-//        int pos = cbCargo.getSelectedIndex();
-//
-////        if (pos == 0) {
-////            cbox(false);
-////        }
-//        if (pos == 1) {
-//            cbox(true);
-//        }
-//        if (pos == 2) {
-//            cbox(true);
-//        }
-//        if (pos == 3) {
-//            cbox(false);
-//        }
-//        if (pos == 4) {
-//            cbox(false);
-//        }
+
     }//GEN-LAST:event_cbCargoActionPerformed
 
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
@@ -781,7 +769,6 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         txtObservacion.setEnabled(valor);
         txtNombres.setEnabled(valor);
         txtFecha.setEnabled(valor);
-        cbCargo.setEnabled(valor);
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
@@ -800,6 +787,12 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         jcMatematicas.setEnabled(valor);
         jcProyectos.setEnabled(valor);
         jcecArtistica.setEnabled(valor);
+        
+        if (cbCargo.getSelectedIndex()==1) {
+            cbCargo.setEnabled(false);
+        } else {
+            cbCargo.setEnabled(true);
+        }
     }
 
     public void Guardar() {
