@@ -16,17 +16,27 @@ public class ma_paralelo {
     private String paralelo_obs;
     private Long id_creacion;
     private Long id_actualizacion;
+    private Long nivel;
 
     public ma_paralelo() {
     }
 
-    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion) {
+    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel) {
         this.id_paralelo = id_paralelo;
         this.paralelo = paralelo;
         this.estado_pa = estado_pa;
         this.paralelo_obs = paralelo_obs;
         this.id_creacion = id_creacion;
         this.id_actualizacion = id_actualizacion;
+        this.nivel = nivel;
+    }
+
+    public Long getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Long nivel) {
+        this.nivel = nivel;
     }
 
     public Long getId_creacion() {

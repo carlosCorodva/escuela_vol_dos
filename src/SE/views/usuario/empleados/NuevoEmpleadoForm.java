@@ -41,7 +41,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         lbSucursal.setText(usu.getId_sucursal().toString());
         lbIdUsuario.setText(usu.getId_usuario().toString());
         Habilitar(false);
-        lbRuc.setText("   ");
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());
         lbSucursal.setText(usu.getId_sucursal().toString());
@@ -88,8 +87,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jrRuc = new javax.swing.JRadioButton();
-        lbRuc = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jcLenguaje = new javax.swing.JCheckBox();
@@ -228,7 +225,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CEDULA");
+        jLabel8.setText("CEDULA/RUC");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRES");
@@ -247,16 +244,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("CORREO");
-
-        jrRuc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jrRuc.setText("RUC");
-        jrRuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrRucActionPerformed(evt);
-            }
-        });
-
-        lbRuc.setText("       ");
 
         txtCedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -279,21 +266,20 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jrRuc)))
+                    .addComponent(jLabel8))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombres)
-                            .addComponent(txtApellidos)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(txtApellidos)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,14 +333,12 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                                 .addComponent(jLabel17))
                             .addComponent(jLabel11)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
-                                .addComponent(jrRuc)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbRuc)
                                 .addComponent(jLabel7)))
                         .addGap(13, 13, 13)
                         .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -532,8 +516,13 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
-
+String cedula ="";
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
+//if (jrRuc.isSelected()) {
+//            cedula = txtCedula.getText() + lbRuc.getText();
+//        } else {
+//            cedula = txtCedula.getText();
+//        }
         if (Validaciones.validarCedulaEmpedos(lista, txtCedula.getText())) {
             Habilitar(true);
         } else {
@@ -588,14 +577,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             Guardar();
         }
     }//GEN-LAST:event_cbCargoKeyPressed
-
-    private void jrRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrRucActionPerformed
-        if (jrRuc.isSelected()) {
-            lbRuc.setText("001");
-        } else {
-            lbRuc.setText("   ");
-        }
-    }//GEN-LAST:event_jrRucActionPerformed
 
     private void txtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombresFocusLost
         txtNombres.setText(txtNombres.getText().toUpperCase());
@@ -658,7 +639,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
-        jrRuc.setEnabled(valor);
+//        jrRuc.setEnabled(valor);
 
         jcCiencias.setEnabled(valor);
         jcDesarrollo.setEnabled(valor);
@@ -674,7 +655,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
     public void Guardar() {
         String fecha = cal.getFecha(dtFecha);
-        String obs, cedula;
+        String obs;
         Long cc, ct;
 
         if (jcCiencias.isSelected() == true) {
@@ -746,11 +727,11 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             obs = txtObservacion.getText();
         }
 
-        if (jrRuc.isSelected()) {
-            cedula = txtCedula.getText() + lbRuc.getText();
-        } else {
-            cedula = txtCedula.getText();
-        }
+//        if (jrRuc.isSelected()) {
+//            cedula = txtCedula.getText() + lbRuc.getText();
+//        } else {
+//            cedula = txtCedula.getText();
+//        }
 
         if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "INGRESE UN NOMBRE O APELLIDO VALIDO");
@@ -771,7 +752,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
             JoinEmpleados obj = new JoinEmpleados();
             obj.setApellidos_nombres(nombApe);
-            obj.setCedula(cedula);
+            obj.setCedula(txtCedula.getText());
             obj.setCorreo(txtCorreo.getText());
             obj.setDireccion(txtDireccion.getText());
             obj.setObservacion(obs);
@@ -909,10 +890,8 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     private javax.swing.JCheckBox jcMatematicas;
     private javax.swing.JCheckBox jcProyectos;
     private javax.swing.JCheckBox jcecArtistica;
-    private javax.swing.JRadioButton jrRuc;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
-    private javax.swing.JLabel lbRuc;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;

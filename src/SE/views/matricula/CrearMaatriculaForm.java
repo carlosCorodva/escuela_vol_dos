@@ -5,11 +5,11 @@
  */
 package SE.views.matricula;
 
-import SE.views.usuario.empleados.*;
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMatriculas;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -24,7 +24,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
-    ArrayList<JoinEmpleados> lista = crud.listarEmpleadosActivosInicio();
+    ArrayList<JoinEmpleados> listar = crud.listarEmpleadosActivosInicio();
+    ArrayList<JoinMatriculas> lista = null;
+    JoinMatriculas je = new JoinMatriculas();
     Calendario cal = new Calendario();
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
@@ -45,6 +47,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         lbEmpresa.setText(usu.getId_empresa().toString());
         lbSucursal.setText(usu.getId_sucursal().toString());
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
+        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        lista=crud.listarAlumnosMatriculas(je);
     }
 
     public CrearMaatriculaForm(java.awt.Frame parent, boolean modal) {
@@ -80,14 +85,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtApellidos = new javax.swing.JTextField();
-        txtNombres = new javax.swing.JTextField();
+        txtAlumno = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         dtFecha = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
+        cbParalelo = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtRepresentante = new javax.swing.JTextField();
@@ -229,10 +233,11 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbxCopiaCedula)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbxCopiaTitulo)
-                                    .addComponent(jCheckBox3))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbxCopiaCedula)
+                                        .addComponent(jCheckBox3)))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jCheckBox1)
@@ -248,37 +253,22 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jLabel8.setText("CEDULA");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("NOMBRES");
+        jLabel9.setText("ALUMNO/A");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("APELLIDOS");
-
-        txtApellidos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtAlumno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtAlumno.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtApellidosFocusLost(evt);
+                txtAlumnoFocusLost(evt);
             }
         });
-        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtApellidosKeyTyped(evt);
-            }
-        });
-
-        txtNombres.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNombresFocusLost(evt);
-            }
-        });
-        txtNombres.addActionListener(new java.awt.event.ActionListener() {
+        txtAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresActionPerformed(evt);
+                txtAlumnoActionPerformed(evt);
             }
         });
-        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtAlumno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombresKeyTyped(evt);
+                txtAlumnoKeyTyped(evt);
             }
         });
 
@@ -305,31 +295,37 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             }
         });
 
+        cbParalelo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbParalelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE PARALELO..." }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCedula)))
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(txtCedula)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(51, 51, 51)
+                        .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -341,12 +337,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                         .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)))
+                            .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +348,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -584,28 +578,20 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-        if (Validaciones.validarCedulaEmpedos(lista, txtCedula.getText())) {
+        if (Validaciones.validarCedulaEmpedos(listar, txtCedula.getText())) {
             Habilitar(true);
         } else {
             Habilitar(false);
         }
     }//GEN-LAST:event_txtCedulaKeyReleased
 
-    private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
+    private void txtAlumnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlumnoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_txtNombresKeyTyped
-
-    private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtApellidosKeyTyped
+    }//GEN-LAST:event_txtAlumnoKeyTyped
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         char c = evt.getKeyChar();
@@ -633,13 +619,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbxCopiaCedulaKeyPressed
 
-    private void txtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombresFocusLost
-        txtNombres.setText(txtNombres.getText().toUpperCase());
-    }//GEN-LAST:event_txtNombresFocusLost
-
-    private void txtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidosFocusLost
-        txtApellidos.setText(txtApellidos.getText().toUpperCase());
-    }//GEN-LAST:event_txtApellidosFocusLost
+    private void txtAlumnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlumnoFocusLost
+        txtAlumno.setText(txtAlumno.getText().toUpperCase());
+    }//GEN-LAST:event_txtAlumnoFocusLost
 
     private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
         txtDireccion.setText(txtDireccion.getText().toUpperCase());
@@ -649,22 +631,22 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
     
-    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
+    private void txtAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlumnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombresActionPerformed
+    }//GEN-LAST:event_txtAlumnoActionPerformed
 
     private void cbxCopiaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCopiaTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCopiaTituloActionPerformed
 
     public void Habilitar(boolean valor) {
-        txtApellidos.setEnabled(valor);
+        
         txtTelefono1.setEnabled(valor);
         txtTelefono2.setEnabled(valor);
         txtCorreo.setEnabled(valor);
         txtDireccion.setEnabled(valor);
         txtObservacion.setEnabled(valor);
-        txtNombres.setEnabled(valor);
+        txtAlumno.setEnabled(valor);
         dtFecha.setEnabled(valor);
         btnGuardar.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
@@ -694,7 +676,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             obs = txtObservacion.getText();
         }
 
-        if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
+        if (txtAlumno.getText().length() < 3 /*|| txtApellidos.getText().length() < 3*/) {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
         } else if (txtTelefono1.getText().length() < 9) {
             JOptionPane.showMessageDialog(null, "Ingrese un número de contacto válido ");
@@ -707,10 +689,10 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         } else if (fecha == null) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
-            String nombApe = txtApellidos.getText() + " " + txtNombres.getText();
+//            String nombApe = txtApellidos.getText() + " " + txtAlumno.getText();
 
             JoinEmpleados obj = new JoinEmpleados();
-            obj.setApellidos_nombres(nombApe);
+//            obj.setApellidos_nombres(nombApe);
             obj.setCedula(txtCedula.getText());
             obj.setCorreo(txtCorreo.getText());
             obj.setDireccion(txtDireccion.getText());
@@ -743,13 +725,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-            txtApellidos.setText("");
+//            txtApellidos.setText("");
             txtCedula.setText("");
             txtTelefono2.setText("");
             txtTelefono1.setText("");
             txtCorreo.setText("");
             txtDireccion.setText("");
-            txtNombres.setText("");
+            txtAlumno.setText("");
             txtObservacion.setText("");
             cbxCopiaCedula.setSelected(false);
             cbxCopiaTitulo.setSelected(false);
@@ -866,6 +848,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbParUno;
+    private javax.swing.JComboBox<String> cbParalelo;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxCopiaTitulo;
     private com.toedter.calendar.JDateChooser dtFecha;
@@ -874,7 +857,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -902,14 +884,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbRuc;
     private javax.swing.JLabel lbSucursal;
-    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCedDos;
     private javax.swing.JTextField txtCedUno;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCordos;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombres;
     private javax.swing.JTextArea txtObservacion;
     private javax.swing.JTextField txtRepDos;
     private javax.swing.JTextField txtRepresentante;

@@ -16,6 +16,7 @@ import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.empresa.sucursal.MostrarSucursalesForm;
 import SE.views.empresa.MostrarInactivosForm;
 import SE.views.materias.MostrarMateriasForm;
+import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
@@ -270,6 +271,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem3.setText("ALUMNOS");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -420,6 +426,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ConfirmacionClaveForm cc = new ConfirmacionClaveForm(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
     }//GEN-LAST:event_btnContraActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        MostrarMatriculasForm mm = new MostrarMatriculasForm(new javax.swing.JFrame(), true, us);
+        mm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

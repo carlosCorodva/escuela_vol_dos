@@ -9,6 +9,7 @@ import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_empleado;
@@ -295,6 +296,60 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+        }
+    }
+    public static void cargarJoinMatriculas(JTable Tabla, ArrayList<JoinMatriculas> lista) {
+
+        int[] a = {10, 30, 150, 72, 20, 70, 30,50,30,30,30,50};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"        ID","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
+            "CORREO", "CARGO","SUCURSAL","     ESTADO","PARALELO","PERIODO","ESTADO MATRIC."};
+        String[] Filas = new String[12];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = "" + lista.get(i).getId_matricula();
+            Filas[2] = lista.get(i).getApellidos_nombres();
+            Filas[1] = lista.get(i).getCedula();
+            Filas[3] = lista.get(i).getDireccion();
+            Filas[4] = lista.get(i).getConvecional();
+            Filas[5] = lista.get(i).getCorreo();
+            Filas[6] = lista.get(i).getRol();
+            Filas[7] = lista.get(i).getNombre_comercial_su();
+            Filas[8] = lista.get(i).getEstado();
+            Filas[9] = lista.get(i).getParalelo();
+            Filas[10] = lista.get(i).getPeriodo();
+            Filas[11] = lista.get(i).getEstado_matricula();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+            Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
+            Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
+            Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(11).setPreferredWidth(a[11]);
+            Tabla.getColumnModel().getColumn(11).setCellRenderer(tcr1);
         }
     }
 }

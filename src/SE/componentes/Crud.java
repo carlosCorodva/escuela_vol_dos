@@ -4,6 +4,7 @@ import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
@@ -728,6 +729,7 @@ public class Crud {
                     "{ call ma_paralelo_crear(?,?,?) }");
             pro.setString(1, us.getParalelo());
             pro.setLong(2, us.getId_actualizacion());
+            pro.setLong(3, us.getNivel());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -1183,6 +1185,101 @@ public class Crud {
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculas(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_mostrar_alumnos(?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<JoinMatriculas> listarMatriculasCedula(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_buscar_ced(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getCedula());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<JoinMatriculas> listarMatriculasApellidosNombres(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_buscar_apellido_nombre(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getApellidos_nombres());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
             con.commit();
         } catch (Exception e) {
             try {

@@ -48,6 +48,7 @@ public class CrearCursosForm extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
+        cbNivel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -79,24 +80,32 @@ public class CrearCursosForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel2");
 
+        cbNivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL...", "1", "2", "3", "4", "5", "6", "7" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(lbIdUsuario)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(37, 37, 37)
-                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnActualizar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
                 .addGap(0, 19, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbIdUsuario)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +114,10 @@ public class CrearCursosForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbIdUsuario))
-                .addGap(37, 37, 37)
+                    .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbIdUsuario)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizar)
                     .addComponent(btnCancelar))
@@ -135,6 +146,7 @@ public class CrearCursosForm extends javax.swing.JDialog {
         ma_paralelo mp = new ma_paralelo();
         mp.setParalelo(text);
         mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+        mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
         String a = crud.crearCursos(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
@@ -195,6 +207,7 @@ public class CrearCursosForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox<String> cbNivel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbIdUsuario;
