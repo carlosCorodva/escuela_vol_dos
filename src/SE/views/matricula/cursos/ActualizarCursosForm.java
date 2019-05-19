@@ -22,13 +22,17 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
      */
     Crud crud = new Crud();
     ma_paralelo cm = null;
+    JoinEmpleados us = null;
 
     public ActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_paralelo paralelo) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        us = usuario;
         cm = paralelo;
         lbIdUsuario.setText(usuario.getId_usuario().toString());
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
         form();
     }
 
@@ -57,6 +61,8 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         cbEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObser = new javax.swing.JTextArea();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -111,6 +117,10 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(txtObser);
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,16 +146,20 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                             .addComponent(jLabel1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(lbIdUsuario)
+                                .addGap(51, 51, 51)
+                                .addComponent(lbSucursal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addComponent(lbEmpresa)
+                                .addGap(37, 37, 37)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(lbIdUsuario)))
+                .addGap(93, 93, 93)
+                .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,9 +171,12 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addComponent(lbIdUsuario)
-                        .addGap(18, 18, 18)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbIdUsuario)
+                            .addComponent(lbSucursal)
+                            .addComponent(lbEmpresa))
+                        .addGap(13, 13, 13)
                         .addComponent(jLabel2))
                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -207,6 +224,8 @@ public void form() {
         mp.setId_paralelo(cm.getId_paralelo());
         mp.setParalelo_obs(txtObser.getText());
         mp.setEstado_pa(cbEstado.getSelectedItem().toString());
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         String a = crud.actualizarCursos(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
@@ -277,7 +296,9 @@ public void form() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextArea txtObser;
     // End of variables declaration//GEN-END:variables

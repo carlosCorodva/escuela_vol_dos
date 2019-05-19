@@ -17,11 +17,13 @@ public class ma_periodo {
     private Long id_actualizacion;
     private String f_actualizacion;
     private String estado_pe;
+    private Long id_empresa_pe;
+    private Long id_sucursal_pe;
 
     public ma_periodo() {
     }
 
-    public ma_periodo(Long id_periodo, String periodo, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String estado_pe) {
+    public ma_periodo(Long id_periodo, String periodo, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String estado_pe, Long id_empresa_pe, Long id_sucursal_pe) {
         this.id_periodo = id_periodo;
         this.periodo = periodo;
         this.id_creacion = id_creacion;
@@ -29,6 +31,24 @@ public class ma_periodo {
         this.id_actualizacion = id_actualizacion;
         this.f_actualizacion = f_actualizacion;
         this.estado_pe = estado_pe;
+        this.id_empresa_pe = id_empresa_pe;
+        this.id_sucursal_pe = id_sucursal_pe;
+    }
+
+    public Long getId_empresa_pe() {
+        return id_empresa_pe;
+    }
+
+    public void setId_empresa_pe(Long id_empresa_pe) {
+        this.id_empresa_pe = id_empresa_pe;
+    }
+
+    public Long getId_sucursal_pe() {
+        return id_sucursal_pe;
+    }
+
+    public void setId_sucursal_pe(Long id_sucursal_pe) {
+        this.id_sucursal_pe = id_sucursal_pe;
     }
 
     public Long getId_periodo() {

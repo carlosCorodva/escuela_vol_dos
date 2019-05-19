@@ -6,10 +6,12 @@
 package SE.views.matricula;
 
 import SE.componentes.Calendario;
+import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_paralelo;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -26,7 +28,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     Crud crud = new Crud();
     ArrayList<JoinEmpleados> listar = crud.listarEmpleadosActivosInicio();
     ArrayList<JoinMatriculas> lista = null;
+    ArrayList<ma_paralelo> paralelo = null;
     JoinMatriculas je = new JoinMatriculas();
+    ma_paralelo mp = new ma_paralelo();
     Calendario cal = new Calendario();
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
@@ -49,7 +53,11 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         lista=crud.listarAlumnosMatriculas(je);
+        paralelo = crud.ComboParaleloRegistrar(mp);
+        cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
     }
 
     public CrearMaatriculaForm(java.awt.Frame parent, boolean modal) {
@@ -136,14 +144,14 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/guardar32.png"))); // NOI18N
-        btnGuardar.setText("GUARDAR");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/live_contacts_32.png"))); // NOI18N
+        btnGuardar.setText("MATRICULAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 136, -1));
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 150, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 51, 204));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -296,7 +304,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         });
 
         cbParalelo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbParalelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE PARALELO..." }));
+        cbParalelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PARALELO..." }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -324,8 +332,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(88, 88, 88)
+                        .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(

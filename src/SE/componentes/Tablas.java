@@ -312,7 +312,7 @@ public class Tablas {
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = "" + lista.get(i).getId_matricula();
+            Filas[0] = "" + lista.get(i).getId_usuario();
             Filas[2] = lista.get(i).getApellidos_nombres();
             Filas[1] = lista.get(i).getCedula();
             Filas[3] = lista.get(i).getDireccion();

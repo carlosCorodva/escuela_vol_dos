@@ -274,7 +274,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
     public JoinMatriculas devuelveObjetoEmpleado(String datos, ArrayList<JoinMatriculas> listarobj) {
         JoinMatriculas objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getId_matricula().toString())) {
+            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
                 objeto1 = listarobj.get(i);
                 break;
             }
@@ -283,27 +283,27 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
     }
 
     private void jtMatriculasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMatriculasMousePressed
-//        int i = 0;
-//        try {
-//            if (evt.getClickCount() == 2) {
-//                i = jtMatriculas.getSelectedRow();
-//                objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
-//                if (objeto != null) {
-//                    System.out.println("holaaaaa");
-//                    ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true,us, objeto);
-//                    acc.setVisible(true);
-//                    listar.clear();
-//                    cbFiltro.setSelectedIndex(0);
-//                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//                    listar = crud.listarAlumnosMatriculas(je);
-//                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
-//                }
-//
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(MostrarMatriculasForm.class.getName()).log(Level.SEVERE, null, e);
-//        }
+        int i = 0;
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtMatriculas.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true,us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    cbFiltro.setSelectedIndex(0);
+                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarAlumnosMatriculas(je);
+                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                }
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MostrarMatriculasForm.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_jtMatriculasMousePressed
     public void filtro() {
 //        JoinEmpleados je = new JoinEmpleados();
@@ -391,23 +391,23 @@ int v = 0;
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        int i = jtMatriculas.getSelectedRow();
-//        if (jtMatriculas.isRowSelected(i) == false) {
-//            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
-//        } else {
-//            objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
-//            if (objeto != null) {
-//                System.out.println("holaaaaa");
-//                ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true,us, objeto);
-//                acc.setVisible(true);
-//                listar.clear();
-//                cbFiltro.setSelectedIndex(0);
-//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//                listar = crud.listarAlumnosMatriculas(je);
-//                Tablas.cargarJoinMatriculas(jtMatriculas, listar);
-//            }
-//        }
+        int i = jtMatriculas.getSelectedRow();
+        if (jtMatriculas.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+            if (objeto != null) {
+                System.out.println("holaaaaa");
+                ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true,us, objeto);
+                acc.setVisible(true);
+                listar.clear();
+                cbFiltro.setSelectedIndex(0);
+                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                listar = crud.listarAlumnosMatriculas(je);
+                Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

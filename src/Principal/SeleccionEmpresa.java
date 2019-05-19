@@ -24,8 +24,6 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     ArrayList<JoinEmpleados> empresa = null;
     ArrayList<JoinEmpleados> sucursal = null;
     ArrayList<JoinEmpleados> usuario = null;
-//    JoinEmpleados objSucursal = null;
-//    JoinEmpleados objEmpresa = null;
     JoinEmpleados objUsuario = null;
     JoinEmpleados obj = null;
     JoinEmpleados es = new JoinEmpleados();

@@ -27,14 +27,19 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
     ArrayList<ma_periodo> listar = null;
     ma_periodo objeto = null;
     JoinEmpleados us = null;
+    ma_periodo mp = new ma_periodo();
 
     public MostrarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        lbIdUsuario.setText(usuario.getId_usuario().toString());
         us = usuario;
-        listar = crud.listarPeriodos();
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+        mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarPeriodos(mp);
         Tablas.cargarTablaPeriodo(jtPeriodo, listar);
     }
 
@@ -63,6 +68,8 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
         btnNuevo = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -140,18 +147,14 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel3");
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +164,27 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(lbIdUsuario))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lbSucursal))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbEmpresa)
+                                .addContainerGap())))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalir))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +195,15 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbIdUsuario))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lbSucursal)
+                        .addGap(32, 32, 32)
+                        .addComponent(lbEmpresa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
@@ -234,7 +264,9 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
                     ActualizarPeriodoForm acc = new ActualizarPeriodoForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    listar = crud.listarPeriodos();
+                    mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+                    mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarPeriodos(mp);
                     Tablas.cargarTablaPeriodo(jtPeriodo, listar);
                 }
             } catch (Exception e) {
@@ -254,7 +286,9 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
                     ActualizarPeriodoForm acc = new ActualizarPeriodoForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    listar = crud.listarPeriodos();
+                    mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+                    mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarPeriodos(mp);
                     Tablas.cargarTablaPeriodo(jtPeriodo, listar);
                 }
 
@@ -266,8 +300,8 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
 
     private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
         char c = evt.getKeyChar();
-        char barra ='-';
-        if (/*fue dificil pero funciona XD*/((!Character.isDigit(c) && !Character.isAlphabetic(c)) && (Character.isSpaceChar(c) || c!=barra)) ) {
+        char barra = '-';
+        if (/*fue dificil pero funciona XD*/((!Character.isDigit(c) && !Character.isAlphabetic(c)) && (Character.isSpaceChar(c) || c != barra))) {
             getToolkit().beep();
             evt.consume();
         }
@@ -339,7 +373,9 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtPeriodo;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

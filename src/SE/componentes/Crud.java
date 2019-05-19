@@ -659,13 +659,15 @@ public class Crud {
         return valor;
     }
     
-    public ArrayList<ma_paralelo> listarCursos() {
+    public ArrayList<ma_paralelo> listarCursos(ma_paralelo us) {
         ArrayList<ma_paralelo> valor = new ArrayList<ma_paralelo>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_mostrar() }");
+                    "{ call ma_paralelo_mostrar(?,?) }");
+            pro.setLong(1, us.getId_empresa_pa());
+            pro.setLong(2, us.getId_sucursal_pa());
             rs = pro.executeQuery();
             while (rs.next()) {
                 ma_paralelo obj = Mappers.getCursosFromResultSet(rs);
@@ -694,12 +696,14 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_actualizar(?,?,?,?,?,?) }");
+                    "{ call ma_paralelo_actualizar(?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getParalelo());
             pro.setLong(2, us.getId_paralelo());
             pro.setLong(3, us.getId_actualizacion());
             pro.setString(4, us.getParalelo_obs());
             pro.setString(5, us.getEstado_pa());
+            pro.setLong(6, us.getId_empresa_pa());
+            pro.setLong(7, us.getId_sucursal_pa());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -726,10 +730,12 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_crear(?,?,?) }");
+                    "{ call ma_paralelo_crear(?,?,?,?,?,?) }");
             pro.setString(1, us.getParalelo());
             pro.setLong(2, us.getId_actualizacion());
             pro.setLong(3, us.getNivel());
+            pro.setLong(4, us.getId_empresa_pa());
+            pro.setLong(5, us.getId_sucursal_pa());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -750,13 +756,15 @@ public class Crud {
         }
         return valor;
     }
-    public ArrayList<ma_periodo> listarPeriodos() {
+    public ArrayList<ma_periodo> listarPeriodos(ma_periodo us) {
         ArrayList<ma_periodo> valor = new ArrayList<ma_periodo>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
                     "{ call ma_periodo_mostrar() }");
+            pro.setLong(1, us.getId_empresa_pe());
+            pro.setLong(2, us.getId_sucursal_pe());
             rs = pro.executeQuery();
             while (rs.next()) {
                 ma_periodo obj = Mappers.getPeriodosFromResultSet(rs);
@@ -786,9 +794,11 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_periodo_crear(?,?,?) }");
+                    "{ call ma_periodo_crear(?,?,?,?,?) }");
             pro.setString(1, us.getPeriodo());
             pro.setLong(2, us.getId_creacion());
+            pro.setLong(5, us.getId_empresa_pe());
+            pro.setLong(6, us.getId_sucursal_pe());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -815,11 +825,13 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_periodo_actualizar(?,?,?,?,?) }");
+                    "{ call ma_periodo_actualizar(?,?,?,?,?,?,?) }");
             pro.setString(1, us.getPeriodo());
             pro.setLong(2, us.getId_creacion());
             pro.setLong(3, us.getId_periodo());
             pro.setString(4, us.getEstado_pe());
+            pro.setLong(5, us.getId_empresa_pe());
+            pro.setLong(6, us.getId_sucursal_pe());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -1296,5 +1308,38 @@ public class Crud {
             }
         }
         return valor;
+    }
+    
+    public ArrayList<ma_paralelo> ComboParaleloRegistrar(ma_paralelo mp) {
+        ArrayList<ma_paralelo> lista = new ArrayList<ma_paralelo>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_combo_paralelo(?,?) }");
+            pro.setLong(1, mp.getId_empresa_pa());
+            pro.setLong(2, mp.getId_sucursal_pa());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                ma_paralelo obj = Mappers.getParaleloFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 }

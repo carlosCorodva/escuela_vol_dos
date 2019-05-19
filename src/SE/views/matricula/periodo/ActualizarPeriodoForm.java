@@ -22,13 +22,17 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
      */
     ma_periodo mp = null;
     Crud crud = new Crud();
+    JoinEmpleados us = null;
 
     public ActualizarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_periodo periodo) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
-        lbIdUsuario.setText(usuario.getId_usuario().toString());
         mp = periodo;
+        us = usuario;
+        setLocationRelativeTo(null);
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
         form();
     }
 
@@ -65,6 +69,8 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         cbEstado = new javax.swing.JComboBox<>();
         lbIdUsuario = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -111,6 +117,10 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel1");
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,11 +138,17 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
                         .addGap(20, 20, 20)
                         .addComponent(lbIdUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInfo)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnActualizar)
-                        .addGap(42, 42, 42)
-                        .addComponent(btnCancelar)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbSucursal)
+                                .addGap(80, 80, 80)
+                                .addComponent(lbEmpresa))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnInfo)
+                                .addGap(45, 45, 45)
+                                .addComponent(btnActualizar)
+                                .addGap(42, 42, 42)
+                                .addComponent(btnCancelar)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,7 +161,11 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbSucursal)
+                            .addComponent(lbEmpresa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnCancelar)
@@ -192,6 +212,8 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
         map.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
         map.setId_periodo(mp.getId_periodo());
         map.setEstado_pe(cbEstado.getSelectedItem().toString());
+        map.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+        map.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
         String a = crud.ActualizarPeriodo(map);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
@@ -274,7 +296,9 @@ char c = evt.getKeyChar();
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtCaja;
     // End of variables declaration//GEN-END:variables
 }

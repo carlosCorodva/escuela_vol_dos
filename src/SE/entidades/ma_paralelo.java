@@ -17,11 +17,13 @@ public class ma_paralelo {
     private Long id_creacion;
     private Long id_actualizacion;
     private Long nivel;
+    private Long id_empresa_pa;
+    private Long id_sucursal_pa;
 
     public ma_paralelo() {
     }
 
-    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel) {
+    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel, Long id_empresa_pa, Long id_sucursal_pa) {
         this.id_paralelo = id_paralelo;
         this.paralelo = paralelo;
         this.estado_pa = estado_pa;
@@ -29,6 +31,24 @@ public class ma_paralelo {
         this.id_creacion = id_creacion;
         this.id_actualizacion = id_actualizacion;
         this.nivel = nivel;
+        this.id_empresa_pa = id_empresa_pa;
+        this.id_sucursal_pa = id_sucursal_pa;
+    }
+
+    public Long getId_empresa_pa() {
+        return id_empresa_pa;
+    }
+
+    public void setId_empresa_pa(Long id_empresa_pa) {
+        this.id_empresa_pa = id_empresa_pa;
+    }
+
+    public Long getId_sucursal_pa() {
+        return id_sucursal_pa;
+    }
+
+    public void setId_sucursal_pa(Long id_sucursal_pa) {
+        this.id_sucursal_pa = id_sucursal_pa;
     }
 
     public Long getNivel() {

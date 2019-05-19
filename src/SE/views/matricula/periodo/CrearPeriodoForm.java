@@ -20,14 +20,16 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
      * Creates new form PeriodoParcialCrearForm
      */
     Crud crud = new Crud();
-//    JoinEmpleados us= null;
+    JoinEmpleados us= null;
     
     public CrearPeriodoForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        lbIdUsuario.setText(usuario.getId_usuario().toString());
-//        us=usuario;
+        us = usuario;
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
     }
     public CrearPeriodoForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -53,6 +55,8 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -104,13 +108,17 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel1");
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel2)
                         .addGap(35, 35, 35)
@@ -118,8 +126,10 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
                         .addGap(26, 26, 26)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lbEmpresa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGuardar)
                         .addGap(99, 99, 99)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +143,10 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbIdUsuario)
                         .addGap(21, 21, 21))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(lbSucursal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +162,14 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(btnInfo)))
-                .addGap(28, 28, 28)
+                .addGap(3, 3, 3)
+                .addComponent(lbSucursal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
-                    .addComponent(lbIdUsuario))
+                    .addComponent(lbIdUsuario)
+                    .addComponent(lbEmpresa))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -183,6 +200,8 @@ public void guardar() {
         ma_periodo mp = new ma_periodo();
         mp.setPeriodo(text);
         mp.setId_creacion(Long.valueOf(lbIdUsuario.getText()));
+        mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
         String a = crud.CrearPeriodo(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
@@ -260,7 +279,9 @@ public void guardar() {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtFin;
     private javax.swing.JTextField txtInicio;
     // End of variables declaration//GEN-END:variables

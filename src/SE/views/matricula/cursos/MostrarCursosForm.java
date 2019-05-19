@@ -7,10 +7,8 @@ package SE.views.matricula.cursos;
 
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
-import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
-import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,15 +27,20 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     ArrayList<ma_paralelo> listar = null;
     JoinEmpleados us = null;
     ma_paralelo objeto = null;
+    ma_paralelo mp = new ma_paralelo();
 
     public MostrarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        listar = crud.listarCursos();
-        Tablas.cargarTablacurso(jtCursos, listar);
         us = usuario;
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarCursos(mp);
+        Tablas.cargarTablacurso(jtCursos, listar);
     }
 
     public MostrarCursosForm(java.awt.Frame parent, boolean modal) {
@@ -63,6 +66,8 @@ public class MostrarCursosForm extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -122,13 +127,21 @@ public class MostrarCursosForm extends javax.swing.JDialog {
             }
         });
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,7 +163,12 @@ public class MostrarCursosForm extends javax.swing.JDialog {
                         .addComponent(lbIdUsuario))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lbSucursal)
+                        .addGap(80, 80, 80)
+                        .addComponent(lbEmpresa)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnActualizar)
@@ -195,13 +213,17 @@ public class MostrarCursosForm extends javax.swing.JDialog {
                     ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    listar = crud.listarCursos();
+                    mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+                    mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarCursos(mp);
                     Tablas.cargarTablacurso(jtCursos, listar);
                 }
             } catch (Exception e) {
                 Logger.getLogger(MostrarCursosForm.class.getName()).log(Level.SEVERE, null, e);
             }
-            listar = crud.listarCursos();
+            mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+            mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+            listar = crud.listarCursos(mp);
             Tablas.cargarTablacurso(jtCursos, listar);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -228,7 +250,9 @@ public class MostrarCursosForm extends javax.swing.JDialog {
                     ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    listar = crud.listarCursos();
+                    mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+                    mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarCursos(mp);
                     Tablas.cargarTablacurso(jtCursos, listar);
                 }
 
@@ -241,7 +265,9 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         CrearCursosForm cc = new CrearCursosForm(new javax.swing.JFrame(), true, us);
         cc.setVisible(true);
-        listar = crud.listarCursos();
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarCursos(mp);
         Tablas.cargarTablacurso(jtCursos, listar);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -298,6 +324,8 @@ public class MostrarCursosForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtCursos;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     // End of variables declaration//GEN-END:variables
 }

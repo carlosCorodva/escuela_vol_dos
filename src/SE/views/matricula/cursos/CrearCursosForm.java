@@ -20,12 +20,16 @@ public class CrearCursosForm extends javax.swing.JDialog {
      * Creates new form ActualizarMaterias
      */
     Crud crud = new Crud();
+    JoinEmpleados us = null;
 
     public CrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
+        us = usuario;
         setLocationRelativeTo(null);
-        lbIdUsuario.setText(usuario.getId_usuario().toString());
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
     }
 
     public CrearCursosForm(java.awt.Frame parent, boolean modal) {
@@ -49,6 +53,8 @@ public class CrearCursosForm extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
         cbNivel = new javax.swing.JComboBox<>();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -83,6 +89,10 @@ public class CrearCursosForm extends javax.swing.JDialog {
         cbNivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL...", "1", "2", "3", "4", "5", "6", "7" }));
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,17 +104,21 @@ public class CrearCursosForm extends javax.swing.JDialog {
                 .addComponent(btnCancelar)
                 .addGap(0, 19, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(lbIdUsuario))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
                         .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbIdUsuario)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbSucursal)
+                        .addGap(37, 37, 37)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbEmpresa)
+                    .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,7 +130,10 @@ public class CrearCursosForm extends javax.swing.JDialog {
                     .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbIdUsuario)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbIdUsuario)
+                    .addComponent(lbSucursal)
+                    .addComponent(lbEmpresa))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizar)
@@ -147,6 +164,8 @@ public class CrearCursosForm extends javax.swing.JDialog {
         mp.setParalelo(text);
         mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
         mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         String a = crud.crearCursos(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);
@@ -210,7 +229,9 @@ public class CrearCursosForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbNivel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtCurso;
     // End of variables declaration//GEN-END:variables
 }

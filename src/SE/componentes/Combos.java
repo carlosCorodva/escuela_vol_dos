@@ -7,6 +7,8 @@ package SE.componentes;
 
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_paralelo;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -73,6 +75,46 @@ public class Combos {
         Object[] arreglo = arregloSucursalParaInactivos(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);
         for (int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    private static Object[] arregloParalelos(ArrayList<JoinMatriculas> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "PARALELO...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getParalelo();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboParalelos(ArrayList<JoinMatriculas> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloParalelos(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for (int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    private static Object[] arregloParalelosRegistrar(ArrayList<ma_paralelo> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "PARALELO...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getParalelo();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboParalelosRegistrar(ArrayList<ma_paralelo> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloParalelosRegistrar(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for(int i = 0; i < arreglo.length; i++) {
             model.addElement(arreglo[i]);
         }
         return model;
