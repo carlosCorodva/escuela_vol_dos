@@ -696,7 +696,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_actualizar(?,?,?,?,?,?,?,?) }");
+                    "{ call ma_paralelo_actualizar(?,?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getParalelo());
             pro.setLong(2, us.getId_paralelo());
             pro.setLong(3, us.getId_actualizacion());
@@ -704,6 +704,7 @@ public class Crud {
             pro.setString(5, us.getEstado_pa());
             pro.setLong(6, us.getId_empresa_pa());
             pro.setLong(7, us.getId_sucursal_pa());
+            pro.setLong(8, us.getNivel());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -797,8 +798,8 @@ public class Crud {
                     "{ call ma_periodo_crear(?,?,?,?,?) }");
             pro.setString(1, us.getPeriodo());
             pro.setLong(2, us.getId_creacion());
-            pro.setLong(5, us.getId_empresa_pe());
-            pro.setLong(6, us.getId_sucursal_pe());
+            pro.setLong(3, us.getId_empresa_pe());
+            pro.setLong(4, us.getId_sucursal_pe());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -827,7 +828,7 @@ public class Crud {
             CallableStatement pro = con.prepareCall(
                     "{ call ma_periodo_actualizar(?,?,?,?,?,?,?) }");
             pro.setString(1, us.getPeriodo());
-            pro.setLong(2, us.getId_creacion());
+            pro.setLong(2, us.getId_actualizacion());
             pro.setLong(3, us.getId_periodo());
             pro.setString(4, us.getEstado_pe());
             pro.setLong(5, us.getId_empresa_pe());
@@ -1348,7 +1349,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());

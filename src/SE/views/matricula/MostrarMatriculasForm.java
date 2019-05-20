@@ -5,7 +5,6 @@
  */
 package SE.views.matricula;
 
-import SE.views.usuario.empleados.*;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;

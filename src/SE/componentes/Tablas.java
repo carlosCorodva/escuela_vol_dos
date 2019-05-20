@@ -300,15 +300,15 @@ public class Tablas {
     }
     public static void cargarJoinMatriculas(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
-        int[] a = {10, 30, 150, 72, 20, 70, 30,50,30,30,30,50};
+        int[] a = {10, 30, 150, 72, 20, 70, 30,50,30,30,30,50,40};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"        ID","CÉDULA","APELLIDOS NOMBRES","DIRECCIÓN", "TELÉFONO",
-            "CORREO", "CARGO","SUCURSAL","     ESTADO","PARALELO","PERIODO","ESTADO MATRIC."};
-        String[] Filas = new String[12];
+            "CORREO", "CARGO","SUCURSAL","     ESTADO","PARALELO","PERIODO","ESTADO MATRIC.","AÑO LECTIVO"};
+        String[] Filas = new String[13];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -324,6 +324,7 @@ public class Tablas {
             Filas[9] = lista.get(i).getParalelo();
             Filas[10] = lista.get(i).getPeriodo();
             Filas[11] = lista.get(i).getEstado_matricula();
+            Filas[12] = lista.get(i).getPeriodo();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -350,6 +351,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(11).setPreferredWidth(a[11]);
             Tabla.getColumnModel().getColumn(11).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(12).setPreferredWidth(a[12]);
+            Tabla.getColumnModel().getColumn(12).setCellRenderer(tcr1);
         }
     }
 }

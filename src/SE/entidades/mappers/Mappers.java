@@ -134,6 +134,7 @@ public class Mappers {
             obj.setParalelo(rs.getString("Paralelo"));
             obj.setParalelo_obs(rs.getString("Paralelo_obs"));
             obj.setEstado_pa(rs.getString("Estado_pa"));
+            obj.setNivel(rs.getLong("Nivel"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);

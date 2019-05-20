@@ -19,11 +19,13 @@ public class ma_paralelo {
     private Long nivel;
     private Long id_empresa_pa;
     private Long id_sucursal_pa;
+    private String inicio; 
+    private String fin;
 
     public ma_paralelo() {
     }
 
-    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel, Long id_empresa_pa, Long id_sucursal_pa) {
+    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel, Long id_empresa_pa, Long id_sucursal_pa, String inicio, String fin) {
         this.id_paralelo = id_paralelo;
         this.paralelo = paralelo;
         this.estado_pa = estado_pa;
@@ -33,6 +35,24 @@ public class ma_paralelo {
         this.nivel = nivel;
         this.id_empresa_pa = id_empresa_pa;
         this.id_sucursal_pa = id_sucursal_pa;
+        this.inicio = inicio;
+        this.fin = fin;
+    }
+
+    public String getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(String inicio) {
+        this.inicio = inicio;
+    }
+
+    public String getFin() {
+        return fin;
+    }
+
+    public void setFin(String fin) {
+        this.fin = fin;
     }
 
     public Long getId_empresa_pa() {

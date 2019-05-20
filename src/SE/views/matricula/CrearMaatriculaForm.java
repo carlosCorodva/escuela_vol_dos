@@ -40,7 +40,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public CrearMaatriculaForm(java.awt.Frame parent, boolean modal,JoinEmpleados usu) {
+    public CrearMaatriculaForm(java.awt.Frame parent, boolean modal, JoinEmpleados usu) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
@@ -54,7 +54,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
         mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-        lista=crud.listarAlumnosMatriculas(je);
+        lista = crud.listarAlumnosMatriculas(je);
         paralelo = crud.ComboParaleloRegistrar(mp);
         cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
         txtOtro.setEnabled(false);
@@ -646,7 +646,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
-    
+
     private void txtAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAlumnoActionPerformed
@@ -698,67 +698,67 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtRepDos.setEnabled(valor);
         txtRepresentante.setEnabled(valor);
         txtCordos.setEnabled(valor);
-        
+
         dtFecha.setEnabled(valor);
         btnGuardar.setEnabled(valor);
-        
+
         cbxCopiaCedula.setEnabled(valor);
         cbxServicoBas.setEnabled(valor);
         cbxPartidaNac.setEnabled(valor);
         cbxEscuela.setEnabled(valor);
-        
+
         cbParUno.setEnabled(valor);
         cbParDos.setEnabled(valor);
         cbParalelo.setEnabled(valor);
     }
 
     public void Guardar() {
+        System.out.println("guardar");
         String fecha = cal.getFecha(dtFecha);
-        String obs,parUno,parDos, cedula;
-        Long cc, sb, doc, esc ,pn;
+        String obs, parUno, parDos;
+        Long cc, sb, doc, esc, pn;
 
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
             cc = Long.valueOf(0);
         }
+        System.out.println("1");
         if (cbxServicoBas.isSelected()) {
             sb = Long.valueOf(1);
         } else {
             sb = Long.valueOf(0);
         }
+        System.out.println("2");
         if (cbxDocu.isSelected()) {
             doc = Long.valueOf(1);
         } else {
             doc = Long.valueOf(0);
         }
-        if (cbxEscuela.isSelected()) {
-            esc = Long.valueOf(1);
-        } else {
-            esc = Long.valueOf(0);
-        }
+        System.out.println("3");
         if (cbxPartidaNac.isSelected()) {
             pn = Long.valueOf(1);
         } else {
             pn = Long.valueOf(0);
         }
-        
-        if (cbParUno.getSelectedIndex()==5) {
+System.out.println("4");
+        if (cbParUno.getSelectedIndex() == 5) {
             parUno = txtOtro.getText();
         } else {
             parUno = cbParUno.getSelectedItem().toString();
-        }if (cbParDos.getSelectedIndex()==5) {
+        }System.out.println("5");
+        if (cbParDos.getSelectedIndex() == 5) {
             parDos = txtOtroDos.getText();
         } else {
             parDos = cbParDos.getSelectedItem().toString();
         }
-
+System.out.println("6");
         if (txtObservacion.getText().length() < 1) {
             obs = "NUEVO MATRICULA";
         } else {
             obs = txtObservacion.getText();
         }
-
+System.out.println("7");
         if (txtAlumno.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
         } else if (txtTelefono1.getText().length() < 9) {
@@ -771,57 +771,45 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingrese una dirección válida ");
         } else if (fecha == null) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
-        } else if (cbParalelo.getSelectedIndex()==0) {
+        } else if (cbParalelo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARALELO");
         } else if (txtCedUno.getText().length() <= 9) {
             JOptionPane.showMessageDialog(null, "INGRESE UNA CEDULA VALIDA");
         } else if (txtRepresentante.getText().length() < 5) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
-        } else if (cbParUno.getSelectedIndex()==0) {
+        } else if (cbParUno.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
-        } else if (cbParUno.getSelectedIndex()==5) {
-            if (txtOtro.getText().length()<4) {
-            JOptionPane.showMessageDialog(null, "ESCRIBA UN PARENTESCO VALIDO");
-            }
-        } else if (cbParDos.getSelectedIndex()==5) {
-            if (txtOtroDos.getText().length()<4) {
-            JOptionPane.showMessageDialog(null, "ESCRIBA UN PARENTESCO VALIDO");
-            }
-        } else if (cbxEscuela.isSelected()) {
-            if (txtEscAnt.getText().length()<4) {
-            JOptionPane.showMessageDialog(null, "ESCRIBA UN NOMBRE DE ESCUELA VALIDO");
-            }
         } else {
-
+            System.out.println("else");
             JoinMatriculas obj = new JoinMatriculas();
             obj.setApellidos_nombres(txtAlumno.getText());
             obj.setCedula(txtCedula.getText());
             obj.setDireccion(txtDireccion.getText());
             obj.setFecha_nacimiento(fecha);
             obj.setParalelo(cbParalelo.getSelectedItem().toString());
-            
+
             obj.setCedula_uno(txtCedUno.getText());
             obj.setRepresentante(txtRepresentante.getText());
             obj.setCorreo(txtCorreo.getText());
             obj.setConvecional(txtTelefono1.getText());
             obj.setParentesco(parUno);
-            
+
             obj.setCedula_dos(txtCedDos.getText());
             obj.setRepresentante_dos(txtRepDos.getText());
             obj.setTelefono_dos(txtTelefono2.getText());
             obj.setCorreo_dos(txtCordos.getText());
             obj.setParentesco_dos(parDos);
-            
+
             obj.setObservacion(obs);
             obj.setCopia_cedula(cc);
             obj.setServicio_basico(sb);
             obj.setPartida_nacimiento(pn);
             obj.setDoc_escuela_ant(doc);
             obj.setAnt_escuela(txtEscAnt.getText());
-            
+
             obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
-            
+
             try {
                 String a = crud.CrearMatricula(obj);
                 JOptionPane.showMessageDialog(this, a);

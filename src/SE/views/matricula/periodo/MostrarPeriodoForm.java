@@ -249,6 +249,10 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         CrearPeriodoForm pp = new CrearPeriodoForm(new javax.swing.JFrame(), true, us);
         pp.setVisible(true);
+        mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarPeriodos(mp);
+        Tablas.cargarTablaPeriodo(jtPeriodo, listar);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
