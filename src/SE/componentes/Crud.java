@@ -762,7 +762,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_periodo_mostrar() }");
+                    "{ call ma_periodo_mostrar(?,?) }");
             pro.setLong(1, us.getId_empresa_pe());
             pro.setLong(2, us.getId_sucursal_pe());
             rs = pro.executeQuery();
@@ -1341,5 +1341,55 @@ public class Crud {
             }
         }
         return lista;
+    }
+    public String CrearMatricula(JoinMatriculas us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            pro.setString(1, us.getCedula());
+            pro.setString(2, us.getApellidos_nombres());
+            pro.setString(3, us.getDireccion());
+            pro.setString(4, us.getFecha_nacimiento());
+            pro.setString(5, us.getConvecional());
+            pro.setString(6, us.getTelefono_dos());
+            pro.setString(7, us.getCorreo());
+            pro.setLong(8, us.getCopia_cedula());
+            pro.setLong(9, us.getServicio_basico());
+            pro.setString(10, us.getObservacion());
+            pro.setLong(11, us.getId_usuario());
+            pro.setLong(12, us.getId_sucursal());
+            pro.setString(13, us.getParalelo());
+            pro.setString(14, us.getCedula_uno());
+            pro.setString(15, us.getRepresentante());
+            pro.setString(16, us.getParentesco());
+            pro.setString(17, us.getCedula_dos());
+            pro.setString(18, us.getRepresentante_dos());
+            pro.setString(19, us.getCorreo_dos());
+            pro.setString(20, us.getParentesco_dos());
+            pro.setLong(21, us.getDoc_escuela_ant());
+            pro.setString(22, us.getAnt_escuela());
+            pro.setLong(23, us.getPartida_nacimiento());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
     }
 }
