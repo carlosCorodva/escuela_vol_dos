@@ -231,6 +231,11 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/live_contacts_32.png"))); // NOI18N
         jButton1.setText("MATRICULAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
@@ -359,6 +364,52 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+public void Guardar() {
+        System.out.println("guardar");
+        String obs="";
+        Long cc, sb;
+
+        if (cbxCopiaCedula.isSelected()) {
+            cc = Long.valueOf(1);
+        } else {
+            cc = Long.valueOf(0);
+        }
+        System.out.println("1");
+        if (cbxServicioBasico.isSelected()) {
+            sb = Long.valueOf(1);
+        } else {
+            sb = Long.valueOf(0);
+        }
+        if (txtObservacion.getText().length() < 1) {
+            obs = "NUEVO MATRICULA";
+        } else {
+            obs = txtObservacion.getText();
+        }
+        if (cbParalelo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN PARALELO");
+        } else {
+            System.out.println("else");
+            JoinMatriculas obj = new JoinMatriculas();
+            obj.setObservacion(obs);
+            obj.setCopia_cedula(cc);
+            obj.setServicio_basico(sb);
+            obj.setParalelo(cbParalelo.getSelectedItem().toString());
+
+            obj.setId_usuario(mat.getId_usuario());
+            obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
+
+            try {
+                String a = crud.CrearMatriculaActualizar(obj);
+                JOptionPane.showMessageDialog(this, a);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e);
+            }
+        }
+        }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            Guardar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

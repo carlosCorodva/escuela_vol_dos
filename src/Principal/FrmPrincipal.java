@@ -88,8 +88,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -103,11 +104,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToolBar1.setRollover(true);
-        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnContra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/contra 32.png"))); // NOI18N
         btnContra.setText("  ACTUALIZAR  ");
+        btnContra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContra.setFocusable(false);
         btnContra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnContra.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -121,14 +123,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnMatricula.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnMatricula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/carpeta add 32.png"))); // NOI18N
         btnMatricula.setText("  MATRICULA  ");
+        btnMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMatricula.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMatricula.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatriculaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnMatricula);
 
         btnUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
         btnUsuario.setText("  USUARIO  ");
-        btnUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuario.setFocusable(false);
         btnUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -142,6 +150,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCalificacion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCalificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/lista 32.png"))); // NOI18N
         btnCalificacion.setText("  CALIFICACION  ");
+        btnCalificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCalificacion.setFocusable(false);
         btnCalificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCalificacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -191,16 +200,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lbIdUsuario.setText("usuario");
 
-        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenu1.setText("EMPRESA");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenu7.setText("EMPRESA");
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem9.setText("CREAR EMPRESAS");
+        jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -210,6 +222,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem12.setText("ACTUALIZAR EMPRESA");
+        jMenuItem12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -219,6 +232,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem10.setText("SUCURSALES");
+        jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -228,6 +242,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem11.setText("INACTIVOS");
+        jMenuItem11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -239,6 +254,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem2.setText("USUARIOS");
+        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -248,6 +264,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem7.setText("ACTUALIZAR CLAVE");
+        jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -258,25 +275,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("MATRICULA");
+        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jMenuItem8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem8.setText("PERIODO LECTIVO");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem8);
-
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem3.setText("ALUMNOS");
+        jMenuItem3.setText("MATRICULAS");
+        jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItem13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem13.setText("ALUMNOS");
+        jMenuItem13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu2.add(jMenuItem13);
+
+        jMenuItem8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem8.setText("PERIODO LECTIVO");
+        jMenuItem8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -285,6 +310,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem6.setText("CALIFICACION");
+        jMenuItem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu6.add(jMenuItem6);
 
         jMenuBar1.add(jMenu6);
@@ -294,6 +320,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem4.setText("CURSOS");
+        jMenuItem4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -308,6 +335,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem5.setText("MATERIAS");
+        jMenuItem5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -324,7 +352,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.setText("AYUDA");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem1.setText("SALIR");
+        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -432,6 +462,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mm.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void btnMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriculaActionPerformed
+        MostrarMatriculasForm mm = new MostrarMatriculasForm(new javax.swing.JFrame(), true, us);
+        mm.setVisible(true);
+    }//GEN-LAST:event_btnMatriculaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -487,6 +522,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

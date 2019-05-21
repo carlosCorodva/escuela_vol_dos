@@ -58,11 +58,12 @@ public class JoinMatriculas {
     private String parentesco_dos;
     private String ant_escuela;
     private Long doc_escuela_ant;
+    private Long id_empleado;
 
     public JoinMatriculas() {
     }
 
-    public JoinMatriculas(Long id_matricula, Long id_usuario, Long id_periodo, Long id_paralelo, String matricula_obs, String estado_matricula, Double promedio_matricula, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String graduado, String correo_dos, String observacion, String contrasena, String usuario, String estado, Long copia_cedula, Long servicio_basico, Long partida_nacimiento, Long id_rol, String rol, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String paralelo, String periodo, String cedula_uno, String representante, String representante_dos, String cedula_dos, String parentesco, String parentesco_dos, String ant_escuela, Long doc_escuela_ant) {
+    public JoinMatriculas(Long id_matricula, Long id_usuario, Long id_periodo, Long id_paralelo, String matricula_obs, String estado_matricula, Double promedio_matricula, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String graduado, String correo_dos, String observacion, String contrasena, String usuario, String estado, Long copia_cedula, Long servicio_basico, Long partida_nacimiento, Long id_rol, String rol, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String paralelo, String periodo, String cedula_uno, String representante, String representante_dos, String cedula_dos, String parentesco, String parentesco_dos, String ant_escuela, Long doc_escuela_ant, Long id_empleado) {
         this.id_matricula = id_matricula;
         this.id_usuario = id_usuario;
         this.id_periodo = id_periodo;
@@ -111,6 +112,15 @@ public class JoinMatriculas {
         this.parentesco_dos = parentesco_dos;
         this.ant_escuela = ant_escuela;
         this.doc_escuela_ant = doc_escuela_ant;
+        this.id_empleado = id_empleado;
+    }
+
+    public Long getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(Long id_empleado) {
+        this.id_empleado = id_empleado;
     }
 
     public Long getDoc_escuela_ant() {

@@ -273,7 +273,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
     public JoinMatriculas devuelveObjetoEmpleado(String datos, ArrayList<JoinMatriculas> listarobj) {
         JoinMatriculas objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
-            if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
+            if (datos.equals(listarobj.get(i).getId_matricula().toString())) {
                 objeto1 = listarobj.get(i);
                 break;
             }
