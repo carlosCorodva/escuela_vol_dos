@@ -33,13 +33,13 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     /**
      * Creates new form Registrar
      */
-    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario, JoinEmpleados empleado) {
+    public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         emp = empleado;
-        us=usuario;
+        us = usuario;
         Habilitar(false);
         cbCargo.setEnabled(false);
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
@@ -787,8 +787,8 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         jcMatematicas.setEnabled(valor);
         jcProyectos.setEnabled(valor);
         jcecArtistica.setEnabled(valor);
-        
-        if (cbCargo.getSelectedIndex()==1) {
+
+        if (cbCargo.getSelectedIndex() == 1) {
             cbCargo.setEnabled(false);
         } else {
             cbCargo.setEnabled(true);
@@ -892,51 +892,50 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         } else if (txtFecha.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else {
-try {
-            JoinEmpleados obj = new JoinEmpleados();
-            obj.setApellidos_nombres(txtNombres.getText());
-            obj.setCedula(txtCedula.getText());
-            obj.setCorreo(txtCorreo.getText());
-            obj.setDireccion(txtDireccion.getText());
-            obj.setObservacion(obs);
-            System.out.println("obs: "+obs);
-            obj.setFecha_nacimiento(txtFecha.getText());
-            System.out.println("fecha: "+txtFecha.getText());
-            obj.setConvecional(txtTelefono1.getText());
-            obj.setTelefono_dos(txtTelefono2.getText());
-            obj.setRol(cbCargo.getSelectedItem().toString());
-            obj.setCopia_cedula(cc);
-            System.out.println("cc: "+cc);
-            obj.setCopia_titulo(ct);
-            System.out.println("ct: "+ct);
-            obj.setEstado(cbEstado.getSelectedItem().toString());
-            obj.setId_usuario(emp.getId_usuario());
-            System.out.println("id1: "+emp.getId_usuario());
-            obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
-            System.out.println("id2: "+lbIdUsuario.getText());
-            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            try {
+                JoinEmpleados obj = new JoinEmpleados();
+                obj.setApellidos_nombres(txtNombres.getText());
+                obj.setCedula(txtCedula.getText());
+                obj.setCorreo(txtCorreo.getText());
+                obj.setDireccion(txtDireccion.getText());
+                obj.setObservacion(obs);
+                System.out.println("obs: " + obs);
+                obj.setFecha_nacimiento(txtFecha.getText());
+                System.out.println("fecha: " + txtFecha.getText());
+                obj.setConvecional(txtTelefono1.getText());
+                obj.setTelefono_dos(txtTelefono2.getText());
+                obj.setRol(cbCargo.getSelectedItem().toString());
+                obj.setCopia_cedula(cc);
+                System.out.println("cc: " + cc);
+                obj.setCopia_titulo(ct);
+                System.out.println("ct: " + ct);
+                obj.setEstado(cbEstado.getSelectedItem().toString());
+                obj.setId_usuario(emp.getId_usuario());
+                System.out.println("id1: " + emp.getId_usuario());
+                obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
+                System.out.println("id2: " + lbIdUsuario.getText());
+                obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
-            us_permiso_empleado usp = new us_permiso_empleado();
-            usp.setEstado_pe(ll);
-            usp.setEstado_pe2(m);
-            usp.setEstado_pe3(inf);
-            usp.setEstado_pe4(cn);
-            usp.setEstado_pe5(ing);
-            usp.setEstado_pe6(eca);
-            usp.setEstado_pe7(ef);
-            usp.setEstado_pe8(pe);
-            usp.setEstado_pe9(dhi);
-            usp.setEstado_pe10(es);
-            usp.setId_usuario(emp.getId_usuario());
+                us_permiso_empleado usp = new us_permiso_empleado();
+                usp.setEstado_pe(ll);
+                usp.setEstado_pe2(m);
+                usp.setEstado_pe3(inf);
+                usp.setEstado_pe4(cn);
+                usp.setEstado_pe5(ing);
+                usp.setEstado_pe6(eca);
+                usp.setEstado_pe7(ef);
+                usp.setEstado_pe8(pe);
+                usp.setEstado_pe9(dhi);
+                usp.setEstado_pe10(es);
+                usp.setId_usuario(emp.getId_usuario());
 
-            
                 String a = crud.ActualizarEmpleado(obj);
-                System.out.println("try: "+a);
+                System.out.println("try: " + a);
                 JOptionPane.showMessageDialog(this, a);
 
                 crud.ActualizarPermisosMaterias(usp);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "catch"+e);
+                JOptionPane.showMessageDialog(this, "catch" + e);
             }
             setVisible(false);
         }

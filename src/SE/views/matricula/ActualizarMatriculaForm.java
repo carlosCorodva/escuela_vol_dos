@@ -9,7 +9,6 @@ import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
-import SE.entidades.ma_paralelo;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -30,7 +29,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     JoinMatriculas mat = null;
     ArrayList<JoinMatriculas> paralelo = null;
     JoinMatriculas jm = new JoinMatriculas();
-
+    
     public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
         super(parent, modal);
         initComponents();
@@ -44,12 +43,12 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         lbIdUsuario.setText(us.getId_usuario().toString());
         txtAlumno.setText(mat.getApellidos_nombres());
         txtCedula.setText(mat.getCedula());
-        System.out.println("matricula: "+mat.getId_matricula());
+        System.out.println("matricula: " + mat.getId_matricula());
         jm.setId_matricula(mat.getId_matricula());
         paralelo = crud.ComboParaleloActualizar(jm);
         cbParalelo.setModel(Combos.listarComboParalelosActualizar(paralelo));
     }
-
+    
     public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -364,11 +363,11 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
-public void Guardar() {
+    public void Guardar() {
         System.out.println("guardar");
-        String obs="";
+        String obs = "";
         Long cc, sb;
-
+        
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -394,21 +393,22 @@ public void Guardar() {
             obj.setCopia_cedula(cc);
             obj.setServicio_basico(sb);
             obj.setParalelo(cbParalelo.getSelectedItem().toString());
-
+            
             obj.setId_usuario(mat.getId_usuario());
             obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
-
+            
             try {
                 String a = crud.CrearMatriculaActualizar(obj);
                 JOptionPane.showMessageDialog(this, a);
-
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
+            setVisible(false);
         }
-        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            Guardar();
+        Guardar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

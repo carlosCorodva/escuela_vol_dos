@@ -1460,4 +1460,54 @@ public class Crud {
         }
         return valor;
     }
+    public String ActualizarAlumno(JoinMatriculas us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matrcula_actualizar_alumno(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            pro.setString(1, us.getCedula());
+            pro.setString(2, us.getApellidos_nombres());
+            pro.setString(3, us.getDireccion());
+            pro.setString(4, us.getFecha_nacimiento());
+            pro.setString(5, us.getConvecional());
+            pro.setString(6, us.getTelefono_dos());
+            pro.setString(7, us.getCorreo());
+            pro.setLong(8, us.getCopia_cedula());
+            pro.setLong(9, us.getServicio_basico());
+            pro.setString(10, us.getObservacion());
+            pro.setLong(11, us.getId_usuario());
+            pro.setString(12, us.getCedula_uno());
+            pro.setString(13, us.getRepresentante());
+            pro.setString(14, us.getParentesco());
+            pro.setString(15, us.getCedula_dos());
+            pro.setString(16, us.getRepresentante_dos());
+            pro.setString(17, us.getCorreo_dos());
+            pro.setString(18, us.getParentesco_dos());
+            pro.setLong(19, us.getDoc_escuela_ant());
+            pro.setString(20, us.getAnt_escuela());
+            pro.setLong(21, us.getPartida_nacimiento());
+            pro.setLong(22, us.getId_matricula());
+            pro.setLong(23, us.getId_empleado());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }
