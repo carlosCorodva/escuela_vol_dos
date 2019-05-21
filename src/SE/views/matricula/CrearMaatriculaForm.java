@@ -12,7 +12,6 @@ import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
-import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

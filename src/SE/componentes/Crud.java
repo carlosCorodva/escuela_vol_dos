@@ -1343,6 +1343,39 @@ public class Crud {
         }
         return lista;
     }
+    
+    public ArrayList<JoinMatriculas> ComboParaleloActualizar(JoinMatriculas mp) {
+        ArrayList<JoinMatriculas> lista = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_cargar_combo_paralelo(?) }");
+            pro.setLong(1, mp.getId_matricula());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getParaleloActualizarFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    
     public String CrearMatricula(JoinMatriculas us) {
         String valor = null;
         try {

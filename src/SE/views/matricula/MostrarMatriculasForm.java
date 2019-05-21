@@ -286,19 +286,22 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         try {
             if (evt.getClickCount() == 2) {
                 i = jtMatriculas.getSelectedRow();
-                objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
-                if (objeto != null) {
-                    System.out.println("holaaaaa");
-                    ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true,us, objeto);
-                    acc.setVisible(true);
-                    listar.clear();
-                    cbFiltro.setSelectedIndex(0);
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculas(je);
-                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 11).toString())) {
+                    JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
+                } else {
+                    objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+                    if (objeto != null) {
+                        System.out.println("holaaaaa");
+                        ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true, us, objeto);
+                        acc.setVisible(true);
+                        listar.clear();
+                        cbFiltro.setSelectedIndex(0);
+                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                        listar = crud.listarAlumnosMatriculas(je);
+                        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                    }
                 }
-
             }
         } catch (Exception e) {
             Logger.getLogger(MostrarMatriculasForm.class.getName()).log(Level.SEVERE, null, e);
@@ -353,7 +356,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         }
         Tablas.cargarJoinMatriculas(jtMatriculas, listar);
     }//GEN-LAST:event_cbFiltroActionPerformed
-int v = 0;
+    int v = 0;
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
@@ -368,19 +371,19 @@ int v = 0;
         int k = jtMatriculas.getRowCount();
 //        for(int i=0;i<k;i++){
 //                    v=i;
-                    System.out.println("k: "+k);
+        System.out.println("k: " + k);
 //                    System.out.println("v: "+v);
 //                }
-                if (k == 0) {
-                    CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
-                    ne.setVisible(true);
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculas(je);
-                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
-                } else {
-                    
-                }
+        if (k == 0) {
+            CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
+            ne.setVisible(true);
+            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            listar = crud.listarAlumnosMatriculas(je);
+            Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+        } else {
+
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
@@ -390,21 +393,26 @@ int v = 0;
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         int i = jtMatriculas.getSelectedRow();
         if (jtMatriculas.isRowSelected(i) == false) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
         } else {
-            objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
-            if (objeto != null) {
-                System.out.println("holaaaaa");
-                ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true,us, objeto);
-                acc.setVisible(true);
-                listar.clear();
-                cbFiltro.setSelectedIndex(0);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMatriculas(je);
-                Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+            if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 11).toString())) {
+                JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
+            } else {
+                objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true, us, objeto);
+                    acc.setVisible(true);
+                    listar.clear();
+                    cbFiltro.setSelectedIndex(0);
+                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarAlumnosMatriculas(je);
+                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                }
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

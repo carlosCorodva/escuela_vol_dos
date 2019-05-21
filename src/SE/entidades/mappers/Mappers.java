@@ -261,4 +261,13 @@ public class Mappers {
         }
         return obj;
     }
+    public static JoinMatriculas getParaleloActualizarFromResultSet(ResultSet rs) {
+        JoinMatriculas obj = new JoinMatriculas();
+        try {
+            obj.setParalelo(rs.getString("Paralelo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }

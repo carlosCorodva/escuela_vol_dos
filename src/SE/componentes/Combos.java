@@ -120,4 +120,24 @@ public class Combos {
         return model;
 
     }
+    private static Object[] arregloParalelosActualizar(ArrayList<JoinMatriculas> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "PARALELO...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getParalelo();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboParalelosActualizar(ArrayList<JoinMatriculas> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloParalelosActualizar(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for(int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
 }

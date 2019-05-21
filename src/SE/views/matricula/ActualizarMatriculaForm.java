@@ -5,10 +5,13 @@
  */
 package SE.views.matricula;
 
+import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_paralelo;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,8 +28,10 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     JoinMatriculas je = new JoinMatriculas();
     JoinEmpleados us = null;
     JoinMatriculas mat = null;
-    
-    public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario,JoinMatriculas matricula) {
+    ArrayList<JoinMatriculas> paralelo = null;
+    JoinMatriculas jm = new JoinMatriculas();
+
+    public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -39,7 +44,12 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         lbIdUsuario.setText(us.getId_usuario().toString());
         txtAlumno.setText(mat.getApellidos_nombres());
         txtCedula.setText(mat.getCedula());
+        System.out.println("matricula: "+mat.getId_matricula());
+        jm.setId_matricula(mat.getId_matricula());
+        paralelo = crud.ComboParaleloActualizar(jm);
+        cbParalelo.setModel(Combos.listarComboParalelosActualizar(paralelo));
     }
+
     public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -205,7 +215,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                             .addComponent(jLabel8)
                             .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxCopiaCedula)
                     .addComponent(cbxServicioBasico))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +280,9 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnSalir))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
@@ -319,7 +329,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtAlumnoKeyTyped
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-        
+
     }//GEN-LAST:event_txtCedulaKeyReleased
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
@@ -331,7 +341,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void cbxCopiaCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxCopiaCedulaKeyPressed
-        
+
     }//GEN-LAST:event_cbxCopiaCedulaKeyPressed
 
     private void cbxServicioBasicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxServicioBasicoActionPerformed
@@ -339,7 +349,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxServicioBasicoActionPerformed
 
     private void cbxServicioBasicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxServicioBasicoKeyPressed
-        
+
     }//GEN-LAST:event_cbxServicioBasicoKeyPressed
 
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
