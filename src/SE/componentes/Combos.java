@@ -5,10 +5,12 @@
  */
 package SE.componentes;
 
+import SE.entidades.ca_materia;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
+import SE.entidades.us_permiso_curso;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -135,6 +137,46 @@ public class Combos {
         Object[] arreglo = arregloParalelosActualizar(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);
         for(int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    private static Object[] arregloCursos(ArrayList<us_permiso_curso> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "CURSOS...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getCurso();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboCursos(ArrayList<us_permiso_curso> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloCursos(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for (int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    private static Object[] arregloMateria(ArrayList<ca_materia> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "MATERIAS...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getMateria();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboMateria(ArrayList<ca_materia> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloMateria(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for (int i = 0; i < arreglo.length; i++) {
             model.addElement(arreglo[i]);
         }
         return model;

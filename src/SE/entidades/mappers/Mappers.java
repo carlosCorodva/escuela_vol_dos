@@ -5,6 +5,7 @@
  */
 package SE.entidades.mappers;
 
+import SE.entidades.ca_conducta;
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
@@ -12,6 +13,7 @@ import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
+import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -141,6 +143,20 @@ public class Mappers {
         }
         return obj;
     }
+    
+    public static us_permiso_curso getCursosPermisosFromResultSet(ResultSet rs) {
+        us_permiso_curso obj = new us_permiso_curso();
+        try {
+            obj.setId_curso(rs.getLong("Id_curso"));
+            obj.setCurso(rs.getString("Curso"));
+            obj.setPermiso(rs.getString("Permiso"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
     public static ma_periodo getPeriodosFromResultSet(ResultSet rs) {
         ma_periodo obj = new ma_periodo();
         try {
@@ -265,6 +281,37 @@ public class Mappers {
         JoinMatriculas obj = new JoinMatriculas();
         try {
             obj.setParalelo(rs.getString("Paralelo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static ca_conducta getMostrarConductaFromResultSet(ResultSet rs) {
+        ca_conducta obj = new ca_conducta();
+        try {
+            obj.setId_conducta(rs.getLong("Id_conducta"));
+            obj.setConducta(rs.getString("Conducta"));
+            obj.setDescripcion(rs.getString("Descripcion"));
+            obj.setReferencia(rs.getString("Referencia"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static us_permiso_curso getCursoComboFromResultSet(ResultSet rs) {
+        us_permiso_curso obj = new us_permiso_curso();
+        try {
+            obj.setCurso(rs.getString("Curso"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static ca_materia getMateriaCalificacionFromResultSet(ResultSet rs) {
+        ca_materia obj = new ca_materia();
+        try {
+            obj.setMateria(rs.getString("Materia"));
+
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

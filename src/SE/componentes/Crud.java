@@ -1,5 +1,6 @@
 package SE.componentes;
 
+import SE.entidades.ca_conducta;
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
@@ -8,6 +9,7 @@ import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
+import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -690,6 +692,40 @@ public class Crud {
         }
         return valor;
     }
+    
+    public ArrayList<us_permiso_curso> listarCursosPermiso(us_permiso_curso us) {
+        ArrayList<us_permiso_curso> valor = new ArrayList<us_permiso_curso>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_paralelo_mostrar(?,?,?) }");
+            pro.setLong(1, us.getId_empresa_per());
+            pro.setLong(2, us.getId_sucursal_per());
+            pro.setLong(3, us.getId_usuario());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                us_permiso_curso obj = Mappers.getCursosPermisosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
     public String actualizarCursos(ma_paralelo us) {
         String valor = null;
         try {
@@ -1509,5 +1545,97 @@ public class Crud {
             }
         }
         return valor;
+    }
+    public ArrayList<ca_conducta> MostarConducta() {
+        ArrayList<ca_conducta> lista = new ArrayList<ca_conducta>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_mostrar_conducta() }");
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                ca_conducta obj = Mappers.getMostrarConductaFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    public ArrayList<us_permiso_curso> ComboCursoCalificacion(us_permiso_curso mp) {
+        ArrayList<us_permiso_curso> lista = new ArrayList<us_permiso_curso>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_calificacion_cargar_combo_cursos(?,?) }");
+            pro.setLong(1, mp.getId_usuario());
+            pro.setLong(2, mp.getId_sucursal_per());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                us_permiso_curso obj = Mappers.getCursoComboFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    public ArrayList<ca_materia> ComboMateriaCalificacion() {
+        ArrayList<ca_materia> lista = new ArrayList<ca_materia>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_calififcacion_mostrar_materias() }");
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                ca_materia obj = Mappers.getMateriaCalificacionFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 }
