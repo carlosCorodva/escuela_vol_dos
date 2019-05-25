@@ -699,10 +699,9 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_paralelo_mostrar(?,?,?) }");
-            pro.setLong(1, us.getId_empresa_per());
+                    "{ call us_permisos_mostrar_actualizar(?,?) }");
+            pro.setLong(1, us.getId_usuario());
             pro.setLong(2, us.getId_sucursal_per());
-            pro.setLong(3, us.getId_usuario());
             rs = pro.executeQuery();
             while (rs.next()) {
                 us_permiso_curso obj = Mappers.getCursosPermisosFromResultSet(rs);
@@ -1637,5 +1636,49 @@ public class Crud {
             }
         }
         return lista;
+    }
+    public void GuardarPermisosCursos(ArrayList<String> queryA) {
+        
+        try {
+            con = c.conectar();
+            for (int i = 0; i < queryA.size(); i++) {
+                java.sql.Statement cst = con.createStatement();
+                cst.executeUpdate(queryA.get(i));
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public String ValidarPermisosCrear(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_empleado_validar_permiso(?,?)}");
+            pro.setLong(1, us.getId_usuario());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
     }
 }

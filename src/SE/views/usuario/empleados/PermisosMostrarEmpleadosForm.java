@@ -261,13 +261,25 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
-        PermisosCrearCursosForm ne = new PermisosCrearCursosForm(new javax.swing.JFrame(), true, us);
-        ne.setVisible(true);
-//        cbFiltro.setSelectedIndex(0);
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarEmpleadosActivos(je);
-        Tablas.cargarJoinUsuario(jtEmpleados, listar);
+        int i = jtEmpleados.getSelectedRow();
+        System.out.println("i:"+i);
+        if (jtEmpleados.isRowSelected(i) == false) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+        } else {
+            objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
+            System.out.println("objeto:"+objeto.getApellidos_nombres());
+            if (objeto != null) {
+                System.out.println("holaaaaa");
+                PermisosCrearCursosForm acc = new PermisosCrearCursosForm(new javax.swing.JFrame(), true, us, objeto);
+                acc.setVisible(true);
+                listar.clear();
+                cbFiltro.setSelectedIndex(0);
+                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                listar = crud.listarEmpleadosActivos(je);
+                Tablas.cargarJoinUsuario(jtEmpleados, listar);
+            }
+        }
     }//GEN-LAST:event_btnAsignarActionPerformed
 
     public JoinEmpleados devuelveObjetoEmpleado(String datos, ArrayList<JoinEmpleados> listarobj) {
@@ -289,7 +301,7 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
                 objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
-                    PermisosActualizarCursosForm acc = new PermisosActualizarCursosForm(new javax.swing.JFrame(), true,us, objeto);
+                    PermisosActualizarCursosForm acc = new PermisosActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
@@ -375,13 +387,14 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int i = jtEmpleados.getSelectedRow();
+        System.out.println("i:"+i);
         if (jtEmpleados.isRowSelected(i) == false) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
         } else {
             objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
                 System.out.println("holaaaaa");
-                ActualizarEmpleadoForm acc = new ActualizarEmpleadoForm(new javax.swing.JFrame(), true,us, objeto);
+                PermisosActualizarCursosForm acc = new PermisosActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);

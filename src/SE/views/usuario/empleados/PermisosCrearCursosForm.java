@@ -10,8 +10,6 @@ import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,17 +24,22 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
     Crud crud = new Crud();
     ArrayList<ma_paralelo> listar = null;
     JoinEmpleados us = null;
+    JoinEmpleados em = null;
     ma_paralelo objeto = null;
     ma_paralelo mp = new ma_paralelo();
+    JoinEmpleados je = new JoinEmpleados();
 
-    public PermisosCrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public PermisosCrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        txtnombre.setEditable(false);
         us = usuario;
+        em = empleado;
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        txtnombre.setText(em.getApellidos_nombres());
         mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
         mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarCursos(mp);
@@ -68,6 +71,8 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
         btnNuevo = new javax.swing.JButton();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        txtnombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -91,11 +96,6 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
             }
         ));
         jtCursos.setRowHeight(25);
-        jtCursos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtCursosMousePressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtCursos);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -126,15 +126,15 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
                 btnNuevoMouseClicked(evt);
             }
         });
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
 
         lbSucursal.setText("sucursal");
 
         lbEmpresa.setText("empresa");
+
+        txtnombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("USUARIO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +155,12 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
                         .addComponent(lbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGap(19, 19, 19)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtnombre))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(lbIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -163,25 +168,29 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lbIdUsuario))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lbSucursal)
-                        .addGap(80, 80, 80)
-                        .addComponent(lbEmpresa)))
-                .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbSucursal)
+                                .addGap(80, 80, 80)
+                                .addComponent(lbEmpresa))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbIdUsuario)
+                        .addGap(140, 140, 140)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnActualizar)
                         .addComponent(btnSalir))
                     .addComponent(btnNuevo))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,93 +210,50 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+    public void guardar() {
+        je.setId_usuario((em.getId_usuario()));
+        String a = crud.ValidarPermisosCrear(je);
+        if ("EL USUARIO YA TIENE PERMISO".equals(a)) {
+            JOptionPane.showMessageDialog(this, "EL USUARIO YA TIENE PERMISO, USE LA VENTANA DE ACTUALIZAR");
+        } else {
+            ArrayList<String> queryA = new ArrayList<String>();
+            String act = "";
+            String valor = "";
+            for (int i = 0; i < jtCursos.getRowCount(); i++) {
+                String dato = jtCursos.getValueAt(i, 2).toString();
+                if ("true".equals(dato)) {
+                    valor = "A";
+                } else {
+                    valor = "I";
+                }
+                act = "INSERT INTO `us_permiso_curso`(`id_usuario`,`id_curso`,\n"
+                        + "`curso`,`permiso`,`id_empresa_per`,`id_sucursal_per`)\n"
+                        + "VALUES ('" + em.getId_usuario() + "','" + jtCursos.getValueAt(i, 0) + "','" + jtCursos.getValueAt(i, 1) + "','" + valor + "',\n"
+                        + "'1','" + us.getId_sucursal() + "');";
 
+                queryA.add(act);
+                crud.GuardarPermisosCursos(queryA);
+                queryA.clear();
+            }
+            JOptionPane.showMessageDialog(this, "PERMISO GUARDADO CORRECTAMENTE");
+            Tablas.TablaCursosPermisosEmpleados(jtCursos, listar);
+        }
+        setVisible(false);
+    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-//        int i = jtCursos.getSelectedRow();
-//        if (jtCursos.isRowSelected(i) == false) {
-//            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
-//        } else {
-//            try {
-//                objeto = devuelveObjetoEmpleado(jtCursos.getValueAt(i, 0).toString(), listar);
-//                if (objeto != null) {
-//                    System.out.println("holaaaaa");
-//                    ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
-//                    acc.setVisible(true);
-//                    listar.clear();
-//                    mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-//                    mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-//                    listar = crud.listarCursos(mp);
-//                    Tablas.cargarTablacurso(jtCursos, listar);
-//                }
-//            } catch (Exception e) {
-//                Logger.getLogger(PermisosMostrarCursosForm.class.getName()).log(Level.SEVERE, null, e);
-//            }
-//            mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-//            mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-//            listar = crud.listarCursos(mp);
-//            Tablas.cargarTablacurso(jtCursos, listar);
-//        }
+        guardar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-//    public ma_paralelo devuelveObjetoEmpleado(String datos, ArrayList<ma_paralelo> listarobj) {
-//        ma_paralelo objeto1 = null;
-//        for (int i = 0; i < listarobj.size(); i++) {
-//            if (datos.equals(listarobj.get(i).getId_paralelo().toString())) {
-//                objeto1 = listarobj.get(i);
-//                break;
-//            }
-//        }
-//        return objeto1;
-//    }
-
-    private void jtCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCursosMousePressed
-//        int i = 0;
-//        try {
-//            if (evt.getClickCount() == 2) {
-//                i = jtCursos.getSelectedRow();
-//                objeto = devuelveObjetoEmpleado(jtCursos.getValueAt(i, 0).toString(), listar);
-//                if (objeto != null) {
-//                    System.out.println("holaaaaa");
-//                    ActualizarCursosForm acc = new ActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
-//                    acc.setVisible(true);
-//                    listar.clear();
-//                    mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-//                    mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-//                    listar = crud.listarCursos(mp);
-//                    Tablas.cargarTablacurso(jtCursos, listar);
-//                }
-//
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(PermisosMostrarCursosForm.class.getName()).log(Level.SEVERE, null, e);
-//        }
-    }//GEN-LAST:event_jtCursosMousePressed
-
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        int acu = evt.getClickCount();
-        int cont = acu++;
-        int impar = 0;
-        int par = 0;
+        int cont = 0;
+        cont = evt.getClickCount();
         boolean v = true;
         boolean f = false;
-        for (int y = 1; cont >= y; y = y + 2) {
-            impar = y;
-            System.out.println("impar: " + impar);
-        }
-        for (int x = 2; cont >= x; x = x + 2) {
-            par = x;
-        }
-        if (cont == impar) {
+        if (cont == 1) {
             for (int a = 0; a < jtCursos.getRowCount(); a++) {
                 jtCursos.setValueAt(v, a, 2);
             }
-        }
-        if (cont == par) {
+        } else {
             for (int a = 0; a < jtCursos.getRowCount(); a++) {
                 jtCursos.setValueAt(f, a, 2);
             }
@@ -356,11 +322,13 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtCursos;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
+    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }
