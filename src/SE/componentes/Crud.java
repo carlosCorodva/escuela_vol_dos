@@ -4,6 +4,7 @@ import SE.entidades.ca_conducta;
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
+import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
@@ -661,7 +662,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<ma_paralelo> listarCursos(ma_paralelo us) {
         ArrayList<ma_paralelo> valor = new ArrayList<ma_paralelo>();
         try {
@@ -693,7 +694,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<us_permiso_curso> listarCursosPermiso(us_permiso_curso us) {
         ArrayList<us_permiso_curso> valor = new ArrayList<us_permiso_curso>();
         try {
@@ -725,7 +726,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String actualizarCursos(ma_paralelo us) {
         String valor = null;
         try {
@@ -761,6 +762,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String crearCursos(ma_paralelo us) {
         String valor = null;
         try {
@@ -793,6 +795,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<ma_periodo> listarPeriodos(ma_periodo us) {
         ArrayList<ma_periodo> valor = new ArrayList<ma_periodo>();
         try {
@@ -824,7 +827,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String CrearPeriodo(ma_periodo us) {
         String valor = null;
         try {
@@ -856,6 +859,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String ActualizarPeriodo(ma_periodo us) {
         String valor = null;
         try {
@@ -889,7 +893,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<em_empresa> ListarEmpresas() {
         ArrayList<em_empresa> valor = new ArrayList<em_empresa>();
         try {
@@ -919,6 +923,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String CrearEmpresa(em_empresa us) {
         String valor = null;
         try {
@@ -952,7 +957,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<em_empresa> MostrarEmpresaUna(em_empresa je) {
         ArrayList<em_empresa> lista = new ArrayList<em_empresa>();
         try {
@@ -984,7 +989,7 @@ public class Crud {
         }
         return lista;
     }
-    
+
     public String ActualizarEmpresa(em_empresa us) {
         String valor = null;
         try {
@@ -1019,7 +1024,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<em_sucursal> ListarSucursales(em_sucursal su) {
         ArrayList<em_sucursal> valor = new ArrayList<em_sucursal>();
         try {
@@ -1050,6 +1055,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String ActualizarSucursal(em_sucursal us) {
         String valor = null;
         try {
@@ -1084,7 +1090,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String CrearSucursal(em_sucursal us) {
         String valor = null;
         try {
@@ -1118,7 +1124,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String CerrarSucursal(em_sucursal us) {
         String valor = null;
         try {
@@ -1148,6 +1154,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinEmpleados> listarEmpleadosInactivosTodos() {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
         try {
@@ -1177,6 +1184,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<em_sucursal> sucursalComboParaInactivos(em_sucursal je) {
         ArrayList<em_sucursal> lista = new ArrayList<em_sucursal>();
         try {
@@ -1208,7 +1216,7 @@ public class Crud {
         }
         return lista;
     }
-    
+
     public String ActualizarEmpleadoInactivo(JoinEmpleados us) {
         String valor = null;
         try {
@@ -1251,6 +1259,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinMatriculas> listarAlumnosMatriculas(JoinMatriculas je) {
         ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
         try {
@@ -1282,6 +1291,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinMatriculas> listarMatriculasCedula(JoinMatriculas je) {
         ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
         try {
@@ -1314,6 +1324,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<JoinMatriculas> listarMatriculasApellidosNombres(JoinMatriculas je) {
         ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
         try {
@@ -1346,7 +1357,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public ArrayList<ma_paralelo> ComboParaleloRegistrar(ma_paralelo mp) {
         ArrayList<ma_paralelo> lista = new ArrayList<ma_paralelo>();
         try {
@@ -1379,7 +1390,7 @@ public class Crud {
         }
         return lista;
     }
-    
+
     public ArrayList<JoinMatriculas> ComboParaleloActualizar(JoinMatriculas mp) {
         ArrayList<JoinMatriculas> lista = new ArrayList<JoinMatriculas>();
         try {
@@ -1411,7 +1422,7 @@ public class Crud {
         }
         return lista;
     }
-    
+
     public String CrearMatricula(JoinMatriculas us) {
         String valor = null;
         try {
@@ -1462,7 +1473,7 @@ public class Crud {
         }
         return valor;
     }
-    
+
     public String CrearMatriculaActualizar(JoinMatriculas us) {
         String valor = null;
         try {
@@ -1496,6 +1507,7 @@ public class Crud {
         }
         return valor;
     }
+
     public String ActualizarAlumno(JoinMatriculas us) {
         String valor = null;
         try {
@@ -1546,6 +1558,7 @@ public class Crud {
         }
         return valor;
     }
+
     public ArrayList<ca_conducta> MostarConducta() {
         ArrayList<ca_conducta> lista = new ArrayList<ca_conducta>();
         try {
@@ -1576,6 +1589,7 @@ public class Crud {
         }
         return lista;
     }
+
     public ArrayList<us_permiso_curso> ComboCursoCalificacion(us_permiso_curso mp) {
         ArrayList<us_permiso_curso> lista = new ArrayList<us_permiso_curso>();
         try {
@@ -1608,6 +1622,7 @@ public class Crud {
         }
         return lista;
     }
+
     public ArrayList<JoinMaterias> ComboMateriaCalificacion(JoinMaterias pe) {
         ArrayList<JoinMaterias> lista = new ArrayList<JoinMaterias>();
         try {
@@ -1639,8 +1654,9 @@ public class Crud {
         }
         return lista;
     }
+
     public void GuardarPermisosCursos(ArrayList<String> queryA) {
-        
+
         try {
             con = c.conectar();
             for (int i = 0; i < queryA.size(); i++) {
@@ -1655,6 +1671,7 @@ public class Crud {
         }
 
     }
+
     public String ValidarPermisosCrear(JoinEmpleados us) {
         String valor = null;
         try {
@@ -1682,5 +1699,86 @@ public class Crud {
             }
         }
         return valor;
+    }
+
+    public String ResetearPermisosemplaeados() {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_usuario_permisos_cursos_truncate(?)}");
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String MostrarPeriodo(Long id) {
+        String periodo = "";
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement("SELECT `periodo` FROM `ma_periodo` \n"
+                    + "WHERE `estado_pe` = 'INICIADO' AND `id_sucursal_pe` = " + id + ";");
+            rs = ps.executeQuery();
+            rs.next();
+            periodo = rs.getString("periodo");
+            con.close();
+        } catch (SQLException e) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return periodo;
+    }
+    public ArrayList<JoinCalificacion> listarAlumnosCalificacionPorCurso(JoinCalificacion pe) {
+        ArrayList<JoinCalificacion> lista = new ArrayList<JoinCalificacion>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ca_calificacion_mostrar_alumnos_por_curso(?,?,?,?,?) }");
+            pro.setLong(1, pe.getParcial());
+            pro.setString(2, pe.getMateria());
+            pro.setString(3, pe.getParalelo());
+            pro.setString(4, pe.getPeriodo());
+            pro.setLong(5, pe.getId_sucursal());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                JoinCalificacion obj = Mappers.getCalificacionFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 }

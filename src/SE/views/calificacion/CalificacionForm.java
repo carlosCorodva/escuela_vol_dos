@@ -5,9 +5,11 @@ import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.ca_calificacion;
 import SE.entidades.ca_materia;
+import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_curso;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -36,6 +38,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     ArrayList<JoinMatriculas> listar = null;
     JoinMatriculas je = new JoinMatriculas();
     us_permiso_curso pc = new us_permiso_curso();
+    JoinCalificacion jc = new JoinCalificacion();
     JoinMaterias jm = new JoinMaterias();
     JoinEmpleados us = null;
     Long pf1 = null;
@@ -43,24 +46,29 @@ public class CalificacionForm extends javax.swing.JDialog {
     String pf3 = "";
 //    ArrayList<us_permiso_curso> listarCursos = null;
     ArrayList<JoinMaterias> materia = null;
+    ArrayList<JoinCalificacion> listarCursos = null;
     ArrayList<us_permiso_curso> cursos = null;
 
     public CalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(null);
+        txtCurso.setEditable(false);
+        txtMateria.setEditable(false);
+        txtQuimestre.setEditable(false);
+        txtUsuario.setEditable(false);
         us=usuario;
-//        this.setUndecorated(false);
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        txtUsuario.setText(us.getUsuario());
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarAlumnosMatriculas(je);
         Tablas.cargarJoinMatriculasCalicficacion(jtCalificacion, listar);
-//        cbFiltroQuimestre.setModel(Formulario.listaComboQuimestre(lista3));
+        lbPeriodo.setText(crud.MostrarPeriodo(Long.valueOf(lbSucursal.getText())));
         btnGuardar.setEnabled(false);
-        btnImprimir.setVisible(false);
+        btnImprimir.setEnabled(false);
         combos();
     }
 
@@ -78,15 +86,14 @@ public class CalificacionForm extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lbfechaLectibva = new javax.swing.JLabel();
+        lbPeriodo = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         cbFiltroQuimestre = new javax.swing.JComboBox<>();
         cbFiltroMateria = new javax.swing.JComboBox<>();
         cbFiltroCurso = new javax.swing.JComboBox<>();
-        btnBuscar = new javax.swing.JButton();
-        btnConducta = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -101,6 +108,8 @@ public class CalificacionForm extends javax.swing.JDialog {
         txtQuimestre = new javax.swing.JTextField();
         txtCurso = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnConducta = new javax.swing.JButton();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -116,9 +125,9 @@ public class CalificacionForm extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CALIFICACION");
 
-        lbfechaLectibva.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
-        lbfechaLectibva.setForeground(new java.awt.Color(255, 255, 255));
-        lbfechaLectibva.setText("PERÍODO: CARGAR P.");
+        lbPeriodo.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
+        lbPeriodo.setForeground(new java.awt.Color(255, 255, 255));
+        lbPeriodo.setText("2018-2019");
 
         lbIdUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lbIdUsuario.setText("usuario");
@@ -129,39 +138,51 @@ public class CalificacionForm extends javax.swing.JDialog {
         lbSucursal.setForeground(new java.awt.Color(255, 255, 255));
         lbSucursal.setText("jLabel7");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("PERÍODO:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(73, 73, 73)
+                .addGap(32, 32, 32)
                 .addComponent(lbIdUsuario)
-                .addGap(68, 68, 68)
-                .addComponent(lbfechaLectibva)
-                .addGap(73, 73, 73)
+                .addGap(191, 191, 191)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPeriodo)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbEmpresa)
-                    .addComponent(lbSucursal))
+                    .addComponent(lbEmpresa, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbSucursal, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(lbEmpresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbSucursal))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lbfechaLectibva)
-                            .addComponent(lbIdUsuario))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbPeriodo)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(lbIdUsuario)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         cbFiltroQuimestre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -172,22 +193,6 @@ public class CalificacionForm extends javax.swing.JDialog {
 
         cbFiltroCurso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbFiltroCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CURSOS...", "2A", "2B", "3A", "3B", "" }));
-
-        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnBuscar.setText("   BUSCAR");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        btnConducta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnConducta.setText("CONDUCTA");
-        btnConducta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConductaActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("CURSO:");
@@ -202,6 +207,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         jLabel3.setText("USAURIO:");
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/disquete guardar 32.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +216,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         });
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.setToolTipText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +226,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         });
 
         btnImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/impresora 32.png"))); // NOI18N
         btnImprimir.setText("IMPRIMIR");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +248,8 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             }
         ));
+        jtCalificacion.setAutoscrolls(false);
+        jtCalificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtCalificacion.setRowHeight(30);
         jtCalificacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -269,57 +279,76 @@ public class CalificacionForm extends javax.swing.JDialog {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/buscar32.png"))); // NOI18N
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnConducta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnConducta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/infor 32.png"))); // NOI18N
+        btnConducta.setText("CONDUCTA");
+        btnConducta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConductaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(cbFiltroQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbFiltroMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConducta)
-                .addGap(43, 43, 43))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(btnImprimir)
-                .addGap(73, 73, 73)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(268, 268, 268))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(txtUsuario)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(txtQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(btnImprimir)
+                .addGap(192, 192, 192)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(cbFiltroQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbFiltroMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConducta))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(65, 65, 65))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,12 +356,12 @@ public class CalificacionForm extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbFiltroQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFiltroMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar)
                         .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnConducta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbFiltroMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbFiltroQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConducta))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,12 +375,11 @@ public class CalificacionForm extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnGuardar)
-                        .addComponent(btnImprimir))
-                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnImprimir))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -362,7 +390,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -396,94 +424,85 @@ public class CalificacionForm extends javax.swing.JDialog {
         }
     }
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtrosCursos();
-        cajasTxt();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    public void cualitativa() {
-
-    }
-
     public void calcularPromedio() {
         //int x = jtCalificacion.getSelectedRow(),y = jtCalificacion.getSelectedColumn();
-        if (jtCalificacion.getColumnCount() >= 6) {
-
-            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-                Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
-                Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
-                Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
-
-                Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 6).toString());
-
-                Double divisor = Double.valueOf(3);
-                Double mon = Double.valueOf(0.80);
-                Double mvn = Double.valueOf(0.20);
-
-                Double suma3 = formativa + (practica) + (aporte);
-                Double dividir3 = suma3 / (divisor);
-
-                Double ochenta = dividir3 * (mon);
-                Double veinte = examen * (mvn);
-
-                jtCalificacion.setValueAt(ochenta, i, 8);
-                jtCalificacion.setValueAt(veinte, i, 9);
-
-                Double promedio = ochenta + veinte;
-
-                Double promediot = 0.00;
-
-                if (promedio <= 1.49) {
-                    promediot = 1.00;
-                }
-                if (promedio >= 1.50 && promedio <= 6.49) {
-                    promediot = 6.00;
-                }
-                if (promedio >= 6.50 && promedio <= 7.49) {
-                    promediot = 7.00;
-                }
-                if (promedio >= 7.50 && promedio <= 8.49) {
-                    promediot = 8.00;
-                }
-                if (promedio >= 8.50 && promedio <= 9.49) {
-                    promediot = 9.00;
-                }
-                if (promedio >= 9.50 && promedio <= 10.00) {
-                    promediot = 10.00;
-                }
-                if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
-                    JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
-                    promediot = 0.00;
-                }
-
-                jtCalificacion.setValueAt(promediot, i, 10);
-
-                String cualitativo = "";
-
-                if (ochenta >= 10.0) {
-                    cualitativo = "NO VÁLIDO";
-                }
-                if (veinte >= 10.0) {
-                    cualitativo = "NO VÁLIDO";
-                }
-
-                if (promediot >= 9) {
-                    cualitativo = "EXCELENTE";
-                } else if (promediot >= 8 && promediot < 9) {
-                    cualitativo = "MUY BUENO";
-                } else if (promediot >= 7 && promediot < 8) {
-                    cualitativo = "BUENO";
-                } else if (promediot >= 6 && promediot < 7) {
-                    cualitativo = "REGULAR";
-                } else if (promediot >= 1 && promediot < 6) {
-                    cualitativo = "INSUFICIENTE";
-                } else if (promediot <= 0.99) {
-                    cualitativo = "NO VÁLIDO";
-                }
-
-                jtCalificacion.setValueAt(cualitativo, i, 11);
-            }
-        }
+//        if (jtCalificacion.getColumnCount() >= 6) {
+//
+//            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
+//                Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
+//                Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+//                Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
+//
+//                Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 6).toString());
+//
+//                Double divisor = Double.valueOf(3);
+//                Double mon = Double.valueOf(0.80);
+//                Double mvn = Double.valueOf(0.20);
+//
+//                Double suma3 = formativa + (practica) + (aporte);
+//                Double dividir3 = suma3 / (divisor);
+//
+//                Double ochenta = dividir3 * (mon);
+//                Double veinte = examen * (mvn);
+//
+//                jtCalificacion.setValueAt(ochenta, i, 8);
+//                jtCalificacion.setValueAt(veinte, i, 9);
+//
+//                Double promedio = ochenta + veinte;
+//
+//                Double promediot = 0.00;
+//
+//                if (promedio <= 1.49) {
+//                    promediot = 1.00;
+//                }
+//                if (promedio >= 1.50 && promedio <= 6.49) {
+//                    promediot = 6.00;
+//                }
+//                if (promedio >= 6.50 && promedio <= 7.49) {
+//                    promediot = 7.00;
+//                }
+//                if (promedio >= 7.50 && promedio <= 8.49) {
+//                    promediot = 8.00;
+//                }
+//                if (promedio >= 8.50 && promedio <= 9.49) {
+//                    promediot = 9.00;
+//                }
+//                if (promedio >= 9.50 && promedio <= 10.00) {
+//                    promediot = 10.00;
+//                }
+//                if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
+//                    JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
+//                    promediot = 0.00;
+//                }
+//
+//                jtCalificacion.setValueAt(promediot, i, 10);
+//
+//                String cualitativo = "";
+//
+//                if (ochenta >= 10.0) {
+//                    cualitativo = "NO VÁLIDO";
+//                }
+//                if (veinte >= 10.0) {
+//                    cualitativo = "NO VÁLIDO";
+//                }
+//
+//                if (promediot >= 9) {
+//                    cualitativo = "EXCELENTE";
+//                } else if (promediot >= 8 && promediot < 9) {
+//                    cualitativo = "MUY BUENO";
+//                } else if (promediot >= 7 && promediot < 8) {
+//                    cualitativo = "BUENO";
+//                } else if (promediot >= 6 && promediot < 7) {
+//                    cualitativo = "REGULAR";
+//                } else if (promediot >= 1 && promediot < 6) {
+//                    cualitativo = "INSUFICIENTE";
+//                } else if (promediot <= 0.99) {
+//                    cualitativo = "NO VÁLIDO";
+//                }
+//
+//                jtCalificacion.setValueAt(cualitativo, i, 11);
+//            }
+//        }
     }
 
     public void guardar() {//funciona 4,5,6 y 8
@@ -534,6 +553,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         if ("QUIMESTRE...".equals(pf1) || "MATERIAS...".equals(pf2) || "CURSOS...".equals(pf3)) {
             JOptionPane.showMessageDialog(this, "SELECCIONE LOS FILTROS CORRECTAMENTE");
             btnGuardar.setEnabled(false);
+            btnImprimir.setEnabled(false);
             txtCurso.setText("");
             txtQuimestre.setText("");
             txtMateria.setText("");
@@ -541,15 +561,17 @@ public class CalificacionForm extends javax.swing.JDialog {
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             listar = crud.listarAlumnosMatriculas(je);
         } else {
-//              ca_calificacion cal = new ca_calificacion();
-//            cal.setParcial(pf1);
-//            cal.setMateria(pf2);
-//            cal.setParalelo(pf3);
+            jc.setParcial(pf1);
+            jc.setMateria(pf2);
+            jc.setParalelo(pf3);
+            jc.setPeriodo(lbPeriodo.getText());
+            jc.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 //
-//            listarCursos = crud.listarAlumnosCalificacion(cal);
-//            Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
-//            btnGuardar.setEnabled(true);
-//            JOptionPane.showMessageDialog(this, "Busqueda exitosa");
+            listarCursos = crud.listarAlumnosCalificacionPorCurso(jc);
+            Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
+            btnGuardar.setEnabled(true);
+            btnImprimir.setEnabled(true);
+            JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
 ////            calcularPromedio();
         }
     }
@@ -571,11 +593,6 @@ public class CalificacionForm extends javax.swing.JDialog {
 //        listarCursos = crud.listarAlumnosCalificacion(cal);
 //        Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnConductaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConductaActionPerformed
-        ConductaForm cond = new ConductaForm(new javax.swing.JFrame(), true);
-        cond.setVisible(true);
-    }//GEN-LAST:event_btnConductaActionPerformed
 
     private void jtCalificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCalificacionMouseClicked
         if (evt.getClickCount() == 0 || evt.getClickCount() == 1 || evt.getClickCount() == 3) {
@@ -626,6 +643,16 @@ public class CalificacionForm extends javax.swing.JDialog {
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
 
     }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        filtrosCursos();
+        cajasTxt();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnConductaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConductaActionPerformed
+        ConductaForm cf = new ConductaForm(new javax.swing.JFrame(), true);
+        cf.setVisible(true);
+    }//GEN-LAST:event_btnConductaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -681,6 +708,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbFiltroQuimestre;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -692,8 +720,8 @@ public class CalificacionForm extends javax.swing.JDialog {
     private javax.swing.JTable jtCalificacion;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbPeriodo;
     private javax.swing.JLabel lbSucursal;
-    private javax.swing.JLabel lbfechaLectibva;
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextField txtMateria;
     private javax.swing.JTextField txtQuimestre;

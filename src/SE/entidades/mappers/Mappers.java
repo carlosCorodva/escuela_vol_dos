@@ -9,6 +9,7 @@ import SE.entidades.ca_conducta;
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
+import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
@@ -312,6 +313,50 @@ public class Mappers {
         JoinMaterias obj = new JoinMaterias();
         try {
             obj.setMateria(rs.getString("Materia"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static ma_periodo getPeriodoFromResultSet(ResultSet rs) {
+        ma_periodo obj = new ma_periodo();
+        try {
+            obj.setPeriodo(rs.getString("Periodo"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static JoinCalificacion getCalificacionFromResultSet(ResultSet rs) {
+        JoinCalificacion obj = new JoinCalificacion();
+        try {
+            obj.setId_calificacion(rs.getLong("Id_calificacion"));
+            obj.setId_matricula(rs.getLong("Id_matricula"));
+            obj.setId_periodo(rs.getLong("Id_periodo"));
+            obj.setId_paralelo(rs.getLong("Id_paralelo"));
+            obj.setId_conducta(rs.getLong("Id_conducta"));
+            obj.setId_sucursal(rs.getLong("Id_sucursal"));
+            obj.setId_materia(rs.getLong("Id_materia"));
+            obj.setApellidos_nombres(rs.getString("Apellidos_nombres"));
+            obj.setAporte(rs.getDouble("Aporte"));
+            obj.setCalificacion_obs(rs.getString("Calificacion_obs"));
+            obj.setConducta(rs.getString("Conducta"));
+            obj.setEstado_ca(rs.getString("Estado_ca"));
+            obj.setExamen(rs.getDouble("Estado_ca"));
+            obj.setExamen_de_gracia(rs.getDouble("Examen_de_gracia"));
+            obj.setMateria(rs.getString("Materia"));
+            obj.setNota_formativa(rs.getLong("Nota_formativa"));
+            obj.setNota_practica(rs.getLong("Nota_practica"));
+            obj.setOchenta_porcentaje(rs.getLong("Ochenta_porcentaje"));
+            obj.setParalelo(rs.getString("Paralelo"));
+            obj.setParcial(rs.getLong("Parcial"));
+            obj.setPeriodo(rs.getString("Periodo"));
+            obj.setPromedio(rs.getLong("Promedio"));
+            obj.setRemedial(rs.getLong("Remedial"));
+            obj.setSupletorio(rs.getLong("Supletorio"));
+            obj.setVeinte_porcentaje(rs.getLong("Veinte_porcentaje"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
