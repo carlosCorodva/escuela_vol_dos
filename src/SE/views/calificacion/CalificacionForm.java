@@ -70,6 +70,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         btnGuardar.setEnabled(false);
         btnImprimir.setEnabled(false);
         combos();
+        
     }
 
     public CalificacionForm(java.awt.Frame parent, boolean modal) {
