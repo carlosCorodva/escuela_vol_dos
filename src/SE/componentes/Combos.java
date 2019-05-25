@@ -8,6 +8,7 @@ package SE.componentes;
 import SE.entidades.ca_materia;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.us_permiso_curso;
@@ -162,7 +163,7 @@ public class Combos {
         return model;
 
     }
-    private static Object[] arregloMateria(ArrayList<ca_materia> lista) {
+    private static Object[] arregloMateria(ArrayList<JoinMaterias> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
         arreglo[0] = "MATERIAS...";
         for (int i = 0; i < lista.size(); i++) {
@@ -172,7 +173,7 @@ public class Combos {
 
     }
 
-    public static DefaultComboBoxModel listarComboMateria(ArrayList<ca_materia> lista) {
+    public static DefaultComboBoxModel listarComboMateria(ArrayList<JoinMaterias> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloMateria(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);

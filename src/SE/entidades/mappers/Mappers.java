@@ -10,6 +10,7 @@ import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
@@ -307,8 +308,8 @@ public class Mappers {
         }
         return obj;
     }
-    public static ca_materia getMateriaCalificacionFromResultSet(ResultSet rs) {
-        ca_materia obj = new ca_materia();
+    public static JoinMaterias getMateriaCalificacionFromResultSet(ResultSet rs) {
+        JoinMaterias obj = new JoinMaterias();
         try {
             obj.setMateria(rs.getString("Materia"));
 

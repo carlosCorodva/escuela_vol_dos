@@ -5,6 +5,7 @@ import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
@@ -1607,17 +1608,18 @@ public class Crud {
         }
         return lista;
     }
-    public ArrayList<ca_materia> ComboMateriaCalificacion() {
-        ArrayList<ca_materia> lista = new ArrayList<ca_materia>();
+    public ArrayList<JoinMaterias> ComboMateriaCalificacion(JoinMaterias pe) {
+        ArrayList<JoinMaterias> lista = new ArrayList<JoinMaterias>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ca_calififcacion_mostrar_materias() }");
+                    "{ call ca_calififcacion_mostrar_materias(?) }");
+            pro.setLong(1, pe.getId_usuario());
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
-                ca_materia obj = Mappers.getMateriaCalificacionFromResultSet(rs);
+                JoinMaterias obj = Mappers.getMateriaCalificacionFromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();

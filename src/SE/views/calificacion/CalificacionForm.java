@@ -6,6 +6,7 @@ import SE.componentes.Tablas;
 import SE.entidades.ca_calificacion;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.us_permiso_curso;
 import java.awt.Dimension;
@@ -35,18 +36,20 @@ public class CalificacionForm extends javax.swing.JDialog {
     ArrayList<JoinMatriculas> listar = null;
     JoinMatriculas je = new JoinMatriculas();
     us_permiso_curso pc = new us_permiso_curso();
+    JoinMaterias jm = new JoinMaterias();
     JoinEmpleados us = null;
     Long pf1 = null;
     String pf2 = "";
     String pf3 = "";
-//    ArrayList<Calificacion_clase> listarCursos = null;
-    ArrayList<ca_materia> materia = null;
+//    ArrayList<us_permiso_curso> listarCursos = null;
+    ArrayList<JoinMaterias> materia = null;
     ArrayList<us_permiso_curso> cursos = null;
 
     public CalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(null);
+        us=usuario;
 //        this.setUndecorated(false);
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
@@ -223,8 +226,6 @@ public class CalificacionForm extends javax.swing.JDialog {
             }
         });
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
         jtCalificacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtCalificacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtCalificacion.setModel(new javax.swing.table.DefaultTableModel(
@@ -261,15 +262,15 @@ public class CalificacionForm extends javax.swing.JDialog {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -373,8 +374,10 @@ public class CalificacionForm extends javax.swing.JDialog {
         cursos = crud.ComboCursoCalificacion(pc);
         cbFiltroCurso.setModel(Combos.listarComboCursos(cursos));
 
-        materia = crud.ComboMateriaCalificacion();
+        jm.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
+        materia = crud.ComboMateriaCalificacion(jm);
         cbFiltroMateria.setModel(Combos.listarComboMateria(materia));
+        
     }
 
     public void cajasTxt() {
