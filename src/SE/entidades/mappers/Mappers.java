@@ -344,7 +344,7 @@ public class Mappers {
             obj.setCalificacion_obs(rs.getString("Calificacion_obs"));
             obj.setConducta(rs.getString("Conducta"));
             obj.setEstado_ca(rs.getString("Estado_ca"));
-            obj.setExamen(rs.getDouble("Estado_ca"));
+            obj.setExamen(rs.getDouble("Examen"));
             obj.setExamen_de_gracia(rs.getDouble("Examen_de_gracia"));
             obj.setMateria(rs.getString("Materia"));
             obj.setNota_formativa(rs.getLong("Nota_formativa"));

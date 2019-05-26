@@ -2,6 +2,7 @@ package SE.views.calificacion;
 
 import SE.componentes.Combos;
 import SE.componentes.Crud;
+import SE.componentes.FormatoNumeros;
 import SE.componentes.Tablas;
 import SE.entidades.ca_calificacion;
 import SE.entidades.ca_materia;
@@ -44,7 +45,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     Long pf1 = null;
     String pf2 = "";
     String pf3 = "";
-//    ArrayList<us_permiso_curso> listarCursos = null;
     ArrayList<JoinMaterias> materia = null;
     ArrayList<JoinCalificacion> listarCursos = null;
     ArrayList<us_permiso_curso> cursos = null;
@@ -57,20 +57,19 @@ public class CalificacionForm extends javax.swing.JDialog {
         txtMateria.setEditable(false);
         txtQuimestre.setEditable(false);
         txtUsuario.setEditable(false);
-        us=usuario;
+        us = usuario;
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         txtUsuario.setText(us.getUsuario());
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculas(je);
-        Tablas.cargarJoinMatriculasCalicficacion(jtCalificacion, listar);
+//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//        listar = crud.listarAlumnosMatriculas(je);
+//        Tablas.cargarJoinMatriculasCalicficacion(jtCalificacion, listar);
         lbPeriodo.setText(crud.MostrarPeriodo(Long.valueOf(lbSucursal.getText())));
         btnGuardar.setEnabled(false);
         btnImprimir.setEnabled(false);
         combos();
-        
     }
 
     public CalificacionForm(java.awt.Frame parent, boolean modal) {
@@ -249,7 +248,6 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             }
         ));
-        jtCalificacion.setAutoscrolls(false);
         jtCalificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtCalificacion.setRowHeight(30);
         jtCalificacion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -406,7 +404,6 @@ public class CalificacionForm extends javax.swing.JDialog {
         jm.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
         materia = crud.ComboMateriaCalificacion(jm);
         cbFiltroMateria.setModel(Combos.listarComboMateria(materia));
-        
     }
 
     public void cajasTxt() {
@@ -427,83 +424,63 @@ public class CalificacionForm extends javax.swing.JDialog {
 
     public void calcularPromedio() {
         //int x = jtCalificacion.getSelectedRow(),y = jtCalificacion.getSelectedColumn();
-//        if (jtCalificacion.getColumnCount() >= 6) {
-//
-//            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-//                Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
-//                Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
-//                Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
-//
-//                Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 6).toString());
-//
-//                Double divisor = Double.valueOf(3);
-//                Double mon = Double.valueOf(0.80);
-//                Double mvn = Double.valueOf(0.20);
-//
-//                Double suma3 = formativa + (practica) + (aporte);
-//                Double dividir3 = suma3 / (divisor);
-//
-//                Double ochenta = dividir3 * (mon);
-//                Double veinte = examen * (mvn);
-//
-//                jtCalificacion.setValueAt(ochenta, i, 8);
-//                jtCalificacion.setValueAt(veinte, i, 9);
-//
-//                Double promedio = ochenta + veinte;
-//
-//                Double promediot = 0.00;
-//
-//                if (promedio <= 1.49) {
-//                    promediot = 1.00;
-//                }
-//                if (promedio >= 1.50 && promedio <= 6.49) {
-//                    promediot = 6.00;
-//                }
-//                if (promedio >= 6.50 && promedio <= 7.49) {
-//                    promediot = 7.00;
-//                }
-//                if (promedio >= 7.50 && promedio <= 8.49) {
-//                    promediot = 8.00;
-//                }
-//                if (promedio >= 8.50 && promedio <= 9.49) {
-//                    promediot = 9.00;
-//                }
-//                if (promedio >= 9.50 && promedio <= 10.00) {
-//                    promediot = 10.00;
-//                }
-//                if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
-//                    JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
-//                    promediot = 0.00;
-//                }
-//
-//                jtCalificacion.setValueAt(promediot, i, 10);
-//
-//                String cualitativo = "";
-//
-//                if (ochenta >= 10.0) {
-//                    cualitativo = "NO VÁLIDO";
-//                }
-//                if (veinte >= 10.0) {
-//                    cualitativo = "NO VÁLIDO";
-//                }
-//
-//                if (promediot >= 9) {
-//                    cualitativo = "EXCELENTE";
-//                } else if (promediot >= 8 && promediot < 9) {
-//                    cualitativo = "MUY BUENO";
-//                } else if (promediot >= 7 && promediot < 8) {
-//                    cualitativo = "BUENO";
-//                } else if (promediot >= 6 && promediot < 7) {
-//                    cualitativo = "REGULAR";
-//                } else if (promediot >= 1 && promediot < 6) {
-//                    cualitativo = "INSUFICIENTE";
-//                } else if (promediot <= 0.99) {
-//                    cualitativo = "NO VÁLIDO";
-//                }
-//
-//                jtCalificacion.setValueAt(cualitativo, i, 11);
-//            }
-//        }
+        if (jtCalificacion.getColumnCount() >= 6) {
+
+            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
+                Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
+                Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
+                Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+
+                Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
+
+                Double divisor = Double.valueOf(3);
+                Double mon = 0.80;
+                Double mvn = 0.20;
+
+                Double suma3 = formativa + (practica) + (aporte);
+                Double dividir3 = suma3 / (divisor);
+
+                Double ochenta = dividir3 * (mon);
+                Double veinte = examen * (mvn);
+
+                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(ochenta.toString()), i, 7);
+                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(veinte.toString()), i, 8);
+
+                Double promedio = ochenta + veinte;
+
+                if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
+                    JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
+                    promedio = 0.00;
+                }
+
+                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()), i, 9);
+
+                String cualitativo = "";
+
+                if (ochenta >= 10.0) {
+                    cualitativo = "NO VÁLIDO";
+                }
+                if (veinte >= 10.0) {
+                    cualitativo = "NO VÁLIDO";
+                }
+
+                if (promedio == 10) {
+                    cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
+                } else if (promedio >= 9 && promedio <= 9.99) {
+                    cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
+                } else if (promedio >= 7 && promedio <= 8.99) {
+                    cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
+                } else if (promedio >= 5 && promedio <= 6.99) {
+                    cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
+                } else if (promedio >= 1 && promedio <= 4.99) {
+                    cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
+                } else if (promedio <= 0.99) {
+                    cualitativo = "NO VÁLIDO";
+                }
+
+                jtCalificacion.setValueAt(cualitativo, i, 10);
+            }
+        }
     }
 
     public void guardar() {//funciona 4,5,6 y 8
@@ -545,7 +522,6 @@ public class CalificacionForm extends javax.swing.JDialog {
 //                            + "AND `matricula`.`id_paralelo`= " + pfci + " AND `matricula`.`id_estudiante` = '" + jtCalificacion.getValueAt(i, 0) + "';";
     }
 
-//    Calificacion_clase cal = new Calificacion_clase();
     public void filtrosCursos() {
         pf1 = Long.valueOf(cbFiltroQuimestre.getSelectedIndex());
         pf2 = cbFiltroMateria.getSelectedItem().toString();
@@ -567,13 +543,13 @@ public class CalificacionForm extends javax.swing.JDialog {
             jc.setParalelo(pf3);
             jc.setPeriodo(lbPeriodo.getText());
             jc.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//
+
             listarCursos = crud.listarAlumnosCalificacionPorCurso(jc);
             Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
             btnGuardar.setEnabled(true);
             btnImprimir.setEnabled(true);
             JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
-////            calcularPromedio();
+            calcularPromedio();
         }
     }
 

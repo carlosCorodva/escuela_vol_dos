@@ -517,8 +517,8 @@ public static void tablaFiltroAlumnos(ArrayList<JoinCalificacion> lista, JTable 
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
-        String[] Co = {"ID", "APELLIDOS/NOMBRES", "NOTA FORMATIVA", "NOTA PRÁCTICA", "APORTE",
-            "EXAMEN", "CONDUCTA", "NOTA 80%", "NOTA 20%", "PROMEDIO", "NOTA CUALITATIVA"};
+        String[] Co = {"ID", "APELLIDOS/NOMBRES", "N. FORMATIVA", "N. PRÁCTICA", "APORTE",
+            "EXAMEN", "CONDUCTA", "80%", "20%", "PROMEDIO", "NOTA CUALITATIVA"};
         String[] Filas = new String[11];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
