@@ -65,6 +65,8 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         lbEmpresa = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cbNivel = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtCapacidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -129,6 +131,16 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         cbNivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL...", "1", "2", "3", "4", "5", "6", "7" }));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("CAPACIDAD");
+
+        txtCapacidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacidadKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,12 +162,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnActualizar)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbIdUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,19 +171,27 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(74, 74, 74))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(74, 74, 74))
+                        .addGap(19, 19, 19)
+                        .addComponent(btnActualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +199,9 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbIdUsuario)
@@ -228,25 +244,32 @@ public void form() {
         int niv = Integer.parseInt(cm.getNivel().toString());
         txtCurso.setText(cm.getParalelo());
         txtObser.setText(cm.getParalelo_obs());
+        txtCapacidad.setText(cm.getN_capacidad().toString());
         if ("ACTIVO".equals(est)) {
             cbEstado.setSelectedIndex(0);
         } else {
             cbEstado.setSelectedIndex(1);
         }
-        
+
         if (niv == 1) {
             cbNivel.setSelectedIndex(1);
-        }if (niv == 2) {
+        }
+        if (niv == 2) {
             cbNivel.setSelectedIndex(2);
-        }if (niv == 3) {
+        }
+        if (niv == 3) {
             cbNivel.setSelectedIndex(3);
-        }if (niv == 4) {
+        }
+        if (niv == 4) {
             cbNivel.setSelectedIndex(4);
-        }if (niv == 5) {
+        }
+        if (niv == 5) {
             cbNivel.setSelectedIndex(5);
-        }if (niv == 6) {
+        }
+        if (niv == 6) {
             cbNivel.setSelectedIndex(6);
-        }if (niv == 7) {
+        }
+        if (niv == 7) {
             cbNivel.setSelectedIndex(7);
         }
     }
@@ -254,19 +277,30 @@ public void form() {
         actualizar();
     }//GEN-LAST:event_btnActualizarActionPerformed
     public void actualizar() {
-        String text = txtCurso.getText();
-        ma_paralelo mp = new ma_paralelo();
-        mp.setParalelo(text);
-        mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
-        mp.setId_paralelo(cm.getId_paralelo());
-        mp.setParalelo_obs(txtObser.getText());
-        mp.setEstado_pa(cbEstado.getSelectedItem().toString());
-        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-        mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
-        String a = crud.actualizarCursos(mp);
-        JOptionPane.showMessageDialog(this, a);
-        setVisible(false);
+        if (txtCurso.getText().length() >= 4) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 3 CARACTERES ALFANUMERICOS");
+        } else if (txtCapacidad.getText().length() >= 3) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 2 CARACTERES NUMERICOS");
+        } else if (txtCurso.getText().length() < 1) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 3 CARACTERES ALFANUMERICOS");
+        } else if (txtCapacidad.getText().length() < 1) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 2 CARACTERES NUMERICOS");
+        } else {
+            String text = txtCurso.getText();
+            ma_paralelo mp = new ma_paralelo();
+            mp.setParalelo(text);
+            mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+            mp.setId_paralelo(cm.getId_paralelo());
+            mp.setParalelo_obs(txtObser.getText());
+            mp.setEstado_pa(cbEstado.getSelectedItem().toString());
+            mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+            mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+            mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
+            mp.setN_capacidad(Long.valueOf(txtCapacidad.getText()));
+            String a = crud.actualizarCursos(mp);
+            JOptionPane.showMessageDialog(this, a);
+            setVisible(false);
+        }
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
@@ -279,6 +313,14 @@ public void form() {
     private void txtObserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObserFocusLost
         txtObser.setText(txtObser.getText().toUpperCase());
     }//GEN-LAST:event_txtObserFocusLost
+
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCapacidadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -334,11 +376,13 @@ public void form() {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
+    private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextArea txtObser;
     // End of variables declaration//GEN-END:variables

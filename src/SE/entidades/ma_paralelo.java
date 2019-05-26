@@ -21,11 +21,13 @@ public class ma_paralelo {
     private Long id_sucursal_pa;
     private String inicio; 
     private String fin;
+    private String capacidad;
+    private Long n_capacidad;
 
     public ma_paralelo() {
     }
 
-    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel, Long id_empresa_pa, Long id_sucursal_pa, String inicio, String fin) {
+    public ma_paralelo(Long id_paralelo, String paralelo, String estado_pa, String paralelo_obs, Long id_creacion, Long id_actualizacion, Long nivel, Long id_empresa_pa, Long id_sucursal_pa, String inicio, String fin, String capacidad, Long n_capacidad) {
         this.id_paralelo = id_paralelo;
         this.paralelo = paralelo;
         this.estado_pa = estado_pa;
@@ -37,6 +39,24 @@ public class ma_paralelo {
         this.id_sucursal_pa = id_sucursal_pa;
         this.inicio = inicio;
         this.fin = fin;
+        this.capacidad = capacidad;
+        this.n_capacidad = n_capacidad;
+    }
+
+    public String getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(String capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public Long getN_capacidad() {
+        return n_capacidad;
+    }
+
+    public void setN_capacidad(Long n_capacidad) {
+        this.n_capacidad = n_capacidad;
     }
 
     public String getInicio() {

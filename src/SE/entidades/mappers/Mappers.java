@@ -139,7 +139,7 @@ public class Mappers {
             obj.setParalelo_obs(rs.getString("Paralelo_obs"));
             obj.setEstado_pa(rs.getString("Estado_pa"));
             obj.setNivel(rs.getLong("Nivel"));
-
+            obj.setN_capacidad(rs.getLong("N_capacidad"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

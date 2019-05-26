@@ -55,6 +55,8 @@ public class CrearCursosForm extends javax.swing.JDialog {
         cbNivel = new javax.swing.JComboBox<>();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtCapacidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -93,16 +95,25 @@ public class CrearCursosForm extends javax.swing.JDialog {
 
         lbEmpresa.setText("empresa");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("CAPACIDAD");
+
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacidadKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(btnCancelar)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(82, 82, 82))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -118,8 +129,13 @@ public class CrearCursosForm extends javax.swing.JDialog {
                         .addGap(37, 37, 37)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbEmpresa)
-                    .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,17 +144,19 @@ public class CrearCursosForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbIdUsuario)
                     .addComponent(lbSucursal)
                     .addComponent(lbEmpresa))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnCancelar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnActualizar))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,20 +177,39 @@ public class CrearCursosForm extends javax.swing.JDialog {
         guardar();
     }//GEN-LAST:event_btnActualizarActionPerformed
     public void guardar() {
-        String text = txtCurso.getText();
-        ma_paralelo mp = new ma_paralelo();
-        mp.setParalelo(text);
-        mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
-        mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
-        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-        String a = crud.crearCursos(mp);
-        JOptionPane.showMessageDialog(this, a);
-        setVisible(false);
+        if (txtCurso.getText().length() >= 4) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 3 CARACTERES ALFANUMERICOS");
+        } else if (txtCapacidad.getText().length() >= 3) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 2 CARACTERES NUMERICOS");
+        } else if (txtCurso.getText().length() < 1) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 3 CARACTERES ALFANUMERICOS");
+        } else if (txtCapacidad.getText().length() < 1) {
+            JOptionPane.showMessageDialog(this, "PROCURE ESCRIBIR MAXIMO 2 CARACTERES NUMERICOS");
+        } else {
+            String text = txtCurso.getText();
+            ma_paralelo mp = new ma_paralelo();
+            mp.setParalelo(text);
+            mp.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+            mp.setNivel(Long.valueOf(cbNivel.getSelectedItem().toString()));
+            mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+            mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+            mp.setN_capacidad(Long.valueOf(txtCapacidad.getText()));
+            String a = crud.crearCursos(mp);
+            JOptionPane.showMessageDialog(this, a);
+            setVisible(false);
+        }
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCapacidadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -228,10 +265,12 @@ public class CrearCursosForm extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cbNivel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
+    private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtCurso;
     // End of variables declaration//GEN-END:variables
 }
