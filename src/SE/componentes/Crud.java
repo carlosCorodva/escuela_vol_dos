@@ -1558,6 +1558,34 @@ public class Crud {
         }
         return valor;
     }
+    public String ValidarCursos(JoinMatriculas us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matriculacion_conteo_de_capacidad_cursos(?,?,?)}");
+            pro.setLong(1, us.getId_sucursal());
+            pro.setString(2, us.getParalelo());
+            pro.setLong(3, us.getId_usuario());
+            pro.executeUpdate();
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 
     public ArrayList<ca_conducta> MostarConducta() {
         ArrayList<ca_conducta> lista = new ArrayList<ca_conducta>();

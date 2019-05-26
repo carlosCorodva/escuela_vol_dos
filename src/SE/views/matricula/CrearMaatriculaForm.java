@@ -51,11 +51,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         lista = crud.listarAlumnosMatriculas(je);
-        paralelo = crud.ComboParaleloRegistrar(mp);
-        cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
+        comboParalelo();
         txtOtro.setEnabled(false);
         txtOtroDos.setEnabled(false);
         txtEscAnt.setEnabled(false);
@@ -65,6 +62,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     public CrearMaatriculaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public void comboParalelo() {
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+        paralelo = crud.ComboParaleloRegistrar(mp);
+        cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
     }
 
     /**
@@ -586,6 +590,16 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Guardar();
+        try {
+            JoinMatriculas ob = new JoinMatriculas();
+            ob.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            ob.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
+            ob.setParalelo(cbParalelo.getSelectedItem().toString());
+            crud.ValidarCursos(ob);
+            comboParalelo();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -712,6 +726,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     }
 
     public void Guardar() {
+        JoinMatriculas obj = new JoinMatriculas();
         System.out.println("guardar");
         String fecha = cal.getFecha(dtFecha);
         String obs, parUno, parDos;
@@ -773,8 +788,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         } else if (cbParUno.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
         } else {
-            System.out.println("else");
-            JoinMatriculas obj = new JoinMatriculas();
             obj.setApellidos_nombres(txtAlumno.getText());
             obj.setCedula(txtCedula.getText());
             obj.setDireccion(txtDireccion.getText());
@@ -839,14 +852,14 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             txtRepDos.setEnabled(false);
             txtRepresentante.setText("");
             txtRepresentante.setEnabled(false);
-            
+
             cbParDos.setEnabled(false);
             cbParDos.setSelectedIndex(0);
             cbParUno.setEnabled(false);
             cbParUno.setSelectedIndex(0);
             cbParalelo.setEnabled(false);
-            cbParalelo.setSelectedIndex(0);
-            
+//            cbParalelo.setSelectedIndex(0);
+
             cbxCopiaCedula.setSelected(false);
             cbxCopiaCedula.setEnabled(false);
             cbxServicoBas.setSelected(false);
@@ -857,7 +870,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             cbxEscuela.setEnabled(false);
             cbxPartidaNac.setSelected(false);
             cbxPartidaNac.setEnabled(false);
-            
+
             dtFecha.setDateFormatString("");
             dtFecha.setEnabled(false);
             btnGuardar.setEnabled(false);
