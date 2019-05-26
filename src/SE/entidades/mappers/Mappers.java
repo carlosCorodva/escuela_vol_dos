@@ -347,16 +347,16 @@ public class Mappers {
             obj.setExamen(rs.getDouble("Examen"));
             obj.setExamen_de_gracia(rs.getDouble("Examen_de_gracia"));
             obj.setMateria(rs.getString("Materia"));
-            obj.setNota_formativa(rs.getLong("Nota_formativa"));
-            obj.setNota_practica(rs.getLong("Nota_practica"));
-            obj.setOchenta_porcentaje(rs.getLong("Ochenta_porcentaje"));
+            obj.setNota_formativa(rs.getDouble("Nota_formativa"));
+            obj.setNota_practica(rs.getDouble("Nota_practica"));
+            obj.setOchenta_porcentaje(rs.getDouble("Ochenta_porcentaje"));
             obj.setParalelo(rs.getString("Paralelo"));
             obj.setParcial(rs.getLong("Parcial"));
             obj.setPeriodo(rs.getString("Periodo"));
-            obj.setPromedio(rs.getLong("Promedio"));
-            obj.setRemedial(rs.getLong("Remedial"));
-            obj.setSupletorio(rs.getLong("Supletorio"));
-            obj.setVeinte_porcentaje(rs.getLong("Veinte_porcentaje"));
+            obj.setPromedio(rs.getDouble("Promedio"));
+            obj.setRemedial(rs.getDouble("Remedial"));
+            obj.setSupletorio(rs.getDouble("Supletorio"));
+            obj.setVeinte_porcentaje(rs.getDouble("Veinte_porcentaje"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);

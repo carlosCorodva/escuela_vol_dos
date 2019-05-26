@@ -424,63 +424,66 @@ public class CalificacionForm extends javax.swing.JDialog {
 
     public void calcularPromedio() {
         //int x = jtCalificacion.getSelectedRow(),y = jtCalificacion.getSelectedColumn();
-        if (jtCalificacion.getColumnCount() >= 6) {
+        try {
+            if (jtCalificacion.getColumnCount() >= 6) {
 
-            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-                Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
-                Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
-                Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+                for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
+                    Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
+                    Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
+                    Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
 
-                Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
+                    Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
 
-                Double divisor = Double.valueOf(3);
-                Double mon = 0.80;
-                Double mvn = 0.20;
+                    Double divisor = Double.valueOf(3);
+                    Double mon = 0.80;
+                    Double mvn = 0.20;
 
-                Double suma3 = formativa + (practica) + (aporte);
-                Double dividir3 = suma3 / (divisor);
+                    Double suma3 = formativa + (practica) + (aporte);
+                    Double dividir3 = suma3 / (divisor);
 
-                Double ochenta = dividir3 * (mon);
-                Double veinte = examen * (mvn);
+                    Double ochenta = dividir3 * (mon);
+                    Double veinte = examen * (mvn);
 
-                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(ochenta.toString()), i, 7);
-                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(veinte.toString()), i, 8);
+                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(ochenta.toString()), i, 7);
+                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(veinte.toString()), i, 8);
+                    System.out.println("ochenta: "+ochenta);
+                    Double promedio = ochenta + veinte;
+                    System.out.println("pro1: "+promedio);
+                    if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
+                        JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
+                        promedio = 0.00;
+                    }
 
-                Double promedio = ochenta + veinte;
+                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString().replace(",", ".").trim()), i, 9);
+                    String cualitativo = "";
 
-                if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
-                    JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
-                    promedio = 0.00;
+                    if (ochenta >= 10.0) {
+                        cualitativo = "NO VÁLIDO";
+                    }
+                    if (veinte >= 10.0) {
+                        cualitativo = "NO VÁLIDO";
+                    }
+
+                    if (promedio == 10) {
+                        cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
+                    } else if (promedio >= 9 && promedio <= 9.99) {
+                        cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
+                    } else if (promedio >= 7 && promedio <= 8.99) {
+                        cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
+                    } else if (promedio >= 5 && promedio <= 6.99) {
+                        cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
+                    } else if (promedio >= 1 && promedio <= 4.99) {
+                        cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
+                    } else if (promedio <= 0.99) {
+                        cualitativo = "NO VÁLIDO";
+                    }
+
+                    jtCalificacion.setValueAt(cualitativo, i, 10);
                 }
-
-                jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()), i, 9);
-
-                String cualitativo = "";
-
-                if (ochenta >= 10.0) {
-                    cualitativo = "NO VÁLIDO";
-                }
-                if (veinte >= 10.0) {
-                    cualitativo = "NO VÁLIDO";
-                }
-
-                if (promedio == 10) {
-                    cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                } else if (promedio >= 9 && promedio <= 9.99) {
-                    cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                } else if (promedio >= 7 && promedio <= 8.99) {
-                    cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
-                } else if (promedio >= 5 && promedio <= 6.99) {
-                    cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
-                } else if (promedio >= 1 && promedio <= 4.99) {
-                    cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
-                } else if (promedio <= 0.99) {
-                    cualitativo = "NO VÁLIDO";
-                }
-
-                jtCalificacion.setValueAt(cualitativo, i, 10);
             }
+        } catch (Exception e) {
         }
+
     }
 
     public void guardar() {//funciona 4,5,6 y 8

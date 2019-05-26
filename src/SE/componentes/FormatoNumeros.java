@@ -13,20 +13,23 @@ import java.text.DecimalFormat;
  * @author carlos
  */
 public class FormatoNumeros {
+
     public static String formato_numero(String valor) {   ////////////////   1
 
-        DecimalFormat formato = new DecimalFormat("0,00");
+        
+        DecimalFormat formato = new DecimalFormat("0.###");
         String valorFormateado = formato.format(Double.parseDouble(valor));
 
-        if (valorFormateado.charAt(0) == ',') {
+        if (valorFormateado.charAt(0) == '.') {
             String h = "0" + valorFormateado;
             valorFormateado = h;
         }
-
-        return valorFormateado;
+        return valorFormateado.replace(",", ".");
     }
 
     public static String removeScientificNotation(String value) {
         return new BigDecimal(value).toPlainString();
     }
+
+    
 }
