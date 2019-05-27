@@ -11,6 +11,8 @@ import SE.entidades.join.JoinMatriculas;
 import SE.entidades.us_permiso_curso;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperFillManager;
@@ -279,6 +281,14 @@ public class CalificacionForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        txtMateria.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        txtQuimestre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        txtCurso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/buscar32.png"))); // NOI18N
         btnBuscar.setText("BUSCAR");
@@ -492,7 +502,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            
+            Logger.getLogger(CalificacionForm.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -515,7 +525,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                     + "  `calificacion_obs` = '" + jtCalificacion.getValueAt(i, 10) + "', \n"
                     + "  `ochenta_porcentaje` = '" + jtCalificacion.getValueAt(i, 7) + "', \n"
                     + "  `veinte_porcentaje` = '" + jtCalificacion.getValueAt(i, 8) + "', \n"
-                    + "  `estado_ca` = '" + estado_ca + "', \n"
+//                    + "  `estado_ca` = '" + estado_ca + "', \n"
                     + "  `id_actualizacion` = '" + lbIdUsuario.getText() + "', \n"
                     + "  `f_actualizacion` = NOW() \n"
                     + "WHERE `id_calificacion` = '" + id + "';";
@@ -557,7 +567,7 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             btnGuardar.setEnabled(true);
             btnImprimir.setEnabled(true);
-            JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
+//            JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
             calcularPromedio();
         }
     }

@@ -310,15 +310,15 @@ public class Tablas {
 
     public static void cargarJoinMatriculas(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
-        int[] a = {10, 30, 150, 72, 20, 70, 30, 50, 30, 30, 30, 50, 40};
+        int[] a = {10, 30, 150, 72, 20, 70, 50, 30, 30, 30, 50};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"        ID", "CÉDULA", "APELLIDOS NOMBRES", "DIRECCIÓN", "TELÉFONO",
-            "CORREO", "CARGO", "SUCURSAL", "     ESTADO", "PARALELO", "PERIODO", "ESTADO MATRIC.", "AÑO LECTIVO"};
-        String[] Filas = new String[13];
+            "CORREO", "SUCURSAL", "     ESTADO", "PARALELO", "PERIODO", "ESTADO MATRIC."};
+        String[] Filas = new String[11];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -328,13 +328,11 @@ public class Tablas {
             Filas[3] = lista.get(i).getDireccion();
             Filas[4] = lista.get(i).getConvecional();
             Filas[5] = lista.get(i).getCorreo();
-            Filas[6] = lista.get(i).getRol();
-            Filas[7] = lista.get(i).getNombre_comercial_su();
-            Filas[8] = lista.get(i).getEstado();
-            Filas[9] = lista.get(i).getParalelo();
-            Filas[10] = lista.get(i).getPeriodo();
-            Filas[11] = lista.get(i).getEstado_matricula();
-            Filas[12] = lista.get(i).getPeriodo();
+            Filas[6] = lista.get(i).getNombre_comercial_su();
+            Filas[7] = lista.get(i).getEstado();
+            Filas[8] = lista.get(i).getParalelo();
+            Filas[9] = lista.get(i).getPeriodo();
+            Filas[10] = lista.get(i).getEstado_matricula();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -359,10 +357,6 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
             Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(11).setPreferredWidth(a[11]);
-            Tabla.getColumnModel().getColumn(11).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(12).setPreferredWidth(a[12]);
-            Tabla.getColumnModel().getColumn(12).setCellRenderer(tcr1);
         }
     }
 

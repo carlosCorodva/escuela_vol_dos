@@ -582,9 +582,9 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         String est = "" + jtEstado.getValueAt(4, 0).toString();
         String ingl = "" + jtEstado.getValueAt(5, 0).toString();
         String ecart = "" + jtEstado.getValueAt(6, 0).toString();
-        String proe = "" + jtEstado.getValueAt(7, 0).toString();
-        String dhint = "" + jtEstado.getValueAt(8, 0).toString();
-        String efis = "" + jtEstado.getValueAt(9, 0).toString();
+        String proe = "" + jtEstado.getValueAt(8, 0).toString();
+        String dhint = "" + jtEstado.getValueAt(9, 0).toString();
+        String efis = "" + jtEstado.getValueAt(7, 0).toString();
         if ("A".equals(leng)) {
 //            System.out.println("chbx3");
             jcLenguaje.setSelected(true);
@@ -616,15 +616,15 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         }
 
         if ("A".equals(proe)) {
-            jcEFisica.setSelected(true);
-        }
-
-        if ("A".equals(dhint)) {
             jcProyectos.setSelected(true);
         }
 
-        if ("A".equals(efis)) {
+        if ("A".equals(dhint)) {
             jcDesarrollo.setSelected(true);
+        }
+
+        if ("A".equals(efis)) {
+            jcEFisica.setSelected(true);
         }
     }
 
@@ -921,12 +921,12 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
                 usp.setEstado_pe2(m);
                 usp.setEstado_pe3(inf);
                 usp.setEstado_pe4(cn);
-                usp.setEstado_pe5(ing);
-                usp.setEstado_pe6(eca);
-                usp.setEstado_pe7(ef);
-                usp.setEstado_pe8(pe);
-                usp.setEstado_pe9(dhi);
-                usp.setEstado_pe10(es);
+                usp.setEstado_pe5(es);
+                usp.setEstado_pe6(ing);
+                usp.setEstado_pe7(eca);
+                usp.setEstado_pe8(ef);
+                usp.setEstado_pe9(pe);
+                usp.setEstado_pe10(dhi);
                 usp.setId_usuario(emp.getId_usuario());
 
                 String a = crud.ActualizarEmpleado(obj);

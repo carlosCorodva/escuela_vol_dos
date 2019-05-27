@@ -286,7 +286,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         try {
             if (evt.getClickCount() == 2) {
                 i = jtMatriculas.getSelectedRow();
-                if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 11).toString())) {
+                if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                     JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
                 } else {
                     objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
@@ -398,7 +398,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         if (jtMatriculas.isRowSelected(i) == false) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
         } else {
-            if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 11).toString())) {
+            if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                 JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
             } else {
                 objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
