@@ -4,20 +4,13 @@ import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.componentes.FormatoNumeros;
 import SE.componentes.Tablas;
-import SE.entidades.ca_calificacion;
-import SE.entidades.ca_materia;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
-import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_curso;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperFillManager;
@@ -48,11 +41,15 @@ public class CalificacionForm extends javax.swing.JDialog {
     ArrayList<JoinMaterias> materia = null;
     ArrayList<JoinCalificacion> listarCursos = null;
     ArrayList<us_permiso_curso> cursos = null;
+    ArrayList<String> ids = null;
+    String estado_ca = "";
+    String id = "";
 
     public CalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(null);
+        jtIdAlumnos.setVisible(false);
         txtCurso.setEditable(false);
         txtMateria.setEditable(false);
         txtQuimestre.setEditable(false);
@@ -62,10 +59,6 @@ public class CalificacionForm extends javax.swing.JDialog {
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         txtUsuario.setText(us.getUsuario());
-//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//        listar = crud.listarAlumnosMatriculas(je);
-//        Tablas.cargarJoinMatriculasCalicficacion(jtCalificacion, listar);
         lbPeriodo.setText(crud.MostrarPeriodo(Long.valueOf(lbSucursal.getText())));
         btnGuardar.setEnabled(false);
         btnImprimir.setEnabled(false);
@@ -76,6 +69,12 @@ public class CalificacionForm extends javax.swing.JDialog {
         super(parent, modal = false);
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    public void conteo() {
+        for (int t = 0; t < jtCalificacion.getRowCount(); t++) {
+            jtCalificacion.setValueAt(t + 1, t, 0);
+            System.out.println("conteo: " + t);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -110,6 +109,8 @@ public class CalificacionForm extends javax.swing.JDialog {
         txtUsuario = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnConducta = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtIdAlumnos = new javax.swing.JTable();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -238,11 +239,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         jtCalificacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtCalificacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -300,23 +297,24 @@ public class CalificacionForm extends javax.swing.JDialog {
             }
         });
 
+        jtIdAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtIdAlumnos);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(btnImprimir)
-                .addGap(192, 192, 192)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -348,6 +346,21 @@ public class CalificacionForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(btnImprimir)
+                        .addGap(192, 192, 192)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,8 +390,9 @@ public class CalificacionForm extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnGuardar)
-                    .addComponent(btnImprimir))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(btnImprimir)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -423,7 +437,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     }
 
     public void calcularPromedio() {
-        //int x = jtCalificacion.getSelectedRow(),y = jtCalificacion.getSelectedColumn();
         try {
             if (jtCalificacion.getColumnCount() >= 6) {
 
@@ -446,11 +459,9 @@ public class CalificacionForm extends javax.swing.JDialog {
 
                     jtCalificacion.setValueAt(FormatoNumeros.formato_numero(ochenta.toString()), i, 7);
                     jtCalificacion.setValueAt(FormatoNumeros.formato_numero(veinte.toString()), i, 8);
-                    System.out.println("ochenta: "+ochenta);
                     Double promedio = ochenta + veinte;
-                    System.out.println("pro1: "+promedio);
                     if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
-                        JOptionPane.showMessageDialog(this, "No puede calificar mayor a 10.00");
+                        JOptionPane.showMessageDialog(this, "NO PUEDE CALIFICAR MAYOR A DIEZ 10.00");
                         promedio = 0.00;
                     }
 
@@ -466,63 +477,58 @@ public class CalificacionForm extends javax.swing.JDialog {
 
                     if (promedio == 10) {
                         cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 9 && promedio <= 9.99) {
+                    } else if (promedio >= 9 && promedio < 10) {
                         cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 7 && promedio <= 8.99) {
+                    } else if (promedio >= 7 && promedio < 9) {
                         cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 5 && promedio <= 6.99) {
+                    } else if (promedio >= 5 && promedio < 7) {
                         cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 1 && promedio <= 4.99) {
+                    } else if (promedio >= 1 && promedio < 5) {
                         cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio <= 0.99) {
+                    } else if (promedio < 1) {
                         cualitativo = "NO VÁLIDO";
                     }
-
                     jtCalificacion.setValueAt(cualitativo, i, 10);
                 }
             }
         } catch (Exception e) {
+            
         }
 
     }
 
-    public void guardar() {//funciona 4,5,6 y 8
-//        ArrayList<String> queryA = new ArrayList<String>();
-//        String act = "";
-//
-//        if (jtCalificacion.getColumnCount() < 5/*jtCalificacion.getValueAt(i, 10) != "0.00" && jtCalificacion.getValueAt(i, 10) != "0.0"*/) {
-//            //JOptionPane.showMessageDialog(this, "No puede califiar en cero!");
-////                    JOptionPane.showMessageDialog(this, "No puede actualizar esta vista");
-//        } else {
-////                    int pfqi = cbFiltroQuimestre.getSelectedIndex();
-////                    int pfmi = cbFiltroMateria.getSelectedIndex();
-////                    int pfci = cbFiltroCurso.getSelectedIndex();
-//
-//            for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-//
-//                act = "UPDATE `calificacion` SET `nota_formativa`= '" + jtCalificacion.getValueAt(i, 3) + "', \n"
-//                        + "`nota_practica`= '" + jtCalificacion.getValueAt(i, 4) + "', `aporte`= '" + jtCalificacion.getValueAt(i, 5) + "', `examen`= "
-//                        + "'" + jtCalificacion.getValueAt(i, 6) + "', `id_conducta` = '" + jtCalificacion.getValueAt(i, 7) + "'"
-//                        + ", `veinte_porcentaje`='" + jtCalificacion.getValueAt(i, 9) + "',`ochenta_porcentaje`='" + jtCalificacion.getValueAt(i, 8) + "', `promedio`='" + jtCalificacion.getValueAt(i, 10) + "', `observacion`='" + jtCalificacion.getValueAt(i, 11) + "' \n"
-//                        + "WHERE `calificacion`.`id_calificacion` = '" + jtCalificacion.getValueAt(i, 0) + "';";
-//
-//                queryA.add(act);
-////                    System.out.println(act);
-//                System.out.println("nombre:" + queryA);
-//                crud.GuardarNotas(queryA);
-//                queryA.clear();
-//            }
-//            JOptionPane.showMessageDialog(this, "Guardado");
-//            Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
-//        }
+    public void guardar() {
+        ArrayList<String> queryA = new ArrayList<String>();
+        String act = "";
+        for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
 
-//        act = "UPDATE `calificacion`,`matricula`,`parcial` SET `nota_formativa`= '" + jtCalificacion.getValueAt(i, 3) + "', \n"
-//                            + "`nota_practica`= '" + jtCalificacion.getValueAt(i, 4) + "', `aporte`= '" + jtCalificacion.getValueAt(i, 5) + "', `examen`= "
-//                            + "'" + jtCalificacion.getValueAt(i, 6) + "', `id_conducta` = '" + jtCalificacion.getValueAt(i, 7) + "'"
-//                            + ", `veinte_porcentaje`='" + jtCalificacion.getValueAt(i, 9) + "',`ochenta_porcentaje`='" + jtCalificacion.getValueAt(i, 8) + "', `promedio`='" + jtCalificacion.getValueAt(i, 10) + "', `observacion`='" + jtCalificacion.getValueAt(i, 11) + "' \n"
-//                            + "WHERE `calificacion`.`id_matricula` = `matricula`.`id_matricula` \n"
-//                            + "AND `parcial`.`id_quimestre` = " + pfqi + " AND `calificacion`.`id_materia`=" + pfmi + " \n"
-//                            + "AND `matricula`.`id_paralelo`= " + pfci + " AND `matricula`.`id_estudiante` = '" + jtCalificacion.getValueAt(i, 0) + "';";
+            String ident = jtIdAlumnos.getValueAt(i, 0).toString();
+            id = ident;
+            
+            act = "UPDATE `ca_calificacion`\n"
+                    + "SET `nota_practica` = '" + jtCalificacion.getValueAt(i, 3) + "',\n"
+                    + "  `nota_formativa` = '" + jtCalificacion.getValueAt(i, 2) + "',\n"
+                    + "  `aporte` = '" + jtCalificacion.getValueAt(i, 4) + "', \n"
+                    + "  `examen` = '" + jtCalificacion.getValueAt(i, 5) + "', \n"
+                    + "  `promedio` = '" + jtCalificacion.getValueAt(i, 9) + "',\n"
+                    + "  `id_conducta` = '" + jtCalificacion.getValueAt(i, 6) + "',\n"
+                    + "  `calificacion_obs` = '" + jtCalificacion.getValueAt(i, 10) + "', \n"
+                    + "  `ochenta_porcentaje` = '" + jtCalificacion.getValueAt(i, 7) + "', \n"
+                    + "  `veinte_porcentaje` = '" + jtCalificacion.getValueAt(i, 8) + "', \n"
+                    + "  `estado_ca` = '" + estado_ca + "', \n"
+                    + "  `id_actualizacion` = '" + lbIdUsuario.getText() + "', \n"
+                    + "  `f_actualizacion` = NOW() \n"
+                    + "WHERE `id_calificacion` = '" + id + "';";
+//            System.out.println("id fin: " + id);
+            queryA.add(act);
+//            System.out.println("nombre:" + queryA);
+            crud.GuardarNotas(queryA);
+            queryA.clear();
+        }
+        JOptionPane.showMessageDialog(this, "NOTAS GUARDADAS CORRECTAMENTE");
+        Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
+        filtrosCursos();
+        conteo();
     }
 
     public void filtrosCursos() {
@@ -537,9 +543,6 @@ public class CalificacionForm extends javax.swing.JDialog {
             txtCurso.setText("");
             txtQuimestre.setText("");
             txtMateria.setText("");
-            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-            listar = crud.listarAlumnosMatriculas(je);
         } else {
             jc.setParcial(pf1);
             jc.setMateria(pf2);
@@ -549,6 +552,9 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             listarCursos = crud.listarAlumnosCalificacionPorCurso(jc);
             Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
+
+            Tablas.tablaFiltroAlumnosId(listarCursos, jtIdAlumnos);
+
             btnGuardar.setEnabled(true);
             btnImprimir.setEnabled(true);
             JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
@@ -558,7 +564,7 @@ public class CalificacionForm extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿Desea Salir del módulo calificación?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO CALIFICACION?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
@@ -577,9 +583,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     private void jtCalificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCalificacionMouseClicked
         if (evt.getClickCount() == 0 || evt.getClickCount() == 1 || evt.getClickCount() == 3) {
             calcularPromedio();
-//            int i = jtCalificacion.getSelectedRow(); para imprimir 
-//            double x = Double.valueOf(jtCalificacion.getValueAt(i, 4).toString());
-//            System.out.println("fuck " + x);
+            conteo();
         }
 
     }//GEN-LAST:event_jtCalificacionMouseClicked
@@ -587,6 +591,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     private void jtCalificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCalificacionKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_ENTER) {
             calcularPromedio();
+            conteo();
         }
     }//GEN-LAST:event_jtCalificacionKeyReleased
 
@@ -627,6 +632,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         filtrosCursos();
         cajasTxt();
+        conteo();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConductaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConductaActionPerformed
@@ -696,8 +702,10 @@ public class CalificacionForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtCalificacion;
+    private javax.swing.JTable jtIdAlumnos;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbPeriodo;

@@ -1811,4 +1811,20 @@ public class Crud {
         }
         return lista;
     }
+    public void GuardarNotas(ArrayList<String> queryA) {
+
+        try {
+            con = c.conectar();
+            for (int i = 0; i < queryA.size(); i++) {
+                java.sql.Statement cst = con.createStatement();
+                cst.executeUpdate(queryA.get(i));
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
