@@ -397,11 +397,12 @@ public class CalificacionForm extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnImprimir)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSalir)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnImprimir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -475,7 +476,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                         promedio = 0.00;
                     }
 
-                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString().replace(",", ".").trim()), i, 9);
+                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()/*.replace(",", ".").trim()*/), i, 9);
                     String cualitativo = "";
 
                     if (ochenta >= 10.0) {
@@ -496,7 +497,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                     } else if (promedio >= 1 && promedio < 5) {
                         cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
                     } else if (promedio < 1) {
-                        cualitativo = "NO VÁLIDO";
+                        cualitativo = "RETIRADO";
                     }
                     jtCalificacion.setValueAt(cualitativo, i, 10);
                 }

@@ -5,12 +5,15 @@
  */
 package SE.views.reportes;
 
+import SE.componentes.Combos;
 import SE.componentes.Crud;
-import java.awt.Dimension;
+import SE.componentes.Tablas;
+import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_paralelo;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperFillManager;
@@ -30,25 +33,45 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
      * Creates new form Mostrar_alumnos_views
      */
     Crud crud = new Crud();
-//    ArrayList<Paralelo> lista2 = crud.ComboParalelo();
-//    ArrayList<Calificacion_clase> listar = null;
-//    ArrayList<Calificacion_clase> listar2 = null;
-//    Calificacion_clase objeto = null;
+    ArrayList<JoinMatriculas> listar = null;
+    JoinMatriculas objeto = null;
+    JoinMatriculas je = new JoinMatriculas();
+    JoinEmpleados us = null;
+    ArrayList<ma_paralelo> paralelo = null;
+    ma_paralelo mp = new ma_paralelo();
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+    String curso = "";
 
-    public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal=false);
+    public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+        us = usuario;
         cbFiltroCurso.setEnabled(false);
         txtBuscar.setEnabled(false);
         btnBuscar.setEnabled(false);
-//        cbFiltroCurso.setModel(Formulario.listaComboparalelo(lista2));
-//        listar2 = crud.listarAlumnosReportes();
         btnImprimir.setVisible(false);
-//        listar = crud.filtroCodigoAlumno(cal);
-//        Tablas.tablaFiltroAlumnosReportes(listar, jtReporte);
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarAlumnosMatriculasReportes(je);
+        Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+        comboParalelo();
+    }
+
+    public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal = false);
+        initComponents();
+        setLocationRelativeTo(null);
+    }
+
+    public void comboParalelo() {
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+        paralelo = crud.ReporteCalifcacionComboParalelo(mp);
+        cbFiltroCurso.setModel(Combos.listarComboParalelosRegistrar(paralelo));
     }
 
     /**
@@ -64,6 +87,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        lbIdUsuario = new javax.swing.JLabel();
         cbFiltro = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -72,6 +96,8 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtReporte = new javax.swing.JTable();
         btnImprimir = new javax.swing.JButton();
+        lbSucursal = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -86,6 +112,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         jLabel1.setText("REPORTE DE ALUMNOS");
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.setToolTipText("SALIR");
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -96,6 +123,8 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
             }
         });
 
+        lbIdUsuario.setText("usaurio");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,15 +133,19 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbIdUsuario)
+                .addGap(32, 32, 32)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbIdUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         cbFiltro.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -131,6 +164,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         });
 
         btnBuscar.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/buscar32.png"))); // NOI18N
         btnBuscar.setText("   BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +216,10 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
             }
         });
 
+        lbSucursal.setText("sucursal");
+
+        lbEmpresa.setText("empresa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,6 +239,10 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(btnBuscar)
+                                .addGap(41, 41, 41)
+                                .addComponent(lbSucursal)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbEmpresa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1))))
                     .addGroup(layout.createSequentialGroup()
@@ -218,12 +260,14 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(jButton1)
-                    .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbSucursal)
+                    .addComponent(lbEmpresa))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,50 +291,40 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
             cbFiltroCurso.setEnabled(false);
         }
         if (filtro == 3) {
-            txtBuscar.setEnabled(true);
-            btnBuscar.setEnabled(true);
-            cbFiltroCurso.setEnabled(false);
-        }
-        if (filtro == 4) {
             cbFiltroCurso.setEnabled(true);
+            txtBuscar.setEnabled(false);
+            btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_cbFiltroActionPerformed
-    String curso = "";
-//    Calificacion_clase cal = new Calificacion_clase();
-
     public void filtro() {
         curso = cbFiltroCurso.getSelectedItem().toString();
         int filtro = cbFiltro.getSelectedIndex();
-        int filtro2 = cbFiltroCurso.getSelectedIndex();
 
-        if (cbFiltro.getSelectedIndex() == 4 && (cbFiltroCurso.getSelectedIndex() != 0 && txtBuscar.getText().length() <= 3)) {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione los filtros");
+        if (cbFiltro.getSelectedIndex() == 0 && cbFiltroCurso.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "POR FAVOR SELECCIONE CORRECTAMENTE LOS FILTROS");
             cbFiltro.setSelectedIndex(0);
             cbFiltroCurso.setSelectedIndex(0);
             txtBuscar.setText("");
         }
-        if (filtro == 1 && filtro2 == 0) {
-//            cal.setId_estudiante(Long.valueOf(txtBuscar.getText()));
-//            listar = crud.filtroCodigoAlumno(cal);
-//            Tablas.tablaFiltroAlumnosReportes(listar, jtReporte);
+        if (filtro == 1 && txtBuscar.getText().length() >= 3) {
+            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            je.setCedula(txtBuscar.getText());
+            listar = crud.listarAlumnosMatriculasReportesCedula(je);
         }
-        if (filtro == 2 && filtro2 == 0) {
-//            cal.setCedula(txtBuscar.getText());
-//            listar = crud.filtroCedulaAlumno(cal);
-//            Tablas.tablaFiltroAlumnosReportes(listar, jtReporte);
+        if (filtro == 2 && txtBuscar.getText().length() >= 3) {
+            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            je.setApellidos_nombres(txtBuscar.getText());
+            listar = crud.listarAlumnosMatriculasReportesAlumno(je);
         }
-        if (filtro == 3 && filtro2 == 0) {
-//            cal.setApellidos(txtBuscar.getText());
-//            listar = crud.filtroApellidoAlumno(cal);
-//            Tablas.tablaFiltroAlumnosReportes(listar, jtReporte);
+        if (filtro == 3 && cbFiltroCurso.getSelectedIndex() != 0) {
+            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            je.setParalelo(cbFiltroCurso.getSelectedItem().toString());
+            listar = crud.listarAlumnosMatriculasReportesCurso(je);
         }
-        if (filtro == 4 && (filtro2 != 0 && txtBuscar.getText().length() >= 3)) {
-//            cal.setPeriodo(txtBuscar.getText());
-//            cal.setParalelo(curso);
-//            listar = crud.filtroPeriodoAlumno(cal);
-//            Tablas.tablaFiltroAlumnosReportes(listar, jtReporte);
-        }
-       // Tablas.tablaFiltroAlumnosReportes(listar, jtReporteAlumnos);
+        Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
         txtBuscar.setText("");
     }
 
@@ -304,7 +338,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
         } else {
-            txtBuscar.setEnabled(true);
+            txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(true);
         }
     }//GEN-LAST:event_cbFiltroCursoActionPerformed
@@ -320,26 +354,24 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
 
     private void jtReporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReporteMousePressed
         int i = 0;
-//        try {
-//            if (evt.getClickCount() == 2) {
-//                i = jtReporte.getSelectedRow();
-//                objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar2);
-//                if (objeto != null) {
-//                    ReporteCalificaciones ac = new ReporteCalificaciones(new javax.swing.JFrame(), true, objeto);
-//                    ac.setVisible(true);
-//                    listar2.clear();
-//                    listar2 = crud.listarAlumnosReportes();
-////                    listar2 = crud.filtroCodigoAlumno(cal);
-////                    listar2 = crud.filtroCedulaAlumno(cal);
-////                    listar2 = crud.filtroApellidoAlumno(cal);
-////                    listar2 = crud.filtroPeriodoAlumno(cal);
-////                    Tablas.tablaFiltroAlumnosReportes(listar2, jtReporte);
-//                }
-//                System.out.println("holaaaaa5");
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(Curso.class.getName()).log(Level.SEVERE, null, e);
-//        }
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtReporte.getSelectedRow();
+                objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
+                if (objeto != null) {
+                    ReporteAlumnosCalificacionActualForm ac = new ReporteAlumnosCalificacionActualForm(new javax.swing.JFrame(), true, us, objeto);
+                    ac.setVisible(true);
+                    listar.clear();
+                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+                    listar = crud.listarAlumnosMatriculasReportes(je);
+                    Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+                }
+                System.out.println("holaaaaa5");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -367,18 +399,17 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
 //            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_btnImprimirActionPerformed
-//public Calificacion_clase buscarObjeto(String datos, ArrayList<Calificacion_clase> listarobj) {
-//        Calificacion_clase objeto1 = null;
-//        for (int i = 0; i < listarobj.size(); i++) {
-//            if (datos.equals(listarobj.get(i).getId_estudiante().toString())) {
-//                objeto1 = listarobj.get(i);
-//                break;
-//            }
-//        }
-//        return objeto1;
-//    }
-    
-    
+public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> listarobj) {
+        JoinMatriculas objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getId_matricula().toString())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -448,6 +479,9 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtReporte;
+    private javax.swing.JLabel lbEmpresa;
+    private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

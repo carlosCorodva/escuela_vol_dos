@@ -155,7 +155,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         });
         jToolBar1.add(jButton1);
 
-        jLabel1.setBackground(new java.awt.Color(0, 51, 204));
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

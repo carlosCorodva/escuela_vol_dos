@@ -18,6 +18,7 @@ import SE.views.materias.MostrarMateriasForm;
 import SE.views.matricula.MostrarAlumnosForm;
 import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
+import SE.views.reportes.ReporteAlumnosperiodoActualForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
@@ -82,7 +83,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -100,6 +100,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -157,6 +158,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCalificacion.setFocusable(false);
         btnCalificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCalificacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCalificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalificacionActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnCalificacion);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -203,29 +209,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lbIdUsuario.setText("usuario");
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenu1.setText("EMPRESA");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu1.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenu7.setText("EMPRESA");
         jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem9.setText("CREAR EMPRESAS");
-        jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem9);
+        jMenu7.setMargin(new java.awt.Insets(1, 0, 0, 0));
 
         jMenuItem12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem12.setText("ACTUALIZAR EMPRESA");
+        jMenuItem12.setText("EMPRESA");
         jMenuItem12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +255,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem2.setText("USUARIOS");
+        jMenuItem2.setBorderPainted(true);
         jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +288,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu2.setText("MATRICULA");
         jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu2.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem3.setText("MATRICULAS");
@@ -325,6 +324,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu6.setText("CALIFICACION");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu6.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem6.setText("CALIFICACION");
@@ -340,6 +340,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("CURSOS");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu4.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem4.setText("CURSOS");
@@ -355,6 +356,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu5.setText("MATERIAS");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu5.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem5.setText("MATERIAS");
@@ -370,10 +372,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu8.setText("REPORTES");
         jMenu8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu8.setMargin(new java.awt.Insets(3, 1, 3, 1));
+
+        jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem9.setText("CALIFICACION");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem9);
+
         jMenuBar1.add(jMenu8);
 
         jMenu3.setText("AYUDA");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu3.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem1.setText("SALIR");
@@ -414,7 +428,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(lbEmpresa)
                 .addGap(61, 61, 61)
                 .addComponent(lbSucursal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -454,11 +468,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MostrarPeriodoForm mp = new MostrarPeriodoForm(new javax.swing.JFrame(), true,us);
         mp.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        MostrarEmpresaForm me = new MostrarEmpresaForm(new javax.swing.JFrame(), true,us);
-        me.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         MostrarEmpresaUnoForm ae = new MostrarEmpresaUnoForm(new javax.swing.JFrame(), true,us);
@@ -504,6 +513,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         CalificacionForm ca = new CalificacionForm(new javax.swing.JFrame(), true, us);
         ca.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ReporteAlumnosperiodoActualForm ca = new ReporteAlumnosperiodoActualForm(new javax.swing.JFrame(), true, us);
+        ca.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void btnCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificacionActionPerformed
+        CalificacionForm ca = new CalificacionForm(new javax.swing.JFrame(), true, us);
+        ca.setVisible(true);
+    }//GEN-LAST:event_btnCalificacionActionPerformed
 
     /**
      * @param args the command line arguments
