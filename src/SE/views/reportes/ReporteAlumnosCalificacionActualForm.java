@@ -6,23 +6,25 @@
 package SE.views.reportes;
 
 import SE.componentes.Crud;
+import SE.componentes.FormatoNumeros;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
-//import net.sf.jasperreports.engine.JRException;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-//import net.sf.jasperreports.engine.util.JRLoader;
-//import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -33,11 +35,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     /**
      * Creates new form Calificacion_registro
      */
-//    Calificacion_clase obj = null;
     ArrayList<JoinCalificacion> reporte = null;
-//    ArrayList<Calificacion_clase_dos> reporteDos = null;
-//    ArrayList<Calificacion_clase_tres> reporteTres = null;
-//    ArrayList<Tabla_vacia> tabla = null;
     Crud crud = new Crud();
     JoinEmpleados us = null;
     JoinMatriculas mat = null;
@@ -58,8 +56,6 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         formulario();
         tablaPQ();
         tablaSQ();
-//        cabecera();
-//        pp();
         calcularPromedio();
     }
 
@@ -67,19 +63,13 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    public void cabecera() {
-        String[] cabeza = {"MATERIAS", "PRIMER QUIMESTRE", "SEGUNDO QUIMESTRE",
-            "PROMEDIO", "NOTA CUALITATIVA", "ESTADO"};
-        md.setColumnIdentifiers(cabeza);
-        jtPromedio.setModel(md);
-    }
 
     public void formulario() {
         txtPeriodo.setEditable(false);
         txtCurso.setEditable(false);
         txtAlumno.setEditable(false);
         txtcedula.setEditable(false);
+        txtPromedio.setEditable(false);
 
         txtCurso.setText(mat.getParalelo());
         txtAlumno.setText(mat.getApellidos_nombres());
@@ -118,6 +108,8 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtPromedio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -249,6 +241,11 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         BtnReporteFinal.setFocusable(false);
         BtnReporteFinal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnReporteFinal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnReporteFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteFinalActionPerformed(evt);
+            }
+        });
 
         btnImprimirSQ.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnImprimirSQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificar 32.png"))); // NOI18N
@@ -257,6 +254,11 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         btnImprimirSQ.setFocusable(false);
         btnImprimirSQ.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImprimirSQ.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnImprimirSQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirSQActionPerformed(evt);
+            }
+        });
 
         btnImprimirPQ.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnImprimirPQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificar 32.png"))); // NOI18N
@@ -265,12 +267,20 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         btnImprimirPQ.setFocusable(false);
         btnImprimirPQ.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImprimirPQ.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnImprimirPQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirPQActionPerformed(evt);
+            }
+        });
 
         lbIdUsuario.setText("usaurio");
 
         lbSucursal.setText("sucursal");
 
         lbEmpresa.setText("empresa");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("PROMEDIO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -279,62 +289,53 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(BtnReporteFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(btnImprimirSQ))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1)
-                                        .addGap(7, 7, 7))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel8))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lbIdUsuario)
-                                                .addGap(156, 156, 156)
-                                                .addComponent(lbSucursal)
-                                                .addGap(122, 122, 122)
-                                                .addComponent(lbEmpresa))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel6)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel11)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPeriodo)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 5, Short.MAX_VALUE)
-                                        .addComponent(btnImprimirPQ)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(lbIdUsuario)
+                                .addGap(156, 156, 156)
+                                .addComponent(lbSucursal)
+                                .addGap(122, 122, 122)
+                                .addComponent(lbEmpresa))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAlumno)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE))
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnImprimirPQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImprimirSQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnReporteFinal))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -345,14 +346,16 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11)
-                        .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -411,14 +414,15 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     Double proDos = 0.00;
     Double prou = 0.00;
     Double prod = 0.00;
+    String cond = "";
 
     public void calcularPromedio() {
-        
+
         cal.setId_matricula(mat.getId_matricula());
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         reporte = crud.ReportePrimerQuimestre(cal);
         Tablas.tablaReporteCalificacionPromedio(reporte, jtPromedio);
-        
+
         for (int i = 0; i < jtPrimerQ.getRowCount(); i++) {
             proUno = Double.valueOf(jtPrimerQ.getValueAt(i, 8).toString());
             prou = proUno;
@@ -426,15 +430,21 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         }
         for (int i = 0; i < jtSegundoQ.getRowCount(); i++) {
             proDos = Double.valueOf(jtSegundoQ.getValueAt(i, 8).toString());
+            cond = jtSegundoQ.getValueAt(i, 5).toString();
             prod = proDos;
             jtPromedio.setValueAt(prod, i, 2);
+            jtPromedio.setValueAt(cond, i, 4);
         }
+
+        Double fila = 0.00;
+        Double total = 0.00;
+
         for (int i = 0; i < jtPromedio.getRowCount(); i++) {
             Double pq = Double.valueOf(jtPromedio.getValueAt(i, 1).toString());
             Double ps = Double.valueOf(jtPromedio.getValueAt(i, 2).toString());
             Double promedio = (pq + ps) / 2;
 
-            jtPromedio.setValueAt(promedio, i, 3);
+            jtPromedio.setValueAt(FormatoNumeros.formato_numero(promedio.toString()), i, 3);
 
             String cualitativo = "";
 
@@ -452,38 +462,164 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                 cualitativo = "RETIRADO";
             }
 
-            jtPromedio.setValueAt(cualitativo, i, 4);
+            jtPromedio.setValueAt(cualitativo, i, 5);
 
             String estado = "";
 
             if (promedio > 7) {
-                estado = "APROVADO!";
+                estado = "APROVADO";
             }
             if (promedio < 7) {
-                estado = "REPROVADO!";
+                estado = "REPROVADO";
             }
-            jtPromedio.setValueAt(estado, i, 5);
+            jtPromedio.setValueAt(estado, i, 6);
+
+            fila = Double.valueOf(jtPromedio.getValueAt(i, 3).toString());
+            total += fila / 10;
         }
-        
+        txtPromedio.setText(FormatoNumeros.formato_numero(total.toString()));
+
+        for (int c = 0; c < jtPromedio.getColumnCount(); c++) {
+            Class<?> col_class = jtPromedio.getColumnClass(c);
+            jtPromedio.setDefaultEditor(col_class, null);
+        }
     }
 
-    public void pp() {
-        System.out.println("1");
-        for (int i = 0; i < jtPrimerQ.getRowCount(); i++) {
-            Object fila[] = new Object[jtPrimerQ.getColumnCount()];
-            fila[0] = jtPrimerQ.getValueAt(i, 0);
-            md.addRow(fila);
-        }
-        System.out.println("3");
-    }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+//        matricula();
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    public void matricula() {
+        int a = 0;
+        String estado = "";
+        for (int i = 0; i < jtPromedio.getRowCount(); i++) {
+            String dato = jtPromedio.getValueAt(i, 5).toString();
+            if ("APROVADO".equals(dato)) {
+                a = a + 1;
+            }
+        }
+        System.out.println("a: " + a);
+        if (a == 10) {
+            estado = "APROVADO";
+        } else {
+            estado = "REPROVADO";
+        }
+        ArrayList<String> queryA = new ArrayList<String>();
+        ArrayList<String> queryB = new ArrayList<String>();
+        String actA = "";
+        String actB = "";
+
+        actA = "UPDATE `ma_matricula`\n"
+                + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
+                + "  `f_actualizacion` = NOW(),\n"
+                + "  `estado_matricula` = '" + estado + "',\n"
+                + "  `promedio_matricula` = '" + txtPromedio.getText() + "'\n"
+                + "WHERE `id_matricula` = '" + mat.getId_matricula() + "';";
+//            System.out.println("id fin: " + id);
+        queryA.add(actA);
+        System.out.println("queryA: " + queryA);
+        crud.matriculaAnualEstado(queryA);
+        queryA.clear();
+
+        actB = "UPDATE `ma_paralelo`\n"
+                + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
+                + "  `f_actualizacion` = NOW(),\n"
+                + "  `capacidad` = 'S'\n"
+                + "WHERE `capacidad`'N' AND `id_sucursal_pa`='" + lbSucursal.getText() + "';";
+//            System.out.println("id fin: " + id);
+        queryB.add(actB);
+        System.out.println("queryB: " + queryB);
+        crud.paraleloCapacidadAnual(queryB);
+        queryB.clear();
+    }
+
+    private void btnImprimirPQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPQActionPerformed
+        imprimirPq();
+    }//GEN-LAST:event_btnImprimirPQActionPerformed
+
+    public void imprimirPq(){
+        ArrayList lista = new ArrayList();
+        for(int i=0;i<jtPrimerQ.getRowCount();i++){
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(),txtCurso.getText(),txtPeriodo.getText(),txtPromedio.getText(),jtPrimerQ.getValueAt(i,0).toString(),jtPrimerQ.getValueAt(i,1).toString(),jtPrimerQ.getValueAt(i,2).toString(),jtPrimerQ.getValueAt(i,3).toString(),jtPrimerQ.getValueAt(i,4).toString(),jtPrimerQ.getValueAt(i,6).toString(),jtPrimerQ.getValueAt(i,7).toString(),jtPrimerQ.getValueAt(i,8).toString(),jtPrimerQ.getValueAt(i,5).toString(),jtPrimerQ.getValueAt(i,9).toString());
+            lista.add(tabla);
+        }
+        try {
+            String dir = System.getProperty("user.dir")+"/Reportes/"+"CalificacionReportePq.jasper";
+            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog();
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho/2,alto/2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void imprimirSq(){
+        ArrayList lista = new ArrayList();
+        for(int i=0;i<jtSegundoQ.getRowCount();i++){
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(),txtCurso.getText(),txtPeriodo.getText(),txtPromedio.getText(),jtPrimerQ.getValueAt(i,0).toString(),jtPrimerQ.getValueAt(i,1).toString(),jtPrimerQ.getValueAt(i,2).toString(),jtPrimerQ.getValueAt(i,3).toString(),jtPrimerQ.getValueAt(i,4).toString(),jtPrimerQ.getValueAt(i,6).toString(),jtPrimerQ.getValueAt(i,7).toString(),jtPrimerQ.getValueAt(i,8).toString(),jtPrimerQ.getValueAt(i,5).toString(),jtPrimerQ.getValueAt(i,9).toString());
+            lista.add(tabla);
+        }
+        try {
+            String dir = System.getProperty("user.dir")+"/Reportes/"+"CalificacionReporteSq.jasper";
+            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog();
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho/2,alto/2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void promedio(){
+        ArrayList lista = new ArrayList();
+        for(int i=0;i<jtPromedio.getRowCount();i++){
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(),txtCurso.getText(),txtPeriodo.getText(),txtPromedio.getText(),jtPrimerQ.getValueAt(i,0).toString(),jtPrimerQ.getValueAt(i,1).toString(),jtPrimerQ.getValueAt(i,2).toString(),jtPrimerQ.getValueAt(i,3).toString(),jtPrimerQ.getValueAt(i,4).toString(),jtPrimerQ.getValueAt(i,5).toString(),jtPrimerQ.getValueAt(i,6).toString());
+            lista.add(tabla);
+        }
+        try {
+            String dir = System.getProperty("user.dir")+"/Reportes/"+"ReporteAnual.jasper";
+            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog();
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho/2,alto/2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void btnImprimirSQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirSQActionPerformed
+        matricula();
+        imprimirSq();
+    }//GEN-LAST:event_btnImprimirSQActionPerformed
+
+    private void BtnReporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteFinalActionPerformed
+        matricula();
+        promedio();
+    }//GEN-LAST:event_BtnReporteFinalActionPerformed
     public void tablaPQ() {
         cal.setId_matricula(mat.getId_matricula());
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         reporte = crud.ReportePrimerQuimestre(cal);
         Tablas.tablaReporteCalificacion(reporte, jtPrimerQ);
+        for (int c = 0; c < jtPrimerQ.getColumnCount(); c++) {
+            Class<?> col_class = jtPrimerQ.getColumnClass(c);
+            jtPrimerQ.setDefaultEditor(col_class, null);
+        }
     }
 
     public void tablaSQ() {
@@ -491,6 +627,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         reporte = crud.ReporteSegundoQuimestre(cal);
         Tablas.tablaReporteCalificacion(reporte, jtSegundoQ);
+        for (int c = 0; c < jtSegundoQ.getColumnCount(); c++) {
+            Class<?> col_class = jtSegundoQ.getColumnClass(c);
+            jtSegundoQ.setDefaultEditor(col_class, null);
+        }
     }
 
     /**
@@ -560,6 +700,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -577,6 +718,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextField txtPeriodo;
+    private javax.swing.JTextField txtPromedio;
     private javax.swing.JTextField txtcedula;
     // End of variables declaration//GEN-END:variables
 }

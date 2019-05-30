@@ -652,15 +652,15 @@ public class Tablas {
         }
     }
     public static void tablaReporteCalificacion(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {180, 50, 50, 25, 30, 40, 30, 30, 50};
+        int[] a = {180, 50, 50, 25, 30, 40, 30, 30, 50,100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "N. FORMATIVA", "N. PRÁCTICA", " APORTE",
-            "   EXAMEN", "  CONDUCTA", "         80%", "         20%", "    PROMEDIO"};
-        String[] Filas = new String[9];
+            "   EXAMEN", "  CONDUCTA", "         80%", "         20%", "    PROMEDIO","NOTA CUALITATIVA"};
+        String[] Filas = new String[10];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -673,6 +673,7 @@ public class Tablas {
             Filas[6] = "" + lista.get(i).getOchenta_porcentaje();
             Filas[7] = "" + lista.get(i).getVeinte_porcentaje();
             Filas[8] = "" + lista.get(i).getPromedio();
+            Filas[9] = "" + lista.get(i).getCalificacion_obs();
 
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -694,18 +695,20 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
             Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
+            Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
         }
     }
     public static void tablaReporteCalificacionPromedio(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {180, 50, 50, 40, 300, 50};
+        int[] a = {180, 50, 50, 40, 55,260, 55};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "QUIMESTRE 1", "QUIMESTRE 2",
-            "PROMEDIO", "NOTA CUALITATIVA", "       ESTADO"};
-        String[] Filas = new String[6];
+            "PROMEDIO","CONDUCTA", "NOTA CUALITATIVA","       ESTADO"};
+        String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -713,8 +716,9 @@ public class Tablas {
             Filas[1] = "" + lista.get(i).getNota_formativa();
             Filas[2] = "" + lista.get(i).getNota_practica();
             Filas[3] = "" + lista.get(i).getAporte();
-            Filas[4] = "" + lista.get(i).getExamen();
-            Filas[5] = "" + lista.get(i).getConducta();
+            Filas[5] = "" + lista.get(i).getCalificacion_obs();
+            Filas[4] = "" + lista.get(i).getConducta();
+            Filas[6] = "" + lista.get(i).getEstado_ca();
 
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -727,9 +731,11 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
             Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
         }
     }
 }
