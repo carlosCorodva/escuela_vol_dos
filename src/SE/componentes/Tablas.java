@@ -198,14 +198,14 @@ public class Tablas {
 
     public static void cargarTablaEmpresa(JTable Tabla, ArrayList<em_empresa> lista) {
 
-        int[] a = {8, 80, 130, 80, 180, 130};
+        int[] a = {8, 80, 130, 80, 180, 130,130,90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"   ID", "        RUC", "              EMPRESA", "      TELEFONO", "                     DIRECCION", "        CORREO"};
-        String[] Filas = new String[6];
+        String[] Co = {"   ID", "        RUC", "              EMPRESA", "      TELEFONO", "                     DIRECCION", "        CORREO","PROVINCIA","CANTON"};
+        String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -215,6 +215,8 @@ public class Tablas {
             Filas[3] = lista.get(i).getTelefono_em();
             Filas[4] = lista.get(i).getDireccion_em();
             Filas[5] = lista.get(i).getCorreo_em();
+            Filas[6] = lista.get(i).getProvincia();
+            Filas[7] = lista.get(i).getCanton();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -229,19 +231,25 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
         }
     }
 
     public static void cargarTablaSucursal(JTable Tabla, ArrayList<em_sucursal> lista) {
 
-        int[] a = {8, 80, 130, 80, 180, 130};
+        int[] a = {8, 80, 130, 80, 180, 130,130,90,90,80,80,80};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"   ID", "              EMPRESA", "      TELEFONO", "                     DIRECCION", "        CORREO", "ESTADO"};
-        String[] Filas = new String[6];
+        String[] Co = {"   ID", "              EMPRESA", "      TELEFONO", 
+            "                     DIRECCION", "        CORREO", "ESTADO","PROVINCIA",
+            "CANTON","JORNADA","ZONA","DISTRITO","CIRCUITO"};
+        String[] Filas = new String[12];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
@@ -251,6 +259,12 @@ public class Tablas {
             Filas[3] = lista.get(i).getDireccion_su();
             Filas[4] = lista.get(i).getCorreo_su();
             Filas[5] = lista.get(i).getEstado_su();
+            Filas[6] = lista.get(i).getProvincia_suc();
+            Filas[7] = lista.get(i).getCanton_suc();
+            Filas[8] = lista.get(i).getJornada();
+            Filas[9] = lista.get(i).getZona();
+            Filas[10] = lista.get(i).getDistrito();
+            Filas[11] = lista.get(i).getCircuito();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -265,6 +279,18 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
+            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(7).setPreferredWidth(a[7]);
+            Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(8).setPreferredWidth(a[8]);
+            Tabla.getColumnModel().getColumn(8).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(9).setPreferredWidth(a[9]);
+            Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(10).setPreferredWidth(a[10]);
+            Tabla.getColumnModel().getColumn(10).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(11).setPreferredWidth(a[11]);
+            Tabla.getColumnModel().getColumn(11).setCellRenderer(tcr);
         }
     }
 

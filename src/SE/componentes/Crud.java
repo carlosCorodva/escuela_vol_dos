@@ -932,13 +932,15 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call em_empresa_crear(?,?,?,?,?,?,?) }");
+                    "{ call em_empresa_crear(?,?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getRuc_em());
             pro.setString(2, us.getNombre_comercial_em());
             pro.setString(3, us.getCorreo_em());
             pro.setString(4, us.getTelefono_em());
             pro.setString(5, us.getDireccion_em());
             pro.setLong(6, us.getUsuario_creacion());
+            pro.setString(7, us.getProvincia());
+            pro.setString(8, us.getCanton());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -998,7 +1000,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call em_empresa_actualizar(?,?,?,?,?,?,?,?) }");
+                    "{ call em_empresa_actualizar(?,?,?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getNombre_comercial_em());
             pro.setString(2, us.getTelefono_em());
             pro.setString(3, us.getDireccion_em());
@@ -1006,6 +1008,8 @@ public class Crud {
             pro.setLong(5, us.getUsuario_actualizacion());
             pro.setLong(6, us.getId_empresa());
             pro.setString(7, us.getRuc_em());
+            pro.setString(8, us.getProvincia());
+            pro.setString(9, us.getCanton());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -1064,7 +1068,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call em_sucursal_actualizar(?,?,?,?,?,?,?,?) }");
+                    "{ call em_sucursal_actualizar(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getNombre_comercial_su());
             pro.setString(2, us.getTelefono_su());
             pro.setString(3, us.getDireccion_su());
@@ -1072,6 +1076,12 @@ public class Crud {
             pro.setLong(5, us.getUsuario_actualizacion());
             pro.setLong(6, us.getId_sucursal());
             pro.setString(7, us.getEstado_su());
+            pro.setString(8, us.getProvincia_suc());
+            pro.setString(9, us.getCanton_suc());
+            pro.setString(10, us.getJornada());
+            pro.setString(11, us.getZona());
+            pro.setString(12, us.getDistrito());
+            pro.setString(13, us.getCircuito());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -1099,13 +1109,19 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call em_sucursal_crear(?,?,?,?,?,?,?) }");
+                    "{ call em_sucursal_crear(?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             pro.setString(1, us.getNombre_comercial_su());
             pro.setString(2, us.getTelefono_su());
             pro.setString(3, us.getDireccion_su());
             pro.setString(4, us.getCorreo_su());
             pro.setLong(5, us.getUsuario_creacion());
             pro.setLong(6, us.getId_empresa());
+            pro.setString(7, us.getProvincia_suc());
+            pro.setString(8, us.getCanton_suc());
+            pro.setString(9, us.getJornada());
+            pro.setString(10, us.getZona());
+            pro.setString(11, us.getDistrito());
+            pro.setString(12, us.getCircuito());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");
@@ -1954,6 +1970,40 @@ public class Crud {
         }
         return valor;
     }
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesCursoPeriodo(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_matricula_actual_curso_periodo(?,?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getParalelo());
+            pro.setString(4, je.getPeriodo());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
     public ArrayList<ma_paralelo> ReporteCalifcacionComboParalelo(ma_paralelo mp) {
         ArrayList<ma_paralelo> lista = new ArrayList<ma_paralelo>();
         try {
@@ -2078,5 +2128,36 @@ public class Crud {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public ArrayList<ma_periodo> ReporteCalificacionPeriodo(ma_periodo mp) {
+        ArrayList<ma_periodo> lista = new ArrayList<ma_periodo>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reportes_cargar_combo_periodo(?) }");
+            pro.setLong(1, mp.getId_sucursal_pe());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                ma_periodo obj = Mappers.getPeriodoFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 }

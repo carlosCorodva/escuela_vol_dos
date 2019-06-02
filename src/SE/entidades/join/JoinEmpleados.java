@@ -45,11 +45,19 @@ public class JoinEmpleados {
     private String correo_su;
     private String estado_su;
     private String codigo_usuario;
+    private String provincia;
+    private String canton;
+    private String provincia_suc;
+    private String canton_suc;
+    private String jornada;
+    private String zona;
+    private String distrito;
+    private String circuito;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String codigo_usuario) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String codigo_usuario, String provincia, String canton, String provincia_suc, String canton_suc, String jornada, String zona, String distrito, String circuito) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -83,6 +91,78 @@ public class JoinEmpleados {
         this.correo_su = correo_su;
         this.estado_su = estado_su;
         this.codigo_usuario = codigo_usuario;
+        this.provincia = provincia;
+        this.canton = canton;
+        this.provincia_suc = provincia_suc;
+        this.canton_suc = canton_suc;
+        this.jornada = jornada;
+        this.zona = zona;
+        this.distrito = distrito;
+        this.circuito = circuito;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getCircuito() {
+        return circuito;
+    }
+
+    public void setCircuito(String circuito) {
+        this.circuito = circuito;
+    }
+
+    public String getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getCanton() {
+        return canton;
+    }
+
+    public void setCanton(String canton) {
+        this.canton = canton;
+    }
+
+    public String getProvincia_suc() {
+        return provincia_suc;
+    }
+
+    public void setProvincia_suc(String provincia_suc) {
+        this.provincia_suc = provincia_suc;
+    }
+
+    public String getCanton_suc() {
+        return canton_suc;
+    }
+
+    public void setCanton_suc(String canton_suc) {
+        this.canton_suc = canton_suc;
     }
 
     public String getCodigo_usuario() {

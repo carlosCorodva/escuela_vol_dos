@@ -296,13 +296,6 @@
 	</pageFooter>
 	<summary>
 		<band height="35" splitType="Stretch">
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="71" y="5" width="100" height="20" uuid="88c438b5-2201-4107-a84b-c8db3f9bdea5"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="10" y="5" width="61" height="20" uuid="7b4591d8-3861-4761-8dac-d03edfa02d6e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -310,6 +303,11 @@
 				</textElement>
 				<text><![CDATA[IMPRESO: ]]></text>
 			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="71" y="5" width="100" height="20" uuid="610f7aaa-322f-4057-887c-a2c482a80f0b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

@@ -12,10 +12,21 @@ import SE.componentes.Validaciones;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
+import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -31,6 +42,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     JoinMatriculas je = new JoinMatriculas();
     ma_paralelo mp = new ma_paralelo();
     Calendario cal = new Calendario();
+    JoinEmpleados us = null;
+    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
@@ -44,6 +58,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        us = usu;
+        lbPeriodo.setVisible(false);
         Habilitar(false);
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());
@@ -57,6 +73,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtOtroDos.setEnabled(false);
         txtEscAnt.setEnabled(false);
         cbxDocu.setEnabled(false);
+        lbPeriodo.setText(crud.MostrarPeriodo(Long.valueOf(lbSucursal.getText())));
     }
 
     public CrearMaatriculaForm(java.awt.Frame parent, boolean modal) {
@@ -130,6 +147,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        lbPeriodo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -567,6 +585,11 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         lbEmpresa.setText("empresa");
         jPanel2.add(lbEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, -1, -1));
 
+        lbPeriodo.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
+        lbPeriodo.setForeground(new java.awt.Color(255, 255, 255));
+        lbPeriodo.setText("2018-2019");
+        jPanel2.add(lbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 50, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -589,6 +612,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
 //    }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        imprimirMatricula();
         Guardar();
         try {
             JoinMatriculas ob = new JoinMatriculas();
@@ -600,7 +624,28 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public void imprimirMatricula() {
+        ArrayList dato = new ArrayList();
+        re_clase_eporte datos = new re_clase_eporte(us.getNombre_comercial_su(), txtCedula.getText(), txtAlumno.getText(), us.getZona(), us.getDistrito(), us.getCircuito(), us.getProvincia_suc(), us.getCanton_suc(), lbPeriodo.getText(), cbParalelo.getSelectedItem().toString(), us.getJornada(), txtObservacion.getText());
+        dato.add(datos);
+        try {
+            String dir = System.getProperty("user.dir") + "/Reportes/" + "MatriculaReporte.jasper";
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog();
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho / 2, alto / 2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(CrearMaatriculaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
@@ -1017,6 +1062,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbPeriodo;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCedDos;

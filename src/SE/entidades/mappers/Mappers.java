@@ -60,7 +60,14 @@ public class Mappers {
             obj.setDireccion_su(rs.getString("direccion_su"));
             obj.setCorreo_su(rs.getString("correo_su"));
             obj.setEstado_su(rs.getString("estado_su"));
-
+            obj.setCanton(rs.getString("Canton"));
+            obj.setProvincia(rs.getString("Provincia"));
+            obj.setProvincia_suc(rs.getString("Provincia_suc"));
+            obj.setCanton_suc(rs.getString("Canton_suc"));
+            obj.setJornada(rs.getString("Jornada"));
+            obj.setDistrito(rs.getString("Distrito"));
+            obj.setCircuito(rs.getString("Circuito"));
+            obj.setZona(rs.getString("Zona"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,6 +188,8 @@ public class Mappers {
             obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
             obj.setRuc_em(rs.getString("Ruc_em"));
             obj.setTelefono_em(rs.getString("Telefono_em"));
+            obj.setProvincia(rs.getString("Provincia"));
+            obj.setCanton(rs.getString("Canton"));
 
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +206,12 @@ public class Mappers {
             obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
             obj.setTelefono_su(rs.getString("Telefono_su"));
             obj.setEstado_su(rs.getString("Estado_su"));
-
+            obj.setProvincia_suc(rs.getString("Provincia_suc"));
+            obj.setCanton_suc(rs.getString("Canton_suc"));
+            obj.setJornada(rs.getString("Jornada"));
+            obj.setDistrito(rs.getString("Distrito"));
+            obj.setCircuito(rs.getString("Circuito"));
+            obj.setZona(rs.getString("Zona"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

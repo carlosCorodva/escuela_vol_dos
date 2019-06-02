@@ -243,7 +243,7 @@
 		<band height="7" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="29" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<staticText>
 				<reportElement x="3" y="9" width="61" height="20" uuid="907e97b4-e155-4657-ac33-66e7cba42523"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -251,11 +251,9 @@
 				</textElement>
 				<text><![CDATA[IMPRESO: ]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="64" y="9" width="100" height="20" uuid="d6d01053-9ff4-45bd-ac51-c78365d30273"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="65" y="9" width="100" height="20" uuid="1c67407e-6858-4099-988c-8f9106fcb669"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

@@ -32,37 +32,11 @@ public class re_clase_eporte {
     public re_clase_eporte() {
     }
 
-    public re_clase_eporte(String field1, String field2, String field3) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-    }
-
-    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7) {
+    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7, String field8, String field9, String field10, String field11) {
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
         this.field4 = field4;
-        this.field5 = field5;
-        this.field6 = field6;
-        this.field7 = field7;
-    }
-
-    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7, String field9) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-        this.field4 = field4;
-        this.field5 = field5;
-        this.field6 = field6;
-        this.field7 = field7;
-        this.field9 = field9;
-    }
-
-    public re_clase_eporte(String field1, String field2, String field3, String field5, String field6, String field7, String field8, String field9, String field10, String field11) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
         this.field5 = field5;
         this.field6 = field6;
         this.field7 = field7;
@@ -87,7 +61,24 @@ public class re_clase_eporte {
         this.field12 = field12;
     }
 
-    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7, String field8, String field9, String field10, String field11, String field12, String field13, String field14, String field15, String field16, String field17, String field18) {
+    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7, String field8, String field9, String field10, String field11, String field12, String field13, String field14) {
+        this.field1 = field1;
+        this.field2 = field2;
+        this.field3 = field3;
+        this.field4 = field4;
+        this.field5 = field5;
+        this.field6 = field6;
+        this.field7 = field7;
+        this.field8 = field8;
+        this.field9 = field9;
+        this.field10 = field10;
+        this.field11 = field11;
+        this.field12 = field12;
+        this.field13 = field13;
+        this.field14 = field14;
+    }
+
+    public re_clase_eporte(String field1, String field2, String field3, String field4, String field5, String field6, String field7, String field8, String field9, String field10, String field11, String field12, String field13, String field14, String field15) {
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -103,17 +94,6 @@ public class re_clase_eporte {
         this.field13 = field13;
         this.field14 = field14;
         this.field15 = field15;
-        this.field16 = field16;
-        this.field17 = field17;
-        this.field18 = field18;
-    }
-
-    public re_clase_eporte(String text, String text0, String text1, String text2, String toString, String toString0, String toString1, String toString2, String toString3, String toString4, String toString5) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public re_clase_eporte(String text, String text0, String text1, String text2, String toString, String toString0, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6, String toString7, String toString8) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getField1() {

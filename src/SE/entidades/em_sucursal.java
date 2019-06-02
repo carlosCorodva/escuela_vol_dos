@@ -21,11 +21,17 @@ public class em_sucursal {
     private Long usuario_actualizacion;
     private String fecha_actualizacion;
     private String estado_su;
+    private String provincia_suc;
+    private String canton_suc;
+    private String jornada;
+    private String zona;
+    private String distrito;
+    private String circuito;
 
     public em_sucursal() {
     }
 
-    public em_sucursal(Long id_sucursal, Long id_empresa, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, Long usuario_creacion, String fecha_creacion, Long usuario_actualizacion, String fecha_actualizacion, String estado_su) {
+    public em_sucursal(Long id_sucursal, Long id_empresa, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, Long usuario_creacion, String fecha_creacion, Long usuario_actualizacion, String fecha_actualizacion, String estado_su, String provincia_suc, String canton_suc, String jornada, String zona, String distrito, String circuito) {
         this.id_sucursal = id_sucursal;
         this.id_empresa = id_empresa;
         this.nombre_comercial_su = nombre_comercial_su;
@@ -37,6 +43,60 @@ public class em_sucursal {
         this.usuario_actualizacion = usuario_actualizacion;
         this.fecha_actualizacion = fecha_actualizacion;
         this.estado_su = estado_su;
+        this.provincia_suc = provincia_suc;
+        this.canton_suc = canton_suc;
+        this.jornada = jornada;
+        this.zona = zona;
+        this.distrito = distrito;
+        this.circuito = circuito;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getCircuito() {
+        return circuito;
+    }
+
+    public void setCircuito(String circuito) {
+        this.circuito = circuito;
+    }
+
+    public String getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
+    }
+
+    public String getProvincia_suc() {
+        return provincia_suc;
+    }
+
+    public void setProvincia_suc(String provincia_suc) {
+        this.provincia_suc = provincia_suc;
+    }
+
+    public String getCanton_suc() {
+        return canton_suc;
+    }
+
+    public void setCanton_suc(String canton_suc) {
+        this.canton_suc = canton_suc;
     }
 
     public Long getId_sucursal() {

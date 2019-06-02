@@ -10,6 +10,7 @@ package SE.entidades;
  * @author carlos
  */
 public class em_empresa {
+
     private Long id_empresa;
     private String nombre_comercial_em;
     private String ruc_em;
@@ -21,11 +22,13 @@ public class em_empresa {
     private Long usuario_actualizacion;
     private String fecha_actualizacion;
     private String estado_em;
+    private String provincia;
+    private String canton;
 
     public em_empresa() {
     }
 
-    public em_empresa(Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, Long usuario_creacion, String fecha_creacion, Long usuario_actualizacion, String fecha_actualizacion, String estado_em) {
+    public em_empresa(Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, Long usuario_creacion, String fecha_creacion, Long usuario_actualizacion, String fecha_actualizacion, String estado_em, String provincia, String canton) {
         this.id_empresa = id_empresa;
         this.nombre_comercial_em = nombre_comercial_em;
         this.ruc_em = ruc_em;
@@ -37,6 +40,24 @@ public class em_empresa {
         this.usuario_actualizacion = usuario_actualizacion;
         this.fecha_actualizacion = fecha_actualizacion;
         this.estado_em = estado_em;
+        this.provincia = provincia;
+        this.canton = canton;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getCanton() {
+        return canton;
+    }
+
+    public void setCanton(String canton) {
+        this.canton = canton;
     }
 
     public Long getId_empresa() {
@@ -126,6 +147,5 @@ public class em_empresa {
     public void setEstado_em(String estado_em) {
         this.estado_em = estado_em;
     }
-    
 
 }

@@ -219,7 +219,6 @@ public class FrmLogin extends javax.swing.JFrame {
             System.out.println("4");
         }
         return objeto1;
-
     }
 
     public void iniciarSesion() {
@@ -263,7 +262,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 System.out.println("excepcion");
                 JOptionPane.showMessageDialog(this, e);
             }
-
         }
     }
 

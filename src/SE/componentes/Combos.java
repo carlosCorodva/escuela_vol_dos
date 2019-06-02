@@ -11,6 +11,7 @@ import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
+import SE.entidades.ma_periodo;
 import SE.entidades.us_permiso_curso;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -176,6 +177,26 @@ public class Combos {
     public static DefaultComboBoxModel listarComboMateria(ArrayList<JoinMaterias> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloMateria(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for (int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
+    private static Object[] arregloPeriodo(ArrayList<ma_periodo> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "MATERIAS...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getPeriodo();
+        }
+        return arreglo;
+
+    }
+
+    public static DefaultComboBoxModel listarComboPeriodo(ArrayList<ma_periodo> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloPeriodo(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);
         for (int i = 0; i < arreglo.length; i++) {
             model.addElement(arreglo[i]);

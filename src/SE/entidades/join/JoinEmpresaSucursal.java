@@ -23,11 +23,18 @@ public class JoinEmpresaSucursal {
     private String direccion_su;
     private String correo_su;
     private String estado_su;
+    private String provincia;
+    private String canton;
+    private String provincia_suc;
+    private String canton_suc;
+    private String zona;
+    private String distrito;
+    private String circuito;
 
     public JoinEmpresaSucursal() {
     }
 
-    public JoinEmpresaSucursal(Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su) {
+    public JoinEmpresaSucursal(Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String provincia, String canton, String provincia_suc, String canton_suc, String zona, String distrito, String circuito) {
         this.id_empresa = id_empresa;
         this.nombre_comercial_em = nombre_comercial_em;
         this.ruc_em = ruc_em;
@@ -41,6 +48,69 @@ public class JoinEmpresaSucursal {
         this.direccion_su = direccion_su;
         this.correo_su = correo_su;
         this.estado_su = estado_su;
+        this.provincia = provincia;
+        this.canton = canton;
+        this.provincia_suc = provincia_suc;
+        this.canton_suc = canton_suc;
+        this.zona = zona;
+        this.distrito = distrito;
+        this.circuito = circuito;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getCircuito() {
+        return circuito;
+    }
+
+    public void setCircuito(String circuito) {
+        this.circuito = circuito;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getCanton() {
+        return canton;
+    }
+
+    public void setCanton(String canton) {
+        this.canton = canton;
+    }
+
+    public String getProvincia_suc() {
+        return provincia_suc;
+    }
+
+    public void setProvincia_suc(String provincia_suc) {
+        this.provincia_suc = provincia_suc;
+    }
+
+    public String getCanton_suc() {
+        return canton_suc;
+    }
+
+    public void setCanton_suc(String canton_suc) {
+        this.canton_suc = canton_suc;
     }
 
     public Long getId_empresa() {

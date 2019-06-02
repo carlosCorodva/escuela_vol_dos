@@ -43,11 +43,65 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
     }
 
     public void formulario() {
+        String prov = empre.getProvincia();
         txtCorreo.setText(empre.getCorreo_em());
         txtDireccion.setText(empre.getDireccion_em());
         txtEmpresa.setText(empre.getNombre_comercial_em());
         txtRuc.setText(empre.getRuc_em());
         txtelefono.setText(empre.getTelefono_em());
+        txtCanton.setText(empre.getCanton());
+        
+        if ("AZUAY".equals(prov)) {
+            cbProvincia.setSelectedIndex(1);
+        }else if ("BOLIBAR".equals(prov)) {
+            cbProvincia.setSelectedIndex(2);
+        }else if ("CAÑAR".equals(prov)) {
+            cbProvincia.setSelectedIndex(3);
+        }else if ("CARCHI".equals(prov)) {
+            cbProvincia.setSelectedIndex(4);
+        }else if ("CHIMBORAZO".equals(prov)) {
+            cbProvincia.setSelectedIndex(5);
+        }else if ("COTOPAXI".equals(prov)) {
+            cbProvincia.setSelectedIndex(6);
+        }else if ("EL ORO".equals(prov)) {
+            cbProvincia.setSelectedIndex(7);
+        }else if ("ESMERALDAS".equals(prov)) {
+            cbProvincia.setSelectedIndex(8);
+        }else if ("GALAPAGOS".equals(prov)) {
+            cbProvincia.setSelectedIndex(9);
+        }else if ("GUAYAS".equals(prov)) {
+            cbProvincia.setSelectedIndex(10);
+        }else if ("IMBABURA".equals(prov)) {
+            cbProvincia.setSelectedIndex(11);
+        }else if ("LOJA".equals(prov)) {
+            cbProvincia.setSelectedIndex(12);
+        }else if ("LOS RIOS".equals(prov)) {
+            cbProvincia.setSelectedIndex(13);
+        }else if ("MANABI".equals(prov)) {
+            cbProvincia.setSelectedIndex(14);
+        }else if ("MORONA SANTIAGO".equals(prov)) {
+            cbProvincia.setSelectedIndex(15);
+        }else if ("NAPO".equals(prov)) {
+            cbProvincia.setSelectedIndex(16);
+        }else if ("ORELLANA".equals(prov)) {
+            cbProvincia.setSelectedIndex(17);
+        }else if ("PASTAZA".equals(prov)) {
+            cbProvincia.setSelectedIndex(18);
+        }else if ("PICHINCHA".equals(prov)) {
+            cbProvincia.setSelectedIndex(19);
+        }else if ("SANTA ELENA".equals(prov)) {
+            cbProvincia.setSelectedIndex(20);
+        }else if ("STO. DOMINGO DE LOS TSACHILAS".equals(prov)) {
+            cbProvincia.setSelectedIndex(21);
+        }else if ("SUCUMBIOS".equals(prov)) {
+            cbProvincia.setSelectedIndex(22);
+        }else if ("TUNGURAGUA".equals(prov)) {
+            cbProvincia.setSelectedIndex(23);
+        }else if ("ZAMORA CHINCHIPE".equals(prov)) {
+            cbProvincia.setSelectedIndex(24);
+        }else{
+            cbProvincia.setSelectedIndex(0);
+        }
     }
 
     /**
@@ -75,6 +129,9 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        cbProvincia = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        txtCanton = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -156,29 +213,33 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
 
         lbEmpresa.setText("empresa");
 
+        cbProvincia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbProvincia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PROVINCIA...", "AZUAY", "BOLIBAR", "CAÑAR", "CARCHI", "CHIMBORAZO", "COTOPAXI", "EL ORO", "ESMERALDAS", "GALAPAGOS", "GUAYAS", "IMBABURA", "LOJA", "LOS RIOS", "MANABI", "MORONA SANTIAGO", "NAPO", "ORELLANA", "PASTAZA", "PICHINCHA", "SANTA ELENA", "STO. DOMINGO DE LOS TSACHILAS", "SUCUMBIOS", "TUNGURAGUA", "ZAMORA CHINCHIPE" }));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("CANTON");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
                 .addComponent(btnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbIdUsuario)
+                .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbIdUsuario)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbEmpresa)
-                        .addGap(24, 24, 24))))
+                .addGap(48, 48, 48)
+                .addComponent(lbEmpresa)
+                .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDireccion))
@@ -189,25 +250,31 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
                                 .addGap(35, 35, 35)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                    .addComponent(txtRuc))
+                                    .addComponent(txtRuc)
+                                    .addComponent(cbProvincia, 0, 1, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(1, 1, 1))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(txtCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(1, 1, 1))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,23 +289,27 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar)
-                            .addComponent(btnGuardar))
-                        .addGap(32, 32, 32))
+                            .addComponent(lbEmpresa)
+                            .addComponent(lbIdUsuario)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lbIdUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(lbEmpresa)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnGuardar))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,7 +341,11 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "INGRESE UN NUMERO VALIDO");
         } else if (txtelefono.getText().length() >= 13) {
             JOptionPane.showMessageDialog(this, "HA PASADO LA CANTIDAD DE NUMEROS PERMITIDOS ");
-        } else {
+        } else if (cbProvincia.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "ESCOJA UN CANTON");
+        } else if (txtCanton.getText().length() < 3) {
+            JOptionPane.showMessageDialog(this, "ESCRIBA UN CANTON VALIDO");
+        }  else {
             int r = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE ACTUALIZAR?", "", JOptionPane.YES_NO_OPTION);
             if (r == JOptionPane.YES_OPTION) {
                 em_empresa mp = new em_empresa();
@@ -281,6 +356,8 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
                 mp.setRuc_em(txtRuc.getText());
                 mp.setTelefono_em(txtelefono.getText());
                 mp.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+                mp.setCanton(txtCanton.getText());
+                mp.setProvincia(cbProvincia.getSelectedItem().toString());
                 String a = crud.ActualizarEmpresa(mp);
                 JOptionPane.showMessageDialog(this, a);
                 setVisible(false);
@@ -369,15 +446,18 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cbProvincia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JTextField txtCanton;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmpresa;

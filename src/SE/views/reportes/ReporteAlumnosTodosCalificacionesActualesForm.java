@@ -30,7 +30,7 @@ import net.sf.jasperreports.view.JRViewer;
  *
  * @author carlos
  */
-public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
+public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.JDialog {
 
     /**
      * Creates new form Calificacion_registro
@@ -44,7 +44,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
-    public ReporteAlumnosCalificacionActualForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
+    public ReporteAlumnosTodosCalificacionesActualesForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
@@ -59,7 +59,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         calcularPromedio();
     }
 
-    public ReporteAlumnosCalificacionActualForm(java.awt.Frame parent, boolean modal) {
+    public ReporteAlumnosTodosCalificacionesActualesForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -554,7 +554,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             frame.setVisible(true);
             viewer.setFitWidthZoomRatio();
         } catch (JRException ex) {
-            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -576,7 +576,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             frame.setVisible(true);
             viewer.setFitWidthZoomRatio();
         } catch (JRException ex) {
-            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -598,7 +598,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             frame.setVisible(true);
             viewer.setFitWidthZoomRatio();
         } catch (JRException ex) {
-            Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -650,14 +650,30 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosCalificacionActualForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReporteAlumnosTodosCalificacionesActualesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -678,7 +694,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReporteAlumnosCalificacionActualForm dialog = new ReporteAlumnosCalificacionActualForm(new javax.swing.JFrame(), true);
+                ReporteAlumnosTodosCalificacionesActualesForm dialog = new ReporteAlumnosTodosCalificacionesActualesForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
