@@ -2160,4 +2160,99 @@ public class Crud {
         }
         return lista;
     }
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesImpresion(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reportes_mostrar_alumnos_todos(?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<JoinMatriculas> ReporteListarMatriculasCedula(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reportes_mostrar_alumnos_todos_cedula(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getCedula());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<JoinMatriculas> ReporteListarMatriculasApellidosNombres(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reportes_mostrar_alumnos_todos_alumno(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getApellidos_nombres());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

@@ -3,22 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.matricula;
+package SE.views.reportes;
 
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
  * @author alumno
  */
-public class ActualizarAlumnosForm extends javax.swing.JDialog {
+public class ActualizarAlumnosReporteForm extends javax.swing.JDialog {
 
     //|| or;
     Crud crud = new Crud();
@@ -27,6 +37,9 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     JoinMatriculas je = new JoinMatriculas();
     Calendario cal = new Calendario();
     JoinMatriculas mat = null;
+    JoinEmpleados us = null;
+    int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
 
     /**
@@ -35,27 +48,30 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public ActualizarAlumnosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usu, JoinMatriculas matricula) {
+    public ActualizarAlumnosReporteForm(java.awt.Frame parent, boolean modal, JoinEmpleados usu, JoinMatriculas matricula) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        mat=matricula;
+        us = usu;
+        mat = matricula;
+        lbSucrsalNombre.setText(us.getNombre_comercial_su());
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());
         lbSucursal.setText(usu.getId_sucursal().toString());
-        this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        lista = crud.listarAlumnosMatriculas(je);
+//        this.setSize(new Dimension(jPanel2.getWidth() + 4, jPanel2.getHeight()));
+//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//        lista = crud.listarAlumnosMatriculas(je);
         txtOtro.setEnabled(false);
         txtOtroDos.setEnabled(false);
         txtEscAnt.setEnabled(false);
         cbxDocu.setEnabled(false);
         formulario();
+        bloqueo();
     }
 
-    public ActualizarAlumnosForm(java.awt.Frame parent, boolean modal) {
+    public ActualizarAlumnosReporteForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -71,7 +87,6 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -120,6 +135,8 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        lbSucrsalNombre = new javax.swing.JLabel();
+        btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -138,21 +155,11 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         });
         jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, -1));
 
-        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
-        btnGuardar.setText("ACTUALIZAR");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 150, -1));
-
         jLabel1.setBackground(new java.awt.Color(0, 51, 204));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ACTUALIZAR ALUMNO");
+        jLabel1.setText("REPORTE DE ALUMNO");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setOpaque(true);
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 1040, 60));
@@ -556,13 +563,26 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1000, 400));
 
         lbIdUsuario.setText("jLabel2");
-        jPanel2.add(lbIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
+        jPanel2.add(lbIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
         lbSucursal.setText("sucursal");
         jPanel2.add(lbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 510, -1, -1));
 
         lbEmpresa.setText("empresa");
         jPanel2.add(lbEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, -1, -1));
+
+        lbSucrsalNombre.setText("jLabel4");
+        jPanel2.add(lbSucrsalNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, -1, -1));
+
+        btnImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/reporte empleado 32.png"))); // NOI18N
+        btnImprimir.setText("IMPRIMIR");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -577,6 +597,34 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void bloqueo() {
+        txtAlumno.setEditable(false);
+        txtCedDos.setEditable(false);
+        txtCedUno.setEditable(false);
+        txtCedula.setEditable(false);
+        txtCordos.setEditable(false);
+        txtCorreo.setEditable(false);
+        txtDireccion.setEditable(false);
+        txtEscAnt.setEditable(false);
+        txtFecha.setEditable(false);
+        txtObservacion.setEditable(false);
+        txtOtro.setEditable(false);
+        txtOtroDos.setEditable(false);
+        txtRepDos.setEditable(false);
+        txtRepresentante.setEditable(false);
+        txtTelefono1.setEditable(false);
+        txtTelefono2.setEditable(false);
+        cbxCopiaCedula.setEnabled(false);
+        cbxDocu.setEnabled(false);
+        cbxEscuela.setEnabled(false);
+        cbxPartidaNac.setEnabled(false);
+        cbxServicoBas.setEnabled(false);
+        cbParDos.setEnabled(false);
+        cbParUno.setEnabled(false);
+        btnAdd.setEnabled(false);
+        dtFecha.setEnabled(false);
+    }
 
     public void formulario() {
         txtCedula.setText(mat.getCedula());
@@ -594,15 +642,15 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         txtCordos.setText(mat.getCorreo_dos());
         txtFecha.setText(mat.getFecha_nacimiento());
         txtEscAnt.setText(mat.getAnt_escuela());
-        
+
         if (txtEscAnt.getText().length() <= 3) {
-            
+
         } else {
             cbxEscuela.setSelected(true);
             cbxDocu.setSelected(true);
         }
-        
-        System.out.println("cc: "+mat.getCopia_cedula());
+
+        System.out.println("cc: " + mat.getCopia_cedula());
         if (mat.getCopia_cedula() == 1) {
             cbxCopiaCedula.setSelected(true);
         }
@@ -612,43 +660,39 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         if (mat.getPartida_nacimiento() == 1) {
             cbxPartidaNac.setSelected(true);
         }
-        
+
         if ("PADRE".equals(mat.getParentesco())) {
             cbParUno.setSelectedItem("PADRE");
-        }else if ("PARENTESCO...".equals(mat.getParentesco())) {
+        } else if ("PARENTESCO...".equals(mat.getParentesco())) {
             cbParUno.setSelectedItem("PARENTESCO...");
-        }else if ("MADRE".equals(mat.getParentesco())) {
+        } else if ("MADRE".equals(mat.getParentesco())) {
             cbParUno.setSelectedItem("MADRE");
-        }else if ("ABUELO/A".equals(mat.getParentesco())) {
+        } else if ("ABUELO/A".equals(mat.getParentesco())) {
             cbParUno.setSelectedItem("ABUELO/A");
-        }else if ("TIO/A".equals(mat.getParentesco())) {
+        } else if ("TIO/A".equals(mat.getParentesco())) {
             cbParUno.setSelectedItem("TIO/A");
-        }else {
+        } else {
             cbParUno.setSelectedItem("OTRO");
             txtOtro.setText(mat.getParentesco());
         }
-        System.out.println("parent1: "+mat.getParentesco());
-        
+        System.out.println("parent1: " + mat.getParentesco());
+
         if ("PADRE".equals(mat.getParentesco_dos())) {
             cbParDos.setSelectedItem("PADRE");
-        }else if ("PARENTESCO...".equals(mat.getParentesco_dos())) {
+        } else if ("PARENTESCO...".equals(mat.getParentesco_dos())) {
             cbParDos.setSelectedItem("PARENTESCO...");
-        }else if ("MADRE".equals(mat.getParentesco_dos())) {
+        } else if ("MADRE".equals(mat.getParentesco_dos())) {
             cbParDos.setSelectedItem("MADRE");
-        }else if ("ABUELO/A".equals(mat.getParentesco_dos())) {
+        } else if ("ABUELO/A".equals(mat.getParentesco_dos())) {
             cbParDos.setSelectedItem("ABUELO/A");
-        }else if ("TIO/A".equals(mat.getParentesco_dos())) {
+        } else if ("TIO/A".equals(mat.getParentesco_dos())) {
             cbParDos.setSelectedItem("TIO/A");
-        }else{
+        } else {
             cbParDos.setSelectedItem("OTRO");
             txtOtroDos.setText(mat.getParentesco_dos());
         }
-        System.out.println("parent2: "+mat.getParentesco_dos());
+        System.out.println("parent2: " + mat.getParentesco_dos());
     }
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Guardar();
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
@@ -663,37 +707,37 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCedulaKeyReleased
 
     private void txtAlumnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlumnoKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        char c = evt.getKeyChar();
+//        if (Character.isDigit(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtAlumnoKeyTyped
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-        char c = evt.getKeyChar();
-        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
-            getToolkit().beep();
-            evt.consume();
-        }
+//        char c = evt.getKeyChar();
+//        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void txtCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Guardar();
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            imprimir();
+//        }
     }//GEN-LAST:event_txtCorreoKeyPressed
 
     private void cbxServicoBasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxServicoBasKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Guardar();
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            imprimir();
+//        }
     }//GEN-LAST:event_cbxServicoBasKeyPressed
 
     private void cbxCopiaCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxCopiaCedulaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Guardar();
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            imprimir();
+//        }
     }//GEN-LAST:event_cbxCopiaCedulaKeyPressed
 
     private void txtAlumnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlumnoFocusLost
@@ -717,21 +761,21 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxServicoBasActionPerformed
 
     private void cbParUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbParUnoActionPerformed
-        int paren = cbParUno.getSelectedIndex();
-        if (paren == 5) {
-            txtOtro.setEnabled(true);
-        } else {
-            txtOtro.setEnabled(false);
-        }
+//        int paren = cbParUno.getSelectedIndex();
+//        if (paren == 5) {
+//            txtOtro.setEnabled(true);
+//        } else {
+//            txtOtro.setEnabled(false);
+//        }
     }//GEN-LAST:event_cbParUnoActionPerformed
 
     private void cbParDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbParDosActionPerformed
-        int parent = cbParDos.getSelectedIndex();
-        if (parent == 5) {
-            txtOtroDos.setEnabled(true);
-        } else {
-            txtOtroDos.setEnabled(false);
-        }
+//        int parent = cbParDos.getSelectedIndex();
+//        if (parent == 5) {
+//            txtOtroDos.setEnabled(true);
+//        } else {
+//            txtOtroDos.setEnabled(false);
+//        }
     }//GEN-LAST:event_cbParDosActionPerformed
     public void fecha() {
         String fecha = cal.getFecha(dtFecha);
@@ -742,113 +786,37 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cbxEscuelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEscuelaActionPerformed
-        if (cbxEscuela.isSelected() == true) {
-            cbxDocu.setEnabled(true);
-            cbxDocu.setSelected(true);
-            txtEscAnt.setEnabled(true);
-        } else {
-            cbxDocu.setEnabled(false);
-            cbxDocu.setSelected(false);
-            txtEscAnt.setEnabled(false);
-        }
+//        if (cbxEscuela.isSelected() == true) {
+//            cbxDocu.setEnabled(true);
+//            cbxDocu.setSelected(true);
+//            txtEscAnt.setEnabled(true);
+//        } else {
+//            cbxDocu.setEnabled(false);
+//            cbxDocu.setSelected(false);
+//            txtEscAnt.setEnabled(false);
+//        }
     }//GEN-LAST:event_cbxEscuelaActionPerformed
 
-    public void Guardar() {
-        System.out.println("guardar");
-//        String fecha = cal.getFecha(dtFecha);
-        String obs, parUno, parDos;
-        Long cc, sb, doc,pn;
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        imprimir();
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
-        if (cbxCopiaCedula.isSelected()) {
-            cc = Long.valueOf(1);
-        } else {
-            cc = Long.valueOf(0);
-        }
-        if (cbxServicoBas.isSelected()) {
-            sb = Long.valueOf(1);
-        } else {
-            sb = Long.valueOf(0);
-        }
-        if (cbxDocu.isSelected()) {
-            doc = Long.valueOf(1);
-        } else {
-            doc = Long.valueOf(0);
-        }
-        if (cbxPartidaNac.isSelected()) {
-            pn = Long.valueOf(1);
-        } else {
-            pn = Long.valueOf(0);
-        }
-        if (cbParUno.getSelectedIndex() == 5) {
-            parUno = txtOtro.getText();
-        } else {
-            parUno = cbParUno.getSelectedItem().toString();
-        }
-        if (cbParDos.getSelectedIndex() == 5) {
-            parDos = txtOtroDos.getText();
-        } else {
-            parDos = cbParDos.getSelectedItem().toString();
-        }
-        if (txtObservacion.getText().length() < 3) {
-            obs = "ALUMNO ACTUALIZADO";
-        } else {
-            obs = txtObservacion.getText();
-        }
-        if (txtAlumno.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "INGRESE APELLIDOS Y NOMBRES VALIDOS");
-        } else if (txtTelefono1.getText().length() < 9) {
-            JOptionPane.showMessageDialog(null, "INGRESE UN NUMERO DE TELEFONO VALIDO");
-        } else if (txtTelefono1.getText().length() > 12) {
-            JOptionPane.showMessageDialog(null, "EXEDE LA CANTIDAD DE NUMEROS VALIDOS PERMITIDOS PARA CELUALR");
-        } else if (txtCorreo.getText().length() < 5) {
-            JOptionPane.showMessageDialog(null, "INGRESE UN CORREO VALIDO");
-        } else if (txtDireccion.getText().length() < 4) {
-            JOptionPane.showMessageDialog(null, "INGRESE UNA DIRECCION VALIDA");
-        } else if (txtCedUno.getText().length() <= 9) {
-            JOptionPane.showMessageDialog(null, "INGRESE UNA CEDULA VALIDA");
-        } else if (txtRepresentante.getText().length() < 5) {
-            JOptionPane.showMessageDialog(null, "INGRESE UN REPRESENTANTE VALIDO");
-        } else if (cbParUno.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
-        } else {
-            System.out.println("else");
-            JoinMatriculas obj = new JoinMatriculas();
-            obj.setApellidos_nombres(txtAlumno.getText());
-            obj.setCedula(txtCedula.getText());
-            obj.setDireccion(txtDireccion.getText());
-            obj.setFecha_nacimiento(txtFecha.getText());
-
-            obj.setCedula_uno(txtCedUno.getText());
-            obj.setRepresentante(txtRepresentante.getText());
-            obj.setCorreo(txtCorreo.getText());
-            obj.setConvecional(txtTelefono1.getText());
-            obj.setParentesco(parUno);
-
-            obj.setCedula_dos(txtCedDos.getText());
-            obj.setRepresentante_dos(txtRepDos.getText());
-            obj.setTelefono_dos(txtTelefono2.getText());
-            obj.setCorreo_dos(txtCordos.getText());
-            obj.setParentesco_dos(parDos);
-
-            obj.setObservacion(obs);
-            obj.setCopia_cedula(cc);
-            obj.setServicio_basico(sb);
-            obj.setPartida_nacimiento(pn);
-            obj.setDoc_escuela_ant(doc);
-            obj.setAnt_escuela(txtEscAnt.getText());
-            
-            obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
-            obj.setId_matricula(mat.getId_matricula());
-            obj.setId_usuario(mat.getId_usuario());
-
-            try {
-                String a = crud.ActualizarAlumno(obj);
-                JOptionPane.showMessageDialog(this, a);
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
-            }
-            setVisible(false);
+    public void imprimir() {
+        ArrayList dato = new ArrayList();
+        re_clase_eporte datos = new re_clase_eporte(lbSucrsalNombre.getText(), txtCedula.getText(), txtAlumno.getText(), txtDireccion.getText(), txtFecha.getText(), txtCedUno.getText(), txtRepresentante.getText(), mat.getParentesco(), txtTelefono1.getText(), txtCorreo.getText(), txtCedDos.getText(), txtRepDos.getText(), mat.getParentesco_dos(), txtTelefono2.getText(), txtCordos.getText(), txtEscAnt.getText(), txtObservacion.getText(), us.getTelefono_su());
+        dato.add(datos);
+        try {
+            JasperReport reporte = (JasperReport) JRLoader.loadObject("Reportes/AlumnoReporte.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(dato));
+            JDialog frame = new JDialog(this);
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho / 2, alto / 2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ActualizarAlumnosReporteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -869,14 +837,142 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarAlumnosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarAlumnosReporteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarAlumnosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarAlumnosReporteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarAlumnosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarAlumnosReporteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarAlumnosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarAlumnosReporteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1009,7 +1105,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActualizarAlumnosForm dialog = new ActualizarAlumnosForm(new javax.swing.JFrame(), true);
+                ActualizarAlumnosReporteForm dialog = new ActualizarAlumnosReporteForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1023,7 +1119,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbParDos;
     private javax.swing.JComboBox<String> cbParUno;
@@ -1056,6 +1152,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
+    private javax.swing.JLabel lbSucrsalNombre;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCedDos;
