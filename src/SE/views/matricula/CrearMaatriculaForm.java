@@ -632,10 +632,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         re_clase_eporte datos = new re_clase_eporte(us.getNombre_comercial_su(), txtCedula.getText(), txtAlumno.getText(), us.getZona(), us.getDistrito(), us.getCircuito(), us.getProvincia_suc(), us.getCanton_suc(), lbPeriodo.getText(), cbParalelo.getSelectedItem().toString(), us.getJornada(), txtObservacion.getText());
         dato.add(datos);
         try {
-            String dir = System.getProperty("user.dir") + "/Reportes/" + "MatriculaReporte.jasper";
-            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JasperReport reporte = (JasperReport) JRLoader.loadObject("Reportes/MatriculaReporte.jasper");
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(dato));
+            JDialog frame = new JDialog(this);
+//            String dir = System.getProperty("user.dir") + "/Reportes/" + "MatriculaReporte.jasper";
+//            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
+//            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
+//            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8fb4d3b8-d911-4bd8-b9ff-36843f8a1ffe">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="715"/>
+	<property name="ireport.x" value="31"/>
+	<property name="ireport.y" value="872"/>
 	<field name="field1" class="java.lang.String"/>
 	<field name="field2" class="java.lang.String"/>
 	<field name="field3" class="java.lang.String"/>
@@ -40,7 +40,7 @@
 			<textField>
 				<reportElement x="88" y="5" width="108" height="35" uuid="4a43b32a-8c48-47ee-98a4-e43251196307"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
+					<font size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field2}]]></textFieldExpression>
 			</textField>
@@ -61,7 +61,7 @@
 			<textField>
 				<reportElement x="275" y="5" width="270" height="35" uuid="69b034bd-c698-4863-a27a-d854f369fbdb"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field3}]]></textFieldExpression>
 			</textField>
@@ -75,7 +75,7 @@
 			<textField>
 				<reportElement x="110" y="42" width="197" height="35" uuid="f6c02deb-1d36-4075-9265-2c07c0b1d45f"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field4}]]></textFieldExpression>
 			</textField>
@@ -89,7 +89,7 @@
 			<textField>
 				<reportElement x="411" y="42" width="134" height="35" uuid="71568281-f64a-429a-b4eb-4ae8cf58b530"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field5}]]></textFieldExpression>
 			</textField>
@@ -110,21 +110,21 @@
 			<textField>
 				<reportElement x="88" y="117" width="100" height="35" uuid="586a31e4-4a5a-4b4d-a1c3-a41fd326fed0"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field6}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="303" y="117" width="242" height="35" uuid="d1bc32e2-7168-4740-a4f8-7ff71e175a27"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field7}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="125" y="155" width="84" height="35" uuid="7f2b5241-e079-4a53-a4a2-64093a4e7abf"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="false"/>
+					<font size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field8}]]></textFieldExpression>
 			</textField>
@@ -138,7 +138,7 @@
 			<textField>
 				<reportElement x="258" y="155" width="85" height="35" uuid="5853c0c1-8b70-406f-9278-1a431357c612"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field9}]]></textFieldExpression>
 			</textField>
@@ -159,7 +159,7 @@
 			<textField>
 				<reportElement x="404" y="154" width="141" height="35" uuid="2568d350-af56-43a5-8b97-f73618560fb7"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field10}]]></textFieldExpression>
 			</textField>
@@ -180,14 +180,14 @@
 			<textField>
 				<reportElement x="87" y="191" width="100" height="35" uuid="602f7fde-c051-41f2-ab4e-64c362aa32e8"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field11}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="308" y="191" width="237" height="35" uuid="4eec892f-8187-4124-9f10-19fabdfb03dc"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field12}]]></textFieldExpression>
 			</textField>
@@ -215,21 +215,21 @@
 			<textField>
 				<reportElement x="125" y="230" width="80" height="35" uuid="ff9bc486-73ee-49d2-9816-08393b80e0e4"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field13}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="256" y="230" width="85" height="35" uuid="f93615ab-3bcc-4afa-9f9d-f969fbf4655c"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field14}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="402" y="230" width="143" height="35" uuid="43b41067-f252-4cc9-9a8a-9ca2446475f4"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field15}]]></textFieldExpression>
 			</textField>
@@ -243,7 +243,7 @@
 			<textField>
 				<reportElement x="162" y="79" width="383" height="35" uuid="bf61a545-81f9-4a79-b695-fbce854e86f0"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field16}]]></textFieldExpression>
 			</textField>
@@ -327,39 +327,35 @@
 		<band height="10" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="30" splitType="Stretch">
+		<band height="135" splitType="Stretch">
 			<staticText>
-				<reportElement x="6" y="3" width="75" height="27" uuid="45b2f3d2-4bce-465c-bb55-4cb2ab0c96fd"/>
+				<reportElement x="6" y="103" width="75" height="27" uuid="45b2f3d2-4bce-465c-bb55-4cb2ab0c96fd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TELEFONO: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="362" y="3" width="73" height="27" uuid="4c082f6f-e371-4e25-9209-5e9e13c955e1"/>
+				<reportElement x="362" y="103" width="73" height="27" uuid="4c082f6f-e371-4e25-9209-5e9e13c955e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IMPRESO:]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="435" y="3" width="113" height="27" uuid="c2ece744-08b6-4d4c-b463-ca5a3bd2a79c"/>
+				<reportElement x="435" y="103" width="113" height="27" uuid="c2ece744-08b6-4d4c-b463-ca5a3bd2a79c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="81" y="3" width="125" height="27" uuid="d0dc08c5-5ab5-4563-93b1-0fe4e54a6bee"/>
+				<reportElement x="81" y="103" width="125" height="27" uuid="d0dc08c5-5ab5-4563-93b1-0fe4e54a6bee"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field18}]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageFooter>
-	<summary>
-		<band height="26" splitType="Stretch">
 			<staticText>
 				<reportElement x="44" y="6" width="100" height="20" uuid="808fc092-f84b-49f8-ad78-58020f38a7a7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -391,5 +387,8 @@
 				<reportElement x="372" y="6" width="133" height="1" uuid="a8478a4c-1974-46e2-b0be-6780a449d5d4"/>
 			</line>
 		</band>
+	</pageFooter>
+	<summary>
+		<band height="26" splitType="Stretch"/>
 	</summary>
 </jasperReport>
