@@ -68,6 +68,7 @@ public class Mappers {
             obj.setDistrito(rs.getString("Distrito"));
             obj.setCircuito(rs.getString("Circuito"));
             obj.setZona(rs.getString("Zona"));
+            
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }
