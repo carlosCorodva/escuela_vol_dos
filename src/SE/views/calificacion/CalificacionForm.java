@@ -72,10 +72,11 @@ public class CalificacionForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+
     public void conteo() {
         for (int t = 0; t < jtCalificacion.getRowCount(); t++) {
             jtCalificacion.setValueAt(t + 1, t, 0);
-            System.out.println("conteo: " + t);
+//            System.out.println("conteo: " + t);
         }
     }
 
@@ -515,7 +516,7 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             String ident = jtIdAlumnos.getValueAt(i, 0).toString();
             id = ident;
-            
+
             act = "UPDATE `ca_calificacion`\n"
                     + "SET `nota_practica` = '" + jtCalificacion.getValueAt(i, 3) + "',\n"
                     + "  `nota_formativa` = '" + jtCalificacion.getValueAt(i, 2) + "',\n"
@@ -526,7 +527,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                     + "  `calificacion_obs` = '" + jtCalificacion.getValueAt(i, 10) + "', \n"
                     + "  `ochenta_porcentaje` = '" + jtCalificacion.getValueAt(i, 7) + "', \n"
                     + "  `veinte_porcentaje` = '" + jtCalificacion.getValueAt(i, 8) + "', \n"
-//                    + "  `estado_ca` = '" + estado_ca + "', \n"
+                    //                    + "  `estado_ca` = '" + estado_ca + "', \n"
                     + "  `id_actualizacion` = '" + lbIdUsuario.getText() + "', \n"
                     + "  `f_actualizacion` = NOW() \n"
                     + "WHERE `id_calificacion` = '" + id + "';";
@@ -537,8 +538,15 @@ public class CalificacionForm extends javax.swing.JDialog {
             queryA.clear();
         }
         JOptionPane.showMessageDialog(this, "NOTAS GUARDADAS CORRECTAMENTE");
+        jc.setParcial(pf1);
+        jc.setMateria(pf2);
+        jc.setParalelo(pf3);
+        jc.setPeriodo(lbPeriodo.getText());
+        jc.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+
+        listarCursos = crud.listarAlumnosCalificacionPorCurso(jc);
         Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
-        filtrosCursos();
+//        filtrosCursos();
         conteo();
     }
 
@@ -568,8 +576,9 @@ public class CalificacionForm extends javax.swing.JDialog {
 
             btnGuardar.setEnabled(true);
             btnImprimir.setEnabled(true);
-//            JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
             calcularPromedio();
+            conteo();
+            JOptionPane.showMessageDialog(this, "BUSQUEDA EXITOSA");
         }
     }
 

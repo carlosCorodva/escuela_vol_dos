@@ -466,7 +466,7 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
 
             String estado = "";
 
-            if (promedio > 7) {
+            if (promedio >= 7) {
                 estado = "APROVADO";
             }
             if (promedio < 7) {
@@ -498,7 +498,7 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
 //            }
 //        }
         System.out.println("a: " + a);
-        if (a > 6.99) {
+        if (a >= 7) {
             estado = "APROVADO";
         } else {
             estado = "REPROVADO";
