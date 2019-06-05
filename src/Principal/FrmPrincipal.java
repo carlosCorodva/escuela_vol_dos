@@ -20,7 +20,7 @@ import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
 import SE.views.reportes.MostrarAlumnosReporteForm;
 import SE.views.reportes.MostrarEmpleadosReportesForm;
-import SE.views.reportes.ReporteAlumnosTodosPeriodosForm;
+import SE.views.reportes.PromedioReporteAlumnosTodosCalificacionForm;
 import SE.views.reportes.ReporteAlumnosperiodoActualForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
@@ -558,7 +558,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalificacionActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        ReporteAlumnosTodosPeriodosForm rp = new ReporteAlumnosTodosPeriodosForm(new javax.swing.JFrame(), true, us);
+        PromedioReporteAlumnosTodosCalificacionForm rp = new PromedioReporteAlumnosTodosCalificacionForm(new javax.swing.JFrame(), true, us);
         rp.setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 

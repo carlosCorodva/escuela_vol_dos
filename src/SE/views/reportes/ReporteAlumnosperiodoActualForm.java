@@ -364,32 +364,21 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtReporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReporteMousePressed
-
         try {
             int i = 0;
             if (evt.getClickCount() == 2) {
                 i = jtReporte.getSelectedRow();
                 objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
-                    System.out.println("holaaaaa");
                     ReporteAlumnosCalificacionActualForm ac = new ReporteAlumnosCalificacionActualForm(new javax.swing.JFrame(), true, us, objeto);
                     ac.setVisible(true);
                     listar.clear();
-                    
                     tabla();
-//                    JoinMatriculas jj = new JoinMatriculas();
-//                    jj.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                    jj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//                    listar = crud.listarAlumnosMatriculasReportes(jj);
-//                    Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
                 }
-//                cbFiltroCurso.setSelectedIndex(0);
-//                tabla();
             }
         } catch (Exception e) {
             Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, e);
         }
-//        tabla();
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

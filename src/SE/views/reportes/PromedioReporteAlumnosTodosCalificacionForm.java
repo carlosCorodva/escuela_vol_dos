@@ -7,6 +7,7 @@ package SE.views.reportes;
 
 import SE.componentes.Combos;
 import SE.componentes.Crud;
+import SE.componentes.FormatoNumeros;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
@@ -28,7 +29,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
+public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDialog {
 
     /**
      * Creates new form Mostrar_alumnos_views
@@ -47,30 +48,35 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
     String curso = "";
     ArrayList<ma_periodo> lista = null;
 
-    public ReporteAlumnosTodosPeriodosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public PromedioReporteAlumnosTodosCalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
         us = usuario;
-        cbFiltroCurso.setEnabled(false);
-        txtBuscar.setEnabled(false);
-        btnBuscar.setEnabled(false);
-        btnImprimir.setVisible(false);
-        cbPeriodo.setEnabled(false);
+        form();
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarAlumnosMatriculasReportes(je);
-        Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+        Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         combos();
     }
 
-    public ReporteAlumnosTodosPeriodosForm(java.awt.Frame parent, boolean modal) {
+    public PromedioReporteAlumnosTodosCalificacionForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public void form(){
+        cbFiltroCurso.setEnabled(false);
+        txtBuscar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        btnImprimir.setEnabled(false);
+        cbPeriodo.setEnabled(false);
+        txtPromedio.setEnabled(false);
     }
 
     public void combos() {
@@ -107,6 +113,7 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         cbPeriodo = new javax.swing.JComboBox<>();
+        txtPromedio = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -210,7 +217,8 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jtReporte);
 
         btnImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnImprimir.setText("IMPRIMIR");
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/impresora 32.png"))); // NOI18N
+        btnImprimir.setText("PROMEDIO");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -229,38 +237,41 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
             }
         });
 
+        txtPromedio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscar)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnBuscar)
-                                .addGap(126, 126, 126))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(439, 439, 439)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbSucursal)
                 .addGap(50, 50, 50)
                 .addComponent(lbEmpresa)
                 .addGap(134, 134, 134))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbFiltroCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnBuscar)
+                        .addGap(126, 126, 126)))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimir)
+                .addGap(18, 18, 18)
+                .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(396, 396, 396))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,9 +290,11 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
                     .addComponent(lbEmpresa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnImprimir)
+                    .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -294,18 +307,24 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
             cbPeriodo.setEnabled(false);
+            btnImprimir.setEnabled(false);
+            txtPromedio.setText("");
         }
         if (filtro == 1) {
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
             cbFiltroCurso.setEnabled(false);
             cbPeriodo.setEnabled(false);
+            btnImprimir.setEnabled(false);
+            txtPromedio.setText("");
         }
         if (filtro == 2) {
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
             cbFiltroCurso.setEnabled(false);
             cbPeriodo.setEnabled(false);
+            btnImprimir.setEnabled(false);
+            txtPromedio.setText("");
         }
         if (filtro == 3) {
             cbPeriodo.setEnabled(true);
@@ -328,14 +347,14 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             je.setCedula(txtBuscar.getText());
             listar = crud.listarAlumnosMatriculasReportesCedula(je);
-            Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+            Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         }
         if (filtro == 2 && txtBuscar.getText().length() >= 3) {
             je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             je.setApellidos_nombres(txtBuscar.getText());
             listar = crud.listarAlumnosMatriculasReportesAlumno(je);
-            Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+            Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         }
         if (filtro == 3 && cbFiltroCurso.getSelectedIndex() != 0 && cbPeriodo.getSelectedIndex() != 0) {
             je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
@@ -343,21 +362,46 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
             je.setParalelo(cbFiltroCurso.getSelectedItem().toString());
             je.setPeriodo(cbPeriodo.getSelectedItem().toString());
             listar = crud.listarAlumnosMatriculasReportesCursoPeriodo(je);
-            Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+            Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         }
         if (jtReporte.getColumnCount() < 1) {
             JOptionPane.showMessageDialog(this, "NO EXISTE REGISTRO");
         }
         txtBuscar.setText("");
-        cbFiltro.setSelectedIndex(0);
-        cbFiltroCurso.setSelectedIndex(0);
-        cbPeriodo.setSelectedIndex(0);
+//        cbFiltro.setSelectedIndex(0);
+//        cbFiltroCurso.setSelectedIndex(0);
+//        cbPeriodo.setSelectedIndex(0);
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         filtro();
+        calcular();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    public void calcular(){
+        int fil = cbFiltro.getSelectedIndex();
+        int cur = cbFiltroCurso.getSelectedIndex();
+        int per = cbPeriodo.getSelectedIndex();
+        int div = jtReporte.getRowCount()+1;
+        Double total=0.00;
+        Double promedio=0.00;
+        if (fil == 3 && cur != 0 && per != 0) {
+            for (int i = 0; i < jtReporte.getRowCount(); i++) {
+                Double pro = Double.valueOf(jtReporte.getValueAt(i, 5).toString());
+                promedio += pro;
+                div=i+1;
+            }
+            total = promedio/div;
+            txtPromedio.setText(FormatoNumeros.formato_numero(total.toString()));
+            txtPromedio.setEnabled(true);
+            btnImprimir.setEnabled(true);
+        }else{
+            txtPromedio.setEnabled(false);
+            btnImprimir.setEnabled(false);
+            txtPromedio.setText("");
+        }
+    }
+    
     private void cbFiltroCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCursoActionPerformed
         int curso2 = cbFiltroCurso.getSelectedIndex();
         if (curso2 == 0) {
@@ -380,18 +424,18 @@ public class ReporteAlumnosTodosPeriodosForm extends javax.swing.JDialog {
                 i = jtReporte.getSelectedRow();
                 objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
-                    ReporteAlumnosTodosCalificacionesActualesForm ac = new ReporteAlumnosTodosCalificacionesActualesForm(new javax.swing.JFrame(), true, us, objeto);
+                    PromedioReporteAlumnosTodosForm ac = new PromedioReporteAlumnosTodosForm(new javax.swing.JFrame(), true, us, objeto);
                     ac.setVisible(true);
                     listar.clear();
                     je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                     je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                     listar = crud.listarAlumnosMatriculasReportes(je);
-                    Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+                    Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
                 }
                 System.out.println("holaaaaa5");
             }
         } catch (Exception e) {
-            Logger.getLogger(ReporteAlumnosTodosPeriodosForm.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(PromedioReporteAlumnosTodosCalificacionForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtReporteMousePressed
 
@@ -459,14 +503,46 @@ public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> lista
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosTodosPeriodosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PromedioReporteAlumnosTodosCalificacionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosTodosPeriodosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PromedioReporteAlumnosTodosCalificacionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosTodosPeriodosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PromedioReporteAlumnosTodosCalificacionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReporteAlumnosTodosPeriodosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PromedioReporteAlumnosTodosCalificacionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -503,7 +579,7 @@ public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> lista
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReporteAlumnosTodosPeriodosForm dialog = new ReporteAlumnosTodosPeriodosForm(new javax.swing.JFrame(), true);
+                PromedioReporteAlumnosTodosCalificacionForm dialog = new PromedioReporteAlumnosTodosCalificacionForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -531,5 +607,6 @@ public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> lista
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtPromedio;
     // End of variables declaration//GEN-END:variables
 }

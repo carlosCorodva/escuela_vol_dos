@@ -550,7 +550,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             String dir = System.getProperty("user.dir") + "/Reportes/" + "CalificacionReportePq.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
