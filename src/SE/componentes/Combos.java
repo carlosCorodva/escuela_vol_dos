@@ -5,7 +5,6 @@
  */
 package SE.componentes;
 
-import SE.entidades.ca_materia;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
@@ -186,7 +185,7 @@ public class Combos {
     }
     private static Object[] arregloPeriodo(ArrayList<ma_periodo> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
-        arreglo[0] = "MATERIAS...";
+        arreglo[0] = "PERIODO...";
         for (int i = 0; i < lista.size(); i++) {
             arreglo[(i + 1)] = lista.get(i).getPeriodo();
         }

@@ -467,10 +467,10 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
             String estado = "";
 
             if (promedio >= 7) {
-                estado = "APROVADO";
+                estado = "APROBADO";
             }
             if (promedio < 7) {
-                estado = "REPROVADO";
+                estado = "REPROBADO";
             }
             jtPromedio.setValueAt(estado, i, 6);
 
@@ -499,14 +499,15 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
 //        }
         System.out.println("a: " + a);
         if (a >= 7) {
-            estado = "APROVADO";
-        } else {
-            estado = "REPROVADO";
+            estado = "APROBADO";
+        }
+        if (a < 7) {
+            estado = "REPROBADO";
         }
         ArrayList<String> queryA = new ArrayList<String>();
-        ArrayList<String> queryB = new ArrayList<String>();
+//        ArrayList<String> queryB = new ArrayList<String>();
         String actA = "";
-        String actB = "";
+//        String actB = "";
 
         actA = "UPDATE `ma_matricula`\n"
                 + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
@@ -520,16 +521,16 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
         crud.matriculaAnualEstado(queryA);
         queryA.clear();
 
-        actB = "UPDATE `ma_paralelo`\n"
-                + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
-                + "  `f_actualizacion` = NOW(),\n"
-                + "  `capacidad` = 'S'\n"
-                + "WHERE `capacidad`'N' AND `id_sucursal_pa`='" + lbSucursal.getText() + "';";
-//            System.out.println("id fin: " + id);
-        queryB.add(actB);
-        System.out.println("queryB: " + queryB);
-        crud.paraleloCapacidadAnual(queryB);
-        queryB.clear();
+//        actB = "UPDATE `ma_paralelo`\n"
+//                + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
+//                + "  `f_actualizacion` = NOW(),\n"
+//                + "  `capacidad` = 'S'\n"
+//                + "WHERE `capacidad`'N' AND `id_sucursal_pa`='" + lbSucursal.getText() + "';";
+////            System.out.println("id fin: " + id);
+//        queryB.add(actB);
+//        System.out.println("queryB: " + queryB);
+//        crud.paraleloCapacidadAnual(queryB);
+//        queryB.clear();
     }
 
     private void btnImprimirPQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPQActionPerformed
@@ -568,7 +569,7 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
             String dir = System.getProperty("user.dir") + "/Reportes/" + "CalificacionReporteSq.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
@@ -590,7 +591,7 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
             String dir = System.getProperty("user.dir") + "/Reportes/" + "ReporteAnual.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
@@ -603,12 +604,12 @@ public class ReporteAlumnosTodosCalificacionesActualesForm extends javax.swing.J
     }
 
     private void btnImprimirSQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirSQActionPerformed
-        matricula();
+//        matricula();
         imprimirSq();
     }//GEN-LAST:event_btnImprimirSQActionPerformed
 
     private void BtnReporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteFinalActionPerformed
-        matricula();
+//        matricula();
         promedio();
     }//GEN-LAST:event_BtnReporteFinalActionPerformed
     public void tablaPQ() {

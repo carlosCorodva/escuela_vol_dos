@@ -11,6 +11,7 @@ import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,17 +56,21 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculasReportes(je);
-        Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+        tabla();
         comboParalelo();
     }
 
     public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public void tabla() {
+        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarAlumnosMatriculasReportes(je);
+        Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
     }
 
     public void comboParalelo() {
@@ -342,6 +347,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
         if (curso2 == 0) {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
+//            tabla();
         } else {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(true);
@@ -358,25 +364,32 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtReporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReporteMousePressed
-        int i = 0;
+
         try {
+            int i = 0;
             if (evt.getClickCount() == 2) {
                 i = jtReporte.getSelectedRow();
                 objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
+                    System.out.println("holaaaaa");
                     ReporteAlumnosCalificacionActualForm ac = new ReporteAlumnosCalificacionActualForm(new javax.swing.JFrame(), true, us, objeto);
                     ac.setVisible(true);
                     listar.clear();
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculasReportes(je);
-                    Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
+                    
+                    tabla();
+//                    JoinMatriculas jj = new JoinMatriculas();
+//                    jj.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                    jj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//                    listar = crud.listarAlumnosMatriculasReportes(jj);
+//                    Tablas.cargarJoinMatriculasReportes(jtReporte, listar);
                 }
-                System.out.println("holaaaaa5");
+//                cbFiltroCurso.setSelectedIndex(0);
+//                tabla();
             }
         } catch (Exception e) {
             Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, e);
         }
+//        tabla();
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -404,7 +417,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
 //            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_btnImprimirActionPerformed
-public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> listarobj) {
+    public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> listarobj) {
         JoinMatriculas objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getId_matricula().toString())) {

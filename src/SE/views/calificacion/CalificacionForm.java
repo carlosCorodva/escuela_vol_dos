@@ -451,8 +451,9 @@ public class CalificacionForm extends javax.swing.JDialog {
     public void calcularPromedio() {
         try {
             if (jtCalificacion.getColumnCount() >= 6) {
-
+                
                 for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
+                    
                     Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
                     Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
                     Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
@@ -473,7 +474,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                     jtCalificacion.setValueAt(FormatoNumeros.formato_numero(veinte.toString()), i, 8);
                     Double promedio = ochenta + veinte;
                     if (formativa > 10.00 || practica > 10.00 || aporte > 10.00 || examen > 10.00 || promedio > 10.00) {
-                        JOptionPane.showMessageDialog(this, "NO PUEDE CALIFICAR MAYOR A DIEZ 10.00");
+                        JOptionPane.showMessageDialog(this, "NO PUEDE CALIFICAR MAYOR A 10.00");
                         promedio = 0.00;
                     }
 

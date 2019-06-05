@@ -39,7 +39,6 @@ public class Tablas {
             lab.removeRow(0);
         }
         return lab;
-
     }
 
     public static void filtro(String valor, JTable Tabla) {

@@ -392,8 +392,16 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     public void Guardar() {
         System.out.println("guardar");
         String obs = "";
+        String est ="";
         Long cc, sb;
 
+        if ("APROBADO".equals(mat.getEstado_matricula())) {
+            est = "APROBADO-CERRADO";
+        }
+        if ("REPROBADO".equals(mat.getEstado_matricula())) {
+            est = "REPROBADO-CERRADO";
+        }
+        
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -418,6 +426,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             obj.setObservacion(obs);
             obj.setCopia_cedula(cc);
             obj.setServicio_basico(sb);
+            obj.setEstado_matricula(est);
             obj.setParalelo(cbParalelo.getSelectedItem().toString());
 
             obj.setId_usuario(mat.getId_usuario());

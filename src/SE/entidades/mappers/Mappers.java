@@ -279,7 +279,6 @@ public class Mappers {
             obj.setParentesco(rs.getString("Parentesco"));
             obj.setParentesco_dos(rs.getString("Parentesco_dos"));
             obj.setAnt_escuela(rs.getString("Ant_escuela"));
-
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

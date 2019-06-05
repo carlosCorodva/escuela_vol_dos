@@ -45,7 +45,8 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
     public ReporteAlumnosCalificacionActualForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         mat = matricula;
@@ -61,7 +62,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
     public ReporteAlumnosCalificacionActualForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+//        initComponents();
+//        super(parent, modal = false);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public void formulario() {
@@ -467,10 +471,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             String estado = "";
 
             if (promedio >= 7) {
-                estado = "APROVADO";
+                estado = "APROBADO";
             }
             if (promedio < 7) {
-                estado = "REPROVADO";
+                estado = "REPROBADO";
             }
             jtPromedio.setValueAt(estado, i, 6);
 
@@ -489,19 +493,21 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
     public void matricula() {
-        int a = Integer.parseInt(txtPromedio.getText());
+        Double nota = Double.valueOf(txtPromedio.getText());
+        int a = 0;
         String estado = "";
-//        for (int i = 0; i < jtPromedio.getRowCount(); i++) {
-//            String dato = jtPromedio.getValueAt(i, 5).toString();
-//            if ("APROVADO".equals(dato)) {
-//                a = a + 1;
-//            }
-//        }
+        for (int i = 0; i < jtPromedio.getRowCount(); i++) {
+            String dato = jtPromedio.getValueAt(i, 6).toString();
+            if ("APROBADO".equals(dato)) {
+                a = a + 1;
+            }
+        }
         System.out.println("a: " + a);
-        if (a >= 7) {
-            estado = "APROVADO";
-        } else {
-            estado = "REPROVADO";
+        if (a >= 10) {
+            estado = "APROBADO";
+        }
+        if (a < 10) {
+            estado = "REPROBADO";
         }
         ArrayList<String> queryA = new ArrayList<String>();
         ArrayList<String> queryB = new ArrayList<String>();
@@ -512,7 +518,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                 + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
                 + "  `f_actualizacion` = NOW(),\n"
                 + "  `estado_matricula` = '" + estado + "',\n"
-                + "  `promedio_matricula` = '" + txtPromedio.getText() + "'\n"
+                + "  `promedio_matricula` = '" + nota + "'\n"
                 + "WHERE `id_matricula` = '" + mat.getId_matricula() + "';";
 //            System.out.println("id fin: " + id);
         queryA.add(actA);
@@ -520,11 +526,9 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         crud.matriculaAnualEstado(queryA);
         queryA.clear();
 
-        actB = "UPDATE `ma_paralelo`\n"
-                + "SET `id_actualizacion` = '" + lbIdUsuario.getText() + "',\n"
-                + "  `f_actualizacion` = NOW(),\n"
-                + "  `capacidad` = 'S'\n"
-                + "WHERE `capacidad`'N' AND `id_sucursal_pa`='" + lbSucursal.getText() + "';";
+        actB = "UPDATE `us_usuario` SET `f_actualizacion`= NOW(), \n"
+                + "`id_actualizacion` = '" + us.getId_usuario() + "' \n"
+                + "WHERE `id_usuario` =" + mat.getId_usuario() + ";";
 //            System.out.println("id fin: " + id);
         queryB.add(actB);
         System.out.println("queryB: " + queryB);
@@ -568,7 +572,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             String dir = System.getProperty("user.dir") + "/Reportes/" + "CalificacionReporteSq.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
@@ -590,7 +594,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             String dir = System.getProperty("user.dir") + "/Reportes/" + "ReporteAnual.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));

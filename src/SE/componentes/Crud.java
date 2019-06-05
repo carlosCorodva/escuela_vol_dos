@@ -1498,13 +1498,14 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getParalelo());
             pro.setLong(3, us.getId_empleado());
             pro.setString(4, us.getObservacion());
             pro.setLong(5, us.getCopia_cedula());
             pro.setLong(6, us.getServicio_basico());
+            pro.setString(7, us.getEstado_matricula());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
