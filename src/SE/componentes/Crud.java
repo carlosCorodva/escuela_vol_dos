@@ -1498,7 +1498,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getParalelo());
             pro.setLong(3, us.getId_empleado());
@@ -1506,6 +1506,7 @@ public class Crud {
             pro.setLong(5, us.getCopia_cedula());
             pro.setLong(6, us.getServicio_basico());
             pro.setString(7, us.getEstado_matricula());
+            pro.setLong(8, us.getId_matricula());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -2068,6 +2069,40 @@ public class Crud {
         }
         return lista;
     }
+    
+    public ArrayList<JoinCalificacion> ReportePQTodosPeriodos(JoinCalificacion pe) {
+        ArrayList<JoinCalificacion> lista = new ArrayList<JoinCalificacion>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_calificacion_pq_todos_periodos(?,?) }");
+            pro.setLong(1, pe.getId_matricula());
+            pro.setLong(2, pe.getId_sucursal());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                JoinCalificacion obj = Mappers.getCalificacionFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    
     public ArrayList<JoinCalificacion> ReporteSegundoQuimestre(JoinCalificacion pe) {
         ArrayList<JoinCalificacion> lista = new ArrayList<JoinCalificacion>();
         try {
@@ -2100,6 +2135,40 @@ public class Crud {
         }
         return lista;
     }
+    
+    public ArrayList<JoinCalificacion> ReporteSQTodosPeriodos(JoinCalificacion pe) {
+        ArrayList<JoinCalificacion> lista = new ArrayList<JoinCalificacion>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_calificacion_sq_todos_periodos(?,?) }");
+            pro.setLong(1, pe.getId_matricula());
+            pro.setLong(2, pe.getId_sucursal());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                JoinCalificacion obj = Mappers.getCalificacionFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    
     public void matriculaAnualEstado(ArrayList<String> queryA) {
 
         try {

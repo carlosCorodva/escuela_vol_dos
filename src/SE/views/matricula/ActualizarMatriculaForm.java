@@ -91,12 +91,13 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnMatricuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
         lbPeriodo = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -243,12 +244,12 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/live_contacts_32.png"))); // NOI18N
-        jButton1.setText("MATRICULAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMatricuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnMatricuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/live_contacts_32.png"))); // NOI18N
+        btnMatricuar.setText("MATRICULAR");
+        btnMatricuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMatricuarActionPerformed(evt);
             }
         });
 
@@ -271,6 +272,15 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         lbPeriodo.setForeground(new java.awt.Color(255, 255, 255));
         lbPeriodo.setText("2018-2019");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/impresora 32.png"))); // NOI18N
+        jButton2.setText("IMPRIMIR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,25 +288,26 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(lbSucursal)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbEmpresa)
                 .addGap(90, 90, 90)
                 .addComponent(lbIdUsuario)
                 .addGap(66, 66, 66))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnSalir)
-                .addGap(79, 79, 79))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSucursal)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(128, 128, 128)
+                            .addComponent(btnMatricuar)
+                            .addGap(31, 31, 31)
+                            .addComponent(btnSalir))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
@@ -307,25 +318,21 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnMatricuar)
+                            .addComponent(btnSalir)
+                            .addComponent(jButton2))
+                        .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbIdUsuario)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbSucursal)
-                            .addComponent(lbEmpresa))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(lbIdUsuario)
+                    .addComponent(lbEmpresa)
+                    .addComponent(lbSucursal))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,7 +343,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -392,7 +399,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     public void Guardar() {
         System.out.println("guardar");
         String obs = "";
-        String est ="";
+        String est = "";
         Long cc, sb;
 
         if ("APROBADO".equals(mat.getEstado_matricula())) {
@@ -401,7 +408,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         if ("REPROBADO".equals(mat.getEstado_matricula())) {
             est = "REPROBADO-CERRADO";
         }
-        
+        System.out.println("est: " + est);
+
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -414,7 +422,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             sb = Long.valueOf(0);
         }
         if (txtObservacion.getText().length() < 1) {
-            obs = "NUEVO MATRICULA";
+            obs = "NUEVA MATRICULA";
         } else {
             obs = txtObservacion.getText();
         }
@@ -431,15 +439,14 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
 
             obj.setId_usuario(mat.getId_usuario());
             obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
+            obj.setId_matricula(mat.getId_matricula());
 
             try {
                 String a = crud.CrearMatriculaActualizar(obj);
                 JOptionPane.showMessageDialog(this, a);
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-            setVisible(false);
         }
     }
 
@@ -450,8 +457,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         try {
             String dir = System.getProperty("user.dir") + "/Reportes/" + "MatriculaReporte.jasper";
             JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-            JDialog frame = new JDialog();
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(dato));
+            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
@@ -459,13 +466,35 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             frame.setVisible(true);
             viewer.setFitWidthZoomRatio();
         } catch (JRException ex) {
-            Logger.getLogger(CrearMaatriculaForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActualizarMatriculaForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        imprimirMatricula();
+    private void btnMatricuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatricuarActionPerformed
         Guardar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            JoinMatriculas ob = new JoinMatriculas();
+            ob.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            ob.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
+            ob.setParalelo(cbParalelo.getSelectedItem().toString());
+            crud.ValidarCursos(ob);
+            
+            jm.setId_matricula(mat.getId_matricula());
+            paralelo = crud.ComboParaleloActualizar(jm);
+            cbParalelo.setModel(Combos.listarComboParalelosActualizar(paralelo));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA IMPRIMIR LA MATRICULA?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            imprimirMatricula();
+        } else {
+        }
+        btnMatricuar.setEnabled(false);
+    }//GEN-LAST:event_btnMatricuarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        imprimirMatricula();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,11 +539,12 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMatricuar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbParalelo;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxServicioBasico;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;

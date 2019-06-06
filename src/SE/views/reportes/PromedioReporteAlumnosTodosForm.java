@@ -45,17 +45,23 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
     public PromedioReporteAlumnosTodosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;
+        System.out.println("1");
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        System.out.println("2");
         formulario();
+        System.out.println("3");
         tablaPQ();
+        System.out.println("4");
         tablaSQ();
+        System.out.println("5");
         calcularPromedio();
     }
 
@@ -420,7 +426,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
 
         cal.setId_matricula(mat.getId_matricula());
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        reporte = crud.ReportePrimerQuimestre(cal);
+        reporte = crud.ReportePQTodosPeriodos(cal);
         Tablas.tablaReporteCalificacionPromedio(reporte, jtPromedio);
 
         for (int i = 0; i < jtPrimerQ.getRowCount(); i++) {
@@ -615,7 +621,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     public void tablaPQ() {
         cal.setId_matricula(mat.getId_matricula());
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        reporte = crud.ReportePrimerQuimestre(cal);
+        reporte = crud.ReportePQTodosPeriodos(cal);
         Tablas.tablaReporteCalificacion(reporte, jtPrimerQ);
         for (int c = 0; c < jtPrimerQ.getColumnCount(); c++) {
             Class<?> col_class = jtPrimerQ.getColumnClass(c);
@@ -626,7 +632,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     public void tablaSQ() {
         cal.setId_matricula(mat.getId_matricula());
         cal.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        reporte = crud.ReporteSegundoQuimestre(cal);
+        reporte = crud.ReporteSQTodosPeriodos(cal);
         Tablas.tablaReporteCalificacion(reporte, jtSegundoQ);
         for (int c = 0; c < jtSegundoQ.getColumnCount(); c++) {
             Class<?> col_class = jtSegundoQ.getColumnClass(c);

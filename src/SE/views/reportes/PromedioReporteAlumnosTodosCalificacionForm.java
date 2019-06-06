@@ -427,6 +427,7 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
                 i = jtReporte.getSelectedRow();
                 objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
+                    System.out.println("obj: "+jtReporte.getValueAt(i, 0).toString());
                     PromedioReporteAlumnosTodosForm ac = new PromedioReporteAlumnosTodosForm(new javax.swing.JFrame(), true, us, objeto);
                     ac.setVisible(true);
                     listar.clear();
