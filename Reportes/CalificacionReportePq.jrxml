@@ -54,20 +54,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field3}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="619" y="10" width="93" height="27" uuid="0123a7fd-f622-4c5b-95ea-5d450280acf7"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PROMEDIO: ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="712" y="10" width="80" height="27" uuid="84e5b2b2-a95e-44dd-97ef-a0dc66328fce"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{field4}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="82" y="10" width="160" height="27" uuid="952cacb7-8336-4329-a2b8-e328f77d0d47"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
