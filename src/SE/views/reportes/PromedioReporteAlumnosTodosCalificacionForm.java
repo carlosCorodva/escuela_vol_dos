@@ -349,14 +349,14 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
             je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             je.setCedula(txtBuscar.getText());
-            listar = crud.listarAlumnosMatriculasReportesCedula(je);
+            listar = crud.listarAlumnosMatriculasReportesCedulaTodoPeriodo(je);
             Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         }
         if (filtro == 2 && txtBuscar.getText().length() >= 3) {
             je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             je.setApellidos_nombres(txtBuscar.getText());
-            listar = crud.listarAlumnosMatriculasReportesAlumno(je);
+            listar = crud.listarAlumnosMatriculasReportesAlumnoTodosPeriodos(je);
             Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         }
         if (filtro == 3 && cbFiltroCurso.getSelectedIndex() != 0 && cbPeriodo.getSelectedIndex() != 0) {

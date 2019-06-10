@@ -1415,8 +1415,10 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_cargar_combo_paralelo(?) }");
+                    "{ call ma_matricula_cargar_combo_paralelo(?,?,?) }");
             pro.setLong(1, mp.getId_matricula());
+            pro.setString(2, mp.getEstado_matricula());
+            pro.setLong(3, mp.getId_sucursal());
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
@@ -1502,7 +1504,7 @@ public class Crud {
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getParalelo());
             pro.setLong(3, us.getId_empleado());
-            pro.setString(4, us.getObservacion());
+            pro.setString(4, us.getMatricula_obs());
             pro.setLong(5, us.getCopia_cedula());
             pro.setLong(6, us.getServicio_basico());
             pro.setString(7, us.getEstado_matricula());
@@ -1908,6 +1910,40 @@ public class Crud {
         }
         return valor;
     }
+    
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesCedulaTodoPeriodo(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_matricula_actual_ced_todos_periodos(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getCedula());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
     public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesAlumno(JoinMatriculas je) {
         ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
         try {
@@ -1940,6 +1976,39 @@ public class Crud {
         }
         return valor;
     }
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesAlumnoTodosPeriodos(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_matricula_actual_nomb_ape_todos_periodos(?,?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            pro.setString(3, je.getApellidos_nombres());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
     public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesCurso(JoinMatriculas je) {
         ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
         try {

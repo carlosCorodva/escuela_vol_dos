@@ -612,8 +612,10 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
 //    }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        imprimirMatricula();
         Guardar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public void validar(){
         try {
             JoinMatriculas ob = new JoinMatriculas();
             ob.setId_sucursal(Long.valueOf(lbSucursal.getText()));
@@ -624,9 +626,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
-
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
+    }
+    
     public void imprimirMatricula() {
         ArrayList dato = new ArrayList();
         re_clase_eporte datos = new re_clase_eporte(us.getNombre_comercial_su(), txtCedula.getText(), txtAlumno.getText(), us.getZona(), us.getDistrito(), us.getCircuito(), us.getProvincia_suc(), us.getCanton_suc(), lbPeriodo.getText(), cbParalelo.getSelectedItem().toString(), us.getJornada(), txtObservacion.getText());
@@ -836,6 +837,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         } else if (cbParUno.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
         } else {
+            imprimirMatricula();
+            
             obj.setApellidos_nombres(txtAlumno.getText());
             obj.setCedula(txtCedula.getText());
             obj.setDireccion(txtDireccion.getText());
@@ -922,6 +925,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             dtFecha.setDateFormatString("");
             dtFecha.setEnabled(false);
             btnGuardar.setEnabled(false);
+            
+            validar();
         }
     }
 

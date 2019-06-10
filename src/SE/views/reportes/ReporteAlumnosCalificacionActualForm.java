@@ -611,6 +611,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         imprimirSq();
     }//GEN-LAST:event_btnImprimirSQActionPerformed
 
+    public void validarGraduados(){
+        
+    }
+    
     private void BtnReporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteFinalActionPerformed
         matricula();
         promedio();
