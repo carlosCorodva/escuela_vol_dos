@@ -48,7 +48,8 @@ public class CalificacionForm extends javax.swing.JDialog {
     String id = "";
 
     public CalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         jtIdAlumnos.setVisible(false);
@@ -68,7 +69,8 @@ public class CalificacionForm extends javax.swing.JDialog {
     }
 
     public CalificacionForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }

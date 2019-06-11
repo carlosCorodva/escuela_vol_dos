@@ -45,7 +45,8 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
     String curso = "";
 
     public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
-        super(parent, modal = false);
+//        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         us = usuario;
@@ -62,6 +63,7 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
 
     public ReporteAlumnosperiodoActualForm(java.awt.Frame parent, boolean modal) {
 //        super(parent, modal = false);
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }

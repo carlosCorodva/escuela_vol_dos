@@ -436,8 +436,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-            validarCursos();
             imprimir();
+            validarCursos();
         }
     }
 

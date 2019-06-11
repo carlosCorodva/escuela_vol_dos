@@ -11,7 +11,6 @@ import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.calificacion.CalificacionForm;
 import SE.views.empresa.MostrarEmpresaUnoForm;
-import SE.views.empresa.MostrarEmpresaForm;
 import SE.views.empresa.sucursal.MostrarSucursalesForm;
 import SE.views.empresa.MostrarInactivosForm;
 import SE.views.materias.MostrarMateriasForm;
@@ -55,6 +54,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        lbsuc.setText(us.getNombre_comercial_su());
+        lbUsuario.setText(us.getUsuario());
     }
 
     public FrmPrincipal() {
@@ -79,7 +80,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbUsuario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lbNum = new javax.swing.JLabel();
+        lbsuc = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
@@ -178,10 +179,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbUsuario.setText("jLabel2");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("IDENTIFICADOR:");
+        jLabel3.setText("ESCUELA:");
 
-        lbNum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbNum.setText("   ");
+        lbsuc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbsuc.setText("   ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,23 +191,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNum, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(lbsuc, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 9, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbNum)
+                    .addComponent(lbsuc)
                     .addComponent(jLabel1)
-                    .addComponent(lbUsuario)))
+                    .addComponent(lbUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lbEmpresa.setText("empresa");
@@ -461,7 +463,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(lbEmpresa)
                 .addGap(61, 61, 61)
                 .addComponent(lbSucursal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -644,8 +646,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
-    private javax.swing.JLabel lbNum;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JLabel lbUsuario;
+    private javax.swing.JLabel lbsuc;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package Principal;
 
 import SE.componentes.Cargar;
 import SE.componentes.Conexion;
+import SE.componentes.Variables;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.logging.Level;
@@ -21,10 +22,11 @@ import javax.swing.UIManager;
  * @author admin1
  */
 public final class CargarSistema extends javax.swing.JFrame {
-    
+
     private static final long serialVersionUID = 1L;
     Cargar hilo;
     Conexion c = new Conexion();
+    Variables fondo = new Variables();
 
     /**
      * Creates new form CargaSistema
@@ -32,8 +34,6 @@ public final class CargarSistema extends javax.swing.JFrame {
     public CargarSistema() {
         setUndecorated(true);
         initComponents();
-        Image logof = new ImageIcon(System.getProperty("user.dir")+"/src/Frm/imagen/Asofar.jpeg").getImage();        
-        this.setIconImage(logof);
         setLocationRelativeTo(null);
         carga_pb.setStringPainted(true);
         UIManager.put("nimbusOrange", new Color(38, 139, 210));
@@ -74,13 +74,13 @@ public final class CargarSistema extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(carga_pb, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
-            .addComponent(lbImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(carga_pb, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(carga_pb, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -89,18 +89,24 @@ public final class CargarSistema extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-        public void imagenes(){
-        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/escuela.jpg"));
+
+    public void imagenes() {
+        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/logopng.png"));
+        Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
+        lbImagen.setIcon(fondoLogo);
+        this.repaint();
+    }
+    public void cargado() {
+        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/logopng.png"));
         Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();

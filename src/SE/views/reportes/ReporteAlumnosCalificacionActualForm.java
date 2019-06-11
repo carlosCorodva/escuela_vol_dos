@@ -38,7 +38,8 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     ArrayList<JoinCalificacion> reporte = null;
     Crud crud = new Crud();
     JoinEmpleados us = null;
-    JoinMatriculas mat = null;
+    JoinMatriculas mat = null; 
+    JoinMatriculas ma = new JoinMatriculas();
     DefaultTableModel md = new DefaultTableModel();
     JoinCalificacion cal = new JoinCalificacion();
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -62,8 +63,6 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
     public ReporteAlumnosCalificacionActualForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-//        initComponents();
-//        super(parent, modal = false);
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -612,12 +611,16 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnImprimirSQActionPerformed
 
     public void validarGraduados(){
-        
+        ma.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        ma.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
+        ma.setId_usuario(mat.getId_usuario());
+        crud.ValidarAlumnosGraduados(ma);
     }
     
     private void BtnReporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteFinalActionPerformed
         matricula();
         promedio();
+        validarGraduados();
     }//GEN-LAST:event_BtnReporteFinalActionPerformed
     public void tablaPQ() {
         cal.setId_matricula(mat.getId_matricula());
