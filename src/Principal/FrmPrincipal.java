@@ -17,6 +17,7 @@ import SE.views.materias.MostrarMateriasForm;
 import SE.views.matricula.MostrarAlumnosForm;
 import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
+import SE.views.reportes.GraduadosReporteForm;
 import SE.views.reportes.MostrarAlumnosReporteForm;
 import SE.views.reportes.MostrarEmpleadosReportesForm;
 import SE.views.reportes.PromedioReporteAlumnosTodosCalificacionForm;
@@ -108,6 +109,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -418,6 +420,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem17);
 
+        jMenuItem18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem18.setText("GRADUADOS");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem18);
+
         jMenuBar1.add(jMenu8);
 
         jMenu3.setText("AYUDA");
@@ -574,6 +585,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         re.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        GraduadosReporteForm gr = new GraduadosReporteForm(new javax.swing.JFrame(), true, us);
+        gr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -634,6 +650,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

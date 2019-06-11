@@ -6,6 +6,7 @@ import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinGraduados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
@@ -2406,6 +2407,69 @@ public class Crud {
             pro.setLong(2, us.getId_usuario());
             pro.setLong(3, us.getId_empleado());
             pro.execute();
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public ArrayList<JoinGraduados> listarAlumnosGraduadosReportes(JoinGraduados je) {
+        ArrayList<JoinGraduados> valor = new ArrayList<JoinGraduados>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_graduados(?,?) }");
+            pro.setLong(1, je.getId_sucursal());
+            pro.setString(2, je.getPeriodo());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinGraduados obj = Mappers.getGraduadosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public ArrayList<JoinGraduados> listarAlumnosGraduadosTodosReportes(JoinGraduados je) {
+        ArrayList<JoinGraduados> valor = new ArrayList<JoinGraduados>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_graduados_todos(?) }");
+            pro.setLong(1, je.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinGraduados obj = Mappers.getGraduadosFromResultSet(rs);
+                valor.add(obj);
+            }
             con.commit();
         } catch (Exception e) {
             try {

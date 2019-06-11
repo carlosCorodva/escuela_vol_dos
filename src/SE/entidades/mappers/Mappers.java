@@ -11,6 +11,7 @@ import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
+import SE.entidades.join.JoinGraduados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
@@ -372,6 +373,32 @@ public class Mappers {
             obj.setSupletorio(rs.getDouble("Supletorio"));
             obj.setVeinte_porcentaje(rs.getDouble("Veinte_porcentaje"));
 
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    public static JoinGraduados getGraduadosFromResultSet(ResultSet rs) {
+        JoinGraduados obj = new JoinGraduados();
+        try {
+            obj.setId_usuario(rs.getLong("Id_usuario"));
+            obj.setId_registro(rs.getLong("Id_registro"));
+            obj.setApellidos_nombres(rs.getString("Apellidos_nombres"));
+            obj.setCedula(rs.getString("Cedula"));
+            obj.setId_rol(rs.getLong("Id_rol"));
+            obj.setId_sucursal(rs.getLong("id_sucursal"));
+            obj.setId_matricula(rs.getLong("Id_matricula"));
+            obj.setId_periodo(rs.getLong("Id_periodo"));
+            obj.setMatricula_obs(rs.getString("Matricula_obs"));
+            obj.setEstado_matricula(rs.getString("Estado_matricula"));
+            obj.setPromedio_matricula(rs.getDouble("Promedio_matricula"));
+            obj.setPeriodo(rs.getString("Periodo"));
+            obj.setGraduado(rs.getString("Graduado"));
+            obj.setDoc_escuela_ant(rs.getLong("Doc_escuela_ant"));
+            obj.setPromedio_graduacion(rs.getDouble("Promedio_graduacion"));
+            obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
+            obj.setId_paralelo(rs.getLong("Id_paralelo"));
+            obj.setParalelo(rs.getString("Paralelo"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }
