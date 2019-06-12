@@ -30,6 +30,9 @@ public class ActualizarSucursalesForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         suc = sucursal;
         lbIdUsuario.setText(us.getId_usuario().toString());
@@ -324,11 +327,11 @@ public class ActualizarSucursalesForm extends javax.swing.JDialog {
                                 .addComponent(lbSucursal)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbIdUsuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbIdUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(lbEmpresa)))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );

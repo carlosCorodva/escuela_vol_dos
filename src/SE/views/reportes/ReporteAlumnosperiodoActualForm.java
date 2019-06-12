@@ -48,6 +48,9 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
 //        super(parent, modal = false);
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         us = usuario;
         cbFiltroCurso.setEnabled(false);

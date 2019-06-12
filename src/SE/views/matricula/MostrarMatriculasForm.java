@@ -34,6 +34,9 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         us = usuario;
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
         btnBuscar.setEnabled(false);

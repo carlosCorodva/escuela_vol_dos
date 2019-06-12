@@ -40,6 +40,9 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         mat=matricula;
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());

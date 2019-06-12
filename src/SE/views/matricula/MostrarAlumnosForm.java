@@ -35,6 +35,9 @@ public class MostrarAlumnosForm extends javax.swing.JDialog {
         initComponents();
         us = usuario;
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         jToolBar1.setEnabled(false);
         btnBuscar.setEnabled(false);
         txtBuscar.setEnabled(false);

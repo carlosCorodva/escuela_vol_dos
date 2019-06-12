@@ -6,7 +6,6 @@
 package SE.views.matricula.cursos;
 
 import SE.componentes.Crud;
-import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
 import javax.swing.JOptionPane;
@@ -27,6 +26,9 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
     public ActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, ma_paralelo paralelo) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         us = usuario;
         cm = paralelo;

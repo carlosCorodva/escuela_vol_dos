@@ -32,6 +32,9 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
 
     public PermisosMostrarEmpleadosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         initComponents();
         us = usuario;
         this.setLocationRelativeTo(null);

@@ -47,6 +47,9 @@ public class ReimprimirMtatriculaForm extends javax.swing.JDialog {
     public ReimprimirMtatriculaForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         txtAlumno.setEditable(false);
         txtCedula.setEditable(false);

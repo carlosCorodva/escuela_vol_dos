@@ -50,6 +50,9 @@ public class GraduadosReporteCalificacionForm extends javax.swing.JDialog {
 //        super(parent, modal = false);
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         mat = graduado;
         us = usuario;

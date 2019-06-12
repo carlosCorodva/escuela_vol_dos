@@ -35,6 +35,8 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         lbIdUsuario.setText(usuario.getId_usuario().toString());
         lbEmpresa.setText(usuario.getId_empresa().toString());
         us = usuario;

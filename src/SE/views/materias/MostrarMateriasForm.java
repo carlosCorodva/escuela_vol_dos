@@ -9,8 +9,6 @@ import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.ca_materia;
 import SE.entidades.join.JoinEmpleados;
-import SE.views.usuario.empleados.ActualizarEmpleadoForm;
-import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +32,7 @@ public class MostrarMateriasForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbIdUsuario.setVisible(false);
         listar = crud.listarMaterias();
         Tablas.cargarTablaMateria(jtMaterias, listar);
         us = usuario;

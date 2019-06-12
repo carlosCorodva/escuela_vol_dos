@@ -54,6 +54,9 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
     public PromedioReporteAlumnosTodosCalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal = false);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         us = usuario;
         form();

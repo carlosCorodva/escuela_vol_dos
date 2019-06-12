@@ -32,6 +32,9 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
     public PermisosCrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         txtnombre.setEditable(false);
         us = usuario;

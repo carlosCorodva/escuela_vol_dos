@@ -48,6 +48,9 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
 //        super(parent, modal = false);
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;

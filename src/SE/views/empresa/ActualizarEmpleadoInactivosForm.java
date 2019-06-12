@@ -42,6 +42,9 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         emp = empleado;
         us = usuario;
         Habilitar(false);

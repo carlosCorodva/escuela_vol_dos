@@ -29,6 +29,7 @@ public class CrearEmpresaForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
 

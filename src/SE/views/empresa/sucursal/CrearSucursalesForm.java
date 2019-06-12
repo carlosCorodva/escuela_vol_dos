@@ -30,6 +30,8 @@ public class CrearSucursalesForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbEmpresa.setText(us.getId_empresa().toString());

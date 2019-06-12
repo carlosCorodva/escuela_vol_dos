@@ -48,6 +48,9 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         txtAlumno.setEditable(false);
         txtCedula.setEditable(false);
         lbPeriodo.setVisible(false);

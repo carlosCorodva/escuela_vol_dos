@@ -32,6 +32,9 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
     public MostrarPeriodoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         us = usuario;
         lbEmpresa.setText(us.getId_empresa().toString());

@@ -31,6 +31,9 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
 
     public PermisosActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         initComponents();
         setLocationRelativeTo(null);
         txtnombre.setEditable(false);

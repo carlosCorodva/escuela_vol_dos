@@ -37,6 +37,10 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        lbIdEmpleado.setVisible(false);
         this.setLocationRelativeTo(null);
         emp = empleado;
         us = usuario;

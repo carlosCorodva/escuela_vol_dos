@@ -33,6 +33,9 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
     public MostrarEmpleadosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);

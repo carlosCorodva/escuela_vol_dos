@@ -52,6 +52,9 @@ public class CalificacionForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         jtIdAlumnos.setVisible(false);
         txtCurso.setEditable(false);
         txtMateria.setEditable(false);

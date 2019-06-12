@@ -34,8 +34,7 @@ public class MostrarEmpresaForm extends javax.swing.JDialog {
         us=usuario;
         listar = crud.ListarEmpresas();
         Tablas.cargarTablaEmpresa(jtEmpresa, listar);
-        
-
+        lbIdUsuario.setVisible(false);
     }
     public MostrarEmpresaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

@@ -25,6 +25,7 @@ public class ActualizarMateriasForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbIdUsuario.setVisible(false);
         cm=materia;
         lbIdUsuario.setText(usuario.getId_usuario().toString());
         txtCaja.setText(cm.getMateria());

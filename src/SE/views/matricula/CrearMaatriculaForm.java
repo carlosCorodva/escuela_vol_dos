@@ -58,6 +58,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usu;
         lbPeriodo.setVisible(false);
         Habilitar(false);
@@ -164,7 +167,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, -1));
+        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/live_contacts_32.png"))); // NOI18N
@@ -174,7 +177,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 150, -1));
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 150, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 51, 204));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N

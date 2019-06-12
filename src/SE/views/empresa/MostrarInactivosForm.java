@@ -33,6 +33,9 @@ public class MostrarInactivosForm extends javax.swing.JDialog {
         initComponents();
         us = usuario;
         this.setLocationRelativeTo(null);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         jToolBar1.setEnabled(false);
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());

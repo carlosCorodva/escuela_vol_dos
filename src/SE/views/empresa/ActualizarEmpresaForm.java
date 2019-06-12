@@ -29,6 +29,8 @@ public class ActualizarEmpresaForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         empre = empresa;
         lbIdUsuario.setText(us.getId_usuario().toString());

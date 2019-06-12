@@ -35,6 +35,9 @@ public class NuevoEmpleadoDosForm extends javax.swing.JDialog {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         usu = usuario;
         this.setLocationRelativeTo(null);
         lbEmpresa.setText(usu.getId_empresa().toString());

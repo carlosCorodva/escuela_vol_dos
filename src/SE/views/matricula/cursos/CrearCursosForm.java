@@ -25,6 +25,9 @@ public class CrearCursosForm extends javax.swing.JDialog {
     public CrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);
         initComponents();
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usuario;
         setLocationRelativeTo(null);
         lbEmpresa.setText(us.getId_empresa().toString());
