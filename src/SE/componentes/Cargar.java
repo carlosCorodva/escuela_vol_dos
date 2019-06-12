@@ -24,7 +24,7 @@ public class Cargar extends Thread {
     public void run() {
         for (int a = 1; a <= 100; a++) {
             progreso.setValue(a);
-            pausa(25);
+            pausa(30);
         }
     }
 
