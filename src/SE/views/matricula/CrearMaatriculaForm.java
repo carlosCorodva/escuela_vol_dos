@@ -58,9 +58,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
+//        lbSucursal.setVisible(false);
+//        lbEmpresa.setVisible(false);
+//        lbIdUsuario.setVisible(false);
         us = usu;
         lbPeriodo.setVisible(false);
         Habilitar(false);

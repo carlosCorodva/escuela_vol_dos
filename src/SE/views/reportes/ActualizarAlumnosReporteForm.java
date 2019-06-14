@@ -55,6 +55,7 @@ public class ActualizarAlumnosReporteForm extends javax.swing.JDialog {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
+        lbSucrsalNombre.setVisible(false);
         this.setLocationRelativeTo(null);
         us = usu;
         mat = matricula;
