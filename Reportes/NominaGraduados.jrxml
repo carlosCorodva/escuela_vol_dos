@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b134e778-9bec-4df2-ba5f-b3c12cd0b270">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="21"/>
-	<property name="ireport.y" value="353"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="46"/>
+	<property name="ireport.y" value="26"/>
 	<field name="field1" class="java.lang.String"/>
 	<field name="field2" class="java.lang.String"/>
 	<field name="field3" class="java.lang.String"/>
 	<field name="field4" class="java.lang.String"/>
 	<field name="field5" class="java.lang.String"/>
+	<field name="field6" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -25,12 +26,19 @@
 	<pageHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="5" width="166" height="20" uuid="7e07dbd0-6b95-4ff0-a2b3-ae98de96180d"/>
+				<reportElement x="20" y="5" width="237" height="20" uuid="7e07dbd0-6b95-4ff0-a2b3-ae98de96180d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NOMINA DE GRADUADOS]]></text>
+				<text><![CDATA[NOMINA DE GRADUADOS, PERIODO:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="257" y="5" width="100" height="20" uuid="9ab65b60-6c02-43f0-bffb-693b6364f495"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field5}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -56,13 +64,6 @@
 				</textElement>
 				<text><![CDATA[ALUMNO]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="450" y="12" width="100" height="27" forecolor="#FFFFFF" backcolor="#000099" uuid="70c6dc12-650b-47dd-a31a-030fe5469ea2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PERIODO]]></text>
-			</staticText>
 			<line>
 				<reportElement x="9" y="39" width="541" height="1" uuid="7bab38f7-15d5-48d0-9e35-2110329fd338"/>
 			</line>
@@ -84,6 +85,13 @@
 			<line>
 				<reportElement x="549" y="12" width="1" height="27" uuid="3f8dee45-2d16-4354-9c01-4bcfbef0a17f"/>
 			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="12" width="100" height="27" forecolor="#FFFFFF" backcolor="#000099" uuid="beaeac75-a05e-473e-afd8-18f744029e50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARALELO]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -109,13 +117,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{field4}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="449" y="2" width="100" height="28" uuid="9ab65b60-6c02-43f0-bffb-693b6364f495"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{field5}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="9" y="30" width="541" height="1" uuid="68e87c89-fdea-4ba8-bc85-1cff08c09a01"/>
 			</line>
@@ -137,6 +138,11 @@
 			<line>
 				<reportElement x="549" y="2" width="1" height="28" uuid="f5b4b5f9-c8e8-4d44-82ce-c1c3742ae310"/>
 			</line>
+			<textField>
+				<reportElement x="450" y="3" width="100" height="27" uuid="6902b520-8d20-4be8-99cd-6ddedddf103f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{field6}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

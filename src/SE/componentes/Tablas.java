@@ -807,7 +807,7 @@ public class Tablas {
     
     public static void cargarJoinGraduadosReportes(JTable Tabla, ArrayList<JoinGraduados> lista) {
 
-        int[] a = {10, 90, 330, 60, 92};
+        int[] a = {10, 90, 330, 60, 92,40};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
@@ -815,7 +815,7 @@ public class Tablas {
         model = VaciarTabla(Tabla);
         String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES","PERIODO",
             "SUCURSAL","PARALELO"};
-        String[] Filas = new String[5];
+        String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
