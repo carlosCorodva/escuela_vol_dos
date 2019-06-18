@@ -814,7 +814,7 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES","PERIODO",
-            "SUCURSAL"};
+            "SUCURSAL","PARALELO"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -824,6 +824,7 @@ public class Tablas {
             Filas[1] = lista.get(i).getCedula();
             Filas[3] = lista.get(i).getPeriodo();
             Filas[4] = lista.get(i).getNombre_comercial_su();
+            Filas[5] = lista.get(i).getParalelo();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -836,6 +837,8 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
 }

@@ -41,8 +41,8 @@
                           <Group type="102" attributes="0">
                               <Component id="cbFiltro" min="-2" pref="134" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="cbPeriodo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="cbPeriodo" min="-2" pref="152" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="txtBuscar" min="-2" pref="154" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>

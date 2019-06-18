@@ -244,8 +244,8 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
-                                .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
+                                .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(btnBuscar)
@@ -380,7 +380,7 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
        ArrayList lista = new ArrayList();
         for(int i=0;i<jtReporte.getRowCount();i++){
-            re_clase_eporte tabla = new re_clase_eporte(us.getNombre_comercial_su(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,1).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,3).toString());
+            re_clase_eporte tabla = new re_clase_eporte(us.getNombre_comercial_su(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,1).toString(),jtReporte.getValueAt(i,2).toString(),cbPeriodo.getSelectedItem().toString(),jtReporte.getValueAt(i,5).toString());
             lista.add(tabla);
         }
         try {
