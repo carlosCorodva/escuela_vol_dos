@@ -12,17 +12,20 @@ import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinGraduados;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
+import SE.entidades.re_clase_eporte;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-//import net.sf.jasperreports.engine.JRException;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-//import net.sf.jasperreports.engine.util.JRLoader;
-//import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -58,13 +61,14 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
         cbPeriodo.setEnabled(false);
         txtBuscar.setEnabled(false);
         btnBuscar.setEnabled(false);
-        btnImprimir.setVisible(false);
+        btnImprimir.setEnabled(false);
+//        btnImprimir.setVisible(false);
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosGraduadosTodosReportes(je);
-        Tablas.cargarJoinGraduadosReportes(jtReporte, listar);
+//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//        listar = crud.listarAlumnosGraduadosTodosReportes(je);
+//        Tablas.cargarJoinGraduadosReportes(jtReporte, listar);
 //        tabla();
         comboPeriodo();
     }
@@ -162,7 +166,7 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
         );
 
         cbFiltro.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "CEDULA", "APELLIDOS/NOMB", "PARALELO" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "CEDULA", "APELLIDOS/NOMB", "PERIODO" }));
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -214,6 +218,7 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jtReporte);
 
         btnImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/impresora 32.png"))); // NOI18N
         btnImprimir.setText("IMPRIMIR");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +255,7 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
                                 .addComponent(lbEmpresa))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(439, 439, 439)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnImprimir)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -267,9 +272,9 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
                     .addComponent(lbEmpresa))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnImprimir)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -309,14 +314,14 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
             txtBuscar.setText("");
         }
         if (filtro == 1 && txtBuscar.getText().length() >= 3) {
-//            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//            je.setCedula(txtBuscar.getText());
-//            listar = crud.listarAlumnosMatriculasReportesCedula(je);
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            je.setCedula(txtBuscar.getText());
+            listar = crud.listarAlumnosGraduadosCedulaReportes(je);
         }
         if (filtro == 2 && txtBuscar.getText().length() >= 3) {
-//            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//            je.setApellidos_nombres(txtBuscar.getText());
-//            listar = crud.listarAlumnosMatriculasReportesAlumno(je);
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            je.setApellidos_nombres(txtBuscar.getText());
+            listar = crud.listarAlumnosGraduadosAlumnoReportes(je);
         }
         if (filtro == 3 && cbPeriodo.getSelectedIndex() != 0) {
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
@@ -328,8 +333,9 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "NO EXISTE REGISTRO");
         }
         txtBuscar.setText("");
-        cbFiltro.setSelectedIndex(0);
-        cbPeriodo.setSelectedIndex(0);
+        btnImprimir.setEnabled(true);
+//        cbFiltro.setSelectedIndex(0);
+//        cbPeriodo.setSelectedIndex(0);
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -341,7 +347,6 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
         if (curso2 == 0) {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-//            tabla();
         } else {
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(true);
@@ -353,21 +358,19 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtBuscarFocusLost
 
     private void jtReporteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReporteMousePressed
-        try {
-            int i = 0;
-            if (evt.getClickCount() == 2) {
-                i = jtReporte.getSelectedRow();
-                objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
-                if (objeto != null) {
-                    GraduadosReporteCalificacionForm ac = new GraduadosReporteCalificacionForm(new javax.swing.JFrame(), true, us, objeto);
-                    ac.setVisible(true);
-//                    listar.clear();
-//                    tabla();
-                }
-            }
-        } catch (Exception e) {
-            Logger.getLogger(GraduadosReporteForm.class.getName()).log(Level.SEVERE, null, e);
-        }
+//        try {
+//            int i = 0;
+//            if (evt.getClickCount() == 2) {
+//                i = jtReporte.getSelectedRow();
+//                objeto = buscarObjeto(jtReporte.getValueAt(i, 0).toString(), listar);
+//                if (objeto != null) {
+//                    GraduadosReporteCalificacionForm ac = new GraduadosReporteCalificacionForm(new javax.swing.JFrame(), true, us, objeto);
+//                    ac.setVisible(true);
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logger.getLogger(GraduadosReporteForm.class.getName()).log(Level.SEVERE, null, e);
+//        }
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -375,25 +378,25 @@ public class GraduadosReporteForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-//       ArrayList lista = new ArrayList();
-//        for(int i=0;i<jtReporte.getRowCount();i++){
-//            ClaseReporte tabla = new ClaseReporte(cbFiltro.getSelectedItem().toString(),txtBuscar.getText(),cbFiltroCurso.getSelectedItem().toString(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,1).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,3).toString(),jtReporte.getValueAt(i,4).toString(),jtReporte.getValueAt(i,5).toString());
-//            lista.add(tabla);
-//        }
-//        try {
-//            String dir = System.getProperty("user.dir")+"/Reportes/"+"ReporteAlumnos.jasper";
-//            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
-//            JDialog frame = new JDialog();
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho/2,alto/2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+       ArrayList lista = new ArrayList();
+        for(int i=0;i<jtReporte.getRowCount();i++){
+            re_clase_eporte tabla = new re_clase_eporte(us.getNombre_comercial_su(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,1).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,3).toString());
+            lista.add(tabla);
+        }
+        try {
+            String dir = System.getProperty("user.dir")+"/Reportes/"+"NominaGraduados.jasper";
+            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog(this);
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho/2,alto/2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnImprimirActionPerformed
     public JoinGraduados buscarObjeto(String datos, ArrayList<JoinGraduados> listarobj) {
         JoinGraduados objeto1 = null;

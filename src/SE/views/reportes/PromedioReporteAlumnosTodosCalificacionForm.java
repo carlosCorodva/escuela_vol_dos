@@ -457,7 +457,7 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
     public void promedio(){
         ArrayList lista = new ArrayList();
         for(int i=0;i<jtReporte.getRowCount();i++){
-            re_clase_eporte tabla = new re_clase_eporte(cbPeriodo.getSelectedItem().toString(),cbFiltroCurso.getSelectedItem().toString(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,5).toString(),jtReporte.getValueAt(i,6).toString(),txtPromedio.getText());
+            re_clase_eporte tabla = new re_clase_eporte(cbPeriodo.getSelectedItem().toString(),cbFiltroCurso.getSelectedItem().toString(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,5).toString(),jtReporte.getValueAt(i,6).toString(),txtPromedio.getText(),us.getNombre_comercial_su());
             lista.add(tabla);
         }
         try {

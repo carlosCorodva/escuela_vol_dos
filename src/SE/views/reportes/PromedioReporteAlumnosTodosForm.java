@@ -549,7 +549,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     public void imprimirPq() {
         ArrayList lista = new ArrayList();
         for (int i = 0; i < jtPrimerQ.getRowCount(); i++) {
-            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPrimerQ.getValueAt(i, 0).toString(), jtPrimerQ.getValueAt(i, 1).toString(), jtPrimerQ.getValueAt(i, 2).toString(), jtPrimerQ.getValueAt(i, 3).toString(), jtPrimerQ.getValueAt(i, 4).toString(), jtPrimerQ.getValueAt(i, 6).toString(), jtPrimerQ.getValueAt(i, 7).toString(), jtPrimerQ.getValueAt(i, 8).toString(), jtPrimerQ.getValueAt(i, 5).toString(), jtPrimerQ.getValueAt(i, 9).toString());
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPrimerQ.getValueAt(i, 0).toString(), jtPrimerQ.getValueAt(i, 1).toString(), jtPrimerQ.getValueAt(i, 2).toString(), jtPrimerQ.getValueAt(i, 3).toString(), jtPrimerQ.getValueAt(i, 4).toString(), jtPrimerQ.getValueAt(i, 6).toString(), jtPrimerQ.getValueAt(i, 7).toString(), jtPrimerQ.getValueAt(i, 8).toString(), jtPrimerQ.getValueAt(i, 5).toString(), jtPrimerQ.getValueAt(i, 9).toString(),us.getNombre_comercial_su());
             lista.add(tabla);
         }
         try {
@@ -571,7 +571,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     public void imprimirSq() {
         ArrayList lista = new ArrayList();
         for (int i = 0; i < jtSegundoQ.getRowCount(); i++) {
-            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPrimerQ.getValueAt(i, 0).toString(), jtPrimerQ.getValueAt(i, 1).toString(), jtPrimerQ.getValueAt(i, 2).toString(), jtPrimerQ.getValueAt(i, 3).toString(), jtPrimerQ.getValueAt(i, 4).toString(), jtPrimerQ.getValueAt(i, 6).toString(), jtPrimerQ.getValueAt(i, 7).toString(), jtPrimerQ.getValueAt(i, 8).toString(), jtPrimerQ.getValueAt(i, 5).toString(), jtPrimerQ.getValueAt(i, 9).toString());
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPrimerQ.getValueAt(i, 0).toString(), jtPrimerQ.getValueAt(i, 1).toString(), jtPrimerQ.getValueAt(i, 2).toString(), jtPrimerQ.getValueAt(i, 3).toString(), jtPrimerQ.getValueAt(i, 4).toString(), jtPrimerQ.getValueAt(i, 6).toString(), jtPrimerQ.getValueAt(i, 7).toString(), jtPrimerQ.getValueAt(i, 8).toString(), jtPrimerQ.getValueAt(i, 5).toString(), jtPrimerQ.getValueAt(i, 9).toString(),us.getNombre_comercial_su());
             lista.add(tabla);
         }
         try {
@@ -593,7 +593,7 @@ public class PromedioReporteAlumnosTodosForm extends javax.swing.JDialog {
     public void promedio() {
         ArrayList lista = new ArrayList();
         for (int i = 0; i < jtPromedio.getRowCount(); i++) {
-            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPrimerQ.getValueAt(i, 0).toString(), jtPrimerQ.getValueAt(i, 1).toString(), jtPrimerQ.getValueAt(i, 2).toString(), jtPrimerQ.getValueAt(i, 3).toString(), jtPrimerQ.getValueAt(i, 4).toString(), jtPrimerQ.getValueAt(i, 5).toString(), jtPrimerQ.getValueAt(i, 6).toString());
+            re_clase_eporte tabla = new re_clase_eporte(txtAlumno.getText(), txtCurso.getText(), txtPeriodo.getText(), txtPromedio.getText(), jtPromedio.getValueAt(i, 0).toString(), jtPromedio.getValueAt(i, 1).toString(), jtPromedio.getValueAt(i, 2).toString(), jtPromedio.getValueAt(i, 3).toString(), jtPromedio.getValueAt(i, 4).toString(), jtPromedio.getValueAt(i, 5).toString(), jtPromedio.getValueAt(i, 6).toString(),us.getNombre_comercial_su());
             lista.add(tabla);
         }
         try {
