@@ -1809,7 +1809,7 @@ public class Crud {
             pro.setString(3, pe.getParalelo());
             pro.setString(4, pe.getPeriodo());
             pro.setLong(5, pe.getId_sucursal());
-            pro.execute();
+            pro.executeQuery();
             rs = pro.getResultSet();
             while (rs.next()) {
                 JoinCalificacion obj = Mappers.getCalificacionFromResultSet(rs);

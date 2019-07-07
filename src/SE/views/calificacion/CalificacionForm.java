@@ -8,12 +8,23 @@ import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.re_clase_eporte;
 import SE.entidades.us_permiso_curso;
+import SE.views.reportes.PromedioReporteAlumnosTodosForm;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JRViewer;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperFillManager;
 //import net.sf.jasperreports.engine.JasperPrint;
@@ -456,9 +467,9 @@ public class CalificacionForm extends javax.swing.JDialog {
     public void calcularPromedio() {
         try {
             if (jtCalificacion.getColumnCount() >= 6) {
-                
+
                 for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-                    
+
                     Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
                     Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
                     Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
@@ -629,32 +640,30 @@ public class CalificacionForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jtCalificacionKeyTyped
 
-    public void imprimir() {
-//        ArrayList lista = new ArrayList();
-//        for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
-////            ClaseReporte tabla = new ClaseReporte(lbMateria.getText(), lbQuimestre.getText(), lbCurso.getText(), jtCalificacion.getValueAt(i, 0).toString(), jtCalificacion.getValueAt(i, 1).toString(), jtCalificacion.getValueAt(i, 2).toString(), jtCalificacion.getValueAt(i, 3).toString());
-////            lista.add(tabla);
-//        }
-//        try {
-//            String dir = System.getProperty("user.dir") + "/Reportes/" + "Mostrar_alumnos_views.jasper";
-//            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-//            JDialog frame = new JDialog();
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho / 2, alto / 2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(CalificacionForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
-
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-
+        imprimirLista();
     }//GEN-LAST:event_btnImprimirActionPerformed
-
+    public void imprimirLista() {
+        ArrayList lista = new ArrayList();
+        for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
+            re_clase_eporte tabla = new re_clase_eporte(us.getNombre_comercial_su(), jtCalificacion.getValueAt(i, 1).toString(), jtCalificacion.getValueAt(i, 2).toString(), jtCalificacion.getValueAt(i, 3).toString(), jtCalificacion.getValueAt(i, 4).toString(), jtCalificacion.getValueAt(i, 5).toString(), jtCalificacion.getValueAt(i, 7).toString(), jtCalificacion.getValueAt(i, 8).toString(), jtCalificacion.getValueAt(i, 9).toString(), jtCalificacion.getValueAt(i, 10).toString(), txtQuimestre.getText(), txtMateria.getText(), txtCurso.getText(), jtCalificacion.getValueAt(i, 6).toString());
+            lista.add(tabla);
+        }
+        try {
+            String dir = System.getProperty("user.dir") + "/Reportes/" + "CalificacionReportePorfesor.jasper";
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
+            JDialog frame = new JDialog(this);
+            JRViewer viewer = new JRViewer(jprint);
+            frame.add(viewer);
+            frame.setSize(new Dimension(ancho / 2, alto / 2));
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            viewer.setFitWidthZoomRatio();
+        } catch (JRException ex) {
+            Logger.getLogger(CalificacionForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         filtrosCursos();
         cajasTxt();

@@ -49,9 +49,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
         this.setLocationRelativeTo(null);
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
+//        lbSucursal.setVisible(false);
+//        lbEmpresa.setVisible(false);
+//        lbIdUsuario.setVisible(false);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario()+"   "+usuario.getId_usuario() + usuario.getId_empresa()+usuario.getId_sucursal());

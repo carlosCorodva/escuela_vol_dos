@@ -58,9 +58,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-//        lbSucursal.setVisible(false);
-//        lbEmpresa.setVisible(false);
-//        lbIdUsuario.setVisible(false);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         us = usu;
         lbPeriodo.setVisible(false);
         Habilitar(false);
@@ -179,7 +179,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         });
         jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 150, -1));
 
-        jLabel1.setBackground(new java.awt.Color(0, 51, 204));
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
