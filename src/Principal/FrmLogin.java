@@ -1,5 +1,6 @@
 package Principal;
 
+import SE.componentes.AES;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ public class FrmLogin extends javax.swing.JFrame {
     JoinEmpleados objeto = null;
     JoinEmpleados sucursal = null;
     ArrayList<JoinEmpleados> listar = null;
+    AES aes = new AES();
 
     public FrmLogin(/*JoinEmpleados es*/) {
         initComponents();
@@ -194,12 +196,13 @@ public class FrmLogin extends javax.swing.JFrame {
         } else {
             JoinEmpleados obj = new JoinEmpleados();
             obj.setUsuario(txtUsuario.getText());
+            String ec = aes.encrypt(txtContrasenia.getText()/*, "encryt"*/);
             obj.setContrasena(txtContrasenia.getText());
             System.out.println("contraseña " + txtContrasenia.getText());
             try {
                 String a = cr.Iniciar_sesion(obj);
                 System.out.println("mensaje: " + a);
-//                JOptionPane.showMessageDialog(this, a);
+                System.out.println("encrytp: "+ec);
                 if ("s".equals(a)) {
                     objeto = devuelveObjeto(txtUsuario.getText(), listar);
                     System.out.println("holaaaaa");
