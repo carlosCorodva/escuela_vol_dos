@@ -147,8 +147,6 @@ public class ConfirmacionClaveForm extends javax.swing.JDialog {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         clave();
-//        CambioClave cc = new CambioClave(new javax.swing.JFrame(), true,em);
-//        cc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed

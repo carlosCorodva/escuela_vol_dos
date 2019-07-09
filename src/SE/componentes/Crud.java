@@ -166,7 +166,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                        "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -837,11 +837,13 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_periodo_crear(?,?,?,?,?) }");
+                    "{ call ma_periodo_crear(?,?,?,?,?,?,?) }");
             pro.setString(1, us.getPeriodo());
             pro.setLong(2, us.getId_creacion());
             pro.setLong(3, us.getId_empresa_pe());
             pro.setLong(4, us.getId_sucursal_pe());
+            pro.setString(5, us.getInicio());
+            pro.setString(6, us.getFin());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.execute();
             valor = pro.getString("salida");

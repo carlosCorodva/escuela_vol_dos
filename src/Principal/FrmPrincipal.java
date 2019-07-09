@@ -28,6 +28,7 @@ import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
 import SE.views.usuario.empleados.PermisosMostrarEmpleadosForm;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,7 +42,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     Variables fondo = new Variables();
 //    private static final String TITLE = "NOMBRE";
     JoinEmpleados us = null;
-
+    
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
         us = usuario;
@@ -49,19 +50,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
         this.setLocationRelativeTo(null);
-//        lbSucursal.setVisible(false);
-//        lbEmpresa.setVisible(false);
-//        lbIdUsuario.setVisible(false);
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setIconImage(fondo.getIconoVentana());
-        System.out.println("usuario: " + usuario.getUsuario()+"   "+usuario.getId_usuario() + usuario.getId_empresa()+usuario.getId_sucursal());
+        System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbsuc.setText(us.getNombre_comercial_su());
         lbUsuario.setText(us.getUsuario());
     }
-
+    
     public FrmPrincipal() {
         initComponents();
     }
@@ -485,7 +486,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.exit(0);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL SISTEMA?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else {
+            
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
@@ -504,32 +510,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        MostrarMateriasForm mm = new MostrarMateriasForm(new javax.swing.JFrame(), true,us);
+        MostrarMateriasForm mm = new MostrarMateriasForm(new javax.swing.JFrame(), true, us);
         mm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        MostrarCursosForm mc = new MostrarCursosForm(new javax.swing.JFrame(), true,us);
+        MostrarCursosForm mc = new MostrarCursosForm(new javax.swing.JFrame(), true, us);
         mc.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        MostrarPeriodoForm mp = new MostrarPeriodoForm(new javax.swing.JFrame(), true,us);
+        MostrarPeriodoForm mp = new MostrarPeriodoForm(new javax.swing.JFrame(), true, us);
         mp.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        MostrarEmpresaUnoForm ae = new MostrarEmpresaUnoForm(new javax.swing.JFrame(), true,us);
+        MostrarEmpresaUnoForm ae = new MostrarEmpresaUnoForm(new javax.swing.JFrame(), true, us);
         ae.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        MostrarSucursalesForm ms = new MostrarSucursalesForm(new javax.swing.JFrame(), true,us);
+        MostrarSucursalesForm ms = new MostrarSucursalesForm(new javax.swing.JFrame(), true, us);
         ms.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        MostrarInactivosForm mi = new MostrarInactivosForm(new javax.swing.JFrame(), true,us);
+        MostrarInactivosForm mi = new MostrarInactivosForm(new javax.swing.JFrame(), true, us);
         mi.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 

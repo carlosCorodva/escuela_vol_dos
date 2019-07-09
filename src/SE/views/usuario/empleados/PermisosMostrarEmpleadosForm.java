@@ -69,7 +69,6 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
         jtEmpleados = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btnBuscar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         btnAsignar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -120,19 +119,6 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
             }
         });
         jToolBar1.add(btnBuscar);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/reset 32.png"))); // NOI18N
-        jButton3.setText("  RESETEAR  ");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton3);
 
         btnAsignar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAsignar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
@@ -286,7 +272,7 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO USUARIO?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO PERMISOS DE CURSOS?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
         } else {
@@ -439,15 +425,6 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA RESETEAR LOS PERMISOS DE CURSOS?", "", JOptionPane.YES_NO_OPTION);
-        if (r == JOptionPane.YES_OPTION) {
-            String a = crud.ResetearPermisosemplaeados();
-            JOptionPane.showMessageDialog(this, a);
-        } else {
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         InfoPermisosform ip = new InfoPermisosform(new javax.swing.JFrame(), true);
         ip.setVisible(true);
@@ -508,7 +485,6 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

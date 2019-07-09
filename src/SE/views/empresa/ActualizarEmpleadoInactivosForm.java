@@ -208,6 +208,9 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
         });
 
         txtObservacion.setColumns(20);
@@ -618,9 +621,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         String dhint = "" + jtEstado.getValueAt(8, 0).toString();
         String efis = "" + jtEstado.getValueAt(9, 0).toString();
         if ("A".equals(leng)) {
-//            System.out.println("chbx3");
             jcLenguaje.setSelected(true);
-//            System.out.println("leng: " + jtEstado.getValueAt(0, 0));
         }
 
         if ("A".equals(mat)) {
@@ -761,18 +762,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         fecha();
     }//GEN-LAST:event_btnAddActionPerformed
-//    public void cbox(boolean valor) {
-//        jcCiencias.setSelected(valor);
-//        jcDesarrollo.setSelected(valor);
-//        jcEFisica.setSelected(valor);
-//        jcEstudios.setSelected(valor);
-//        jcInformaticas.setSelected(valor);
-//        jcIngles.setSelected(valor);
-//        jcLenguaje.setSelected(valor);
-//        jcMatematicas.setSelected(valor);
-//        jcProyectos.setSelected(valor);
-//        jcecArtistica.setSelected(valor);
-//    }
+
     private void txtObservacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionFocusLost
         txtObservacion.setText(txtObservacion.getText().toUpperCase());
     }//GEN-LAST:event_txtObservacionFocusLost
@@ -786,10 +776,25 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDireccionFocusLost
 
     private void cbSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSucursalesActionPerformed
-//        if (cbCargo.getSelectedIndex()==1) {
-//            cbCargo.setEnabled(true);
-//        }
+
     }//GEN-LAST:event_cbSucursalesActionPerformed
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+char c = evt.getKeyChar();
+        char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
+        char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
+        char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
+        char n = 'ç', o = '´', p = '`', q = '¨', r = 'Ñ', s = '·', t = 'ñ';
+        if (Character.isWhitespace(c) || c == mas || c == por || c == div || c == dp
+                || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
+                || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
+                || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
+                || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
+                || c == q || c == r || c == s || c == t) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
 
     public void Habilitar(boolean valor) {
         txtNombres.setEnabled(valor);
@@ -958,12 +963,11 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                 usp.setId_usuario(emp.getId_usuario());
 
                 String a = crud.ActualizarEmpleadoInactivo(obj);
-                System.out.println("try: " + a);
                 JOptionPane.showMessageDialog(this, a);
 
                 crud.ActualizarPermisosMaterias(usp);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "catch" + e);
+                JOptionPane.showMessageDialog(this, e);
             }
             setVisible(false);
         }

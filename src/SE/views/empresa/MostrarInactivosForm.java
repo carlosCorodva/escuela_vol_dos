@@ -79,13 +79,10 @@ public class MostrarInactivosForm extends javax.swing.JDialog {
         jtEmpleadosInactivos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtEmpleadosInactivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jtEmpleadosInactivos.setRowHeight(25);
@@ -133,6 +130,11 @@ public class MostrarInactivosForm extends javax.swing.JDialog {
         jLabel1.setOpaque(true);
 
         txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBuscar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBuscarFocusLost(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -287,6 +289,10 @@ public class MostrarInactivosForm extends javax.swing.JDialog {
             Logger.getLogger(MostrarInactivosForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarFocusLost
+txtBuscar.setText(txtBuscar.getText().toUpperCase());
+    }//GEN-LAST:event_txtBuscarFocusLost
 
     /**
      * @param args the command line arguments

@@ -217,13 +217,7 @@ public class ActualizarPeriodoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCajaKeyTyped
-//        char c = evt.getKeyChar();
-//        char barra = '-';
-//        if (/*fue dificil pero funciona XD*/(!Character.isDigit(c) && (Character.isSpaceChar(c) || c != barra))) {
-//            getToolkit().beep();
-//            evt.consume();
-//        }
-char c = evt.getKeyChar();
+    char c = evt.getKeyChar();
         int caja= txtCaja.getText().length();
         char barra = '-';
         for(int i = 0; i < caja; i++){

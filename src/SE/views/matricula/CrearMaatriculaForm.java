@@ -238,6 +238,12 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             }
         });
 
+        txtEscAnt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEscAntFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -393,13 +399,35 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("REPRESENTANTE");
 
+        txtRepresentante.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtRepresentanteFocusLost(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("CEDULA");
+
+        txtCedUno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedUnoFocusLost(evt);
+            }
+        });
+        txtCedUno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedUnoKeyTyped(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("TELEFONO ");
 
         txtTelefono1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTelefono1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono1KeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("CORREO ");
@@ -409,6 +437,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
         });
 
         cbParUno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -416,6 +447,12 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         cbParUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbParUnoActionPerformed(evt);
+            }
+        });
+
+        txtOtro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtOtroFocusLost(evt);
             }
         });
 
@@ -476,21 +513,50 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jLabel16.setText("TELEFONO ");
 
         txtTelefono2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTelefono2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono2KeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("CORREO ");
 
+        txtCordos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCordosKeyTyped(evt);
+            }
+        });
+
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("CEDULA");
 
+        txtCedDos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedDosKeyTyped(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("REPRESENTANTE ");
+
+        txtRepDos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtRepDosFocusLost(evt);
+            }
+        });
 
         cbParDos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbParDos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PARENTESCO...", "PADRE", "MADRE", "ABUELO/A", "TIO/A", "OTRO" }));
         cbParDos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbParDosActionPerformed(evt);
+            }
+        });
+
+        txtOtroDos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtOtroDosFocusLost(evt);
             }
         });
 
@@ -618,7 +684,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    public void validar(){
+    public void validar() {
         try {
             JoinMatriculas ob = new JoinMatriculas();
             ob.setId_sucursal(Long.valueOf(lbSucursal.getText()));
@@ -630,7 +696,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e);
         }
     }
-    
+
     public void imprimirMatricula() {
         ArrayList dato = new ArrayList();
         re_clase_eporte datos = new re_clase_eporte(us.getNombre_comercial_su(), txtCedula.getText(), txtAlumno.getText(), us.getZona(), us.getDistrito(), us.getCircuito(), us.getProvincia_suc(), us.getCanton_suc(), lbPeriodo.getText(), cbParalelo.getSelectedItem().toString(), us.getJornada(), txtObservacion.getText());
@@ -751,6 +817,96 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbxEscuelaActionPerformed
 
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        char c = evt.getKeyChar();
+        char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
+        char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
+        char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
+        char n = 'ç', o = '´', p = '`', q = '¨', r = 'Ñ', s = '·', t = 'ñ';
+        if (Character.isWhitespace(c) || c == mas || c == por || c == div || c == dp
+                || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
+                || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
+                || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
+                || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
+                || c == q || c == r || c == s || c == t) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void txtCordosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCordosKeyTyped
+        char c = evt.getKeyChar();
+        char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
+        char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
+        char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
+        char n = 'ç', o = '´', p = '`', q = '¨', r = 'Ñ', s = '·', t = 'ñ';
+        if (Character.isWhitespace(c) || c == mas || c == por || c == div || c == dp
+                || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
+                || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
+                || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
+                || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
+                || c == q || c == r || c == s || c == t) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCordosKeyTyped
+
+    private void txtCedUnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedUnoFocusLost
+        
+    }//GEN-LAST:event_txtCedUnoFocusLost
+
+    private void txtCedUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedUnoKeyTyped
+char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedUnoKeyTyped
+
+    private void txtTelefono1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono1KeyTyped
+char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefono1KeyTyped
+
+    private void txtCedDosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedDosKeyTyped
+char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedDosKeyTyped
+
+    private void txtTelefono2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono2KeyTyped
+char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefono2KeyTyped
+
+    private void txtEscAntFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEscAntFocusLost
+txtEscAnt.setText(txtEscAnt.getText().toUpperCase());
+    }//GEN-LAST:event_txtEscAntFocusLost
+
+    private void txtOtroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtroFocusLost
+txtOtro.setText(txtOtro.getText().toUpperCase());
+    }//GEN-LAST:event_txtOtroFocusLost
+
+    private void txtRepresentanteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRepresentanteFocusLost
+txtRepresentante.setText(txtRepresentante.getText().toUpperCase());
+    }//GEN-LAST:event_txtRepresentanteFocusLost
+
+    private void txtRepDosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRepDosFocusLost
+txtRepDos.setText(txtRepDos.getText().toUpperCase());
+    }//GEN-LAST:event_txtRepDosFocusLost
+
+    private void txtOtroDosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtroDosFocusLost
+txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
+    }//GEN-LAST:event_txtOtroDosFocusLost
+
     public void Habilitar(boolean valor) {
         txtTelefono1.setEnabled(valor);
         txtTelefono2.setEnabled(valor);
@@ -841,7 +997,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
         } else {
             imprimirMatricula();
-            
+
             obj.setApellidos_nombres(txtAlumno.getText());
             obj.setCedula(txtCedula.getText());
             obj.setDireccion(txtDireccion.getText());
@@ -928,7 +1084,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             dtFecha.setDateFormatString("");
             dtFecha.setEnabled(false);
             btnGuardar.setEnabled(false);
-            
+
             validar();
         }
     }

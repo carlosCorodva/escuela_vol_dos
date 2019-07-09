@@ -25,13 +25,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
-//import net.sf.jasperreports.engine.JRException;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-//import net.sf.jasperreports.engine.util.JRLoader;
-//import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -59,7 +52,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     String id = "";
 
     public CalificacionForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
-//        super(parent, modal = false);
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -83,7 +75,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     }
 
     public CalificacionForm(java.awt.Frame parent, boolean modal) {
-//        super(parent, modal = false);
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -92,7 +83,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     public void conteo() {
         for (int t = 0; t < jtCalificacion.getRowCount(); t++) {
             jtCalificacion.setValueAt(t + 1, t, 0);
-//            System.out.println("conteo: " + t);
         }
     }
 
@@ -544,13 +534,10 @@ public class CalificacionForm extends javax.swing.JDialog {
                     + "  `calificacion_obs` = '" + jtCalificacion.getValueAt(i, 10) + "', \n"
                     + "  `ochenta_porcentaje` = '" + jtCalificacion.getValueAt(i, 7) + "', \n"
                     + "  `veinte_porcentaje` = '" + jtCalificacion.getValueAt(i, 8) + "', \n"
-                    //                    + "  `estado_ca` = '" + estado_ca + "', \n"
                     + "  `id_actualizacion` = '" + lbIdUsuario.getText() + "', \n"
                     + "  `f_actualizacion` = NOW() \n"
                     + "WHERE `id_calificacion` = '" + id + "';";
-//            System.out.println("id fin: " + id);
             queryA.add(act);
-//            System.out.println("nombre:" + queryA);
             crud.GuardarNotas(queryA);
             queryA.clear();
         }
@@ -563,7 +550,6 @@ public class CalificacionForm extends javax.swing.JDialog {
 
         listarCursos = crud.listarAlumnosCalificacionPorCurso(jc);
         Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
-//        filtrosCursos();
         conteo();
     }
 
@@ -601,7 +587,7 @@ public class CalificacionForm extends javax.swing.JDialog {
 
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO CALIFICACION?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO CALIFICACIONES?", "", JOptionPane.YES_NO_OPTION);
 
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
@@ -612,9 +598,6 @@ public class CalificacionForm extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         calcularPromedio();
         guardar();
-//        listarCursos.clear();
-//        listarCursos = crud.listarAlumnosCalificacion(cal);
-//        Tablas.tablaFiltroAlumnos(listarCursos, jtCalificacion);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jtCalificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCalificacionMouseClicked

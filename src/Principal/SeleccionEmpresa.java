@@ -218,29 +218,28 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getNombre_comercial_su())) {
                 objeto1 = listarobj.get(i);
-//                System.out.println("objeto sucursal:" + listarobj.get(i).getNombre_comercial_su());
                 break;
             }
         }
         return objeto1;
     }
+
     public JoinEmpleados ObjetoUsaurio(String datos, ArrayList<JoinEmpleados> listarobj) {
         JoinEmpleados objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getId_usuario().toString())) {
                 objeto1 = listarobj.get(i);
-//                System.out.println("objeto usuario:" + listarobj.get(i).getId_usuario().toString());
                 break;
             }
         }
         return objeto1;
     }
+
     public JoinEmpleados ObjetoEmpresa(String datos, ArrayList<JoinEmpleados> listarobj) {
         JoinEmpleados objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getNombre_comercial_em())) {
                 objeto1 = listarobj.get(i);
-//                System.out.println("objeto empresa:" + listarobj.get(i).getNombre_comercial_em());
                 break;
             }
         }
@@ -254,25 +253,15 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
     public void ingresarSistema() {
         int po = cbEmpresa.getSelectedIndex();
         int po2 = cbSucursal.getSelectedIndex();
-        String cbSuc = cbSucursal.getSelectedItem().toString();
-        String cbemp = cbEmpresa.getSelectedItem().toString();
         if (po == 0) {
             JOptionPane.showMessageDialog(this, "ELIJA UNA EMPRESA");
         } else if (po2 == 0) {
             JOptionPane.showMessageDialog(this, "ELIJA UNA SUCURSAL");
         } else {
             System.out.println("holaaaaa");
-//            objSucursal = ObjetoSucursal(cbSuc, sucursal);
-//            objEmpresa = ObjetoEmpresa(cbemp, empresa);
             objUsuario = ObjetoUsaurio(lbUsuario.getText(), usuario);
-//            System.out.println("holaaaaa " + objSucursal.getNombre_comercial_su());
-            if (/*objSucursal*/objUsuario != null) {
-//                System.out.println("holaaaaa");
-//                System.out.println("empresa " + objUsuario.getNombre_comercial_em());
-//                System.out.println("sucursal " + objUsuario.getNombre_comercial_su());
-//                System.out.println("usuario " + objUsuario.getUsuario());
-                FrmPrincipal acc = new FrmPrincipal(/*objSucursal,objEmpresa,*/objUsuario);
-//                System.out.println("holaaaaa " + objUsuario.getId_usuario());
+            if (objUsuario != null) {
+                FrmPrincipal acc = new FrmPrincipal(objUsuario);
                 acc.setVisible(true);
                 dispose();
             }
@@ -283,18 +272,22 @@ public class SeleccionEmpresa extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void cbSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSucursalActionPerformed
+    public void sucursal() {
         JoinEmpleados is = new JoinEmpleados();
-            is.setUsuario(obj.getUsuario());
-            is.setContrasena(obj.getContrasena());
-            is.setNombre_comercial_su(cbSucursal.getSelectedItem().toString());
-            String a = crud.validarUsuario(is);
-            if (a==null) {
-                System.out.println("null");
-            } else {
-                lbUsuario.setText(a);
-                System.out.println("else"+a);
-            }
+        is.setUsuario(obj.getUsuario());
+        is.setContrasena(obj.getContrasena());
+        is.setNombre_comercial_su(cbSucursal.getSelectedItem().toString());
+        String a = crud.validarUsuario(is);
+        if (a == null) {
+            System.out.println("null");
+        } else {
+            lbUsuario.setText(a);
+            System.out.println("else" + a);
+        }
+    }
+
+    private void cbSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSucursalActionPerformed
+        sucursal();
     }//GEN-LAST:event_cbSucursalActionPerformed
 
     /**

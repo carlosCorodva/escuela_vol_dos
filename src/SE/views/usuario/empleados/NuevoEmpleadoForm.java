@@ -39,10 +39,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         lbIdUsuario.setVisible(false);
         usu = usuario;
         this.setLocationRelativeTo(null);
-//        setUndecorated(true);
-        lbEmpresa.setText(usu.getId_empresa().toString());
-        lbSucursal.setText(usu.getId_sucursal().toString());
-        lbIdUsuario.setText(usu.getId_usuario().toString());
         Habilitar(false);
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());
@@ -186,6 +182,9 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
         });
 
         txtObservacion.setColumns(20);
@@ -280,9 +279,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                                     .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                                     .addComponent(txtApellidos)
                                     .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,13 +502,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//    public void imagenes(){
-//        ImageIcon logo = new ImageIcon(getClass().getResource("/img/cliente.png"));
-//        Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
-//        lbImagen.setIcon(fondoLogo);
-//        this.repaint();
-//    }
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -521,11 +511,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 String cedula ="";
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-//if (jrRuc.isSelected()) {
-//            cedula = txtCedula.getText() + lbRuc.getText();
-//        } else {
-//            cedula = txtCedula.getText();
-//        }
         if (Validaciones.validarCedulaEmpedos(lista, txtCedula.getText())) {
             Habilitar(true);
         } else {
@@ -629,6 +614,23 @@ String cedula ="";
         
     }//GEN-LAST:event_cbCargoActionPerformed
 
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+char c = evt.getKeyChar();
+        char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
+        char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
+        char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
+        char n = 'ç', o = '´', p = '`', q = '¨', r = 'Ñ', s = '·', t = 'ñ';
+        if (Character.isWhitespace(c) || c == mas || c == por || c == div || c == dp
+                || c == pc || c == c2 || c == p1 || c == p2 || c == lla1 || c == lla2
+                || c == el || c == el2 || c == co || c == co2 || c == c3 || c == d || c == e
+                || c == col || c == a || c == b || c == e2 || c == f || c == g || c == h
+                || c == i || c == j || c == k || c == l || c == m || c == n || c == o || c == p
+                || c == q || c == r || c == s || c == t) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
     public void Habilitar(boolean valor) {
         txtApellidos.setEnabled(valor);
         txtTelefono1.setEnabled(valor);
@@ -729,27 +731,21 @@ String cedula ="";
         } else {
             obs = txtObservacion.getText();
         }
-
-//        if (jrRuc.isSelected()) {
-//            cedula = txtCedula.getText() + lbRuc.getText();
-//        } else {
-//            cedula = txtCedula.getText();
-//        }
-
+        
         if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "INGRESE UN NOMBRE O APELLIDO VALIDO");
         } else if (txtTelefono1.getText().length() < 9) {
-            JOptionPane.showMessageDialog(null, "Ingrese un número de contacto válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN NUMERO DE CONTACTO VALIDO ");
         } else if (txtTelefono1.getText().length() > 12) {
-            JOptionPane.showMessageDialog(null, "Exede la cantidad de numeros válidos permitidos para celular");
+            JOptionPane.showMessageDialog(null, "EXEDE LA CANTIDAD DE NUMEROS VALIDOS PERMITIDOS PARA CELULAR");
         } else if (txtCorreo.getText().length() < 5) {
-            JOptionPane.showMessageDialog(null, "Ingrese un correo válido ");
+            JOptionPane.showMessageDialog(null, "INGRESE UN CORREO VALIDO");
         } else if (txtDireccion.getText().length() < 4) {
-            JOptionPane.showMessageDialog(null, "Ingrese una dirección válida ");
+            JOptionPane.showMessageDialog(null, "INGRESE UNA DIRECCION VALIDA");
         } else if (cbCargo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione un cargo válido");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN CARGO VALIDO");
         } else if (fecha == null) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+            JOptionPane.showMessageDialog(null, "SELECCIONE UNA FECHA");
         } else {
             String nombApe = txtApellidos.getText() + " " + txtNombres.getText();
 
@@ -765,8 +761,8 @@ String cedula ="";
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
+            
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
-//            obj.setId_empresa(Long.valueOf(lbEmpresa.getText()));
             obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
             us_permiso_empleado us = new us_permiso_empleado();

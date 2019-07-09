@@ -194,13 +194,15 @@ public class CrearPeriodoForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
-public void guardar() {
+    public void guardar() {
         String text = txtInicio.getText()+"-"+txtFin.getText();
         ma_periodo mp = new ma_periodo();
         mp.setPeriodo(text);
         mp.setId_creacion(Long.valueOf(lbIdUsuario.getText()));
         mp.setId_empresa_pe(Long.valueOf(lbEmpresa.getText()));
         mp.setId_sucursal_pe(Long.valueOf(lbSucursal.getText()));
+        mp.setInicio(txtInicio.getText());
+        mp.setFin(txtInicio.getText());
         String a = crud.CrearPeriodo(mp);
         JOptionPane.showMessageDialog(this, a);
         setVisible(false);

@@ -19,11 +19,13 @@ public class ma_periodo {
     private String estado_pe;
     private Long id_empresa_pe;
     private Long id_sucursal_pe;
+    private String inicio;
+    private String fin;
 
     public ma_periodo() {
     }
 
-    public ma_periodo(Long id_periodo, String periodo, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String estado_pe, Long id_empresa_pe, Long id_sucursal_pe) {
+    public ma_periodo(Long id_periodo, String periodo, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String estado_pe, Long id_empresa_pe, Long id_sucursal_pe, String inicio, String fin) {
         this.id_periodo = id_periodo;
         this.periodo = periodo;
         this.id_creacion = id_creacion;
@@ -33,7 +35,26 @@ public class ma_periodo {
         this.estado_pe = estado_pe;
         this.id_empresa_pe = id_empresa_pe;
         this.id_sucursal_pe = id_sucursal_pe;
+        this.inicio = inicio;
+        this.fin = fin;
     }
+
+    public String getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(String inicio) {
+        this.inicio = inicio;
+    }
+
+    public String getFin() {
+        return fin;
+    }
+
+    public void setFin(String fin) {
+        this.fin = fin;
+    }
+
 
     public Long getId_empresa_pe() {
         return id_empresa_pe;

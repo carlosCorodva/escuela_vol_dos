@@ -241,7 +241,7 @@ public class MostrarPeriodoForm extends javax.swing.JDialog {
     }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO EMPRESA?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO PERIODO LECTIVO?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
         } else {

@@ -387,29 +387,15 @@ public class ReporteAlumnosperiodoActualForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        setVisible(false);
+int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO REPORTES?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        } else {
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-//       ArrayList lista = new ArrayList();
-//        for(int i=0;i<jtReporte.getRowCount();i++){
-//            ClaseReporte tabla = new ClaseReporte(cbFiltro.getSelectedItem().toString(),txtBuscar.getText(),cbFiltroCurso.getSelectedItem().toString(),jtReporte.getValueAt(i,0).toString(),jtReporte.getValueAt(i,1).toString(),jtReporte.getValueAt(i,2).toString(),jtReporte.getValueAt(i,3).toString(),jtReporte.getValueAt(i,4).toString(),jtReporte.getValueAt(i,5).toString());
-//            lista.add(tabla);
-//        }
-//        try {
-//            String dir = System.getProperty("user.dir")+"/Reportes/"+"ReporteAlumnos.jasper";
-//            JasperReport reporte =(JasperReport)JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,new JRBeanCollectionDataSource(lista));
-//            JDialog frame = new JDialog();
-//            JRViewer viewer = new JRViewer(jprint);
-//            frame.add(viewer);
-//            frame.setSize(new Dimension(ancho/2,alto/2));
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            viewer.setFitWidthZoomRatio();
-//        } catch (JRException ex) {
-//            Logger.getLogger(ReporteAlumnosperiodoActualForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }//GEN-LAST:event_btnImprimirActionPerformed
     public JoinMatriculas buscarObjeto(String datos, ArrayList<JoinMatriculas> listarobj) {
         JoinMatriculas objeto1 = null;

@@ -117,14 +117,7 @@ public final class CargarSistema extends javax.swing.JFrame {
         lbImagen.setIcon(fondoLogo);
         this.repaint();
     }
-//    public void cargado() {
-//        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/logopng.png"));
-//        Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
-//        lbImagen.setIcon(fondoLogo);
-//        this.repaint();
-//    }
     private void carga_pbStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_carga_pbStateChanged
-        // TODO add your handling code here:
         if (carga_pb.getValue() == 100) {
             try {
                 if (c.conectar() == null) {

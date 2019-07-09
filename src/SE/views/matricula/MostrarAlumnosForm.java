@@ -242,7 +242,7 @@ public class MostrarAlumnosForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO USUARIO?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO ALUMNOS", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
         } else {
@@ -283,7 +283,6 @@ public class MostrarAlumnosForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jtMatriculasMousePressed
     public void filtro() {
-//        JoinEmpleados je = new JoinEmpleados();
         int pos = cbFiltro.getSelectedIndex();
         String f = txtBuscar.getText();
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
@@ -344,11 +343,6 @@ public class MostrarAlumnosForm extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         filtro();
         int k = jtMatriculas.getRowCount();
-//        for(int i=0;i<k;i++){
-//                    v=i;
-        System.out.println("k: " + k);
-//                    System.out.println("v: "+v);
-//                }
         if (k == 0) {
             CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
             ne.setVisible(true);

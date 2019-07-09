@@ -447,7 +447,11 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
     }//GEN-LAST:event_jtReporteMousePressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        setVisible(false);
+int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO REPORTES?", "", JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        } else {
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed

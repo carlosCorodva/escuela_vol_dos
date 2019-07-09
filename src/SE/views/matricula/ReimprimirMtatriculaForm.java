@@ -5,7 +5,6 @@
  */
 package SE.views.matricula;
 
-import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -340,60 +338,6 @@ public class ReimprimirMtatriculaForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
-//    public void Guardar() {
-//        System.out.println("guardar");
-//        String obs = "";
-//        String est = "";
-//        Long cc, sb;
-//
-//        if ("APROBADO".equals(mat.getEstado_matricula())) {
-//            est = "APROBADO-CERRADO";
-//        }
-//        if ("REPROBADO".equals(mat.getEstado_matricula())) {
-//            est = "REPROBADO-CERRADO";
-//        }
-//        System.out.println("est: " + est);
-//
-//        if (cbxCopiaCedula.isSelected()) {
-//            cc = Long.valueOf(1);
-//        } else {
-//            cc = Long.valueOf(0);
-//        }
-//        System.out.println("1");
-//        if (cbxServicioBasico.isSelected()) {
-//            sb = Long.valueOf(1);
-//        } else {
-//            sb = Long.valueOf(0);
-//        }
-//        if (txtObservacion.getText().length() < 1) {
-//            obs = "NUEVA MATRICULA";
-//        } else {
-//            obs = txtObservacion.getText();
-//        }
-//        if (cbParalelo.getSelectedIndex() == 0) {
-//            JOptionPane.showMessageDialog(null, "SELECCIONE UN PARALELO");
-//        } else {
-//            System.out.println("else");
-//            JoinMatriculas obj = new JoinMatriculas();
-//            obj.setObservacion(obs);
-//            obj.setCopia_cedula(cc);
-//            obj.setServicio_basico(sb);
-//            obj.setEstado_matricula(est);
-//            obj.setParalelo(cbParalelo.getSelectedItem().toString());
-//
-//            obj.setId_usuario(mat.getId_usuario());
-//            obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
-//            obj.setId_matricula(mat.getId_matricula());
-//
-//            try {
-//                String a = crud.CrearMatriculaActualizar(obj);
-//                JOptionPane.showMessageDialog(this, a);
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(this, e);
-//            }
-//        }
-//    }
-
     public void imprimirMatricula() {
         ArrayList dato = new ArrayList();
         re_clase_eporte datos = new re_clase_eporte(us.getNombre_comercial_su(), txtCedula.getText(), txtAlumno.getText(), us.getZona(), us.getDistrito(), us.getCircuito(), us.getProvincia_suc(), us.getCanton_suc(), lbPeriodo.getText(), txtParalelo.getText(), us.getJornada(), txtObservacion.getText());

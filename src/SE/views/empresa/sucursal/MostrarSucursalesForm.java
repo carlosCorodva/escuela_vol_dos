@@ -5,11 +5,8 @@
  */
 package SE.views.empresa.sucursal;
 
-import SE.views.empresa.sucursal.CrearSucursalesForm;
-import SE.views.empresa.sucursal.ActualizarSucursalesForm;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
-import SE.entidades.em_empresa;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import java.util.ArrayList;
@@ -214,7 +211,7 @@ public class MostrarSucursalesForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO EMPRESA?", "", JOptionPane.YES_NO_OPTION);
+        int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO SUCURSALES?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             setVisible(false);
         } else {
