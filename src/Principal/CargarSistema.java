@@ -112,7 +112,7 @@ public final class CargarSistema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void imagenes() {
-        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/escuela.jpg"));
+        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/paisaje.jpg"));
         Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
         lbImagen.setIcon(fondoLogo);
         this.repaint();

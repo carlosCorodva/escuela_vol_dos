@@ -9,6 +9,7 @@ import SE.componentes.Calendario;
 import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.componentes.Validaciones;
+import SE.componentes.ValidarIdentificacionEc;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
@@ -46,7 +47,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
-
+    ValidarIdentificacionEc id = null;
+    
     /**
      * Creates new form Registrar
      *
@@ -89,6 +91,21 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         paralelo = crud.ComboParaleloRegistrar(mp);
         cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
+    }
+    
+    public void validarCedula(){
+        try {
+            boolean vc = id.validarCedula(txtCedula.getText());
+            System.out.println(vc);
+            if(vc == false){
+                JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
+            }else{
+                
+            }
+        } catch (Exception e) {
+            
+        }
+        
     }
 
     /**
@@ -413,6 +430,11 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 txtCedUnoFocusLost(evt);
             }
         });
+        txtCedUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedUnoActionPerformed(evt);
+            }
+        });
         txtCedUno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedUnoKeyTyped(evt);
@@ -673,13 +695,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//    public void imagenes(){
-//        ImageIcon logo = new ImageIcon(getClass().getResource("/img/cliente.png"));
-//        Icon fondoLogo = new ImageIcon(logo.getImage().getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), Image.SCALE_DEFAULT));
-//        lbImagen.setIcon(fondoLogo);
-//        this.repaint();
-//    }
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -705,10 +720,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JasperReport reporte = (JasperReport) JRLoader.loadObject("Reportes/MatriculaReporte.jasper");
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(dato));
             JDialog frame = new JDialog(this);
-//            String dir = System.getProperty("user.dir") + "/Reportes/" + "MatriculaReporte.jasper";
-//            JasperReport reporte = (JasperReport) JRLoader.loadObject(dir);
-//            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-//            JDialog frame = new JDialog(this);
             JRViewer viewer = new JRViewer(jprint);
             frame.add(viewer);
             frame.setSize(new Dimension(ancho / 2, alto / 2));
@@ -907,6 +918,10 @@ txtRepDos.setText(txtRepDos.getText().toUpperCase());
 txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
     }//GEN-LAST:event_txtOtroDosFocusLost
 
+    private void txtCedUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedUnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedUnoActionPerformed
+
     public void Habilitar(boolean valor) {
         txtTelefono1.setEnabled(valor);
         txtTelefono2.setEnabled(valor);
@@ -939,7 +954,9 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
         String fecha = cal.getFecha(dtFecha);
         String obs, parUno, parDos;
         Long cc, sb, doc, pn;
-
+     
+        validarCedula();
+        
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
         } else {
@@ -975,6 +992,8 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
         } else {
             obs = txtObservacion.getText();
         }
+        
+        
         if (txtAlumno.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre o apellido válido ");
         } else if (txtTelefono1.getText().length() < 9) {
@@ -989,13 +1008,14 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else if (cbParalelo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARALELO");
-        } else if (txtCedUno.getText().length() <= 9) {
+        } else if (txtCedUno.getText().length() <= 9 || txtCedula.getText().length() <= 9) {
             JOptionPane.showMessageDialog(null, "INGRESE UNA CEDULA VALIDA");
         } else if (txtRepresentante.getText().length() < 5) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else if (cbParUno.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
         } else {
+            
             imprimirMatricula();
 
             obj.setApellidos_nombres(txtAlumno.getText());

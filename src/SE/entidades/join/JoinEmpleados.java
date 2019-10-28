@@ -53,11 +53,12 @@ public class JoinEmpleados {
     private String zona;
     private String distrito;
     private String circuito;
+    private String tipo_i;
 
     public JoinEmpleados() {
     }
 
-    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String codigo_usuario, String provincia, String canton, String provincia_suc, String canton_suc, String jornada, String zona, String distrito, String circuito) {
+    public JoinEmpleados(Long id_usuario, String apellidos_nombres, String cedula, String direccion, String convecional, String fecha_nacimiento, String telefono_dos, String correo, String contrasena, String estado, Long copia_cedula, Long servicio_basico, Long copia_titulo, Long id_rol, String rol, String observacion, Date fecha_nacimiento_date, String usuario, Long id_usuarioDos, Long id_empresa, String nombre_comercial_em, String ruc_em, String telefono_em, String direccion_em, String correo_em, String estado_em, Long id_sucursal, String nombre_comercial_su, String telefono_su, String direccion_su, String correo_su, String estado_su, String codigo_usuario, String provincia, String canton, String provincia_suc, String canton_suc, String jornada, String zona, String distrito, String circuito, String tipo_i) {
         this.id_usuario = id_usuario;
         this.apellidos_nombres = apellidos_nombres;
         this.cedula = cedula;
@@ -99,7 +100,18 @@ public class JoinEmpleados {
         this.zona = zona;
         this.distrito = distrito;
         this.circuito = circuito;
+        this.tipo_i = tipo_i;
     }
+
+    public String getTipo_i() {
+        return tipo_i;
+    }
+
+    public void setTipo_i(String tipo_i) {
+        this.tipo_i = tipo_i;
+    }
+
+    
 
     public String getZona() {
         return zona;

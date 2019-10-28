@@ -166,7 +166,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                        "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                        "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -180,6 +180,7 @@ public class Crud {
             pro.setString(11, us.getObservacion());
             pro.setLong(12, us.getId_usuario());
             pro.setLong(13, us.getId_sucursal());
+            pro.setString(14, us.getTipo_i());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -207,7 +208,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_empleados_actualizar(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call us_empleados_actualizar(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -223,6 +224,7 @@ public class Crud {
             pro.setLong(13, us.getId_usuario());
             pro.setLong(14, us.getId_usuarioDos());
             pro.setLong(15, us.getId_sucursal());
+            pro.setString(16, us.getTipo_i());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -1244,7 +1246,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call em_empresa_cambio_sucursal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call em_empresa_cambio_sucursal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -1260,6 +1262,7 @@ public class Crud {
             pro.setLong(13, us.getId_usuario());
             pro.setLong(14, us.getId_usuarioDos());
             pro.setString(15, us.getNombre_comercial_su());
+            pro.setString(16, us.getTipo_i());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -2553,4 +2556,33 @@ public class Crud {
         }
         return valor;
     }
+    
+    public String HiloStatement() {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call hilo(?)}");
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
 }

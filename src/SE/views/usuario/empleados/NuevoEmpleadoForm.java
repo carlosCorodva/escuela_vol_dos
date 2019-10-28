@@ -8,6 +8,7 @@ package SE.views.usuario.empleados;
 import SE.componentes.Calendario;
 import SE.componentes.Crud;
 import SE.componentes.Validaciones;
+import SE.componentes.ValidarIdentificacionEc;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
 import java.awt.Dimension;
@@ -27,6 +28,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     Calendario cal = new Calendario();
     JoinEmpleados usu = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
+    ValidarIdentificacionEc id = null;
 
     /**
      * Creates new form Registrar
@@ -79,7 +81,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         cbxCopiaCedula = new javax.swing.JCheckBox();
         cbxCopiaTitulo = new javax.swing.JCheckBox();
         cbCargo = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -87,6 +88,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
+        cbId = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jcLenguaje = new javax.swing.JCheckBox();
         jcMatematicas = new javax.swing.JCheckBox();
@@ -214,7 +216,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         });
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "RECTOR/A", "INSPECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -225,9 +227,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                 cbCargoKeyPressed(evt);
             }
         });
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CEDULA/RUC");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRES");
@@ -257,6 +256,9 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             }
         });
 
+        cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -268,8 +270,8 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel8))
-                .addGap(27, 27, 27)
+                    .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +318,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(cbxCopiaTitulo))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(59, 59, 59)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
@@ -337,9 +339,9 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))
+                                .addComponent(jLabel7)
+                                .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(13, 13, 13)
                         .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -506,10 +508,57 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         Guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public void seleccionId() {
+        if (cbId.getSelectedIndex() == 0) {
+            try {
+                boolean vc = id.validarCedula(txtCedula.getText());
+                System.out.println(vc);
+                if (vc == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
+                } else {
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+        
+        if (cbId.getSelectedIndex() == 1) {
+            try {
+                boolean vc = id.validarRucPersonaNatural(txtCedula.getText());
+                System.out.println(vc);
+                if (vc == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
+                } else {
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+        
+        if (cbId.getSelectedIndex() == 2) {
+            try {
+                boolean vc = id.validarRucSociedadPrivada(txtCedula.getText());
+                System.out.println(vc);
+                if (vc == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
+                } else {
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+    }
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
-String cedula ="";
+    String cedula = "";
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
         if (Validaciones.validarCedulaEmpedos(lista, txtCedula.getText())) {
             Habilitar(true);
@@ -611,11 +660,11 @@ String cedula ="";
         if (pos == 4) {
             cbox(false);
         }
-        
+
     }//GEN-LAST:event_cbCargoActionPerformed
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
         char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
         char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
@@ -662,7 +711,10 @@ char c = evt.getKeyChar();
         String fecha = cal.getFecha(dtFecha);
         String obs;
         Long cc, ct;
+        String cbIdent = cbId.getSelectedItem().toString();
 
+        seleccionId();
+        
         if (jcCiencias.isSelected() == true) {
             cn = "A";
         } else {
@@ -731,7 +783,7 @@ char c = evt.getKeyChar();
         } else {
             obs = txtObservacion.getText();
         }
-        
+
         if (txtNombres.getText().length() < 3 || txtApellidos.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "INGRESE UN NOMBRE O APELLIDO VALIDO");
         } else if (txtTelefono1.getText().length() < 9) {
@@ -761,9 +813,10 @@ char c = evt.getKeyChar();
             obj.setRol(cbCargo.getSelectedItem().toString());
             obj.setCopia_cedula(cc);
             obj.setCopia_titulo(ct);
-            
+
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
             obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            obj.setTipo_i(cbIdent);
 
             us_permiso_empleado us = new us_permiso_empleado();
             us.setEstado_pe(ll);
@@ -862,6 +915,7 @@ char c = evt.getKeyChar();
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbCargo;
+    private javax.swing.JComboBox<String> cbId;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxCopiaTitulo;
     private com.toedter.calendar.JDateChooser dtFecha;
@@ -873,7 +927,6 @@ char c = evt.getKeyChar();
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

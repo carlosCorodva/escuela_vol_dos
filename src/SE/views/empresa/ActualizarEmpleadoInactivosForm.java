@@ -9,6 +9,7 @@ import SE.componentes.Calendario;
 import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
+import SE.componentes.ValidarIdentificacionEc;
 import SE.entidades.em_sucursal;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.us_permiso_empleado;
@@ -33,6 +34,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
     ArrayList<em_sucursal> sucursal = null;
     em_sucursal suc = new em_sucursal();
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
+    ValidarIdentificacionEc id = null;
 
     /**
      * Creates new form Registrar
@@ -98,7 +100,6 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         cbxCopiaCedula = new javax.swing.JCheckBox();
         cbxCopiaTitulo = new javax.swing.JCheckBox();
         cbCargo = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -109,6 +110,7 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         txtFecha = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         cbSucursales = new javax.swing.JComboBox<>();
+        cbId = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtEstado = new javax.swing.JTable();
@@ -240,15 +242,12 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         });
 
         cbCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE CARGO...", "ADMINISTRADOR/A", "RECTOR/A", "INSPECTOR/A", "PROFESOR/A", "SECRETARIO/A", "PASANTE" }));
         cbCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbCargoKeyPressed(evt);
             }
         });
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CEDULA");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("APELIDOS Y NOMBRES");
@@ -284,6 +283,9 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
             }
         });
 
+        cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -298,11 +300,14 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(46, 46, 46)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)
+                                        .addGap(46, 46, 46))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -371,8 +376,8 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel7)
                                             .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8)
-                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -691,8 +696,21 @@ public class ActualizarEmpleadoInactivosForm extends javax.swing.JDialog {
         if ("PROFESOR/A".equals(emp.getRol())) {
             cbCargo.setSelectedItem("PROFESOR/A");
         }
+        if ("INSPECTOR/A".equals(emp.getRol())) {
+            cbCargo.setSelectedItem("INSPECTOR/A");
+        }
         if ("SECRETARIO/A".equals(emp.getRol())) {
             cbCargo.setSelectedItem("SECRETARIO/A");
+        }
+        
+        if ("CEDULA".equals(emp.getTipo_i())) {
+            cbId.setSelectedItem("CEDULA");
+        }
+        if ("P. NATURAL".equals(emp.getTipo_i())) {
+            cbId.setSelectedItem("P. NATURAL");
+        }
+        if ("P. JURIDICA".equals(emp.getTipo_i())) {
+            cbId.setSelectedItem("P. JURIDICA");
         }
     }
 
@@ -835,6 +853,7 @@ char c = evt.getKeyChar();
     public void Guardar() {
         String obs;
         Long cc, ct;
+        String cbIdent = cbId.getSelectedItem().toString();
 
         if (jcCiencias.isSelected() == true) {
             cn = "A";
@@ -948,6 +967,7 @@ char c = evt.getKeyChar();
                 obj.setId_usuario(emp.getId_usuario());
                 obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
                 obj.setNombre_comercial_su(cbSucursales.getSelectedItem().toString());
+                obj.setTipo_i(cbIdent);
 
                 us_permiso_empleado usp = new us_permiso_empleado();
                 usp.setEstado_pe(ll);
@@ -1084,6 +1104,7 @@ char c = evt.getKeyChar();
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JComboBox<String> cbEstado;
+    private javax.swing.JComboBox<String> cbId;
     private javax.swing.JComboBox<String> cbSucursales;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxCopiaTitulo;
@@ -1096,7 +1117,6 @@ char c = evt.getKeyChar();
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

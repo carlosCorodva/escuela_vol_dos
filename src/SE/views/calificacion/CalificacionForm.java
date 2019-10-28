@@ -460,12 +460,46 @@ public class CalificacionForm extends javax.swing.JDialog {
 
                 for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
 
-                    Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
-                    Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
-                    Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+                    Double formativa = 0.0;
+                    String forma = "";
+                    Double practica = 0.0;
+                    String pract = "";
+                    Double aporte = 0.0;
+                    String apor = "";
+                    Double examen = 0.0;
+                    String exa = "";
+                    
+                    forma = jtCalificacion.getValueAt(i, 2).toString();
+                    pract = jtCalificacion.getValueAt(i, 3).toString();
+                    apor = jtCalificacion.getValueAt(i, 4).toString();
+                    exa = jtCalificacion.getValueAt(i, 5).toString();
+//                    Double formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
+//                    Double practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
+//                    Double aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+//                    Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
 
-                    Double examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
-
+                    if (forma.length() < 1 || pract.length() < 1 || apor.length() < 1 || exa.length() < 1) {
+                        JOptionPane.showMessageDialog(this, "NO PUEDE DEJAR CAMPOS NULOS");
+                    }
+                    else{
+                        formativa = Double.parseDouble(jtCalificacion.getValueAt(i, 2).toString());
+                        practica = Double.parseDouble(jtCalificacion.getValueAt(i, 3).toString());
+                        aporte = Double.parseDouble(jtCalificacion.getValueAt(i, 4).toString());
+                        examen = Double.parseDouble(jtCalificacion.getValueAt(i, 5).toString());
+                    }
+//                    if (jtCalificacion.getValueAt(i, 3).toString().length() < 1) {
+//                        JOptionPane.showMessageDialog(this, "NO PUEDE DEJAR CAMPOS NULOS");
+//                        practica = 0.0;
+//                    }
+//                    if (aporte == null) {
+//                        JOptionPane.showMessageDialog(this, "NO PUEDE DEJAR CAMPOS NULOS");
+//                        aporte = 0.0;
+//                    }
+//                    if (examen == null) {
+//                        JOptionPane.showMessageDialog(this, "NO PUEDE DEJAR CAMPOS NULOS");
+//                        examen = 0.0;
+//                    }
+                    
                     Double divisor = Double.valueOf(3);
                     Double mon = 0.80;
                     Double mvn = 0.20;
@@ -483,7 +517,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(this, "NO PUEDE CALIFICAR MAYOR A 10.00");
                         promedio = 0.00;
                     }
-
+                    
                     jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()/*.replace(",", ".").trim()*/), i, 9);
                     String cualitativo = "";
 
@@ -508,6 +542,14 @@ public class CalificacionForm extends javax.swing.JDialog {
                         cualitativo = "RETIRADO";
                     }
                     jtCalificacion.setValueAt(cualitativo, i, 10);
+                    
+                    int conducta = Integer.valueOf(jtCalificacion.getValueAt(i, 6).toString());
+                    
+                    if (conducta >= 6) {
+                        JOptionPane.showMessageDialog(this, "NO PUEDE CALIFICAR CONDUCTA MAYOR A 5");
+                        conducta = 1;
+                    }
+                    jtCalificacion.setValueAt(conducta, i, 6);
                 }
             }
         } catch (Exception e) {

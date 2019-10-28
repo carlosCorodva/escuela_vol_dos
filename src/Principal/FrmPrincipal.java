@@ -6,6 +6,7 @@
 package Principal;
 
 import SE.componentes.Fondo;
+import SE.componentes.Hilo;
 import SE.componentes.Variables;
 import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.join.JoinEmpleados;
@@ -28,7 +29,11 @@ import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
 import SE.views.usuario.empleados.PermisosMostrarEmpleadosForm;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -40,9 +45,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     Variables fondo = new Variables();
-//    private static final String TITLE = "NOMBRE";
     JoinEmpleados us = null;
-    
+    Hilo hilo;
+
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
         us = usuario;
@@ -54,15 +59,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.setIconImage(fondo.getIconoVentana());
+//        this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbsuc.setText(us.getNombre_comercial_su());
         lbUsuario.setText(us.getUsuario());
+        permisos();
+
+        java.util.Date sistFecha = new java.util.Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+
+        Timer tiempo = new Timer(100, new FrmPrincipal.horas());
+        tiempo.start();
+
+        fecha.setText(formato.format(sistFecha));
+//        hilo = new Hilo(this);
+//        hilo.start();
     }
-    
+
     public FrmPrincipal() {
         initComponents();
     }
@@ -89,31 +105,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
+        hora = new javax.swing.JLabel();
+        fecha = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        meEmpresa = new javax.swing.JMenu();
+        jmEmpresa = new javax.swing.JMenu();
+        subEmpresa = new javax.swing.JMenuItem();
+        subSucursales = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jmUsuarios = new javax.swing.JMenuItem();
+        jmPermisos = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        meMatricula = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        jmAlumnos = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        meCalificacion = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        meCursos = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        meMaterias = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        meReportes = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        jmPerAnteriores = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
+        jmEmpleados = new javax.swing.JMenuItem();
+        jmGraduados = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -198,23 +216,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(lbsuc, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbsuc, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbsuc)
                     .addComponent(jLabel1)
                     .addComponent(lbUsuario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         lbEmpresa.setText("empresa");
@@ -223,37 +241,50 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lbIdUsuario.setText("usuario");
 
+        hora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hora.setText("jLabel2");
+        hora.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        hora.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        hora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        hora.setVerifyInputWhenFocusTarget(false);
+
+        fecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fecha.setText("jLabel2");
+        fecha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenu1.setText("EMPRESA");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu1.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meEmpresa.setText("EMPRESA");
+        meEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        meEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meEmpresa.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
-        jMenu7.setText("EMPRESA");
-        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu7.setMargin(new java.awt.Insets(1, 0, 0, 0));
+        jmEmpresa.setText("EMPRESA");
+        jmEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmEmpresa.setMargin(new java.awt.Insets(1, 0, 0, 0));
 
-        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem12.setText("EMPRESA");
-        jMenuItem12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        subEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        subEmpresa.setText("EMPRESA");
+        subEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        subEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                subEmpresaActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem12);
+        jmEmpresa.add(subEmpresa);
 
-        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem10.setText("SUCURSALES");
-        jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        subSucursales.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        subSucursales.setText("SUCURSALES");
+        subSucursales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        subSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                subSucursalesActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem10);
+        jmEmpresa.add(subSucursales);
 
         jMenuItem11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem11.setText("INACTIVOS");
@@ -263,29 +294,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem11ActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem11);
+        jmEmpresa.add(jMenuItem11);
 
-        jMenu1.add(jMenu7);
+        meEmpresa.add(jmEmpresa);
 
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem2.setText("USUARIOS");
-        jMenuItem2.setBorderPainted(true);
-        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmUsuarios.setText("USUARIOS");
+        jmUsuarios.setBorderPainted(true);
+        jmUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmUsuariosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        meEmpresa.add(jmUsuarios);
 
-        jMenuItem14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem14.setText("PERMISOS DE CURSOS");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jmPermisos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmPermisos.setText("PERMISOS DE CURSOS");
+        jmPermisos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jmPermisosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        meEmpresa.add(jmPermisos);
 
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem7.setText("ACTUALIZAR CLAVE");
@@ -295,14 +326,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        meEmpresa.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(meEmpresa);
 
-        jMenu2.setText("MATRICULA");
-        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu2.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meMatricula.setText("MATRICULA");
+        meMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        meMatricula.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meMatricula.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem3.setText("MATRICULAS");
@@ -312,17 +343,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        meMatricula.add(jMenuItem3);
 
-        jMenuItem13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem13.setText("ALUMNOS");
-        jMenuItem13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        jmAlumnos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmAlumnos.setText("ALUMNOS");
+        jmAlumnos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                jmAlumnosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem13);
+        meMatricula.add(jmAlumnos);
 
         jMenuItem8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem8.setText("PERIODO LECTIVO");
@@ -332,13 +363,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        meMatricula.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(meMatricula);
 
-        jMenu6.setText("CALIFICACION");
-        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu6.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meCalificacion.setText("CALIFICACION");
+        meCalificacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meCalificacion.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem6.setText("CALIFICACION");
@@ -348,13 +379,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem6);
+        meCalificacion.add(jMenuItem6);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(meCalificacion);
 
-        jMenu4.setText("CURSOS");
-        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu4.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meCursos.setText("CURSOS");
+        meCursos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meCursos.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem4.setText("CURSOS");
@@ -364,13 +395,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem4);
+        meCursos.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(meCursos);
 
-        jMenu5.setText("MATERIAS");
-        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu5.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meMaterias.setText("MATERIAS");
+        meMaterias.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meMaterias.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem5.setText("MATERIAS");
@@ -380,13 +411,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem5);
+        meMaterias.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(meMaterias);
 
-        jMenu8.setText("REPORTES");
-        jMenu8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu8.setMargin(new java.awt.Insets(3, 1, 3, 1));
+        meReportes.setText("REPORTES");
+        meReportes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        meReportes.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem9.setText("CALIFICACION");
@@ -395,16 +426,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem9);
+        meReportes.add(jMenuItem9);
 
-        jMenuItem15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem15.setText("PERIODOS ANTERIORES");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+        jmPerAnteriores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmPerAnteriores.setText("PERIODOS ANTERIORES");
+        jmPerAnteriores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                jmPerAnterioresActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem15);
+        meReportes.add(jmPerAnteriores);
 
         jMenuItem16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem16.setText("ALUMNOS");
@@ -413,27 +444,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jMenuItem16ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem16);
+        meReportes.add(jMenuItem16);
 
-        jMenuItem17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem17.setText("EMPLEADOS");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+        jmEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmEmpleados.setText("EMPLEADOS");
+        jmEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
+                jmEmpleadosActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem17);
+        meReportes.add(jmEmpleados);
 
-        jMenuItem18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem18.setText("GRADUADOS");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+        jmGraduados.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmGraduados.setText("GRADUADOS");
+        jmGraduados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                jmGraduadosActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem18);
+        meReportes.add(jmGraduados);
 
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(meReportes);
 
         jMenu3.setText("AYUDA");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -457,21 +488,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbIdUsuario)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lbEmpresa)
-                        .addComponent(lbSucursal)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbIdUsuario)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lbEmpresa)
+                                .addComponent(lbSucursal)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hora, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(113, 113, 113)
                 .addComponent(lbIdUsuario)
                 .addGap(59, 59, 59)
@@ -485,12 +528,72 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class horas implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            java.util.Date sistHora = new java.util.Date();
+            String pmAm = "HH:mm:ss";
+            SimpleDateFormat format = new SimpleDateFormat(pmAm);
+            java.util.Calendar hoy = java.util.Calendar.getInstance();
+            hora.setText(String.format(format.format(sistHora), hoy));
+
+        }
+    }
+    
+    public void permisos(){
+        String cargo = us.getRol();
+        if ("ADMINISTRADOR".equals(cargo)) {
+            
+        }else{
+            if ("RECTOR/A".equals(cargo)) {
+                subEmpresa.setVisible(false);
+                subSucursales.setVisible(false);
+            }
+            if ("INSPECTOR/A".equals(cargo)) {
+                jmEmpresa.setVisible(false);
+            }
+            if ("PROFESOR/A".equals(cargo) || "PASANTE".equals(cargo)) {
+                jmEmpresa.setVisible(false);
+                jmPermisos.setVisible(false);
+                jmUsuarios.setVisible(false);
+                meMatricula.setVisible(false);
+                btnMatricula.setVisible(false);
+                btnUsuario.setVisible(false);
+                meCursos.setVisible(false);
+                meMaterias.setVisible(false);
+                jmGraduados.setVisible(false);
+                jmEmpleados.setVisible(false);
+                jmPerAnteriores.setVisible(false);
+            }
+            if ("SECRETARIO/A".equals(cargo)) {
+                jmEmpresa.setVisible(false);
+                jmPermisos.setVisible(false);
+                jmUsuarios.setVisible(false);
+                btnUsuario.setVisible(false);
+                btnCalificacion.setVisible(false);
+                meCursos.setVisible(false);
+                meMaterias.setVisible(false);
+                jmAlumnos.setVisible(false);
+                meCalificacion.setVisible(false);
+            }
+            if ("ESTUDIANTE".equals(cargo)) {
+                meCalificacion.setVisible(false);
+                meCursos.setVisible(false);
+                meEmpresa.setVisible(false);
+                meMaterias.setVisible(false);
+                meMatricula.setVisible(false);
+                meReportes.setVisible(false);
+            }
+        }
+    }
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL SISTEMA?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             System.exit(0);
         } else {
-            
+
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -499,10 +602,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ne.setVisible(true);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmUsuariosActionPerformed
         MostrarEmpleadosForm me = new MostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
         me.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmUsuariosActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         ConfirmacionClaveForm cc = new ConfirmacionClaveForm(new javax.swing.JFrame(), true, us);
@@ -524,15 +627,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mp.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void subEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subEmpresaActionPerformed
         MostrarEmpresaUnoForm ae = new MostrarEmpresaUnoForm(new javax.swing.JFrame(), true, us);
         ae.setVisible(true);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_subEmpresaActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void subSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subSucursalesActionPerformed
         MostrarSucursalesForm ms = new MostrarSucursalesForm(new javax.swing.JFrame(), true, us);
         ms.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_subSucursalesActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         MostrarInactivosForm mi = new MostrarInactivosForm(new javax.swing.JFrame(), true, us);
@@ -554,15 +657,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mm.setVisible(true);
     }//GEN-LAST:event_btnMatriculaActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void jmAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnosActionPerformed
         MostrarAlumnosForm ma = new MostrarAlumnosForm(new javax.swing.JFrame(), true, us);
         ma.setVisible(true);
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_jmAlumnosActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void jmPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPermisosActionPerformed
         PermisosMostrarEmpleadosForm pe = new PermisosMostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
         pe.setVisible(true);
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_jmPermisosActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         CalificacionForm ca = new CalificacionForm(new javax.swing.JFrame(), true, us);
@@ -579,25 +682,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ca.setVisible(true);
     }//GEN-LAST:event_btnCalificacionActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+    private void jmPerAnterioresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPerAnterioresActionPerformed
         PromedioReporteAlumnosTodosCalificacionForm rp = new PromedioReporteAlumnosTodosCalificacionForm(new javax.swing.JFrame(), true, us);
         rp.setVisible(true);
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+    }//GEN-LAST:event_jmPerAnterioresActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         MostrarAlumnosReporteForm mar = new MostrarAlumnosReporteForm(new javax.swing.JFrame(), true, us);
         mar.setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+    private void jmEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEmpleadosActionPerformed
         MostrarEmpleadosReportesForm re = new MostrarEmpleadosReportesForm(new javax.swing.JFrame(), true, us);
         re.setVisible(true);
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
+    }//GEN-LAST:event_jmEmpleadosActionPerformed
 
-    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+    private void jmGraduadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGraduadosActionPerformed
         GraduadosReporteForm gr = new GraduadosReporteForm(new javax.swing.JFrame(), true, us);
         gr.setVisible(true);
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
+    }//GEN-LAST:event_jmGraduadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -639,28 +742,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnContra;
     private javax.swing.JButton btnMatricula;
     private javax.swing.JButton btnUsuario;
+    private javax.swing.JLabel fecha;
+    private javax.swing.JLabel hora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -670,10 +760,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuItem jmAlumnos;
+    private javax.swing.JMenuItem jmEmpleados;
+    private javax.swing.JMenu jmEmpresa;
+    private javax.swing.JMenuItem jmGraduados;
+    private javax.swing.JMenuItem jmPerAnteriores;
+    private javax.swing.JMenuItem jmPermisos;
+    private javax.swing.JMenuItem jmUsuarios;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JLabel lbsuc;
+    private javax.swing.JMenu meCalificacion;
+    private javax.swing.JMenu meCursos;
+    private javax.swing.JMenu meEmpresa;
+    private javax.swing.JMenu meMaterias;
+    private javax.swing.JMenu meMatricula;
+    private javax.swing.JMenu meReportes;
+    private javax.swing.JMenuItem subEmpresa;
+    private javax.swing.JMenuItem subSucursales;
     // End of variables declaration//GEN-END:variables
 }
