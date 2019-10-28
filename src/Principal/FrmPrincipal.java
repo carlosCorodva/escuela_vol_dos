@@ -41,9 +41,6 @@ import javax.swing.Timer;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPrincipal
-     */
     Variables fondo = new Variables();
     JoinEmpleados us = null;
     Hilo hilo;
@@ -62,7 +59,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
         lbEmpresa.setText(us.getId_empresa().toString());  
-        
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbsuc.setText(us.getNombre_comercial_su());
@@ -538,14 +534,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
             SimpleDateFormat format = new SimpleDateFormat(pmAm);
             java.util.Calendar hoy = java.util.Calendar.getInstance();
             hora.setText(String.format(format.format(sistHora), hoy));
-
         }
     }
     
     public void permisos(){
         String cargo = us.getRol();
         if ("ADMINISTRADOR".equals(cargo)) {
-            
         }else{
             if ("RECTOR/A".equals(cargo)) {
                 subEmpresa.setVisible(false);
@@ -603,6 +597,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ne.setVisible(true);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
+    
     private void jmUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmUsuariosActionPerformed
         MostrarEmpleadosForm me = new MostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
         me.setVisible(true);
