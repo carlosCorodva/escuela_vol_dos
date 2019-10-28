@@ -61,7 +61,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
 //        this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
-        lbEmpresa.setText(us.getId_empresa().toString());
+        lbEmpresa.setText(us.getId_empresa().toString());  
+        
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbsuc.setText(us.getNombre_comercial_su());
