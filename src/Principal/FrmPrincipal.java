@@ -11,6 +11,7 @@ import SE.componentes.Variables;
 import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.calificacion.CalificacionForm;
+import SE.views.complementos.datosInformacion;
 import SE.views.empresa.MostrarEmpresaUnoForm;
 import SE.views.empresa.sucursal.MostrarSucursalesForm;
 import SE.views.empresa.MostrarInactivosForm;
@@ -130,6 +131,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jmEmpleados = new javax.swing.JMenuItem();
         jmGraduados = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -467,6 +469,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu3.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem2.setText("INFORMACION");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuItem1.setText("SALIR");
         jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -698,6 +709,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         gr.setVisible(true);
     }//GEN-LAST:event_jmGraduadosActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        datosInformacion di = new datosInformacion(new javax.swing.JFrame(), true);
+        di.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -747,6 +763,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
