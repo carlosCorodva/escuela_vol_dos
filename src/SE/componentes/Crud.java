@@ -1,5 +1,6 @@
 package SE.componentes;
 
+import SE.entidades.bloqueo;
 import SE.entidades.ca_conducta;
 import SE.entidades.ca_materia;
 import SE.entidades.em_empresa;
@@ -2585,4 +2586,61 @@ public class Crud {
         return valor;
     }
     
+    public String estadoMatricula(bloqueo bl) {
+        String valor = "";
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call select_estado_modulo_matricula(?,?) }");
+            pro.setLong(1, bl.getId_sucursal_bloqueo());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String estadoCalificacion(bloqueo bl) {
+        String valor = "";
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call select_estado_modulo_calificacion(?,?) }");
+            pro.setLong(1, bl.getId_sucursal_bloqueo());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

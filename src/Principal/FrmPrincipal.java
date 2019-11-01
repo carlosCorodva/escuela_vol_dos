@@ -5,9 +5,11 @@
  */
 package Principal;
 
+import SE.componentes.Crud;
 import SE.componentes.Fondo;
 import SE.componentes.Hilo;
 import SE.componentes.Variables;
+import SE.entidades.bloqueo;
 import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.calificacion.CalificacionForm;
@@ -33,6 +35,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -45,6 +49,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     Variables fondo = new Variables();
     JoinEmpleados us = null;
     Hilo hilo;
+    Crud c = new Crud();
 
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
@@ -59,13 +64,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
 //        this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
-        lbEmpresa.setText(us.getId_empresa().toString());  
+        lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         lbsuc.setText(us.getNombre_comercial_su());
         lbUsuario.setText(us.getUsuario());
         permisos();
-
+        bloq();
         java.util.Date sistFecha = new java.util.Date();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -91,6 +96,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btnContra = new javax.swing.JButton();
         btnMatricula = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
@@ -139,6 +146,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
+        jButton1.setText("DESACT.  CALIFICACION");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
+        jButton2.setText("DESACT. MATRICULA");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
 
         btnContra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/contra 32.png"))); // NOI18N
@@ -547,11 +570,40 @@ public class FrmPrincipal extends javax.swing.JFrame {
             hora.setText(String.format(format.format(sistHora), hoy));
         }
     }
-    
-    public void permisos(){
+
+    public void bloq() {
+        try {
+            bloqueo b = new bloqueo();
+            b.setId_sucursal_bloqueo(us.getId_sucursal());
+            String a = c.estadoMatricula(b);
+            System.out.println("a: " + a);
+            if ("a".equals(a)) {
+                meMatricula.setEnabled(true);
+                btnMatricula.setEnabled(true);
+            } else {
+                meMatricula.setEnabled(false);
+                btnMatricula.setEnabled(false);
+            }
+            
+            String aa = c.estadoCalificacion(b);
+            if ("a".equals(aa)) {
+                meCalificacion.setEnabled(true);
+                btnCalificacion.setEnabled(true);
+            } else {
+                meCalificacion.setEnabled(false);
+                btnCalificacion.setEnabled(false);
+            }
+            
+        } catch (Exception e) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    public void permisos() {
         String cargo = us.getRol();
         if ("ADMINISTRADOR".equals(cargo)) {
-        }else{
+        } else {
             if ("RECTOR/A".equals(cargo)) {
                 subEmpresa.setVisible(false);
                 subSucursales.setVisible(false);
@@ -608,7 +660,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ne.setVisible(true);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
-    
+
     private void jmUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmUsuariosActionPerformed
         MostrarEmpleadosForm me = new MostrarEmpleadosForm(new javax.swing.JFrame(), true, us);
         me.setVisible(true);
@@ -756,6 +808,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
