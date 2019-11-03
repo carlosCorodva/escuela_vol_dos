@@ -50,6 +50,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     JoinEmpleados us = null;
     Hilo hilo;
     Crud c = new Crud();
+    bloqueo b = new bloqueo();
 
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
@@ -96,8 +97,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bloqCal = new javax.swing.JButton();
+        bloqMat = new javax.swing.JButton();
         btnContra = new javax.swing.JButton();
         btnMatricula = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
@@ -122,11 +123,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jmPermisos = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         meMatricula = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmMatriculas = new javax.swing.JMenuItem();
         jmAlumnos = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         meCalificacion = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jmCalificacion = new javax.swing.JMenuItem();
         meCursos = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         meMaterias = new javax.swing.JMenu();
@@ -147,21 +148,31 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
-        jButton1.setText("DESACT.  CALIFICACION");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        bloqCal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bloqCal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
+        bloqCal.setText("DESACT.  CALIFICACION");
+        bloqCal.setFocusable(false);
+        bloqCal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bloqCal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bloqCal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloqCalActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bloqCal);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
-        jButton2.setText("DESACT. MATRICULA");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        bloqMat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bloqMat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/candado32sit.png"))); // NOI18N
+        bloqMat.setText("DESACT. MATRICULA");
+        bloqMat.setFocusable(false);
+        bloqMat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bloqMat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bloqMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloqMatActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bloqMat);
 
         btnContra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/contra 32.png"))); // NOI18N
@@ -357,15 +368,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         meMatricula.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         meMatricula.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
-        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem3.setText("MATRICULAS");
-        jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmMatriculas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmMatriculas.setText("MATRICULAS");
+        jmMatriculas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmMatriculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmMatriculasActionPerformed(evt);
             }
         });
-        meMatricula.add(jMenuItem3);
+        meMatricula.add(jmMatriculas);
 
         jmAlumnos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jmAlumnos.setText("ALUMNOS");
@@ -393,15 +404,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         meCalificacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         meCalificacion.setMargin(new java.awt.Insets(3, 1, 3, 1));
 
-        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem6.setText("CALIFICACION");
-        jMenuItem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jmCalificacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmCalificacion.setText("CALIFICACION");
+        jmCalificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmCalificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jmCalificacionActionPerformed(evt);
             }
         });
-        meCalificacion.add(jMenuItem6);
+        meCalificacion.add(jmCalificacion);
 
         jMenuBar1.add(meCalificacion);
 
@@ -573,27 +584,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public void bloq() {
         try {
-            bloqueo b = new bloqueo();
+//            bloqueo b = new bloqueo();
             b.setId_sucursal_bloqueo(us.getId_sucursal());
             String a = c.estadoMatricula(b);
-            System.out.println("a: " + a);
             if ("a".equals(a)) {
-                meMatricula.setEnabled(true);
+                jmMatriculas.setEnabled(true);
                 btnMatricula.setEnabled(true);
+                bloqMat.setText("DESACT. MATRICULA");
             } else {
-                meMatricula.setEnabled(false);
+                jmMatriculas.setEnabled(false);
                 btnMatricula.setEnabled(false);
+                bloqMat.setText("ACT. MATRICULA");
             }
-            
+
             String aa = c.estadoCalificacion(b);
             if ("a".equals(aa)) {
-                meCalificacion.setEnabled(true);
+                jmCalificacion.setEnabled(true);
                 btnCalificacion.setEnabled(true);
+                bloqCal.setText("DESACT.  CALIFICACION");
             } else {
-                meCalificacion.setEnabled(false);
+                jmCalificacion.setEnabled(false);
                 btnCalificacion.setEnabled(false);
+                bloqCal.setText("ACT.  CALIFICACION");
             }
-            
+
         } catch (Exception e) {
             Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -603,6 +617,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void permisos() {
         String cargo = us.getRol();
         if ("ADMINISTRADOR".equals(cargo)) {
+
         } else {
             if ("RECTOR/A".equals(cargo)) {
                 subEmpresa.setVisible(false);
@@ -610,6 +625,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
             if ("INSPECTOR/A".equals(cargo)) {
                 jmEmpresa.setVisible(false);
+                bloqMat.setVisible(false);
+                bloqCal.setVisible(false);
             }
             if ("PROFESOR/A".equals(cargo) || "PASANTE".equals(cargo)) {
                 jmEmpresa.setVisible(false);
@@ -623,6 +640,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 jmGraduados.setVisible(false);
                 jmEmpleados.setVisible(false);
                 jmPerAnteriores.setVisible(false);
+                bloqMat.setVisible(false);
+                bloqCal.setVisible(false);
             }
             if ("SECRETARIO/A".equals(cargo)) {
                 jmEmpresa.setVisible(false);
@@ -634,6 +653,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 meMaterias.setVisible(false);
                 jmAlumnos.setVisible(false);
                 meCalificacion.setVisible(false);
+                bloqMat.setVisible(false);
+                bloqCal.setVisible(false);
             }
             if ("ESTUDIANTE".equals(cargo)) {
                 meCalificacion.setVisible(false);
@@ -642,6 +663,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 meMaterias.setVisible(false);
                 meMatricula.setVisible(false);
                 meReportes.setVisible(false);
+                bloqMat.setVisible(false);
+                bloqCal.setVisible(false);
             }
         }
     }
@@ -706,10 +729,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         cc.setVisible(true);
     }//GEN-LAST:event_btnContraActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMatriculasActionPerformed
         MostrarMatriculasForm mm = new MostrarMatriculasForm(new javax.swing.JFrame(), true, us);
         mm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmMatriculasActionPerformed
 
     private void btnMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriculaActionPerformed
         MostrarMatriculasForm mm = new MostrarMatriculasForm(new javax.swing.JFrame(), true, us);
@@ -726,10 +749,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pe.setVisible(true);
     }//GEN-LAST:event_jmPermisosActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jmCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCalificacionActionPerformed
         CalificacionForm ca = new CalificacionForm(new javax.swing.JFrame(), true, us);
         ca.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_jmCalificacionActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         ReporteAlumnosperiodoActualForm ca = new ReporteAlumnosperiodoActualForm(new javax.swing.JFrame(), true, us);
@@ -765,6 +788,51 @@ public class FrmPrincipal extends javax.swing.JFrame {
         datosInformacion di = new datosInformacion(new javax.swing.JFrame(), true);
         di.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    public void activarMatricula() {
+        if ("DESACT. MATRICULA".equals(bloqMat.getText())) {
+            b.setId_sucursal_bloqueo(us.getId_sucursal());
+            c.estadoMatriculaDesact(b);
+
+            jmMatriculas.setEnabled(false);
+            btnMatricula.setEnabled(false);
+            bloqMat.setText("ACT. MATRICULA");
+        } else {
+            b.setId_sucursal_bloqueo(us.getId_sucursal());
+            c.estadoMatriculaAct(b);
+
+            jmMatriculas.setEnabled(true);
+            btnMatricula.setEnabled(true);
+            bloqMat.setText("DESACT. MATRICULA");
+        }
+    }
+
+    public void activarCalificacion() {
+        if ("DESACT.  CALIFICACION".equals(bloqCal.getText())) {
+            b.setId_sucursal_bloqueo(us.getId_sucursal());
+            c.estadoCalificacionDesact(b);
+
+            jmCalificacion.setEnabled(false);
+            btnCalificacion.setEnabled(false);
+            bloqCal.setText("ACT.  CALIFICACION");
+        } else {
+            b.setId_sucursal_bloqueo(us.getId_sucursal());
+            c.estadoCalificacionAct(b);
+
+            jmCalificacion.setEnabled(true);
+            btnCalificacion.setEnabled(true);
+            bloqCal.setText("DESACT.  CALIFICACION");
+        }
+
+    }
+
+    private void bloqCalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloqCalActionPerformed
+        activarCalificacion();
+    }//GEN-LAST:event_bloqCalActionPerformed
+
+    private void bloqMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloqMatActionPerformed
+        activarMatricula();
+    }//GEN-LAST:event_bloqMatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -802,14 +870,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bloqCal;
+    private javax.swing.JButton bloqMat;
     private javax.swing.JButton btnCalificacion;
     private javax.swing.JButton btnContra;
     private javax.swing.JButton btnMatricula;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
@@ -818,19 +886,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem jmAlumnos;
+    private javax.swing.JMenuItem jmCalificacion;
     private javax.swing.JMenuItem jmEmpleados;
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenuItem jmGraduados;
+    private javax.swing.JMenuItem jmMatriculas;
     private javax.swing.JMenuItem jmPerAnteriores;
     private javax.swing.JMenuItem jmPermisos;
     private javax.swing.JMenuItem jmUsuarios;
