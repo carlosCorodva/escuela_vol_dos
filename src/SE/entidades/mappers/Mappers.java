@@ -16,6 +16,7 @@ import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
+import SE.entidades.precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
@@ -399,6 +400,22 @@ public class Mappers {
             obj.setNombre_comercial_su(rs.getString("Nombre_comercial_su"));
             obj.setId_paralelo(rs.getLong("Id_paralelo"));
             obj.setParalelo(rs.getString("Paralelo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
+    public static precios getPreciosFromResultSet(ResultSet rs) {
+        precios obj = new precios();
+        try {
+            obj.setId_precios(rs.getLong("id_precios"));
+            obj.setCodigo(rs.getString("codigo"));
+            obj.setValor(rs.getDouble("valor"));
+            obj.setPromocion(rs.getString("promocion"));
+            obj.setEstado_pre(rs.getString("estado_pre"));
+            obj.setPago(rs.getString("pago"));
+
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

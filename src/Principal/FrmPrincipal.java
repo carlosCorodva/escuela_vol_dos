@@ -21,6 +21,7 @@ import SE.views.materias.MostrarMateriasForm;
 import SE.views.matricula.MostrarAlumnosForm;
 import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
+import SE.views.mensualidades.mostrarPreciosForm;
 import SE.views.reportes.GraduadosReporteForm;
 import SE.views.reportes.MostrarAlumnosReporteForm;
 import SE.views.reportes.MostrarEmpleadosReportesForm;
@@ -96,6 +97,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem3 = new javax.swing.JMenuItem();
         jToolBar1 = new javax.swing.JToolBar();
         bloqCal = new javax.swing.JButton();
         bloqMat = new javax.swing.JButton();
@@ -119,6 +121,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         subEmpresa = new javax.swing.JMenuItem();
         subSucursales = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenuItem();
         jmPermisos = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -141,6 +145,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -289,7 +295,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        meEmpresa.setText("EMPRESA");
+        meEmpresa.setText("MANTENIMIENTO");
         meEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         meEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         meEmpresa.setMargin(new java.awt.Insets(3, 1, 3, 1));
@@ -328,6 +334,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jmEmpresa.add(jMenuItem11);
+
+        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem6.setText("MENSUALIDADES");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jmEmpresa.add(jMenuItem6);
+
+        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem10.setText("PRECIOS");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jmEmpresa.add(jMenuItem10);
 
         meEmpresa.add(jmEmpresa);
 
@@ -834,6 +858,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         activarMatricula();
     }//GEN-LAST:event_bloqMatActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        mostrarPreciosForm mp = new mostrarPreciosForm(new javax.swing.JFrame(), true, us);
+        mp.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -883,11 +916,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;

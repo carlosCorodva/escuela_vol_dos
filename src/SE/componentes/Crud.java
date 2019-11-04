@@ -13,6 +13,7 @@ import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
+import SE.entidades.precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.CallableStatement;
@@ -2749,4 +2750,105 @@ public class Crud {
         }
         return valor;
     }
+    
+    public String CrearPrecio(precios us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call crear_precios(?,?,?,?,?,?,?) }");
+            pro.setDouble(1, us.getValor());
+            pro.setString(2, us.getPromocion());
+            pro.setLong(3, us.getId_creacion());
+            pro.setString(4, us.getCodigo());
+            pro.setString(5, us.getPago());
+            pro.setLong(6, us.getId_sucursal());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public ArrayList<precios> mostrarPrecios(precios p) {
+        ArrayList<precios> valor = new ArrayList<precios>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call mstrar_precios(?) }");
+            pro.setLong(1, p.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                precios obj = Mappers.getPreciosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public String ActualizarPrecio(precios us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call actualizar_precio(?,?,?,?,?,?,?,?,?) }");
+            pro.setDouble(1, us.getValor());
+            pro.setString(2, us.getPromocion());
+            pro.setLong(3, us.getId_creacion());
+            pro.setString(4, us.getCodigo());
+            pro.setString(5, us.getPago());
+            pro.setLong(6, us.getId_sucursal());
+            pro.setString(7, us.getEstado_pre());
+            pro.setLong(8, us.getId_precios());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
 }

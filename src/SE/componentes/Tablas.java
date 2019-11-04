@@ -15,6 +15,7 @@ import SE.entidades.join.JoinGraduados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
+import SE.entidades.precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
@@ -825,6 +826,43 @@ public class Tablas {
             Filas[3] = lista.get(i).getPeriodo();
             Filas[4] = lista.get(i).getNombre_comercial_su();
             Filas[5] = lista.get(i).getParalelo();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        }
+    }
+    
+    public static void cargarPrecios(JTable Tabla, ArrayList<precios> lista) {
+
+        int[] a = {30, 50, 200, 72, 70, 30};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"   ID", "VALOR", "PROMOCION", "PAGO", "CODIGO",
+            "ESTADO"};
+        String[] Filas = new String[6];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = ""+lista.get(i).getId_precios();
+            Filas[1] = ""+lista.get(i).getValor();
+            Filas[2] = lista.get(i).getPromocion();
+            Filas[3] = lista.get(i).getPago();
+            Filas[4] = lista.get(i).getCodigo();
+            Filas[5] = lista.get(i).getEstado_pre();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
