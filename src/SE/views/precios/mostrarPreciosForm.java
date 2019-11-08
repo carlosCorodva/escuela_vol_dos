@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.mensualidades;
+package SE.views.precios;
 
 import SE.componentes.Crud;
 import SE.componentes.Tablas;

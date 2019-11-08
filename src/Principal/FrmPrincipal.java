@@ -21,7 +21,7 @@ import SE.views.materias.MostrarMateriasForm;
 import SE.views.matricula.MostrarAlumnosForm;
 import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
-import SE.views.mensualidades.mostrarPreciosForm;
+import SE.views.precios.mostrarPreciosForm;
 import SE.views.reportes.GraduadosReporteForm;
 import SE.views.reportes.MostrarAlumnosReporteForm;
 import SE.views.reportes.MostrarEmpleadosReportesForm;

@@ -337,7 +337,7 @@ public class Tablas {
 
     public static void cargarJoinMatriculas(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
-        int[] a = {10, 30, 150, 72, 20, 70, 50, 30, 30, 30, 50};
+        int[] a = {70, 100, 350, 350, 100, 200, 100, 80, 90, 90, 170};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);

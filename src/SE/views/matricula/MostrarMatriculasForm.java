@@ -88,15 +88,13 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         jtMatriculas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtMatriculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jtMatriculas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtMatriculas.setRowHeight(25);
         jtMatriculas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

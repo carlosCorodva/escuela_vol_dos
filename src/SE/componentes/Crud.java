@@ -1457,7 +1457,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -1481,6 +1481,7 @@ public class Crud {
             pro.setLong(21, us.getDoc_escuela_ant());
             pro.setString(22, us.getAnt_escuela());
             pro.setLong(23, us.getPartida_nacimiento());
+            pro.setDouble(24, us.getValor_mat());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -1508,7 +1509,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getParalelo());
             pro.setLong(3, us.getId_empleado());
@@ -1517,6 +1518,7 @@ public class Crud {
             pro.setLong(6, us.getServicio_basico());
             pro.setString(7, us.getEstado_matricula());
             pro.setLong(8, us.getId_matricula());
+            pro.setDouble(9, us.getValor_mat());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -2850,5 +2852,37 @@ public class Crud {
         }
         return valor;
     }
+    public ArrayList<precios> ComboValor(precios mp) {
+        ArrayList<precios> lista = new ArrayList<precios>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_matricula_combo_valor(?) }");
+            pro.setLong(1, mp.getId_sucursal());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                precios obj = Mappers.getValorFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+    
     
 }

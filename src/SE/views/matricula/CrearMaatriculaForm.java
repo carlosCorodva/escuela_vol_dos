@@ -13,6 +13,7 @@ import SE.componentes.ValidarIdentificacionEc;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
+import SE.entidades.precios;
 import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -40,8 +41,10 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     ArrayList<JoinEmpleados> listar = crud.listarEmpleadosActivosInicio();
     ArrayList<JoinMatriculas> lista = null;
     ArrayList<ma_paralelo> paralelo = null;
+    ArrayList<precios> precio = null;
     JoinMatriculas je = new JoinMatriculas();
     ma_paralelo mp = new ma_paralelo();
+    precios pr = new precios();
     Calendario cal = new Calendario();
     JoinEmpleados us = null;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -74,6 +77,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         lista = crud.listarAlumnosMatriculas(je);
         comboParalelo();
+        comboValor();
         txtOtro.setEnabled(false);
         txtOtroDos.setEnabled(false);
         txtEscAnt.setEnabled(false);
@@ -91,6 +95,12 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
         paralelo = crud.ComboParaleloRegistrar(mp);
         cbParalelo.setModel(Combos.listarComboParalelosRegistrar(paralelo));
+    }
+    
+    public void comboValor() {
+        pr.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        precio = crud.ComboValor(pr);
+        cbValor.setModel(Combos.listarComboValor(precio));
     }
     
     public void validarCedula(){
@@ -145,7 +155,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtEscAnt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbValor = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtRepresentante = new javax.swing.JTextField();
@@ -326,11 +336,14 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxEscuela)
                     .addComponent(cbxServicoBas))
-                .addGap(99, 99, 99)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxDocu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEscAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(cbxDocu))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(txtEscAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,8 +376,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(txtObservacion);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VALOR..." }));
+        cbValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbValor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VALOR..." }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -396,7 +409,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                                 .addGap(59, 59, 59)
                                 .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)))
                         .addGap(60, 60, 60)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,7 +441,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 18, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
@@ -906,11 +919,11 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
         cbParUno.setEnabled(valor);
         cbParDos.setEnabled(valor);
         cbParalelo.setEnabled(valor);
+        cbValor.setEnabled(valor);
     }
 
     public void Guardar() {
         JoinMatriculas obj = new JoinMatriculas();
-        System.out.println("guardar");
         String fecha = cal.getFecha(dtFecha);
         String obs, parUno, parDos;
         Long cc, sb, doc, pn;
@@ -974,6 +987,8 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
         } else if (cbParUno.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARENTESCO VALIDO");
+        } else if (cbValor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
         } else {
             
             imprimirMatricula();
@@ -1002,6 +1017,7 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
             obj.setPartida_nacimiento(pn);
             obj.setDoc_escuela_ant(doc);
             obj.setAnt_escuela(txtEscAnt.getText());
+            obj.setValor_mat(Double.valueOf(cbValor.getSelectedItem().toString()));
 
             obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
@@ -1180,13 +1196,13 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
     private javax.swing.JComboBox<String> cbParDos;
     private javax.swing.JComboBox<String> cbParUno;
     private javax.swing.JComboBox<String> cbParalelo;
+    private javax.swing.JComboBox<String> cbValor;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxDocu;
     private javax.swing.JCheckBox cbxEscuela;
     private javax.swing.JCheckBox cbxPartidaNac;
     private javax.swing.JCheckBox cbxServicoBas;
     private com.toedter.calendar.JDateChooser dtFecha;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

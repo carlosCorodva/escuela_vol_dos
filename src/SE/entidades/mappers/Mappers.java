@@ -421,4 +421,14 @@ public class Mappers {
         }
         return obj;
     }
+    
+    public static precios getValorFromResultSet(ResultSet rs) {
+        precios obj = new precios();
+        try {
+            obj.setValor(rs.getDouble("valor"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }

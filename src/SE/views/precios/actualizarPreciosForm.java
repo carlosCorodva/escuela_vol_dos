@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SE.views.mensualidades;
+package SE.views.precios;
 
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author carlos
  */
-public class crearPreciosForm extends javax.swing.JDialog {
+public class actualizarPreciosForm extends javax.swing.JDialog {
 
     /**
      * Creates new form crearMensualidadesForm
@@ -24,22 +24,19 @@ public class crearPreciosForm extends javax.swing.JDialog {
     Crud c = new Crud();
     precios p = new precios();
     JoinEmpleados us;
+    precios pre;
 
-    public crearPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
+    public actualizarPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, precios precio) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         us = usuario;
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
+        pre=precio;
         this.setLocationRelativeTo(null);
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
+        formulario();
     }
 
-    public crearPreciosForm(java.awt.Frame parent, boolean modal) {
+    public actualizarPreciosForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -66,6 +63,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -88,8 +86,8 @@ public class crearPreciosForm extends javax.swing.JDialog {
         jLabel2.setText("CODIGO");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/add32.png"))); // NOI18N
-        jButton1.setText("CREAR");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
+        jButton1.setText("ACTUALIZAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -114,6 +112,9 @@ public class crearPreciosForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("usaurio");
 
+        cbEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,33 +124,35 @@ public class crearPreciosForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbEmpresa)
-                                .addGap(82, 82, 82)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbIdUsuario)
-                            .addComponent(lbSucursal)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jButton1)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton2)))
-                        .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(lbSucursal))
+                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(76, 76, 76))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57))))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCodigo)
+                            .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(34, 34, 34))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(55, 55, 55))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(43, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,13 +168,19 @@ public class crearPreciosForm extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(lbSucursal)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmpresa))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbEmpresa)
+                        .addGap(103, 103, 103)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -182,7 +191,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,6 +201,32 @@ public class crearPreciosForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void formulario(){
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+        
+        txtvalor.setText(String.valueOf(pre.getValor()));
+        txtCodigo.setText(pre.getCodigo());
+        jTextArea1.setText(pre.getPromocion());
+        
+        if ("A".equals(pre.getEstado_pre())) {
+            cbEstado.setSelectedIndex(0);
+        } else {
+            cbEstado.setSelectedIndex(1);
+        }
+        
+        if ("MATRICULA".equals(pre.getPago())) {
+            jComboBox1.setSelectedIndex(1);
+        } else {
+            jComboBox1.setSelectedIndex(2);
+        }
+        
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -217,12 +252,21 @@ public class crearPreciosForm extends javax.swing.JDialog {
                 pr.setValor(Double.valueOf(txtvalor.getText()));
                 pr.setPromocion(jTextArea1.getText());
                 pr.setPago(jComboBox1.getSelectedItem().toString());
+                pr.setEstado_pre(cbEstado.getSelectedItem().toString());
                 pr.setId_creacion(Long.valueOf(lbIdUsuario.getText()));
                 pr.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                String a = c.CrearPrecio(pr);
+                pr.setId_precios(pre.getId_precios());
+                if (cbEstado.getSelectedIndex() == 0) {
+                    pr.setEstado_pre("A");
+                } else {
+                    pr.setEstado_pre("I");
+                }
+                String a = c.ActualizarPrecio(pr);
                 JOptionPane.showMessageDialog(this, a);
+                
+                setVisible(false);
             } catch (Exception e) {
-                Logger.getLogger(crearPreciosForm.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(actualizarPreciosForm.class.getName()).log(Level.SEVERE, null, e);
             }
 
         }
@@ -245,21 +289,23 @@ public class crearPreciosForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actualizarPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actualizarPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actualizarPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(crearPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actualizarPreciosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                crearPreciosForm dialog = new crearPreciosForm(new javax.swing.JFrame(), true);
+                actualizarPreciosForm dialog = new actualizarPreciosForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -272,6 +318,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;

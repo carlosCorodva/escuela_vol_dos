@@ -9,6 +9,7 @@ import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.precios;
 import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     JoinMatriculas mat = null;
     ArrayList<JoinMatriculas> paralelo = null;
     JoinMatriculas jm = new JoinMatriculas();
+    ArrayList<precios> precio = null;
+    precios pr = new precios();
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
@@ -67,6 +70,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         jm.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         paralelo = crud.ComboParaleloActualizar(jm);
         cbParalelo.setModel(Combos.listarComboParalelosActualizar(paralelo));
+        comboValor();
     }
 
     public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal) {
@@ -93,15 +97,15 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         cbParalelo = new javax.swing.JComboBox<>();
         cbxCopiaCedula = new javax.swing.JCheckBox();
         cbxServicioBasico = new javax.swing.JCheckBox();
-        jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
-        lbPeriodo = new javax.swing.JLabel();
+        cbValor = new javax.swing.JComboBox<>();
         btnMatricuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
+        lbPeriodo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -172,12 +176,10 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("OBSERVACION");
-
         txtObservacion.setColumns(20);
         txtObservacion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtObservacion.setRows(5);
+        txtObservacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OBSERVACION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         txtObservacion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtObservacionFocusLost(evt);
@@ -185,35 +187,18 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(txtObservacion);
 
-        lbPeriodo.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
-        lbPeriodo.setForeground(new java.awt.Color(255, 255, 255));
-        lbPeriodo.setText("2018-2019");
+        cbValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbValor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VALOR..." }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cbxCopiaCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(cbxServicioBasico)
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -223,12 +208,22 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtAlumno)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(59, 59, 59))))
+                                    .addComponent(txtAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                                    .addComponent(txtCedula)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxCopiaCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxServicioBasico))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)))
+                .addGap(59, 59, 59))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,22 +236,22 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel8))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCopiaCedula)
-                    .addComponent(cbxServicioBasico))
+                    .addComponent(cbParalelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 11, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 11, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cbxCopiaCedula)
+                        .addGap(27, 27, 27)
+                        .addComponent(cbxServicioBasico)
+                        .addGap(29, 29, 29))))
         );
 
         btnMatricuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -283,6 +278,10 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("usaurio");
 
+        lbPeriodo.setFont(new java.awt.Font("Tahoma", 1, 29)); // NOI18N
+        lbPeriodo.setForeground(new java.awt.Color(255, 255, 255));
+        lbPeriodo.setText("2018-2019");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -302,7 +301,9 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
                         .addGap(33, 33, 33)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(44, 44, 44)
+                        .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(btnMatricuar)
                         .addGap(86, 86, 86)
                         .addComponent(btnSalir)))
@@ -311,20 +312,25 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnMatricuar))
-                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalir)
+                            .addComponent(btnMatricuar))
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbIdUsuario)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbEmpresa)
                         .addComponent(lbSucursal)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -369,6 +375,12 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
+    public void comboValor() {
+        pr.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        precio = crud.ComboValor(pr);
+        cbValor.setModel(Combos.listarComboValor(precio));
+    }
+    
     private void cbxCopiaCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxCopiaCedulaKeyPressed
 
     }//GEN-LAST:event_cbxCopiaCedulaKeyPressed
@@ -420,6 +432,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         }
         if (cbParalelo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN PARALELO");
+        } else if (cbValor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
         } else {
             System.out.println("else");
             JoinMatriculas obj = new JoinMatriculas();
@@ -432,6 +446,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             obj.setId_usuario(mat.getId_usuario());
             obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
             obj.setId_matricula(mat.getId_matricula());
+            obj.setValor_mat(Double.valueOf(cbValor.getSelectedItem().toString()));
 
             try {
                 String a = crud.CrearMatriculaActualizar(obj);
@@ -541,10 +556,10 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     private javax.swing.JButton btnMatricuar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbParalelo;
+    private javax.swing.JComboBox<String> cbValor;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxServicioBasico;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
