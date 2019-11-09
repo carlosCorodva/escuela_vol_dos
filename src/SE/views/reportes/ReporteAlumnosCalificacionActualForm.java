@@ -462,9 +462,9 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                 cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
             } else if (promedio >= 5 && promedio < 7) {
                 cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
-            } else if (promedio >= 1 && promedio < 5) {
+            } else if (promedio >= 1.01 && promedio < 5) {
                 cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
-            } else if (promedio < 1) {
+            } else if (promedio <= 1) {
                 cualitativo = "RETIRADO";
             }
 

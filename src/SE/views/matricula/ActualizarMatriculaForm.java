@@ -445,6 +445,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
             obj.setId_matricula(mat.getId_matricula());
             obj.setValor_mat(Double.valueOf(cbValor.getSelectedItem().toString()));
+            obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
             try {
                 String a = crud.CrearMatriculaActualizar(obj);

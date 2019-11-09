@@ -1509,7 +1509,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call ma_matricula_crear_actualizar(?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getParalelo());
             pro.setLong(3, us.getId_empleado());
@@ -1519,6 +1519,7 @@ public class Crud {
             pro.setString(7, us.getEstado_matricula());
             pro.setLong(8, us.getId_matricula());
             pro.setDouble(9, us.getValor_mat());
+            pro.setLong(10, us.getId_sucursal());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
