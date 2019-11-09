@@ -505,10 +505,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             }
         }
         System.out.println("a: " + a);
-        if (a >= 7) {
+        if (a == 10) {
             estado = "APROBADO";
         }
-        if (a <= 6) {
+        if (a <= 9) {
             estado = "REPROBADO";
         }
         ArrayList<String> queryA = new ArrayList<String>();

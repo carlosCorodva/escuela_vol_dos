@@ -2884,5 +2884,35 @@ public class Crud {
         return lista;
     }
     
-    
+    public ArrayList<JoinMatriculas> listarAlumnosMatriculasReportesTodos(JoinMatriculas je) {
+        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call re_reporte_mostrar_matricula_todo(?,?) }");
+            pro.setLong(1, je.getId_empresa());
+            pro.setLong(2, je.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

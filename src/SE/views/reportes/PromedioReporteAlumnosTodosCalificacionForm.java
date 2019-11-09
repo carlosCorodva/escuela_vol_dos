@@ -65,8 +65,8 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
         lbIdUsuario.setText(us.getId_usuario().toString());
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculasReportes(je);
-        Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
+//        listar = crud.listarAlumnosMatriculasReportesTodos(je);
+//        Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
         combos();
     }
 
@@ -373,10 +373,6 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
         if (jtReporte.getColumnCount() < 1) {
             JOptionPane.showMessageDialog(this, "NO EXISTE REGISTRO");
         }
-        txtBuscar.setText("");
-//        cbFiltro.setSelectedIndex(0);
-//        cbFiltroCurso.setSelectedIndex(0);
-//        cbPeriodo.setSelectedIndex(0);
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -434,10 +430,7 @@ public class PromedioReporteAlumnosTodosCalificacionForm extends javax.swing.JDi
                     PromedioReporteAlumnosTodosForm ac = new PromedioReporteAlumnosTodosForm(new javax.swing.JFrame(), true, us, objeto);
                     ac.setVisible(true);
                     listar.clear();
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculasReportes(je);
-                    Tablas.cargarJoinMatriculasReportesPeriodosTodos(jtReporte, listar);
+                    filtro();
                 }
                 System.out.println("holaaaaa5");
             }

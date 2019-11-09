@@ -879,4 +879,41 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
+    
+    public static void cargarJoinMensualidades(JTable Tabla, ArrayList<JoinMatriculas> lista) {
+
+        int[] a = {70, 350, 100, 200, 90, 90};
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        tcr1.setHorizontalAlignment(SwingConstants.CENTER);
+        model = VaciarTabla(Tabla);
+        String[] Co = {"        ID", "APELLIDOS NOMBRES", "TELÉFONO",
+            "CORREO", "PARALELO", "PERIODO"};
+        String[] Filas = new String[6];
+        model = new DefaultTableModel(null, Co);
+        Tabla.setShowGrid(true);
+        for (int i = 0; i < lista.size(); i++) {
+            Filas[0] = "" + lista.get(i).getId_matricula();
+            Filas[1] = lista.get(i).getApellidos_nombres();
+            Filas[2] = lista.get(i).getConvecional();
+            Filas[3] = lista.get(i).getCorreo();
+            Filas[4] = lista.get(i).getParalelo();
+            Filas[5] = lista.get(i).getPeriodo();
+            model.addRow(Filas);
+            Tabla.setModel(model);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
+            Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        }
+    }
 }

@@ -401,7 +401,6 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
     public void Guardar() {
-        System.out.println("guardar");
         String obs = "";
         String est = "";
         Long cc, sb;
@@ -419,7 +418,6 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         } else {
             cc = Long.valueOf(0);
         }
-        System.out.println("1");
         if (cbxServicioBasico.isSelected()) {
             sb = Long.valueOf(1);
         } else {

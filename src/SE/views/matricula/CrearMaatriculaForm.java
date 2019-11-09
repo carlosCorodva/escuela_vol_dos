@@ -103,20 +103,20 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         cbValor.setModel(Combos.listarComboValor(precio));
     }
     
-    public void validarCedula(){
-        try {
-            boolean vc = id.validarCedula(txtCedula.getText());
-            System.out.println(vc);
-            if(vc == false){
-                JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
-            }else{
-                
-            }
-        } catch (Exception e) {
-            
-        }
-        
-    }
+//    public void validarCedula(){
+//        try {
+//            boolean vc = id.validarCedula(txtCedula.getText());
+//            System.out.println(vc);
+//            if(vc == false){
+//                JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
+//            }else{
+//                
+//            }
+//        } catch (Exception e) {
+//            
+//        }
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -928,7 +928,7 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
         String obs, parUno, parDos;
         Long cc, sb, doc, pn;
      
-        validarCedula();
+//        validarCedula();
         
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);

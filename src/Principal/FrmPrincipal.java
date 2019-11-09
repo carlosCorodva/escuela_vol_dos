@@ -21,6 +21,7 @@ import SE.views.materias.MostrarMateriasForm;
 import SE.views.matricula.MostrarAlumnosForm;
 import SE.views.matricula.MostrarMatriculasForm;
 import SE.views.matricula.periodo.MostrarPeriodoForm;
+import SE.views.mensualidades.MostrarMensualidadesForm;
 import SE.views.precios.mostrarPreciosForm;
 import SE.views.reportes.GraduadosReporteForm;
 import SE.views.reportes.MostrarAlumnosReporteForm;
@@ -859,7 +860,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bloqMatActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        
+        MostrarMensualidadesForm gr = new MostrarMensualidadesForm(new javax.swing.JFrame(), true, us);
+        gr.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
