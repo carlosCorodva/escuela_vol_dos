@@ -530,15 +530,15 @@ public class CalificacionForm extends javax.swing.JDialog {
 
                     if (promedio == 10) {
                         cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 9 && promedio < 10) {
+                    } else if (promedio >= 9 && promedio <= 9.99) {
                         cualitativo = "SUPERA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 7 && promedio < 9) {
+                    } else if (promedio >= 7 && promedio <= 8.99) {
                         cualitativo = "ALCANZA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 5 && promedio < 7) {
+                    } else if (promedio >= 5 && promedio < 6.99) {
                         cualitativo = "ESTA PROXIMO A ALCANZAR LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio >= 1 && promedio < 5) {
+                    } else if (promedio >= 2 && promedio < 4.99) {
                         cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
-                    } else if (promedio < 1) {
+                    } else if (promedio <= 1.99) {
                         cualitativo = "RETIRADO";
                     }
                     jtCalificacion.setValueAt(cualitativo, i, 10);
