@@ -47,7 +47,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         lbIdUsuario.setText(us.getId_usuario().toString());
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculas(je);
+        listar = crud.listarAlumnosMensualidadTodos(je);
         Tablas.cargarJoinMensualidades(jtMensualidades, listar);
     }
 
@@ -310,7 +310,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                     cbFiltro.setSelectedIndex(0);
                     je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                     je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculas(je);
+                    listar = crud.listarAlumnosMensualidadTodos(je);
                     Tablas.cargarJoinMatriculas(jtMensualidades, listar);
                 }
             }
@@ -384,7 +384,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
             ne.setVisible(true);
             je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
             je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-            listar = crud.listarAlumnosMatriculas(je);
+            listar = crud.listarAlumnosMensualidadTodos(je);
             Tablas.cargarJoinMatriculas(jtMensualidades, listar);
         } else {
 
@@ -412,7 +412,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                 cbFiltro.setSelectedIndex(0);
                 je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                 je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMatriculas(je);
+                listar = crud.listarAlumnosMensualidadTodos(je);
                 Tablas.cargarJoinMatriculas(jtMensualidades, listar);
             }
         }
