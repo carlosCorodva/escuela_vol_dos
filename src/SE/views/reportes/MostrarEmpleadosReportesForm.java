@@ -304,15 +304,11 @@ public class MostrarEmpleadosReportesForm extends javax.swing.JDialog {
             }
             if (pos == 3) {
                 je.setCedula(f);
-//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoCedula(je);
                 txtBuscar.setText("");
             }
             if (pos == 4) {
                 je.setApellidos_nombres(f);
-//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.filtroEmpleadoApeNomb(je);
                 txtBuscar.setText("");
             }

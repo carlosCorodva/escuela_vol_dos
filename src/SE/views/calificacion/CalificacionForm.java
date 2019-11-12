@@ -539,7 +539,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                     } else if (promedio >= 2 && promedio < 4.99) {
                         cualitativo = "NO ALCANZA LOS APRENDISAJES REQUERIDOS";
                     } else if (promedio <= 1.99) {
-                        cualitativo = "RETIRADO";
+                        cualitativo = "EN CURSO";
                     }
                     jtCalificacion.setValueAt(cualitativo, i, 10);
                     
