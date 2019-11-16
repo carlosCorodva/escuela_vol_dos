@@ -308,9 +308,9 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
             }
             if (pos == 2) {
                 je.setApellidos_nombres(f);
-                listar = crud.listarMatriculasApellidosNombres(je);
+                listar = crud.listarMensualidadesPersona(je);
             }
-            Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+            Tablas.cargarJoinMensualidades(jtMensualidades, listar);
         } catch (Exception e) {
             Logger.getLogger(MostrarMensualidadesForm.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -350,7 +350,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-//        filtro();
+        filtro();
 //        int k = jtMensualidades.getRowCount();
 //        if (k == 0) {
 //            CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);

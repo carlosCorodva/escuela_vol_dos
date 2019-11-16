@@ -241,6 +241,9 @@
                 </Property>
                 <Property name="rowHeight" type="int" value="28"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtMensualidadesMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

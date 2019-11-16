@@ -188,6 +188,11 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
             }
         ));
         jtMensualidades.setRowHeight(28);
+        jtMensualidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtMensualidadesMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtMensualidades);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -290,6 +295,10 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jtMensualidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMensualidadesMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtMensualidadesMousePressed
 
 //    public void imprimirPq() {
 //        ArrayList lista = new ArrayList();
