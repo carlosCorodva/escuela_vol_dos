@@ -14,7 +14,7 @@ public class ma_mensualidad {
     private Long id_matricula;
     private Long id_sucursal_men;
     private String estado;
-    private double mensualidad;
+    private Long mensualidad;
     private double valor_mens;
     private double ingreso;
     private double deuda;
@@ -28,7 +28,7 @@ public class ma_mensualidad {
     public ma_mensualidad() {
     }
 
-    public ma_mensualidad(Long id_mensualidad, Long id_matricula, Long id_sucursal_men, String estado, double mensualidad, double valor_mens, double ingreso, double deuda, double valor_ref, double total, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion) {
+    public ma_mensualidad(Long id_mensualidad, Long id_matricula, Long id_sucursal_men, String estado, Long mensualidad, double valor_mens, double ingreso, double deuda, double valor_ref, double total, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion) {
         this.id_mensualidad = id_mensualidad;
         this.id_matricula = id_matricula;
         this.id_sucursal_men = id_sucursal_men;
@@ -111,11 +111,11 @@ public class ma_mensualidad {
         this.estado = estado;
     }
 
-    public double getMensualidad() {
+    public Long getMensualidad() {
         return mensualidad;
     }
 
-    public void setMensualidad(double mensualidad) {
+    public void setMensualidad(Long mensualidad) {
         this.mensualidad = mensualidad;
     }
 

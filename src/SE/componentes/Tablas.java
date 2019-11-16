@@ -919,41 +919,38 @@ public class Tablas {
     }
     public static void cargarJoinMensualidadesPorAlumnos(JTable Tabla, ArrayList<ma_mensualidad> lista) {
 
-        int[] a = {70, 350, 100, 200, 90, 90, 100};
+        int[] a = {130, 200, 150, 130, 130, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"MENSAULIDAD", "VALOR", "VALOR REFERENCIAL",
+        String[] Co = {"MENSAULIDAD", "VALOR REFERENCIAL",
             "INGRESO", "DEUDA", "TOTAL","ESTADO"};
-        String[] Filas = new String[7];
+        String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
             Filas[0] = "" + lista.get(i).getMensualidad();
-            Filas[1] = ""+lista.get(i).getValor_mens();
-            Filas[2] = ""+lista.get(i).getValor_ref();
-            Filas[3] = ""+lista.get(i).getIngreso();
-            Filas[4] = ""+lista.get(i).getDeuda();
-            Filas[5] = ""+lista.get(i).getTotal();
-            Filas[6] = lista.get(i).getEstado();
+            Filas[1] = ""+lista.get(i).getValor_ref();
+            Filas[2] = ""+lista.get(i).getIngreso();
+            Filas[3] = ""+lista.get(i).getDeuda();
+            Filas[4] = ""+lista.get(i).getTotal();
+            Filas[5] = lista.get(i).getEstado();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(1).setPreferredWidth(a[1]);
-            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(1).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(2).setPreferredWidth(a[2]);
-            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(2).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(3).setPreferredWidth(a[3]);
-            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
-            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
-            Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
-            Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
         }
     }
 }

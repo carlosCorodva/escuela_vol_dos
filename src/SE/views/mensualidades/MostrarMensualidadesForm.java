@@ -44,10 +44,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-//        je.setId_matricula(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMensualidadTodos(je);
-        Tablas.cargarJoinMensualidades(jtMensualidades, listar);
+        tabla();
     }
 
     public MostrarMensualidadesForm(java.awt.Frame parent, boolean modal) {
@@ -69,7 +66,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         jtMensualidades = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btnBuscar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -116,19 +112,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
             }
         });
         jToolBar1.add(btnBuscar);
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dos_personas_32.png"))); // NOI18N
-        jButton4.setText("  NUEVO  ");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton4);
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
@@ -266,6 +249,12 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void tabla(){
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarAlumnosMensualidadTodos(je);
+        Tablas.cargarJoinMensualidades(jtMensualidades, listar);
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO MATRICULAS?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
@@ -273,16 +262,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         } else {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-//        CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
-//        ne.setVisible(true);
-//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//        listar = crud.listarAlumnosMatriculas(je);
-//        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
-//        cbFiltro.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     public JoinMatriculas devuelveObjetoEmpleado(String datos, ArrayList<JoinMatriculas> listarobj) {
         JoinMatriculas objeto1 = null;
@@ -307,10 +286,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
-//                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMensualidadTodos(je);
-                    Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+                    tabla();
                 }
             }
         } catch (Exception e) {
@@ -324,11 +300,11 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         try {
             if (pos == 0) {
-                listar = crud.listarAlumnosMatriculas(je);
+                tabla();
             }
             if (pos == 1) {
                 je.setCedula(f);
-                listar = crud.listarMatriculasCedula(je);
+                listar = crud.listarMensualidadesCedula(je);
             }
             if (pos == 2) {
                 je.setApellidos_nombres(f);
@@ -342,28 +318,26 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
         int pos = cbFiltro.getSelectedIndex();
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         if (pos == 0) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(false);
             btnBuscar.setEnabled(false);
-            listar = crud.listarAlumnosMatriculas(je);
+            tabla();
         }
         if (pos == 1) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
-            listar = crud.listarAlumnosMatriculas(je);
+            tabla();
 
         }
         if (pos == 2) {
             txtBuscar.setText("");
             txtBuscar.setEnabled(true);
             btnBuscar.setEnabled(true);
-            listar = crud.listarAlumnosMatriculas(je);
+            tabla();
         }
-        Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+//        Tablas.cargarJoinMatriculas(jtMensualidades, listar);
     }//GEN-LAST:event_cbFiltroActionPerformed
     int v = 0;
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -500,7 +474,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

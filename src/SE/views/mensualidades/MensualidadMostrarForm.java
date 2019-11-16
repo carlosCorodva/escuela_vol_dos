@@ -52,17 +52,9 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     public MensualidadMostrarForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula) {
         super(parent, modal);
         initComponents();
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;
-        System.out.println("matri1: "+mat.getId_matricula());
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
-        txtMatricula.setText(mat.getId_matricula().toString());
         formulario();
         tabla();
     }
@@ -75,7 +67,6 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     
     public void tabla(){
         me.setId_matricula(Long.valueOf(txtMatricula.getText()));
-        System.out.println("matri: "+mat.getId_matricula());
         me.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
         listar2 = crud.listarAlumnosMensualidadPorAlumno(me);
         Tablas.cargarJoinMensualidadesPorAlumnos(jtMensualidades, listar2);
@@ -86,11 +77,21 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         txtCurso.setEditable(false);
         txtAlumno.setEditable(false);
         txtcedula.setEditable(false);
+        
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        txtMatricula.setVisible(false);
+        
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
 
         txtCurso.setText(mat.getParalelo());
         txtAlumno.setText(mat.getApellidos_nombres());
         txtPeriodo.setText(mat.getPeriodo());
         txtcedula.setText(mat.getCedula());
+        txtMatricula.setText(mat.getId_matricula().toString());
     }
 
     @SuppressWarnings("unchecked")
@@ -186,7 +187,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
 
             }
         ));
-        jtMensualidades.setRowHeight(25);
+        jtMensualidades.setRowHeight(28);
         jScrollPane1.setViewportView(jtMensualidades);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -267,8 +268,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                             .addComponent(lbSucursal)
                             .addComponent(lbEmpresa))))
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

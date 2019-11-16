@@ -437,7 +437,6 @@ public class Mappers {
         ma_mensualidad obj = new ma_mensualidad();
         try {
             obj.setMensualidad(rs.getLong("mensualidad"));
-            obj.setValor_mens(rs.getDouble("valor_mens"));
             obj.setIngreso(rs.getDouble("ingreso"));
             obj.setDeuda(rs.getDouble("deuda"));
             obj.setValor_ref(rs.getDouble("valor_ref"));
