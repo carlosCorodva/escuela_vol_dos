@@ -41,7 +41,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     JoinEmpleados us = null;
     JoinMatriculas mat = null;
     ma_mensualidad me = new ma_mensualidad();
-//    JoinMatriculas ma = new JoinMatriculas();
+    ma_mensualidad objeto = null;
     DefaultTableModel md = new DefaultTableModel();
     JoinCalificacion cal = new JoinCalificacion();
     ArrayList<JoinMatriculas> listar = null;
@@ -296,8 +296,33 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    public ma_mensualidad devuelveObjetoEmpleado(String datos, ArrayList<ma_mensualidad> listarobj) {
+        ma_mensualidad objeto1 = null;
+        for (int i = 0; i < listarobj.size(); i++) {
+            if (datos.equals(listarobj.get(i).getMensualidad().toString())) {
+                objeto1 = listarobj.get(i);
+                break;
+            }
+        }
+        return objeto1;
+    }
+    
     private void jtMensualidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMensualidadesMousePressed
-        // TODO add your handling code here:
+        int i = 0;
+        try {
+            if (evt.getClickCount() == 2) {
+                i = jtMensualidades.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar2);
+                if (objeto != null) {
+                    System.out.println("holaaaaa");
+                    cobroForm acc = new cobroForm(new javax.swing.JFrame(), true, us,mat, objeto);
+                    acc.setVisible(true);
+                    tabla();
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(MensualidadMostrarForm.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_jtMensualidadesMousePressed
 
 //    public void imprimirPq() {

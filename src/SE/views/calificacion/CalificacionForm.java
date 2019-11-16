@@ -518,7 +518,7 @@ public class CalificacionForm extends javax.swing.JDialog {
                         promedio = 0.00;
                     }
                     
-                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()/*.replace(",", ".").trim()*/), i, 9);
+                    jtCalificacion.setValueAt(FormatoNumeros.formato_numero(promedio.toString()), i, 9);
                     String cualitativo = "";
 
                     if (ochenta >= 10.0) {
