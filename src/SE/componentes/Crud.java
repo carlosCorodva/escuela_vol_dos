@@ -10,6 +10,7 @@ import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinGraduados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_mensualidad;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
@@ -2923,12 +2924,43 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call ma_mostrar_mensualidad_todos(?,?) }");
-            pro.setLong(1, je.getId_empresa());
-            pro.setLong(2, je.getId_sucursal());
+                    "{ call ma_mostrar_mensualidad_todos(?) }");
+//            pro.setLong(1, je.getId_empresa());
+            pro.setLong(1, je.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
                 JoinMatriculas obj = Mappers.getMatriculasFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    public ArrayList<ma_mensualidad> listarAlumnosMensualidadPorAlumno(ma_mensualidad je) {
+        ArrayList<ma_mensualidad> valor = new ArrayList<ma_mensualidad>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_mostrar_mensualidades(?,?) }");
+            pro.setLong(1, je.getId_matricula());
+            pro.setLong(2, je.getId_sucursal_men());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                ma_mensualidad obj = Mappers.getMostrarmensualidadFromResultSet(rs);
                 valor.add(obj);
             }
             con.commit();

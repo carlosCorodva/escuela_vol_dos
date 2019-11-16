@@ -5,7 +5,6 @@
  */
 package SE.views.mensualidades;
 
-import SE.views.matricula.*;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
@@ -45,7 +44,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//        je.setId_matricula(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarAlumnosMensualidadTodos(je);
         Tablas.cargarJoinMensualidades(jtMensualidades, listar);
@@ -308,7 +307,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                     acc.setVisible(true);
                     listar.clear();
                     cbFiltro.setSelectedIndex(0);
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                     je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                     listar = crud.listarAlumnosMensualidadTodos(je);
                     Tablas.cargarJoinMatriculas(jtMensualidades, listar);
@@ -377,18 +376,18 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtro();
-        int k = jtMensualidades.getRowCount();
-        if (k == 0) {
-            CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
-            ne.setVisible(true);
-            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-            listar = crud.listarAlumnosMensualidadTodos(je);
-            Tablas.cargarJoinMatriculas(jtMensualidades, listar);
-        } else {
-
-        }
+//        filtro();
+//        int k = jtMensualidades.getRowCount();
+//        if (k == 0) {
+//            CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
+//            ne.setVisible(true);
+//            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//            listar = crud.listarAlumnosMensualidadTodos(je);
+//            Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+//        } else {
+//
+//        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
@@ -410,7 +409,7 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
                 je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 listar = crud.listarAlumnosMensualidadTodos(je);
                 Tablas.cargarJoinMatriculas(jtMensualidades, listar);
@@ -419,23 +418,23 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        int i = jtMensualidades.getSelectedRow();
-        if (jtMensualidades.isRowSelected(i) == false) {
-            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
-        } else {
-            objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar);
-            if (objeto != null) {
-                System.out.println("holaaaaa");
-                ReimprimirMtatriculaForm acc = new ReimprimirMtatriculaForm(new javax.swing.JFrame(), true, us, objeto);
-                acc.setVisible(true);
-                listar.clear();
-                cbFiltro.setSelectedIndex(0);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMatriculas(je);
-                Tablas.cargarJoinMatriculas(jtMensualidades, listar);
-            }
-        }
+//        int i = jtMensualidades.getSelectedRow();
+//        if (jtMensualidades.isRowSelected(i) == false) {
+//            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
+//        } else {
+//            objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar);
+//            if (objeto != null) {
+//                System.out.println("holaaaaa");
+//                ReimprimirMtatriculaForm acc = new ReimprimirMtatriculaForm(new javax.swing.JFrame(), true, us, objeto);
+//                acc.setVisible(true);
+//                listar.clear();
+//                cbFiltro.setSelectedIndex(0);
+//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//                listar = crud.listarAlumnosMatriculas(je);
+//                Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+//            }
+//        }
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**

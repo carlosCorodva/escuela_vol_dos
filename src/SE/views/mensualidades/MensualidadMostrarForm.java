@@ -11,6 +11,7 @@ import SE.componentes.Tablas;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_mensualidad;
 import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -39,9 +40,12 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     Crud crud = new Crud();
     JoinEmpleados us = null;
     JoinMatriculas mat = null;
-    JoinMatriculas ma = new JoinMatriculas();
+    ma_mensualidad me = new ma_mensualidad();
+//    JoinMatriculas ma = new JoinMatriculas();
     DefaultTableModel md = new DefaultTableModel();
     JoinCalificacion cal = new JoinCalificacion();
+    ArrayList<JoinMatriculas> listar = null;
+    ArrayList<ma_mensualidad> listar2 = null;
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
@@ -54,16 +58,27 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;
+        System.out.println("matri1: "+mat.getId_matricula());
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
+        txtMatricula.setText(mat.getId_matricula().toString());
         formulario();
+        tabla();
     }
 
     public MensualidadMostrarForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public void tabla(){
+        me.setId_matricula(Long.valueOf(txtMatricula.getText()));
+        System.out.println("matri: "+mat.getId_matricula());
+        me.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
+        listar2 = crud.listarAlumnosMensualidadPorAlumno(me);
+        Tablas.cargarJoinMensualidadesPorAlumnos(jtMensualidades, listar2);
     }
 
     public void formulario() {
@@ -90,7 +105,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPrimerQ = new javax.swing.JTable();
+        jtMensualidades = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         txtPeriodo = new javax.swing.JTextField();
         txtCurso = new javax.swing.JTextField();
@@ -99,6 +114,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
+        txtMatricula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -153,8 +169,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("CURSO");
 
-        jtPrimerQ.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jtPrimerQ.setModel(new javax.swing.table.DefaultTableModel(
+        jtMensualidades.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jtMensualidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -170,8 +186,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
 
             }
         ));
-        jtPrimerQ.setRowHeight(25);
-        jScrollPane1.setViewportView(jtPrimerQ);
+        jtMensualidades.setRowHeight(25);
+        jScrollPane1.setViewportView(jtMensualidades);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("PERIODO");
@@ -181,6 +197,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         lbSucursal.setText("sucursal");
 
         lbEmpresa.setText("empresa");
+
+        txtMatricula.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,7 +233,9 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(186, 186, 186))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -235,7 +255,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                         .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11)
                         .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -415,12 +436,13 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtPrimerQ;
+    private javax.swing.JTable jtMensualidades;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCurso;
+    private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtPeriodo;
     private javax.swing.JTextField txtcedula;
     // End of variables declaration//GEN-END:variables

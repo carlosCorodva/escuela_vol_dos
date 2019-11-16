@@ -14,6 +14,7 @@ import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinGraduados;
 import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
+import SE.entidades.ma_mensualidad;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.precios;
@@ -426,6 +427,24 @@ public class Mappers {
         precios obj = new precios();
         try {
             obj.setValor(rs.getDouble("valor"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
+    public static ma_mensualidad getMostrarmensualidadFromResultSet(ResultSet rs) {
+        ma_mensualidad obj = new ma_mensualidad();
+        try {
+            obj.setMensualidad(rs.getLong("mensualidad"));
+            obj.setValor_mens(rs.getDouble("valor_mens"));
+            obj.setIngreso(rs.getDouble("ingreso"));
+            obj.setDeuda(rs.getDouble("deuda"));
+            obj.setValor_ref(rs.getDouble("valor_ref"));
+            obj.setTotal(rs.getDouble("total"));
+            obj.setEstado(rs.getString("estado"));
+            obj.setId_mensualidad(rs.getLong("id_mensualidad"));
+            obj.setId_matricula(rs.getLong("id_matricula"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
         }

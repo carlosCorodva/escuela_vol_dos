@@ -409,7 +409,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
             est = "APROBADO-CERRADO";
         }
         if ("REPROBADO".equals(mat.getEstado_matricula())) {
-            est = "REPROBADO-CERRADO";
+            est = "MATRICULADO";
         }
         System.out.println("est: " + est);
 
