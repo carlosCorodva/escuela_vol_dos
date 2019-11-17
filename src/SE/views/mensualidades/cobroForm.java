@@ -184,13 +184,12 @@ public class cobroForm extends javax.swing.JDialog {
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
         txtValor.setEditable(false);
-//        txtMatricula.setVisible(false);
         
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
         
-        txtValor.setText(""+me.getValor_ref());
+        txtValor.setText(""+me.getDeuda());
     }
     
     public void cobro(){
@@ -203,18 +202,19 @@ public class cobroForm extends javax.swing.JDialog {
         }
         
         if (val > pa) {
-            result = pa - val;
-            System.out.println("pago: "+pa);
-            System.out.println("val: "+val);
-            System.out.println("resta: "+result);
-            JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $"+result);
-        }
-        if (val < pa) {
             result = val - pa;
             System.out.println("pago: "+pa);
             System.out.println("val: "+val);
             System.out.println("resta: "+result);
             JOptionPane.showMessageDialog(this, "ADEUDA: $"+result);
+            
+        }
+        if (val < pa) {
+            result = pa - val;
+            System.out.println("pago: "+pa);
+            System.out.println("val: "+val);
+            System.out.println("resta: "+result);
+            JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $"+result);
         }
     }
     

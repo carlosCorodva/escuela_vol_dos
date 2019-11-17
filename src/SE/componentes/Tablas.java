@@ -919,24 +919,23 @@ public class Tablas {
     }
     public static void cargarJoinMensualidadesPorAlumnos(JTable Tabla, ArrayList<ma_mensualidad> lista) {
 
-        int[] a = {130, 200, 150, 130, 130, 200};
+        int[] a = {130, 200, 130, 130, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"MENSAULIDAD", "VALOR REFERENCIAL",
-            "INGRESO", "DEUDA", "TOTAL","ESTADO"};
-        String[] Filas = new String[6];
+            "DEUDA", "TOTAL","ESTADO"};
+        String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
             Filas[0] = "" + lista.get(i).getMensualidad();
             Filas[1] = ""+lista.get(i).getValor_ref();
-            Filas[2] = ""+lista.get(i).getIngreso();
-            Filas[3] = ""+lista.get(i).getDeuda();
-            Filas[4] = ""+lista.get(i).getTotal();
-            Filas[5] = lista.get(i).getEstado();
+            Filas[2] = ""+lista.get(i).getDeuda();
+            Filas[3] = ""+lista.get(i).getTotal();
+            Filas[4] = lista.get(i).getEstado();
             model.addRow(Filas);
             Tabla.setModel(model);
             Tabla.getColumnModel().getColumn(0).setPreferredWidth(a[0]);
@@ -949,8 +948,6 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(3).setCellRenderer(tcr1);
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
-            Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
         }
     }
 }
