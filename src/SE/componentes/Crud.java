@@ -3114,4 +3114,33 @@ public class Crud {
         }
         return valor;
     }
+    
+    public String valorRecaudado(JoinMatriculas us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_valor_recaudado(?,?,?)}");
+            pro.setLong(1, us.getId_matricula());
+            pro.setLong(2, us.getId_empleado());
+            pro.setDouble(3, us.getValor_recaudado());
+            pro.executeUpdate();
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }

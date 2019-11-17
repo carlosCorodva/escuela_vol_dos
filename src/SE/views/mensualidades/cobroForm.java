@@ -204,7 +204,11 @@ public class cobroForm extends javax.swing.JDialog {
         if (deuda <= 0.0) {
             JOptionPane.showMessageDialog(this, "NO PUEDE COBRAR EN CERO" + result);
         }
+        if (deuda == pago) {
+            result = deuda - pago;
+            est = "PAGADO";
 
+        }
         if (deuda > pago) {
             result = deuda - pago;
             JOptionPane.showMessageDialog(this, "ADEUDA: $" + result);
@@ -215,12 +219,14 @@ public class cobroForm extends javax.swing.JDialog {
             result = pago - deuda;
             JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $" + result);
             est = "PAGADO";
-            pago = (pago + me.getTotal())-result;
+            pago = (pago + me.getTotal()) - result;
+
             
-            if ("PAGADO".equals(est)) {
+        }
+        
+        if ("PAGADO".equals(est)) {
                 result = 0.0;
             }
-        }
 
         ma_mensualidad obj = new ma_mensualidad();
         obj.setDeuda(result);
@@ -230,7 +236,7 @@ public class cobroForm extends javax.swing.JDialog {
         obj.setTotal(pago);
         obj.setEstado(est);
         obj.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
-        
+
         try {
             String a = crud.cobroMensualidad(obj);
             JOptionPane.showMessageDialog(this, a);

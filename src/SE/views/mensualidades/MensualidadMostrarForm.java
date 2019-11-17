@@ -56,6 +56,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;
+        System.out.println("valor: "+matricula.getValor_mat());
         formulario();
         tabla();
     }
@@ -93,6 +94,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         txtPeriodo.setText(mat.getPeriodo());
         txtcedula.setText(mat.getCedula());
         txtMatricula.setText(mat.getId_matricula().toString());
+        txtValMat.setText(""+mat.getValor_mat());
     }
 
     @SuppressWarnings("unchecked")
@@ -117,6 +119,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
+        txtValMat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -148,9 +151,9 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 623, Short.MAX_VALUE)
                 .addComponent(btnSalir)
-                .addContainerGap())
+                .addGap(31, 31, 31))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,6 +196,9 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jtMensualidadesMousePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtMensualidadesMouseReleased(evt);
+            }
         });
         jScrollPane1.setViewportView(jtMensualidades);
 
@@ -207,11 +213,12 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
 
         txtMatricula.setText("jTextField1");
 
+        txtValMat.setText("jTextField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -232,20 +239,26 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAlumno)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(186, 186, 186))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +275,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                         .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11)
                         .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -272,27 +284,56 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbSucursal)
-                            .addComponent(lbEmpresa))))
-                .addGap(12, 12, 12)
+                            .addComponent(lbEmpresa)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 991, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+public void total(){
+    try {
+        double tot = 0.0;
+        double resul = 0.0;
+        for (int i = 0; i < jtMensualidades.getRowCount(); i++) {
+            tot = Double.valueOf(jtMensualidades.getValueAt(i, 3).toString());
+            System.out.println("total: "+tot);
+            resul = resul +tot;
+        }
+        resul = resul + Double.valueOf(txtValMat.getText());
+        
+        System.out.println("result: "+resul);
+        
+        JoinMatriculas obj = new JoinMatriculas();
+        obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
+        obj.setId_matricula(mat.getId_matricula());
+        obj.setValor_recaudado(resul);
+        
+            crud.valorRecaudado(obj);
+        
+    } catch (Exception e) {
+        Logger.getLogger(MensualidadMostrarForm.class.getName()).log(Level.SEVERE, null, e);
+    }
+}
+    
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -325,11 +366,16 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                     }
                 }
                 tabla();
+                total();
             }
         } catch (Exception e) {
             Logger.getLogger(MensualidadMostrarForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jtMensualidadesMousePressed
+
+    private void jtMensualidadesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMensualidadesMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtMensualidadesMouseReleased
 
 //    public void imprimirPq() {
 //        ArrayList lista = new ArrayList();
@@ -485,6 +531,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtPeriodo;
+    private javax.swing.JTextField txtValMat;
     private javax.swing.JTextField txtcedula;
     // End of variables declaration//GEN-END:variables
 }
