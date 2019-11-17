@@ -24,7 +24,7 @@ public class cobroForm extends javax.swing.JDialog {
     JoinEmpleados us = null;
     JoinMatriculas mat = null;
     ma_mensualidad me = null;
-    
+
     public cobroForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinMatriculas matricula, ma_mensualidad objeto) {
         super(parent, modal);
         initComponents();
@@ -34,7 +34,7 @@ public class cobroForm extends javax.swing.JDialog {
         me = objeto;
         formulario();
     }
-    
+
     public cobroForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -179,52 +179,74 @@ public class cobroForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void formulario() {
-        
+
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
         txtValor.setEditable(false);
-        
+
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        
-        txtValor.setText(""+me.getDeuda());
+
+        txtValor.setText("" + me.getDeuda());
     }
-    
-    public void cobro(){
+
+    public void cobro() {
         double result = 0.0;
-        double val = Double.valueOf(txtValor.getText());
-        double pa = Double.valueOf(txtPago.getText());
-        
-        if (pa <= 0.0) {
-            JOptionPane.showMessageDialog(this, "NO PUEDE COBRAR EN CERO"+result);
+        String est = "";
+        double deuda = Double.valueOf(txtValor.getText());
+        double pago = Double.valueOf(txtPago.getText());
+
+        if (pago <= 0.0) {
+            JOptionPane.showMessageDialog(this, "NO PUEDE COBRAR EN CERO" + result);
         }
-        
-        if (val > pa) {
-            result = val - pa;
-            System.out.println("pago: "+pa);
-            System.out.println("val: "+val);
-            System.out.println("resta: "+result);
-            JOptionPane.showMessageDialog(this, "ADEUDA: $"+result);
+        if (deuda <= 0.0) {
+            JOptionPane.showMessageDialog(this, "NO PUEDE COBRAR EN CERO" + result);
+        }
+
+        if (deuda > pago) {
+            result = deuda - pago;
+            JOptionPane.showMessageDialog(this, "ADEUDA: $" + result);
+            est = "ADEUDA";
+
+        }
+        if (deuda < pago) {
+            result = pago - deuda;
+            JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $" + result);
+            est = "PAGADO";
+            pago = (pago + me.getTotal())-result;
             
+            if ("PAGADO".equals(est)) {
+                result = 0.0;
+            }
         }
-        if (val < pa) {
-            result = pa - val;
-            System.out.println("pago: "+pa);
-            System.out.println("val: "+val);
-            System.out.println("resta: "+result);
-            JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $"+result);
+
+        ma_mensualidad obj = new ma_mensualidad();
+        obj.setDeuda(result);
+        obj.setId_mensualidad(me.getId_mensualidad());
+        obj.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
+        obj.setId_matricula(mat.getId_matricula());
+        obj.setTotal(pago);
+        obj.setEstado(est);
+        obj.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
+        
+        try {
+            String a = crud.cobroMensualidad(obj);
+            JOptionPane.showMessageDialog(this, a);
+        } catch (Exception e) {
+
         }
+
     }
-    
+
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
         cobro();
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void txtPagoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoKeyTyped
         char c = evt.getKeyChar();
-        if ((!Character.isDigit(c) && c !='.') || Character.isSpaceChar(c)) {
+        if ((!Character.isDigit(c) && c != '.') || Character.isSpaceChar(c)) {
             getToolkit().beep();
             evt.consume();
         }

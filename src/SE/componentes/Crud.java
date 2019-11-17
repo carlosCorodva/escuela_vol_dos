@@ -3079,4 +3079,39 @@ public class Crud {
         }
         return valor;
     }
+    
+    public String cobroMensualidad(ma_mensualidad us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_mensualidad_cobrar(?,?,?,?,?,?,?,?)}");
+            pro.setLong(1, us.getId_mensualidad());
+            pro.setLong(2, us.getId_sucursal_men());
+            pro.setLong(3, us.getId_matricula());
+            pro.setDouble(4, us.getDeuda());
+            pro.setDouble(5, us.getTotal());
+            pro.setString(6, us.getEstado());
+            pro.setLong(7, us.getId_actualizacion());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 }
