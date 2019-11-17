@@ -206,7 +206,7 @@ public class Combos {
     }
     private static Object[] arregloValor(ArrayList<precios> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
-        arreglo[0] = "VALOR...";
+        arreglo[0] = "MATRICULA...";
         for (int i = 0; i < lista.size(); i++) {
             arreglo[(i + 1)] = lista.get(i).getValor();
         }
@@ -224,5 +224,24 @@ public class Combos {
         return model;
 
     }
+    private static Object[] arregloMensualidad(ArrayList<precios> lista) {
+        Object[] arreglo = new Object[lista.size() + 1];
+        arreglo[0] = "MENSUALIDAD...";
+        for (int i = 0; i < lista.size(); i++) {
+            arreglo[(i + 1)] = lista.get(i).getValor();
+        }
+        return arreglo;
+
+    }
     
+    public static DefaultComboBoxModel listarComboMensualidad(ArrayList<precios> lista) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Object[] arreglo = arregloMensualidad(lista);
+        System.out.println(lista.size() + " tam " + arreglo.length);
+        for(int i = 0; i < arreglo.length; i++) {
+            model.addElement(arreglo[i]);
+        }
+        return model;
+
+    }
 }
