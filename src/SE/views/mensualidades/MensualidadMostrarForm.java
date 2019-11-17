@@ -6,26 +6,27 @@
 package SE.views.mensualidades;
 
 import SE.componentes.Crud;
-import SE.componentes.FormatoNumeros;
+//import SE.componentes.FormatoNumeros;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_mensualidad;
-import SE.entidades.re_clase_eporte;
-import java.awt.Dimension;
+//import SE.entidades.re_clase_eporte;
+//import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JRViewer;
+import javax.swing.JOptionPane;
+//import javax.swing.JDialog;
+//import javax.swing.table.DefaultTableModel;
+//import net.sf.jasperreports.engine.JRException;
+//import net.sf.jasperreports.engine.JasperFillManager;
+//import net.sf.jasperreports.engine.JasperPrint;
+//import net.sf.jasperreports.engine.JasperReport;
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+//import net.sf.jasperreports.engine.util.JRLoader;
+//import net.sf.jasperreports.view.JRViewer;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     JoinMatriculas mat = null;
     ma_mensualidad me = new ma_mensualidad();
     ma_mensualidad objeto = null;
-    DefaultTableModel md = new DefaultTableModel();
+//    DefaultTableModel md = new DefaultTableModel();
     JoinCalificacion cal = new JoinCalificacion();
     ArrayList<JoinMatriculas> listar = null;
     ArrayList<ma_mensualidad> listar2 = null;
@@ -64,8 +65,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    public void tabla(){
+
+    public void tabla() {
         me.setId_matricula(Long.valueOf(txtMatricula.getText()));
         me.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
         listar2 = crud.listarAlumnosMensualidadPorAlumno(me);
@@ -77,12 +78,12 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         txtCurso.setEditable(false);
         txtAlumno.setEditable(false);
         txtcedula.setEditable(false);
-        
+
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
         txtMatricula.setVisible(false);
-        
+
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
@@ -306,19 +307,24 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         }
         return objeto1;
     }
-    
+
     private void jtMensualidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMensualidadesMousePressed
         int i = 0;
         try {
             if (evt.getClickCount() == 2) {
                 i = jtMensualidades.getSelectedRow();
-                objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar2);
-                if (objeto != null) {
-                    System.out.println("holaaaaa");
-                    cobroForm acc = new cobroForm(new javax.swing.JFrame(), true, us,mat, objeto);
-                    acc.setVisible(true);
-                    tabla();
+                if ("PAGADO".equals(jtMensualidades.getValueAt(i, 4).toString())) {
+                    JOptionPane.showMessageDialog(this, "ESTA MENSUALIDAD YA ESTA PAGADA");
+                } else {
+                    i = jtMensualidades.getSelectedRow();
+                    objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar2);
+                    if (objeto != null) {
+                        System.out.println("holaaaaa");
+                        cobroForm acc = new cobroForm(new javax.swing.JFrame(), true, us, mat, objeto);
+                        acc.setVisible(true);
+                    }
                 }
+                tabla();
             }
         } catch (Exception e) {
             Logger.getLogger(MensualidadMostrarForm.class.getName()).log(Level.SEVERE, null, e);
