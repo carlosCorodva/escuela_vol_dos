@@ -720,14 +720,14 @@ public class Tablas {
     }
     
     public static void tablaReporteCalificacion(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {180, 50, 50, 25, 30, 40, 30, 30, 50,100};
+        int[] a = {300, 250, 250, 250, 250, 250, 250, 250, 250,350};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "N. FORMATIVA", "N. PRÁCTICA", " APORTE",
-            "   EXAMEN", "  CONDUCTA", "         80%", "         20%", "    PROMEDIO","NOTA CUALITATIVA"};
+            "   EXAMEN", "  CONDUCTA", "NOTA 80%", "NOTA 20%", "    PROMEDIO","NOTA CUALITATIVA"};
         String[] Filas = new String[10];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -768,14 +768,14 @@ public class Tablas {
         }
     }
     public static void tablaReporteCalificacionPromedio(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {180, 50, 50, 40, 55,260, 55};
+        int[] a = {250, 200, 200, 200, 300,300, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "QUIMESTRE 1", "QUIMESTRE 2",
-            "PROMEDIO","CONDUCTA", "NOTA CUALITATIVA","       ESTADO"};
+                "PROMEDIO","LETRAS", "NOTA CUALITATIVA","       ESTADO"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -801,7 +801,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setPreferredWidth(a[4]);
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(5).setPreferredWidth(a[5]);
-            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr1);
+            Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
             Tabla.getColumnModel().getColumn(6).setPreferredWidth(a[6]);
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
         }

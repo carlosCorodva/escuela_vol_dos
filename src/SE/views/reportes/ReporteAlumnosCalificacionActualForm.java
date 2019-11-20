@@ -7,6 +7,7 @@ package SE.views.reportes;
 
 import SE.componentes.Crud;
 import SE.componentes.FormatoNumeros;
+import SE.componentes.NumerosEnLetras;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinCalificacion;
 import SE.entidades.join.JoinEmpleados;
@@ -42,6 +43,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     JoinMatriculas ma = new JoinMatriculas();
     DefaultTableModel md = new DefaultTableModel();
     JoinCalificacion cal = new JoinCalificacion();
+    NumerosEnLetras nu = new NumerosEnLetras();
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
@@ -187,6 +189,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
             }
         ));
+        jtPrimerQ.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtPrimerQ.setRowHeight(25);
         jScrollPane1.setViewportView(jtPrimerQ);
 
@@ -207,6 +210,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
             }
         ));
+        jtSegundoQ.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtSegundoQ.setRowHeight(25);
         jScrollPane2.setViewportView(jtSegundoQ);
 
@@ -231,6 +235,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
             }
         ));
+        jtPromedio.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtPromedio.setRowHeight(25);
         jScrollPane3.setViewportView(jtPromedio);
 
@@ -449,8 +454,10 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
             Double pq = Double.valueOf(jtPromedio.getValueAt(i, 1).toString());
             Double ps = Double.valueOf(jtPromedio.getValueAt(i, 2).toString());
             Double promedio = (pq + ps) / 2;
-
             jtPromedio.setValueAt(FormatoNumeros.formato_numero(promedio.toString()), i, 3);
+            
+            String letras = nu.letras(promedio);
+            jtPromedio.setValueAt(letras, i, 4);
 
             String cualitativo = "";
 
