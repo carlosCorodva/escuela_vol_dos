@@ -39,11 +39,13 @@ public class Hilo extends Thread{
     
     
     public void pausa(int mlsg){
+//        String msg="";
         try {
             String fecha = c.HiloStatement();
             
             if ("A".equals(fecha)) {
                 System.out.println("comida2: "+fecha);
+//                msg= fecha;
             }
             if ("I".equals(fecha)) {
                 System.out.println("comida2: "+fecha);
@@ -54,12 +56,21 @@ public class Hilo extends Thread{
                 l.setVisible(true);
                 
             }
+//            if ("M".equals(fecha)) {
+//                System.out.println("comida2: "+fecha);
+////                msg= fecha;
+//            }
             
             Thread.sleep(mlsg);
             
+            
         } catch (Exception e) {
         }
+        
+//            return msg;
     }
+    
+    
     
     
 }

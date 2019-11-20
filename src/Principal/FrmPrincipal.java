@@ -8,6 +8,7 @@ package Principal;
 import SE.componentes.Crud;
 import SE.componentes.Fondo;
 import SE.componentes.Hilo;
+import SE.componentes.Validaciones;
 import SE.componentes.Variables;
 import SE.entidades.bloqueo;
 import SE.views.matricula.cursos.MostrarCursosForm;
@@ -53,6 +54,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     Hilo hilo;
     Crud c = new Crud();
     bloqueo b = new bloqueo();
+    Validaciones val = new Validaciones();
 
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
@@ -81,8 +83,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         tiempo.start();
 
         fecha.setText(formato.format(sistFecha));
-//        hilo = new Hilo(this);
-//        hilo.start();
+        hilo = new Hilo(this);
+        hilo.start();
+        mens();
+        
     }
 
     public FrmPrincipal() {
@@ -116,6 +120,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbIdUsuario = new javax.swing.JLabel();
         hora = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
+        mensaje = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         meEmpresa = new javax.swing.JMenu();
         jmEmpresa = new javax.swing.JMenu();
@@ -293,6 +298,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fecha.setText("jLabel2");
         fecha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        mensaje.setText(" ");
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -557,21 +564,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbIdUsuario)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lbEmpresa)
-                                .addComponent(lbSucursal)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(hora, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbIdUsuario)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbEmpresa)
+                        .addComponent(lbSucursal)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,12 +589,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(113, 113, 113)
-                .addComponent(lbIdUsuario)
-                .addGap(59, 59, 59)
-                .addComponent(lbEmpresa)
-                .addGap(61, 61, 61)
-                .addComponent(lbSucursal)
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbIdUsuario)
+                        .addGap(59, 59, 59)
+                        .addComponent(lbEmpresa)
+                        .addGap(61, 61, 61)
+                        .addComponent(lbSucursal))
+                    .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -605,6 +615,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             java.util.Calendar hoy = java.util.Calendar.getInstance();
             hora.setText(String.format(format.format(sistHora), hoy));
         }
+    }
+    
+    public void mens(){
+        String msg = val.mensaje();
+        String salida="";
+        if ("M1".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN CUATRO DIAS";
+        }
+        if ("M".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN TRES DIAS";
+        }
+        if ("M".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN DOS DIAS";
+        }
+        if ("M1".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN UN DIA";
+        }
+        mensaje.setText(salida);
     }
 
     public void bloq() {
@@ -951,6 +979,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu meMaterias;
     private javax.swing.JMenu meMatricula;
     private javax.swing.JMenu meReportes;
+    private javax.swing.JLabel mensaje;
     private javax.swing.JMenuItem subEmpresa;
     private javax.swing.JMenuItem subSucursales;
     // End of variables declaration//GEN-END:variables

@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  * @author carlos
  */
 public class Validaciones {
+    
+    Crud c = new Crud();
 
     public static boolean buscarCedulaEmpleados(ArrayList<JoinEmpleados> lista, String cedula) {
         boolean valor = false;
@@ -75,5 +77,20 @@ public class Validaciones {
             }
         }
         return valor;
+    }
+    
+    public String mensaje(/*int mlsg*/){
+        String msg="";
+        try {
+            String fecha = c.HiloStatement();
+            if ("M".equals(fecha)) {
+                System.out.println("salida: "+fecha);
+                msg= fecha;
+            }
+            
+        } catch (Exception e) {
+        }
+        
+            return msg;
     }
 }
