@@ -299,7 +299,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         fecha.setText("jLabel2");
         fecha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        mensaje.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        mensaje.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mensaje.setForeground(new java.awt.Color(255, 0, 0));
         mensaje.setText(" ");
 
@@ -582,7 +582,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                                 .addComponent(lbSucursal))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -623,9 +623,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     public void mens(){
         String msg = c.HiloStatement2();
-        System.out.println("entra1");
         String salida="";
-        System.out.println("msg: "+msg);
         if ("M1".equals(msg)) {
             salida="RENUEVE LA LICENCIA, QUEDAN CUATRO DIAS!";
         }
@@ -639,7 +637,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             salida="RENUEVE LA LICENCIA, QUEDAN UN DIA!";
         }
         mensaje.setText(salida);
-        System.out.println("salida: "+salida);
     }
 
     public void bloq() {
