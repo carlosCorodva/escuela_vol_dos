@@ -70,7 +70,7 @@ public class Validaciones {
         } else {
             boolean valor1 = buscarCedulaAlumnos(lista, cedula);
             if (valor1 == true) {
-                JOptionPane.showMessageDialog(null, "Cedula ya existente");
+                JOptionPane.showMessageDialog(null, "CEDULA YA EXISTENTE");
                 valor = false;
             } else {
                 valor = true;

@@ -14,6 +14,7 @@ import SE.entidades.bloqueo;
 import SE.views.matricula.cursos.MostrarCursosForm;
 import SE.entidades.join.JoinEmpleados;
 import SE.views.calificacion.CalificacionForm;
+import SE.views.calificacion.ConductaGeneralMostrarForm;
 import SE.views.complementos.datosInformacion;
 import SE.views.empresa.MostrarEmpresaUnoForm;
 import SE.views.empresa.sucursal.MostrarSucursalesForm;
@@ -138,6 +139,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         meCalificacion = new javax.swing.JMenu();
         jmCalificacion = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         meCursos = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         meMaterias = new javax.swing.JMenu();
@@ -448,6 +450,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         meCalificacion.add(jmCalificacion);
 
+        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem12.setText("CONDUCTA GENERAL");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        meCalificacion.add(jMenuItem12);
+
         jMenuBar1.add(meCalificacion);
 
         meCursos.setText("CURSOS");
@@ -594,9 +605,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
+                .addGap(18, 18, 18)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125)
                 .addComponent(lbEmpresa)
                 .addGap(61, 61, 61)
                 .addComponent(lbSucursal)
@@ -901,6 +912,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mp.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        ConductaGeneralMostrarForm cg = new ConductaGeneralMostrarForm(new javax.swing.JFrame(), true, us);
+        cg.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -952,6 +968,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

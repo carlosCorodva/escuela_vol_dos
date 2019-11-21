@@ -450,4 +450,61 @@ public class Mappers {
         }
         return obj;
     }
+    public static JoinMatriculas getMatriculasConductaFromResultSet(ResultSet rs) {
+        JoinMatriculas obj = new JoinMatriculas();
+        try {
+            obj.setId_usuario(rs.getLong("Id_usuario"));
+            obj.setApellidos_nombres(rs.getString("Apellidos_nombres"));
+            obj.setCedula(rs.getString("Cedula"));
+            obj.setContrasena(rs.getString("Contrasena"));
+            obj.setConvecional(rs.getString("Convecional"));
+            obj.setCopia_cedula(rs.getLong("Copia_cedula"));
+            obj.setCorreo(rs.getString("Correo"));
+            obj.setDireccion(rs.getString("Direccion"));
+            obj.setEstado(rs.getString("Estado"));
+            obj.setFecha_nacimiento(rs.getString("Fecha_nacimiento"));
+            obj.setId_rol(rs.getLong("Id_rol"));
+            obj.setRol(rs.getString("Rol"));
+            obj.setServicio_basico(rs.getLong("Servicio_basico"));
+            obj.setTelefono_dos(rs.getString("Telefono_dos"));
+            obj.setPartida_nacimiento(rs.getLong("Partida_nacimiento"));
+            obj.setObservacion(rs.getString("Observacion"));
+            obj.setUsuario(rs.getString("Usuario"));
+            obj.setId_empresa(rs.getLong("Id_empresa"));
+            obj.setNombre_comercial_em(rs.getString("Nombre_comercial_em"));
+            obj.setRuc_em(rs.getString("ruc_em"));
+            obj.setTelefono_em(rs.getString("telefono_em"));
+            obj.setDireccion_em(rs.getString("direccion_em"));
+            obj.setCorreo_em(rs.getString("correo_em"));
+            obj.setEstado_em(rs.getString("estado_em"));
+            obj.setId_sucursal(rs.getLong("id_sucursal"));
+            obj.setNombre_comercial_su(rs.getString("nombre_comercial_su"));
+            obj.setTelefono_su(rs.getString("telefono_su"));
+            obj.setDireccion_su(rs.getString("direccion_su"));
+            obj.setCorreo_su(rs.getString("correo_su"));
+            obj.setEstado_su(rs.getString("estado_su"));
+            obj.setId_matricula(rs.getLong("Id_matricula"));
+            obj.setId_periodo(rs.getLong("Id_periodo"));
+            obj.setId_paralelo(rs.getLong("Id_paralelo"));
+            obj.setMatricula_obs(rs.getString("Matricula_obs"));
+            obj.setEstado_matricula(rs.getString("Estado_matricula"));
+            obj.setPromedio_matricula(rs.getDouble("Promedio_matricula"));
+            obj.setParalelo(rs.getString("Paralelo"));
+            obj.setPeriodo(rs.getString("Periodo"));
+            obj.setCorreo_dos(rs.getString("Correo_dos"));
+            obj.setGraduado(rs.getString("Graduado"));
+            obj.setCedula_uno(rs.getString("Cedula_uno"));
+            obj.setCedula_dos(rs.getString("Cedula_dos"));
+            obj.setRepresentante(rs.getString("Representante"));
+            obj.setRepresentante_dos(rs.getString("Representante_dos"));
+            obj.setParentesco(rs.getString("Parentesco"));
+            obj.setParentesco_dos(rs.getString("Parentesco_dos"));
+            obj.setAnt_escuela(rs.getString("Ant_escuela"));
+            obj.setValor_mat(rs.getDouble("valor_mat"));
+            obj.setConducta_general(rs.getString("conducta_general"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 }
