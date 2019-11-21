@@ -79,18 +79,19 @@ public class Validaciones {
         return valor;
     }
     
-    public String mensaje(/*int mlsg*/){
-        String msg="";
-        try {
-            String fecha = c.HiloStatement();
-            if ("M".equals(fecha)) {
-                System.out.println("salida: "+fecha);
-                msg= fecha;
-            }
-            
-        } catch (Exception e) {
-        }
-        
-            return msg;
-    }
+//    public String mensaje(/*int mlsg*/){
+//        String msg="";
+//        System.out.println("entra2");
+//        try {
+//            String fecha = c.HiloStatement();
+//            if ("M".equals(fecha)) {
+//                System.out.println("fecha: "+fecha);
+//                msg= fecha;
+//            }
+//            
+//        } catch (Exception e) {
+//        }
+//        
+//            return msg;
+//    }
 }

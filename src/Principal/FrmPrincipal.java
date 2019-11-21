@@ -299,6 +299,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         fecha.setText("jLabel2");
         fecha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        mensaje.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        mensaje.setForeground(new java.awt.Color(255, 0, 0));
         mensaje.setText(" ");
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -570,15 +572,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(hora, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbIdUsuario)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lbEmpresa)
-                        .addComponent(lbSucursal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbEmpresa)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbIdUsuario)
+                                .addComponent(lbSucursal))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,16 +594,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(lbEmpresa)
+                .addGap(61, 61, 61)
+                .addComponent(lbSucursal)
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbIdUsuario)
-                        .addGap(59, 59, 59)
-                        .addComponent(lbEmpresa)
-                        .addGap(61, 61, 61)
-                        .addComponent(lbSucursal))
-                    .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addComponent(lbIdUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -618,21 +622,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
     public void mens(){
-        String msg = val.mensaje();
+        String msg = c.HiloStatement2();
+        System.out.println("entra1");
         String salida="";
+        System.out.println("msg: "+msg);
         if ("M1".equals(msg)) {
-            salida="RENUEVE LA LICENCIA, QUEDAN CUATRO DIAS";
+            salida="RENUEVE LA LICENCIA, QUEDAN CUATRO DIAS!";
         }
-        if ("M".equals(msg)) {
-            salida="RENUEVE LA LICENCIA, QUEDAN TRES DIAS";
+        if ("M2".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN TRES DIAS!";
         }
-        if ("M".equals(msg)) {
-            salida="RENUEVE LA LICENCIA, QUEDAN DOS DIAS";
+        if ("M3".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN DOS DIAS!";
         }
-        if ("M1".equals(msg)) {
-            salida="RENUEVE LA LICENCIA, QUEDAN UN DIA";
+        if ("M4".equals(msg)) {
+            salida="RENUEVE LA LICENCIA, QUEDAN UN DIA!";
         }
         mensaje.setText(salida);
+        System.out.println("salida: "+salida);
     }
 
     public void bloq() {
