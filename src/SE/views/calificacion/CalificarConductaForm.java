@@ -5,8 +5,12 @@
  */
 package SE.views.calificacion;
 
+import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,11 +21,19 @@ public class CalificarConductaForm extends javax.swing.JDialog {
     /**
      * Creates new form CalificarConductaForm
      */
+    
+    Crud c = new Crud();
+    JoinEmpleados us;
+    JoinMatriculas mat;
+    
     public CalificarConductaForm(java.awt.Frame parent, boolean modal,JoinEmpleados usuario,JoinMatriculas matricula) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        us = usuario;
+        mat=matricula;
         txtAlumno.setText(matricula.getApellidos_nombres());
+        txtObservacion.setText(matricula.getMatricula_obs());
     }
     
     public CalificarConductaForm(java.awt.Frame parent, boolean modal) {
@@ -62,6 +74,11 @@ public class CalificarConductaForm extends javax.swing.JDialog {
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/disquete guardar 32.png"))); // NOI18N
         btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
@@ -128,6 +145,35 @@ public class CalificarConductaForm extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void crear() {
+        if (txtObservacion.getText().length() < 1) {
+            JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO CODIGO!");
+        } else if (cbConducta.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UNA OPCION!");
+        } else {
+            JoinMatriculas pr = new JoinMatriculas();
+
+            try {
+                pr.setId_matricula(mat.getId_matricula());
+                pr.setId_empleado(us.getId_usuario());
+                pr.setId_sucursal(us.getId_sucursal());
+                pr.setMatricula_obs(txtObservacion.getText());
+                pr.setConducta_general(cbConducta.getSelectedItem().toString());
+                String a = c.Conducta(pr);
+                JOptionPane.showMessageDialog(this, a);
+                
+                setVisible(false);
+            } catch (Exception e) {
+                Logger.getLogger(CalificarConductaForm.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+        }
+    }
+    
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        crear();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

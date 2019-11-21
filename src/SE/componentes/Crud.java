@@ -3265,5 +3265,38 @@ public class Crud {
         return valor;
     }
     
+    public String Conducta(JoinMatriculas us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call ma_calificar_conducta(?,?,?,?,?,?) }");
+            pro.setLong(1, us.getId_matricula());
+            pro.setLong(2, us.getId_sucursal());
+            pro.setLong(3, us.getId_empleado());
+            pro.setString(4, us.getConducta_general());
+            pro.setString(5, us.getMatricula_obs());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.execute();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
     
 }

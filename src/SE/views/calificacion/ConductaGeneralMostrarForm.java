@@ -117,8 +117,8 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         jToolBar1.add(btnBuscar);
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/actualiza32.png"))); // NOI18N
-        btnActualizar.setText("  MATRICULAR  ");
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificaion documento 32.png"))); // NOI18N
+        btnActualizar.setText("  CONDUCTA  ");
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
