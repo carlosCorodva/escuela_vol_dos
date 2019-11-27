@@ -78,6 +78,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         txtAlumno.setEditable(false);
         txtcedula.setEditable(false);
         txtPromedio.setEditable(false);
+        txtConducta.setEditable(false);
 
         txtCurso.setText(mat.getParalelo());
         txtAlumno.setText(mat.getApellidos_nombres());
