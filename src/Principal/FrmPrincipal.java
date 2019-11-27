@@ -84,9 +84,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         tiempo.start();
 
         fecha.setText(formato.format(sistFecha));
-        hilo = new Hilo(this);
-        hilo.start();
-        mens();
+//        hilo = new Hilo(this);
+//        hilo.start();
+//        mens();
         
     }
 
