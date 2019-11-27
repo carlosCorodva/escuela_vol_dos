@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14418dd1-db19-4bf9-bf0c-fc0d8206623c">
-	<property name="ireport.zoom" value="6.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2665"/>
+	<property name="ireport.y" value="487"/>
 	<field name="field1" class="java.lang.String"/>
 	<field name="field2" class="java.lang.String"/>
 	<field name="field3" class="java.lang.String"/>
@@ -231,10 +231,13 @@
 				<reportElement x="352" y="0" width="1" height="30" uuid="c1657216-dea6-4f86-b52d-0004d0b91c86"/>
 			</line>
 			<line>
+				<reportElement x="35" y="0" width="501" height="1" uuid="8acefcbb-1971-4939-86a3-cb69d215f454"/>
+			</line>
+			<line>
 				<reportElement x="535" y="0" width="1" height="30" uuid="4412a325-4ff2-4849-a832-62a65ec2be79"/>
 			</line>
 			<line>
-				<reportElement x="285" y="0" width="1" height="30" uuid="9b472a8e-32f0-4f65-906c-d3a1c959e5e0"/>
+				<reportElement x="284" y="0" width="1" height="30" uuid="9b472a8e-32f0-4f65-906c-d3a1c959e5e0"/>
 			</line>
 		</band>
 	</detail>

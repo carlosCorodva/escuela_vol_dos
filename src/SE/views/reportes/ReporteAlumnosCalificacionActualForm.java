@@ -83,6 +83,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         txtAlumno.setText(mat.getApellidos_nombres());
         txtPeriodo.setText(mat.getPeriodo());
         txtcedula.setText(mat.getCedula());
+        txtConducta.setText(mat.getConducta_general());
     }
 
     @SuppressWarnings("unchecked")
@@ -116,6 +117,8 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
         jtSegundoQ = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtPromedio = new javax.swing.JTable();
+        txtConducta = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -290,6 +293,9 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("REPORTE ANUAL", jScrollPane3);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("CONDUCTA");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -326,19 +332,26 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                         .addGap(27, 27, 27))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(93, Short.MAX_VALUE))
+                        .addContainerGap(93, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lbSucursal)
+                .addGap(54, 54, 54)
+                .addComponent(btnImprimirPQ)
+                .addGap(40, 40, 40)
+                .addComponent(lbEmpresa)
+                .addGap(58, 58, 58)
+                .addComponent(btnImprimirSQ)
+                .addGap(106, 106, 106)
+                .addComponent(BtnReporteFinal)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnImprimirPQ)
-                        .addGap(77, 77, 77)
-                        .addComponent(lbEmpresa)
-                        .addGap(63, 63, 63)
-                        .addComponent(btnImprimirSQ)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbSucursal)
-                        .addGap(38, 38, 38)
-                        .addComponent(BtnReporteFinal)
-                        .addGap(148, 148, 148))))
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(txtConducta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,27 +379,26 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(btnImprimirSQ)
-                                            .addGap(28, 28, 28))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lbSucursal)
-                                            .addGap(49, 49, 49))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(btnImprimirPQ)
-                                            .addContainerGap()))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbEmpresa)
-                                        .addGap(46, 46, 46))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnReporteFinal)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnImprimirPQ)
+                                        .addComponent(BtnReporteFinal)
+                                        .addComponent(btnImprimirSQ))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtConducta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7)))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbSucursal)
+                                .addGap(49, 49, 49))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbEmpresa)
+                                .addGap(43, 43, 43))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -705,6 +717,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -719,6 +732,7 @@ public class ReporteAlumnosCalificacionActualForm extends javax.swing.JDialog {
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtAlumno;
+    private javax.swing.JTextField txtConducta;
     private javax.swing.JTextField txtCurso;
     private javax.swing.JTextField txtPeriodo;
     private javax.swing.JTextField txtPromedio;
