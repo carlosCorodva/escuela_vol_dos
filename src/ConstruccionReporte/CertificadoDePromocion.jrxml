@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14418dd1-db19-4bf9-bf0c-fc0d8206623c">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="487"/>
+	<property name="ireport.y" value="192"/>
 	<field name="field1" class="java.lang.String"/>
 	<field name="field2" class="java.lang.String"/>
 	<field name="field3" class="java.lang.String"/>
@@ -15,6 +15,14 @@
 	<field name="field10" class="java.lang.String"/>
 	<field name="field11" class="java.lang.String"/>
 	<field name="field12" class="java.lang.String"/>
+	<field name="field13" class="java.lang.String"/>
+	<field name="field14" class="java.lang.String"/>
+	<field name="field15" class="java.lang.String"/>
+	<field name="field16" class="java.lang.String"/>
+	<field name="field17" class="java.lang.String"/>
+	<field name="field18" class="java.lang.String"/>
+	<field name="field19" class="java.lang.String"/>
+	<field name="field20" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -245,7 +253,129 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="285" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="0" width="249" height="20" uuid="bb8f96a2-e9bb-4a6c-8d7d-587703fe3cae"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUMA TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="22" width="250" height="20" uuid="966c6ee6-7267-4666-9cb5-99cc272e4acd"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO GENERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="44" width="250" height="30" uuid="e511ac36-2bfe-4e91-bea3-8023874ba2b2"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EVALUACION DEL COMPORTAMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="75" width="250" height="30" uuid="d26a5066-2d02-4064-a8f6-cc01ed0cc6dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROYECTOS EDUCATIVOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="0" width="65" height="20" uuid="eb18a87c-9fbb-4780-8e1c-50d79afed5b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="22" width="65" height="20" uuid="4f1cd513-a7a1-43d5-a270-6f7dbb13040a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="44" width="65" height="30" uuid="a568628e-dd21-4b75-a9d3-f5f04dc6f733"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="287" y="75" width="65" height="30" uuid="5bb18af6-a88c-4ad5-b991-0b29967924ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="0" width="181" height="20" uuid="047c0786-8347-4755-b6c0-ddc30fff6b05"/>
+				<textFieldExpression><![CDATA[$F{field16}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="22" width="181" height="20" uuid="5b237aec-3906-4d8e-992a-04241b4fac99"/>
+				<textFieldExpression><![CDATA[$F{field17}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="43" width="181" height="30" uuid="c92d6403-0344-4da5-b6d7-355f26bff2a6"/>
+				<textFieldExpression><![CDATA[$F{field18}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="75" width="181" height="30" uuid="e68f7262-18f9-44c0-954e-065d3606e6cb"/>
+				<textFieldExpression><![CDATA[$F{field19}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="125" width="130" height="20" uuid="408129fe-bbc4-4f90-8cf9-a66f9104fcb5"/>
+				<text><![CDATA[Por lo tanto es promovido/a ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="125" width="370" height="20" uuid="305a5ed2-c08a-4d0f-9702-fa6da41f29e6"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field20}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="145" width="400" height="20" uuid="d86e3859-1b14-40d2-961c-dd2ede317859"/>
+				<text><![CDATA[Para certificar suscriben en unidad de acto a la rectora con la secretaria del plantel.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="258" width="73" height="27" uuid="9ba1cc1d-b844-4304-b87f-45bdcce1d502"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPRESO:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="434" y="258" width="113" height="27" uuid="57eda195-0bde-437e-a720-256969986c59"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="317" y="218" width="133" height="1" uuid="a0812e7a-276e-45d1-8bb8-1cc86afc2546"/>
+			</line>
+			<staticText>
+				<reportElement x="106" y="221" width="100" height="20" uuid="6565daac-0bb2-4646-9d2e-e1d265a41ad9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="220" width="100" height="20" uuid="dabfa983-d4de-44f9-9e09-baf147445d35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECTOR/A]]></text>
+			</staticText>
+			<line>
+				<reportElement x="88" y="220" width="133" height="1" uuid="07d8881a-9069-497b-b1bc-62d59391c147"/>
+			</line>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

@@ -34,6 +34,8 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
      *
      * @param parent
      * @param modal
+     * @param usu
+     * @param matricula
      */
     public ActualizarAlumnosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usu, JoinMatriculas matricula) {
         super(parent, modal);
@@ -43,7 +45,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
-        mat=matricula;
+        mat = matricula;
         lbIdUsuario.setText(usu.getId_usuario().toString());
         lbEmpresa.setText(usu.getId_empresa().toString());
         lbSucursal.setText(usu.getId_sucursal().toString());
@@ -55,6 +57,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         txtOtroDos.setEnabled(false);
         txtEscAnt.setEnabled(false);
         cbxDocu.setEnabled(false);
+        txtCedula.setEditable(false);
         formulario();
     }
 
@@ -631,6 +634,9 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void formulario() {
+        String rep_uno = mat.getParentesco();
+        String rep_dos = mat.getParentesco_dos();
+
         txtCedula.setText(mat.getCedula());
         txtTelefono1.setText(mat.getConvecional());
         txtTelefono2.setText(mat.getTelefono_dos());
@@ -646,15 +652,15 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         txtCordos.setText(mat.getCorreo_dos());
         txtFecha.setText(mat.getFecha_nacimiento());
         txtEscAnt.setText(mat.getAnt_escuela());
-        
+
         if (txtEscAnt.getText().length() <= 3) {
-            
+
         } else {
             cbxEscuela.setSelected(true);
             cbxDocu.setSelected(true);
         }
-        
-        System.out.println("cc: "+mat.getCopia_cedula());
+
+        System.out.println("cc: " + mat.getCopia_cedula());
         if (mat.getCopia_cedula() == 1) {
             cbxCopiaCedula.setSelected(true);
         }
@@ -664,38 +670,11 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
         if (mat.getPartida_nacimiento() == 1) {
             cbxPartidaNac.setSelected(true);
         }
-        
-        if ("PADRE".equals(mat.getParentesco())) {
-            cbParUno.setSelectedItem("PADRE");
-        }else if ("PARENTESCO...".equals(mat.getParentesco())) {
-            cbParUno.setSelectedItem("PARENTESCO...");
-        }else if ("MADRE".equals(mat.getParentesco())) {
-            cbParUno.setSelectedItem("MADRE");
-        }else if ("ABUELO/A".equals(mat.getParentesco())) {
-            cbParUno.setSelectedItem("ABUELO/A");
-        }else if ("TIO/A".equals(mat.getParentesco())) {
-            cbParUno.setSelectedItem("TIO/A");
-        }else {
-            cbParUno.setSelectedItem("OTRO");
-            txtOtro.setText(mat.getParentesco());
-        }
-        System.out.println("parent1: "+mat.getParentesco());
-        
-        if ("PADRE".equals(mat.getParentesco_dos())) {
-            cbParDos.setSelectedItem("PADRE");
-        }else if ("PARENTESCO...".equals(mat.getParentesco_dos())) {
-            cbParDos.setSelectedItem("PARENTESCO...");
-        }else if ("MADRE".equals(mat.getParentesco_dos())) {
-            cbParDos.setSelectedItem("MADRE");
-        }else if ("ABUELO/A".equals(mat.getParentesco_dos())) {
-            cbParDos.setSelectedItem("ABUELO/A");
-        }else if ("TIO/A".equals(mat.getParentesco_dos())) {
-            cbParDos.setSelectedItem("TIO/A");
-        }else{
-            cbParDos.setSelectedItem("OTRO");
-            txtOtroDos.setText(mat.getParentesco_dos());
-        }
-        System.out.println("parent2: "+mat.getParentesco_dos());
+
+        cbParUno.setSelectedItem(rep_uno);
+//        System.out.println("parent1: " + mat.getParentesco());
+        cbParDos.setSelectedItem(rep_dos);
+//        System.out.println("parent2: " + mat.getParentesco_dos());
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -806,7 +785,7 @@ public class ActualizarAlumnosForm extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxEscuelaActionPerformed
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
         char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
         char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
@@ -823,7 +802,7 @@ char c = evt.getKeyChar();
     }//GEN-LAST:event_txtCorreoKeyTyped
 
     private void txtCordosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCordosKeyTyped
-char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
         char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
         char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
@@ -872,7 +851,7 @@ char c = evt.getKeyChar();
     }//GEN-LAST:event_txtTelefono2KeyTyped
 
     private void txtEscAntFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEscAntFocusLost
-txtEscAnt.setText(txtEscAnt.getText().toUpperCase());
+        txtEscAnt.setText(txtEscAnt.getText().toUpperCase());
     }//GEN-LAST:event_txtEscAntFocusLost
 
     private void txtOtroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtroFocusLost
@@ -880,13 +859,13 @@ txtEscAnt.setText(txtEscAnt.getText().toUpperCase());
     }//GEN-LAST:event_txtOtroFocusLost
 
     private void txtOtroDosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtroDosFocusLost
-txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
+        txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
     }//GEN-LAST:event_txtOtroDosFocusLost
 
     public void Guardar() {
         System.out.println("guardar");
         String obs, parUno, parDos;
-        Long cc, sb, doc,pn;
+        Long cc, sb, doc, pn;
 
         if (cbxCopiaCedula.isSelected()) {
             cc = Long.valueOf(1);
@@ -965,7 +944,7 @@ txtOtroDos.setText(txtOtroDos.getText().toUpperCase());
             obj.setPartida_nacimiento(pn);
             obj.setDoc_escuela_ant(doc);
             obj.setAnt_escuela(txtEscAnt.getText());
-            
+
             obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
             obj.setId_matricula(mat.getId_matricula());
             obj.setId_usuario(mat.getId_usuario());

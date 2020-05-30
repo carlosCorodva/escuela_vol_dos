@@ -30,7 +30,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     JoinEmpleados emp = null;
     JoinEmpleados us = null;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
-    ValidarIdentificacionEc id = null;
+    int id;
 
     /**
      * Creates new form Registrar
@@ -57,6 +57,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         jtEstado.setVisible(false);
         lbEmpresa.setText(emp.getId_empresa().toString());
         lbSucursal.setText(emp.getId_sucursal().toString());
+        txtCedula.setEditable(false);
     }
 
     public ActualizarEmpleadoForm(java.awt.Frame parent, boolean modal) {
@@ -271,7 +272,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         });
 
         cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA" }));
+        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA", "PASAPORTE" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -585,6 +586,45 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         Tablas.cargarTablaEstadoChbx(jtEstado, listar);
     }
 
+    public boolean validarCedula(String cedula) {
+        boolean estado = false;
+        try {
+            id = cbId.getSelectedIndex();
+            boolean vc = ValidarIdentificacionEc.validarCedula(cedula);
+            boolean pn = ValidarIdentificacionEc.validarRucPersonaNatural(cedula);
+            boolean pj = ValidarIdentificacionEc.validarRucSociedadPrivada(cedula);
+
+            if (id == 0) {
+                if (vc == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
+                    estado = false;
+                } else {
+                    estado = true;
+                }
+                System.out.println(vc);
+            } else if (id == 1) {
+                if (pn == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
+                    estado = false;
+                } else {
+                    estado = true;
+                }
+            } else if (id == 2) {
+                if (pj == false) {
+                    JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
+                    estado = false;
+                } else {
+                    estado = true;
+                }
+            } else {
+                estado = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return estado;
+    }
+
     public void chbx() {
 
         String leng = "" + jtEstado.getValueAt(0, 0).toString();
@@ -641,6 +681,8 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     }
 
     public void formulario() {
+        String cargo = emp.getRol();
+        String estado = emp.getEstado();
         lbIdEmpleado.setText(emp.getId_usuario().toString());
         txtCedula.setText(emp.getCedula());
         txtCorreo.setText(emp.getCorreo());
@@ -650,44 +692,32 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
         txtTelefono1.setText(emp.getConvecional());
         txtTelefono2.setText(emp.getTelefono_dos());
         txtFecha.setText(emp.getFecha_nacimiento());
-        if ("ACTIVO".equals(emp.getEstado())) {
-            cbEstado.setSelectedItem("ACTIVO");
-        } else {
-            cbEstado.setSelectedItem("INACTIVO");
-        }
+        cbCargo.setSelectedItem(cargo);
+        cbEstado.setSelectedItem(estado);
+        
         if (emp.getCopia_cedula() == 1) {
             cbxCopiaCedula.setSelected(true);
         }
         if (emp.getCopia_titulo() == 1) {
             cbxCopiaTitulo.setSelected(true);
         }
-        if ("ADMINISTRADOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("ADMINISTRADOR/A");
+
+        if (txtCedula.getText().length() == 10) {
+            cbId.setSelectedIndex(0);
         }
-        if ("RECTOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("RECTOR/A");
+        if (txtCedula.getText().length() == 13) {
+            String string = txtCedula.getText().substring(12);
+//            System.out.println("string: " + string);
+            int num = Integer.parseInt(string);
+//            System.out.println("num: " + num);
+            if (num != 1) {
+                cbId.setSelectedIndex(2);
+            } else {
+                cbId.setSelectedIndex(1);
+            }
         }
-        if ("PROFESOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("PROFESOR/A");
-        }
-        if ("SECRETARIO/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("SECRETARIO/A");
-        }
-        if ("PASANTE".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("PASANTE");
-        }
-        if ("INSPECTOR/A".equals(emp.getRol())) {
-            cbCargo.setSelectedItem("INSPECTOR/A");
-        }
-        
-        if ("CEDULA".equals(emp.getTipo_i())) {
-            cbId.setSelectedItem("CEDULA");
-        }
-        if ("P. NATURAL".equals(emp.getTipo_i())) {
-            cbId.setSelectedItem("P. NATURAL");
-        }
-        if ("P. JURIDICA".equals(emp.getTipo_i())) {
-            cbId.setSelectedItem("P. JURIDICA");
+        if (txtCedula.getText().length() >= 14) {
+            cbId.setSelectedIndex(3);
         }
     }
 
@@ -786,7 +816,7 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDireccionFocusLost
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         char mas = '+', por = '*', div = '/', dp = ':', pc = ';', c2 = ',', p1 = '{', p2 = '}';
         char lla1 = '[', el = '^', lla2 = ']', el2 = '¿', co = '?', co2 = '¡', c3 = '!', d = '"', e = '#';
         char col = '$', a = '!', b = '=', e2 = '%', f = '&', g = '=', h = 'º', i = 'ª', j = '(', k = ')', l = '<', m = '>';
@@ -812,9 +842,10 @@ char c = evt.getKeyChar();
         txtNombres.setEnabled(valor);
         txtFecha.setEnabled(valor);
         btnGuardar.setEnabled(valor);
+        txtCedula.setEnabled(valor);
         cbxCopiaCedula.setEnabled(valor);
         cbxCopiaTitulo.setEnabled(valor);
-        txtCedula.setEnabled(valor);
+        cbId.setEnabled(valor);
         cbEstado.setEnabled(valor);
         dtFecha.setEnabled(valor);
         btnAdd.setEnabled(valor);
@@ -840,7 +871,7 @@ char c = evt.getKeyChar();
     public void Guardar() {
         String obs;
         Long cc, ct;
-        String cbIdent = cbId.getSelectedItem().toString();
+        String cedu = txtCedula.toString();
 
         if (jcCiencias.isSelected() == true) {
             cn = "A";
@@ -934,6 +965,8 @@ char c = evt.getKeyChar();
             JOptionPane.showMessageDialog(null, "Seleccione un cargo válido");
         } else if (txtFecha.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+        } else if (this.validarCedula(cedu) == false) {
+
         } else {
             try {
                 JoinEmpleados obj = new JoinEmpleados();
@@ -958,7 +991,7 @@ char c = evt.getKeyChar();
                 obj.setId_usuarioDos(Long.valueOf(lbIdUsuario.getText()));
                 System.out.println("id2: " + lbIdUsuario.getText());
                 obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                obj.setTipo_i(cbIdent);
+//                obj.setTipo_i(cbIdent);
 
                 us_permiso_empleado usp = new us_permiso_empleado();
                 usp.setEstado_pe(ll);

@@ -35,7 +35,7 @@ public class Validaciones {
         boolean valor = false;
         if (cedula.length() < 10) {
             valor = false;
-        } else if (cedula.length() > 13) {
+        } else if (cedula.length() > 19) {
             valor = false;
         } else {
             boolean valor1 = buscarCedulaEmpleados(lista, cedula);

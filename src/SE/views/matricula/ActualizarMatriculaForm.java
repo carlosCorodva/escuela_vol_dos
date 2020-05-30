@@ -71,6 +71,7 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
         paralelo = crud.ComboParaleloActualizar(jm);
         cbParalelo.setModel(Combos.listarComboParalelosActualizar(paralelo));
         comboValor();
+        txtCedula.setEditable(false);
     }
 
     public ActualizarMatriculaForm(java.awt.Frame parent, boolean modal) {

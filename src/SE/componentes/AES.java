@@ -60,16 +60,16 @@ public class AES {
         return null;
     }
 
-    public static void main(String[] args) {
-        final String secretKey = "ydaleU";
-
-        String originalString = "luciernaga";
+//    public static void main(String[] args) {
+//        final String secretKey = "ydaleU";
+//
+//        String originalString = "luciernaga";
         /*String encryptedString = AES.encrypt(originalString, secretKey);*/
         /*String decryptedString = AES.decrypt(encryptedString, secretKey);
 
         System.out.println(originalString);
         System.out.println(encryptedString);
         System.out.println(decryptedString);*/
-    }
+//    }
     
 }

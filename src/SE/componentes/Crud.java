@@ -169,7 +169,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                        "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                        "{ call us_empleados_crear(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -183,7 +183,6 @@ public class Crud {
             pro.setString(11, us.getObservacion());
             pro.setLong(12, us.getId_usuario());
             pro.setLong(13, us.getId_sucursal());
-            pro.setString(14, us.getTipo_i());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -211,7 +210,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_empleados_actualizar(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                    "{ call us_empleados_actualizar(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             pro.setString(1, us.getCedula());
             pro.setString(2, us.getApellidos_nombres());
             pro.setString(3, us.getDireccion());
@@ -227,7 +226,6 @@ public class Crud {
             pro.setLong(13, us.getId_usuario());
             pro.setLong(14, us.getId_usuarioDos());
             pro.setLong(15, us.getId_sucursal());
-            pro.setString(16, us.getTipo_i());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -486,7 +484,7 @@ public class Crud {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_clave_mantenimiento(?,?,?,?)}");
+                    "{ call seg_usuario_mantenimiento_cuenta(?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.setString(2, us.getUsuario());
             pro.setString(3, us.getContrasena());
@@ -1743,6 +1741,35 @@ public class Crud {
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
                     "{ call us_empleado_validar_permiso(?,?)}");
+            pro.setLong(1, us.getId_usuario());
+            pro.registerOutParameter("salida", Types.VARCHAR);
+            pro.executeUpdate();
+            valor = pro.getString("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String BorrarPermisosCursos(JoinEmpleados us) {
+        String valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_empleado_borrar_permiso(?,?)}");
             pro.setLong(1, us.getId_usuario());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();

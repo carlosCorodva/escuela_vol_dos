@@ -60,6 +60,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
         us = usuario;
+        jmMensualidades.setVisible(false);
+        jmPrecios.setVisible(false);
 //        this.setTitle(fondo.getTitle() + TITLE + "---USUARIO" + " ---" + us.getNombre_comercial_em() + "---");
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
@@ -128,8 +130,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         subEmpresa = new javax.swing.JMenuItem();
         subSucursales = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jmMensualidades = new javax.swing.JMenuItem();
+        jmPrecios = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenuItem();
         jmPermisos = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -347,23 +349,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jmEmpresa.add(jMenuItem11);
 
-        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem6.setText("MENSUALIDADES");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jmMensualidades.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmMensualidades.setText("MENSUALIDADES");
+        jmMensualidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jmMensualidadesActionPerformed(evt);
             }
         });
-        jmEmpresa.add(jMenuItem6);
+        jmEmpresa.add(jmMensualidades);
 
-        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem10.setText("PRECIOS");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jmPrecios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmPrecios.setText("PRECIOS");
+        jmPrecios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jmPreciosActionPerformed(evt);
             }
         });
-        jmEmpresa.add(jMenuItem10);
+        jmEmpresa.add(jmPrecios);
 
         meEmpresa.add(jmEmpresa);
 
@@ -902,15 +904,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         activarMatricula();
     }//GEN-LAST:event_bloqMatActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        MostrarMensualidadesForm gr = new MostrarMensualidadesForm(new javax.swing.JFrame(), true, us);
-        gr.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    private void jmMensualidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMensualidadesActionPerformed
+//        MostrarMensualidadesForm gr = new MostrarMensualidadesForm(new javax.swing.JFrame(), true, us);
+//        gr.setVisible(true);
+    }//GEN-LAST:event_jmMensualidadesActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        mostrarPreciosForm mp = new mostrarPreciosForm(new javax.swing.JFrame(), true, us);
-        mp.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    private void jmPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPreciosActionPerformed
+//        mostrarPreciosForm mp = new mostrarPreciosForm(new javax.swing.JFrame(), true, us);
+//        mp.setVisible(true);
+    }//GEN-LAST:event_jmPreciosActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         ConductaGeneralMostrarForm cg = new ConductaGeneralMostrarForm(new javax.swing.JFrame(), true, us);
@@ -966,7 +968,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem16;
@@ -974,7 +975,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -986,8 +986,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenuItem jmGraduados;
     private javax.swing.JMenuItem jmMatriculas;
+    private javax.swing.JMenuItem jmMensualidades;
     private javax.swing.JMenuItem jmPerAnteriores;
     private javax.swing.JMenuItem jmPermisos;
+    private javax.swing.JMenuItem jmPrecios;
     private javax.swing.JMenuItem jmUsuarios;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;

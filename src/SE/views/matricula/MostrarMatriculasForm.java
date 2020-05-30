@@ -44,10 +44,8 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculas(je);
-        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+        
+        tabla();
     }
 
     public MostrarMatriculasForm(java.awt.Frame parent, boolean modal) {
@@ -267,6 +265,12 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void tabla(){
+        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarAlumnosMatriculas(je);
+        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO MATRICULAS?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
@@ -280,8 +284,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         ne.setVisible(true);
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculas(je);
-        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+        tabla();
         cbFiltro.setSelectedIndex(0);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -304,7 +307,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
                 if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                     JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
                 }
-                if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
+                else if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                     JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
 
                 } else {
@@ -313,12 +316,9 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
                         System.out.println("holaaaaa");
                         ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true, us, objeto);
                         acc.setVisible(true);
-                        listar.clear();
+//                        listar.clear();
                         cbFiltro.setSelectedIndex(0);
-                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                        listar = crud.listarAlumnosMatriculas(je);
-                        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                        tabla();
                     }
                 }
             }
@@ -390,10 +390,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         if (k == 0) {
             CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
             ne.setVisible(true);
-            je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-            listar = crud.listarAlumnosMatriculas(je);
-            Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+            tabla();
         } else {
 
         }
@@ -424,12 +421,9 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
                     System.out.println("holaaaaa");
                     ActualizarMatriculaForm acc = new ActualizarMatriculaForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
-                    listar.clear();
+//                    listar.clear();
                     cbFiltro.setSelectedIndex(0);
-                    je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculas(je);
-                    Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                    tabla();
                 }
             }
         }
@@ -445,12 +439,9 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
                 System.out.println("holaaaaa");
                 ReimprimirMtatriculaForm acc = new ReimprimirMtatriculaForm(new javax.swing.JFrame(), true, us, objeto);
                 acc.setVisible(true);
-                listar.clear();
+//                listar.clear();
                 cbFiltro.setSelectedIndex(0);
-                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMatriculas(je);
-                Tablas.cargarJoinMatriculas(jtMatriculas, listar);
+                tabla();
             }
         }
     }//GEN-LAST:event_btnImprimirActionPerformed

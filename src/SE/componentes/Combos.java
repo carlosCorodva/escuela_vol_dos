@@ -29,7 +29,6 @@ public class Combos {
             arreglo[(i + 1)] = lista.get(i).getNombre_comercial_em();
         }
         return arreglo;
-
     }
 
     public static DefaultComboBoxModel listarComboEmpresa(ArrayList<JoinEmpleados> lista) {
@@ -40,7 +39,6 @@ public class Combos {
             model.addElement(arreglo[i]);
         }
         return model;
-
     }
     
     private static Object[] arregloSucursal(ArrayList<JoinEmpleados> lista) {

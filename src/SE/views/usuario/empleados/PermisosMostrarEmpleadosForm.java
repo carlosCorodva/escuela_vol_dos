@@ -36,6 +36,7 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
+        jButton4.setVisible(false);
         us = usuario;
         this.setLocationRelativeTo(null);
         jToolBar1.setEnabled(false);
@@ -319,7 +320,7 @@ public class PermisosMostrarEmpleadosForm extends javax.swing.JDialog {
                 i = jtEmpleados.getSelectedRow();
                 objeto = devuelveObjetoEmpleado(jtEmpleados.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
-                    System.out.println("holaaaaa");
+                    System.out.println("HOLA: ");
                     PermisosActualizarCursosForm acc = new PermisosActualizarCursosForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();

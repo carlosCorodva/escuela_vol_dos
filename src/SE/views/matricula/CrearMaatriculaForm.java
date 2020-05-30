@@ -49,7 +49,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     String ll = "", m = "", inf = "", cn = "", ing = "", eca = "", ef = "", pe = "", dhi = "", es = "";
-    ValidarIdentificacionEc id = null;
+    int id;
+//    ValidarIdentificacionEc id = null;
+//    ValidarIdentificacionEc ruc = null;
 
     /**
      * Creates new form Registrar
@@ -114,20 +116,24 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
 
     }
 
-//    public void validarCedula(){
-//        try {
-//            boolean vc = id.validarCedula(txtCedula.getText());
-//            System.out.println(vc);
-//            if(vc == false){
-//                JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE COPIA DE IDENTIFICACION");
-//            }else{
-//                
-//            }
-//        } catch (Exception e) {
-//            
-//        }
-//        
-//    }
+    public boolean validarCedula(String cedula) {
+        boolean estado = false;
+        try {
+            boolean vc = ValidarIdentificacionEc.validarCedula(cedula);
+
+            if (vc == false) {
+                JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
+                estado = false;
+            } else {
+                estado = true;
+            }
+            System.out.println(vc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return estado;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +153,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         lbPeriodo = new javax.swing.JLabel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtAlumno = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
@@ -167,6 +172,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtObservacion = new javax.swing.JTextArea();
         cbValor = new javax.swing.JComboBox<>();
         cbMensualidad = new javax.swing.JComboBox<>();
+        cbId = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtRepresentante = new javax.swing.JTextField();
@@ -243,9 +249,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         jTabbedPane4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CEDULA");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("ALUMNO/A");
@@ -398,6 +401,9 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         cbMensualidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbMensualidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MENSUALIDAD..." }));
 
+        cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA", "PASAPORTE" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -415,8 +421,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel8))
-                                .addGap(90, 90, 90)
+                                    .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(54, 54, 54)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                     .addComponent(txtAlumno)))
@@ -444,14 +450,13 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)))
-                            .addComponent(jLabel8))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -723,7 +728,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             frame.setVisible(true);
             viewer.setFitWidthZoomRatio();
         } catch (JRException ex) {
-            Logger.getLogger(CrearMaatriculaForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CrearMaatriculaForm.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -903,10 +909,14 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCedulaKeyReleased
 
     private void txtAlumnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlumnoKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
+        if (id == 3) {
+
+        } else {
+            char c = evt.getKeyChar();
+            if (Character.isDigit(c)) {
+                getToolkit().beep();
+                evt.consume();
+            }
         }
     }//GEN-LAST:event_txtAlumnoKeyTyped
 
@@ -954,6 +964,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         String fecha = cal.getFecha(dtFecha);
         String obs, parUno, parDos;
         Long cc, sb, doc, pn;
+        String cedula = txtCedula.toString();
 
 //        validarCedula();
         if (cbxCopiaCedula.isSelected()) {
@@ -1016,6 +1027,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
         } else if (cbMensualidad.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
+        } else if (this.validarCedula(cedula) == false) {
+
         } else {
 
             imprimirMatricula();
@@ -1130,13 +1143,17 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMaatriculaForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -1221,6 +1238,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbId;
     private javax.swing.JComboBox<String> cbMensualidad;
     private javax.swing.JComboBox<String> cbParDos;
     private javax.swing.JComboBox<String> cbParUno;
@@ -1243,7 +1261,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
