@@ -25,29 +25,22 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
     Crud crud = new Crud();
     JoinEmpleados je = new JoinEmpleados();
     ArrayList<us_permiso_curso> listar = null;
+    ArrayList<ma_paralelo> listarCurso = null;
     ArrayList<ma_paralelo> listarParal = null;
     JoinEmpleados us = null;
     JoinEmpleados em = null;
     ma_paralelo objeto = null;
+    ma_paralelo pc = new ma_paralelo();
     us_permiso_curso mp = new us_permiso_curso();
 
     public PermisosActualizarCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         initComponents();
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
         setLocationRelativeTo(null);
-        txtnombre.setEditable(false);
         us = usuario;
         em = empleado;
-        txtnombre.setText(em.getApellidos_nombres());
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
-        lbIdEmpleado.setText(em.getId_usuario().toString());
+        form();
         tabla();
-        validar();
     }
 
     public PermisosActualizarCursosForm(java.awt.Frame parent, boolean modal) {
@@ -56,13 +49,18 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
-    public void validar() {
-        int i = jtCursos.getRowCount();
-        if (i <= 0) {
-            JOptionPane.showMessageDialog(this, "EL USUARIO NO TIENE PERMISOS USE LA VENTANA DE ASIGNAR PERMISOS");
-        }
-    }
+    public void form() {
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        txtnombre.setEditable(false);
+        txtnombre.setText(em.getApellidos_nombres());
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+        lbIdEmpleado.setText(em.getId_usuario().toString());
 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +73,7 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtCursos = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
@@ -85,6 +83,8 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
         lbIdEmpleado = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtTabla1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -98,8 +98,8 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
         jLabel1.setText("ACTUALIZAR PERMISO");
         jLabel1.setOpaque(true);
 
-        jtCursos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jtCursos.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -107,8 +107,13 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
 
             }
         ));
-        jtCursos.setRowHeight(25);
-        jScrollPane1.setViewportView(jtCursos);
+        jtTabla.setRowHeight(25);
+        jtTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtTablaMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtTabla);
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
@@ -150,6 +155,23 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
 
         lbIdEmpleado.setText("jLabel3");
 
+        jtTabla1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtTabla1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtTabla1.setRowHeight(25);
+        jtTabla1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtTabla1MousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtTabla1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,7 +180,11 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(lbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -202,8 +228,13 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
                     .addComponent(lbEmpresa)
                     .addComponent(lbIdEmpleado)
                     .addComponent(lbIdUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,72 +261,42 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
-//    public void guardar() {
-//        ArrayList<String> queryA = new ArrayList<String>();
-//        String act = "";
-//        String valor = "";
-//        for (int i = 0; i < jtCursos.getRowCount(); i++) {
-//            String dato = jtCursos.getValueAt(i, 2).toString();
-//            if ("true".equals(dato)) {
-//                valor = "A";
-//            } else {
-//                valor = "I";
-//            }
-//            act = "UPDATE `us_permiso_curso`\n"
-//                    + "SET `permiso` = '" + valor + "'\n"
-//                    + "WHERE `id_usuario` ='" + em.getId_usuario() + "' \n"
-//                    + "AND `id_empresa_per`='1' \n"
-//                    + "AND `id_sucursal_per`='" + us.getId_sucursal() + "' \n"
-//                    + "AND `id_curso` = '" + jtCursos.getValueAt(i, 0) + "';";
-//
-//            queryA.add(act);
-//            crud.GuardarPermisosCursos(queryA);
-//            queryA.clear();
-//        }
-//        JOptionPane.showMessageDialog(this, "PERMISO GUARDADO CORRECTAMENTE");
-////        tabla();
-//        setVisible(false);
-//    }
-    
-    public void guardar() {
-        je.setId_usuario((em.getId_usuario()));
-        String a = crud.BorrarPermisosCursos(je);
-        if ("S".equals(a)) {
-            JOptionPane.showMessageDialog(this, "EL USUARIO YA TIENE PERMISO, USE LA VENTANA DE ACTUALIZAR");
-        } else {
-            ArrayList<String> queryA = new ArrayList<String>();
-            String act = "";
-            String valor = "";
-            for (int i = 0; i < jtCursos.getRowCount(); i++) {
-                String dato = jtCursos.getValueAt(i, 2).toString();
-                if ("true".equals(dato)) {
-                    valor = "A";
-                } else {
-                    valor = "I";
-                }
-                act = "INSERT INTO `us_permiso_curso`(`id_usuario`,`id_curso`,\n"
-                        + "`curso`,`permiso`,`id_empresa_per`,`id_sucursal_per`)\n"
-                        + "VALUES ('" + em.getId_usuario() + "','" + jtCursos.getValueAt(i, 0) + "','" + jtCursos.getValueAt(i, 1) + "','" + valor + "',\n"
-                        + "'1','" + us.getId_sucursal() + "');";
 
-                queryA.add(act);
-                crud.GuardarPermisosCursos(queryA);
-                queryA.clear();
+        public void guardar() {
+        ArrayList<String> queryA = new ArrayList<>();
+        String act = "";
+        String valor = "";
+        for (int i = 0; i < jtTabla.getRowCount(); i++) {
+            String dato = jtTabla.getValueAt(i, 2).toString();
+            if ("true".equals(dato)) {
+                valor = "A";
+            } else {
+                valor = "I";
             }
-            JOptionPane.showMessageDialog(this, "PERMISO GUARDADO CORRECTAMENTE");
-            tabla();
+            act = "UPDATE `us_permiso_curso`\n"
+                    + "SET `permiso` = '" + valor + "'\n"
+                    + "WHERE `id_usuario` ='" + em.getId_usuario() + "' \n"
+                    + "AND `id_empresa_per`='1' \n"
+                    + "AND `id_sucursal_per`='" + us.getId_sucursal() + "' \n"
+                    + "AND `id_curso` = '" + jtTabla.getValueAt(i, 0) + "';";
+
+            queryA.add(act);
+            crud.GuardarPermisosCursos(queryA);
+            queryA.clear();
         }
+        JOptionPane.showMessageDialog(this, "PERMISO GUARDADO CORRECTAMENTE");
+        tabla();
         setVisible(false);
     }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         guardar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    public void tabla(){
+    public void tabla() {
         mp.setId_usuario(Long.valueOf(lbIdEmpleado.getText()));
         mp.setId_sucursal_per(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarCursosPermiso(mp);
-        Tablas.TablaCursosPermisosEmpleadosActualizar(jtCursos, listar);
+        Tablas.TablaCursosPermisosEmpleadosActualizar(jtTabla, listar);
     }
     private void btnTodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTodoMouseClicked
         int cont = 0;
@@ -303,15 +304,23 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
         boolean v = true;
         boolean f = false;
         if (cont == 1) {
-            for (int a = 0; a < jtCursos.getRowCount(); a++) {
-                jtCursos.setValueAt(v, a, 2);
+            for (int a = 0; a < jtTabla.getRowCount(); a++) {
+                jtTabla.setValueAt(v, a, 2);
             }
         } else {
-            for (int a = 0; a < jtCursos.getRowCount(); a++) {
-                jtCursos.setValueAt(f, a, 2);
+            for (int a = 0; a < jtTabla.getRowCount(); a++) {
+                jtTabla.setValueAt(f, a, 2);
             }
         }
     }//GEN-LAST:event_btnTodoMouseClicked
+
+    private void jtTablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMousePressed
+
+    }//GEN-LAST:event_jtTablaMousePressed
+
+    private void jtTabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabla1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtTabla1MousePressed
 
     /**
      * @param args the command line arguments
@@ -378,7 +387,9 @@ public class PermisosActualizarCursosForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtCursos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtTabla;
+    private javax.swing.JTable jtTabla1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdEmpleado;
     private javax.swing.JLabel lbIdUsuario;

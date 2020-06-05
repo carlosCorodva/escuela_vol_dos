@@ -157,6 +157,22 @@ public class Mappers {
         return obj;
     }
     
+    public static us_permiso_curso getPermisosCursosFromResultSet(ResultSet rs) {
+        us_permiso_curso obj = new us_permiso_curso();
+        try {
+            obj.setId_curso(rs.getLong("Id_curso"));
+            obj.setCurso(rs.getString("Curso"));
+            obj.setPermiso(rs.getString("Permiso"));
+            obj.setId_empresa_per(rs.getLong("id_empresa_per"));
+            obj.setId_usuario(rs.getLong("id_usuario"));
+            obj.setId_sucursal_per(rs.getLong("id_sucursal_per"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
     public static us_permiso_curso getCursosPermisosFromResultSet(ResultSet rs) {
         us_permiso_curso obj = new us_permiso_curso();
         try {
@@ -451,6 +467,7 @@ public class Mappers {
         }
         return obj;
     }
+    
     public static JoinMatriculas getMatriculasConductaFromResultSet(ResultSet rs) {
         JoinMatriculas obj = new JoinMatriculas();
         try {

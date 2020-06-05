@@ -130,6 +130,37 @@ public class Crud {
         }
         return valor;
     }
+    
+    public ArrayList<JoinEmpleados> listarEmpleadosActivosInactivos(JoinEmpleados je) {
+        ArrayList<JoinEmpleados> valor = new ArrayList<>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_permisos_empleados_activos_inactivos(?) }");
+            pro.setLong(1, je.getId_sucursal());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                JoinEmpleados obj = Mappers.getEmpleadosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 
     public ArrayList<JoinEmpleados> listarEmpleadosInactivos(JoinEmpleados je) {
         ArrayList<JoinEmpleados> valor = new ArrayList<JoinEmpleados>();
@@ -698,9 +729,41 @@ public class Crud {
         }
         return valor;
     }
+    
+    public ArrayList<us_permiso_curso> permisosCursos(us_permiso_curso us) {
+        ArrayList<us_permiso_curso> valor = new ArrayList<>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_permiso_curso_select(?,?) }");
+            pro.setLong(1, us.getId_empresa_per());
+            pro.setLong(2, us.getId_sucursal_per());
+            rs = pro.executeQuery();
+            while (rs.next()) {
+                us_permiso_curso obj = Mappers.getPermisosCursosFromResultSet(rs);
+                valor.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
 
     public ArrayList<us_permiso_curso> listarCursosPermiso(us_permiso_curso us) {
-        ArrayList<us_permiso_curso> valor = new ArrayList<us_permiso_curso>();
+        ArrayList<us_permiso_curso> valor = new ArrayList<>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
@@ -1763,14 +1826,48 @@ public class Crud {
         return valor;
     }
     
-    public String BorrarPermisosCursos(JoinEmpleados us) {
+    public Integer BorrarPermisosCursos(JoinEmpleados us) {
+        Integer valor = null;
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_empleado_borrar_permiso(?,?,?)}");
+            pro.setLong(1, us.getId_usuario());
+            pro.setLong(2, us.getId_sucursal());
+            pro.registerOutParameter("salida", Types.INTEGER);
+            pro.executeUpdate();
+            valor = pro.getInt("salida");
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return valor;
+    }
+    
+    public String ActualizarPermisosCursos(us_permiso_curso us) {
         String valor = null;
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call us_empleado_borrar_permiso(?,?)}");
+                    "{ call us_permiso_actualizar(?,?,?,?,?,?)}");
             pro.setLong(1, us.getId_usuario());
+            pro.setLong(2, us.getId_curso());
+            pro.setString(3, us.getCurso());
+            pro.setString(4, us.getPermiso());
+            pro.setLong(5, us.getId_sucursal_per());
             pro.registerOutParameter("salida", Types.VARCHAR);
             pro.executeUpdate();
             valor = pro.getString("salida");
@@ -1790,6 +1887,38 @@ public class Crud {
             }
         }
         return valor;
+    }
+    
+    public ArrayList<us_permiso_curso> VerificarEstadoPermisos(us_permiso_curso pe) {
+        ArrayList<us_permiso_curso> lista = new ArrayList<>();
+        try {
+            con = c.conectar();
+            con.setAutoCommit(false);
+            CallableStatement pro = con.prepareCall(
+                    "{ call us_permiso_verificar_estado(?) }");
+            pro.setLong(1, pe.getId_usuario());
+            pro.execute();
+            rs = pro.getResultSet();
+            while (rs.next()) {
+                us_permiso_curso obj = Mappers.getPermisosCursosFromResultSet(rs);
+                lista.add(obj);
+            }
+            con.commit();
+        } catch (Exception e) {
+            try {
+                con.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 
     public String ResetearPermisosemplaeados() {

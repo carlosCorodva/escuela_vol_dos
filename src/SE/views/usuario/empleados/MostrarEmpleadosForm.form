@@ -130,6 +130,7 @@
                 <Property name="rowHeight" type="int" value="25"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtEmpleadosMouseExited"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtEmpleadosMousePressed"/>
               </Events>
             </Component>

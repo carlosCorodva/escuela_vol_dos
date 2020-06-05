@@ -8,6 +8,8 @@ package SE.views.matricula.cursos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.ma_paralelo;
+import SE.entidades.us_permiso_curso;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,7 +127,7 @@ public class CrearCursosForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        guardar();
+        idUsuario();
     }//GEN-LAST:event_btnActualizarActionPerformed
     public void guardar() {
         if (txtCurso.getText().length() >= 4) {
@@ -153,6 +155,60 @@ public class CrearCursosForm extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+    public void idUsuario() {
+        Long id_usuario = null;
+        Long id_curso = null;
+        String curso = "";
+        String estado = "I";
+        try {
+            ArrayList<JoinEmpleados> lista = null;
+            JoinEmpleados je = new JoinEmpleados();
+            JoinEmpleados jem = new JoinEmpleados();
+            us_permiso_curso perCur = new us_permiso_curso();
+
+            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+            lista = crud.listarEmpleadosActivosInactivos(je);
+
+            guardar();
+
+            System.out.println("inicia");
+            for (int e = 0; e < lista.size(); e++) {
+
+                if (lista.get(e).getId_usuario() >= 0 || lista.get(e).getId_usuario() != null) {
+                    id_usuario = lista.get(e).getId_usuario();
+                    System.out.println("id usuario: " + id_usuario);
+
+                    jem.setId_usuario((id_usuario));
+                    jem.setId_sucursal((us.getId_sucursal()));
+                    Integer a = crud.BorrarPermisosCursos(jem);
+
+                    System.out.println("a: " + a);
+
+                    if (a != 0) {
+                        id_curso = Long.valueOf(a) + 1;
+                        curso = txtCurso.getText();
+                        perCur.setId_curso(id_curso);
+                        perCur.setId_usuario(id_usuario);
+                        perCur.setId_sucursal_per(Long.valueOf(lbSucursal.getText()));
+                        perCur.setCurso(curso);
+                        perCur.setPermiso(estado);
+                        String ab = crud.ActualizarPermisosCursos(perCur);
+
+//                        System.out.println(
+//                                "id usuario: " + id_usuario + " - id curso: "
+//                                + id_curso + " - curso: " + curso + " - permiso: " + estado + " " + 1 + " " + 1);
+                    } else {
+
+                    }
+
+                } else {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
 
     private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
         char c = evt.getKeyChar();

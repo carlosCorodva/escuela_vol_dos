@@ -32,21 +32,10 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
     public PermisosCrearCursosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, JoinEmpleados empleado) {
         super(parent, modal);
         initComponents();
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
-        setLocationRelativeTo(null);
-        txtnombre.setEditable(false);
         us = usuario;
         em = empleado;
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
-        txtnombre.setText(em.getApellidos_nombres());
-        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
-        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarCursos(mp);
-        Tablas.TablaCursosPermisosEmpleados(jtCursos, listar);
+        form();
+        tabla();
     }
 
     public PermisosCrearCursosForm(java.awt.Frame parent, boolean modal) {
@@ -210,16 +199,35 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void form(){
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        setLocationRelativeTo(null);
+        txtnombre.setEditable(false);
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+        txtnombre.setText(em.getApellidos_nombres());
+    }
+    
+    public void tabla(){
+        mp.setId_empresa_pa(Long.valueOf(lbEmpresa.getText()));
+        mp.setId_sucursal_pa(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarCursos(mp);
+        Tablas.TablaCursosPermisosEmpleados(jtCursos, listar);
+    }
+    
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
     public void guardar() {
-        je.setId_usuario((em.getId_usuario()));
-        String a = crud.ValidarPermisosCrear(je);
-        if ("EL USUARIO YA TIENE PERMISO".equals(a)) {
-            JOptionPane.showMessageDialog(this, "EL USUARIO YA TIENE PERMISO, USE LA VENTANA DE ACTUALIZAR");
-        } else {
-            ArrayList<String> queryA = new ArrayList<String>();
+//        je.setId_usuario((em.getId_usuario()));
+//        String a = crud.ValidarPermisosCrear(je);
+//        if ("EL USUARIO YA TIENE PERMISOS".equals(a)) {
+//            JOptionPane.showMessageDialog(this, a + ", USE LA VENTANA DE ACTUALIZAR");
+//        } else {
+            ArrayList<String> queryA = new ArrayList<>();
             String act = "";
             String valor = "";
             for (int i = 0; i < jtCursos.getRowCount(); i++) {
@@ -239,8 +247,8 @@ public class PermisosCrearCursosForm extends javax.swing.JDialog {
                 queryA.clear();
             }
             JOptionPane.showMessageDialog(this, "PERMISO GUARDADO CORRECTAMENTE");
-            Tablas.TablaCursosPermisosEmpleados(jtCursos, listar);
-        }
+            tabla();
+//        }
         setVisible(false);
     }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed

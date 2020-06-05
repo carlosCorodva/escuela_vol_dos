@@ -98,6 +98,9 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
         ));
         jtEmpleados.setRowHeight(25);
         jtEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jtEmpleadosMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jtEmpleadosMousePressed(evt);
             }
@@ -426,6 +429,10 @@ public class MostrarEmpleadosForm extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jtEmpleadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpleadosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtEmpleadosMouseExited
 
     /**
      * @param args the command line arguments

@@ -32,6 +32,9 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
     /**
      * Creates new form Registrar
+     * @param parent
+     * @param modal
+     * @param usuario
      */
     public NuevoEmpleadoForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
         super(parent, modal);

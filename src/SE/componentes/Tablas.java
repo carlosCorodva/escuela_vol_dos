@@ -200,13 +200,13 @@ public class Tablas {
 
     public static void cargarTablaEmpresa(JTable Tabla, ArrayList<em_empresa> lista) {
 
-        int[] a = {8, 80, 130, 80, 180, 130,130,90};
+        int[] a = {8, 80, 130, 80, 180, 130, 130, 90};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"   ID", "        RUC", "              EMPRESA", "      TELEFONO", "                     DIRECCION", "        CORREO","PROVINCIA","CANTON"};
+        String[] Co = {"   ID", "        RUC", "              EMPRESA", "      TELEFONO", "                     DIRECCION", "        CORREO", "PROVINCIA", "CANTON"};
         String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -242,15 +242,15 @@ public class Tablas {
 
     public static void cargarTablaSucursal(JTable Tabla, ArrayList<em_sucursal> lista) {
 
-        int[] a = {8, 80, 130, 80, 180, 130,130,90,90,80,80,80};
+        int[] a = {8, 80, 130, 80, 180, 130, 130, 90, 90, 80, 80, 80};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"   ID", "              EMPRESA", "      TELEFONO", 
-            "                     DIRECCION", "        CORREO", "ESTADO","PROVINCIA",
-            "CANTON","JORNADA","ZONA","DISTRITO","CIRCUITO"};
+        String[] Co = {"   ID", "              EMPRESA", "      TELEFONO",
+            "                     DIRECCION", "        CORREO", "ESTADO", "PROVINCIA",
+            "CANTON", "JORNADA", "ZONA", "DISTRITO", "CIRCUITO"};
         String[] Filas = new String[12];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -484,11 +484,8 @@ public class Tablas {
                 fila[0] = "" + lista.get(i).getId_paralelo();
                 fila[1] = lista.get(i).getParalelo();
                 fila[2] = false;
-                
                 dt.addRow(fila);
-
             }
-
         }
 
         Tabla.setModel(dt);
@@ -569,7 +566,6 @@ public class Tablas {
 //            Tabla.setModel(a);
 //        }
 //    }
-
     public static void tablaFiltroAlumnos(ArrayList<JoinCalificacion> lista, JTable Tabla) {
         int[] a = {6, 200, 20, 20, 20, 20, 20, 20, 20, 20, 70};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -622,7 +618,7 @@ public class Tablas {
 
         }
     }
-    
+
     public static void tablaFiltroAlumnosId(ArrayList<JoinCalificacion> lista, JTable Tabla) {
         int[] a = {6};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -643,6 +639,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
         }
     }
+
     public static void cargarJoinMatriculasReportes(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
         int[] a = {10, 90, 330, 92, 40, 100};
@@ -652,7 +649,7 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES",
-            "SUCURSAL","PARALELO","ESTADO DE MATRICULA"};
+            "SUCURSAL", "PARALELO", "ESTADO DE MATRICULA"};
         String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -679,16 +676,17 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
+
     public static void cargarJoinMatriculasReportesPeriodosTodos(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
-        int[] a = {10, 90, 330, 92, 40,80, 100};
+        int[] a = {10, 90, 330, 92, 40, 80, 100};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES",
-            "SUCURSAL","PARALELO","PROMEDIO","ESTADO DE MATRICULA"};
+            "SUCURSAL", "PARALELO", "PROMEDIO", "ESTADO DE MATRICULA"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -698,7 +696,7 @@ public class Tablas {
             Filas[1] = lista.get(i).getCedula();
             Filas[3] = lista.get(i).getNombre_comercial_su();
             Filas[4] = lista.get(i).getParalelo();
-            Filas[5] = ""+lista.get(i).getPromedio_matricula();
+            Filas[5] = "" + lista.get(i).getPromedio_matricula();
             Filas[6] = lista.get(i).getEstado_matricula();
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -718,16 +716,16 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
         }
     }
-    
+
     public static void tablaReporteCalificacion(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {300, 250, 250, 250, 250, 250, 250, 250, 250,350};
+        int[] a = {300, 250, 250, 250, 250, 250, 250, 250, 250, 350};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "N. FORMATIVA", "N. PRÁCTICA", " APORTE",
-            "   EXAMEN", "  CONDUCTA", "NOTA 80%", "NOTA 20%", "    PROMEDIO","NOTA CUALITATIVA"};
+            "   EXAMEN", "  CONDUCTA", "NOTA 80%", "NOTA 20%", "    PROMEDIO", "NOTA CUALITATIVA"};
         String[] Filas = new String[10];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -767,15 +765,16 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(9).setCellRenderer(tcr);
         }
     }
+
     public static void tablaReporteCalificacionPromedio(ArrayList<JoinCalificacion> lista, JTable Tabla) {
-        int[] a = {250, 200, 200, 200, 300,300, 300};
+        int[] a = {250, 200, 200, 200, 300, 300, 300};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tcr1.setHorizontalAlignment(SwingConstants.LEFT);
         model = Tablas.VaciarTabla(Tabla);
         String[] Co = {"MATERIAS", "QUIMESTRE 1", "QUIMESTRE 2",
-                "PROMEDIO","LETRAS", "NOTA CUALITATIVA","       ESTADO"};
+            "PROMEDIO", "LETRAS", "NOTA CUALITATIVA", "       ESTADO"};
         String[] Filas = new String[7];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -806,17 +805,17 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
         }
     }
-    
+
     public static void cargarJoinGraduadosReportes(JTable Tabla, ArrayList<JoinGraduados> lista) {
 
-        int[] a = {10, 90, 330, 60, 92,40};
+        int[] a = {10, 90, 330, 60, 92, 40};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
-        String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES","PERIODO",
-            "SUCURSAL","PARALELO"};
+        String[] Co = {"     ID", "CÉDULA", "APELLIDOS NOMBRES", "PERIODO",
+            "SUCURSAL", "PARALELO"};
         String[] Filas = new String[6];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -843,7 +842,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
-    
+
     public static void cargarPrecios(JTable Tabla, ArrayList<precios> lista) {
 
         int[] a = {30, 50, 200, 72, 70, 30};
@@ -858,8 +857,8 @@ public class Tablas {
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
-            Filas[0] = ""+lista.get(i).getId_precios();
-            Filas[1] = ""+lista.get(i).getValor();
+            Filas[0] = "" + lista.get(i).getId_precios();
+            Filas[1] = "" + lista.get(i).getValor();
             Filas[2] = lista.get(i).getPromocion();
             Filas[3] = lista.get(i).getPago();
             Filas[4] = lista.get(i).getCodigo();
@@ -880,7 +879,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
-    
+
     public static void cargarJoinMensualidades(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
         int[] a = {70, 350, 100, 200, 90, 90};
@@ -917,6 +916,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }
+
     public static void cargarJoinMensualidadesPorAlumnos(JTable Tabla, ArrayList<ma_mensualidad> lista) {
 
         int[] a = {130, 200, 130, 130, 200};
@@ -926,15 +926,15 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"MENSAULIDAD", "VALOR REFERENCIAL",
-            "DEUDA", "TOTAL","ESTADO"};
+            "DEUDA", "TOTAL", "ESTADO"};
         String[] Filas = new String[5];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
         for (int i = 0; i < lista.size(); i++) {
             Filas[0] = "" + lista.get(i).getMensualidad();
-            Filas[1] = ""+lista.get(i).getValor_ref();
-            Filas[2] = ""+lista.get(i).getDeuda();
-            Filas[3] = ""+lista.get(i).getTotal();
+            Filas[1] = "" + lista.get(i).getValor_ref();
+            Filas[2] = "" + lista.get(i).getDeuda();
+            Filas[3] = "" + lista.get(i).getTotal();
             Filas[4] = lista.get(i).getEstado();
             model.addRow(Filas);
             Tabla.setModel(model);
@@ -950,6 +950,7 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(4).setCellRenderer(tcr1);
         }
     }
+
     public static void cargarJoinMatriculasConducta(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
         int[] a = {70, 100, 350, 350, 100, 80, 90, 90};
@@ -959,7 +960,7 @@ public class Tablas {
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"        ID", "CÉDULA", "APELLIDOS NOMBRES", "TELÉFONO",
-            "PARALELO", "PERIODO","CONDUCTA", "ESTADO MATRIC."};
+            "PARALELO", "PERIODO", "CONDUCTA", "ESTADO MATRIC."};
         String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);
@@ -992,5 +993,5 @@ public class Tablas {
             Tabla.getColumnModel().getColumn(7).setCellRenderer(tcr);
         }
     }
-    
+
 }

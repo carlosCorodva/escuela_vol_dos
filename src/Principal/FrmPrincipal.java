@@ -60,8 +60,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal(JoinEmpleados usuario) {
         initComponents();
         us = usuario;
-        jmMensualidades.setVisible(false);
-        jmPrecios.setVisible(false);
+//        jmMensualidades.setVisible(false);
+//        jmPrecios.setVisible(false);
 //        this.setTitle(fondo.getTitle() + TITLE + "---USUARIO" + " ---" + us.getNombre_comercial_em() + "---");
         this.add(new Fondo(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height), BorderLayout.CENTER);
         jToolBar1.setEnabled(false);
@@ -69,7 +69,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(FrmPrincipal.MAXIMIZED_BOTH);
 //        this.setIconImage(fondo.getIconoVentana());
         System.out.println("usuario: " + usuario.getUsuario() + "   " + usuario.getId_usuario() + usuario.getId_empresa() + usuario.getId_sucursal());
         lbEmpresa.setText(us.getId_empresa().toString());
@@ -905,13 +905,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bloqMatActionPerformed
 
     private void jmMensualidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMensualidadesActionPerformed
-//        MostrarMensualidadesForm gr = new MostrarMensualidadesForm(new javax.swing.JFrame(), true, us);
-//        gr.setVisible(true);
+        MostrarMensualidadesForm gr = new MostrarMensualidadesForm(new javax.swing.JFrame(), true, us);
+        gr.setVisible(true);
     }//GEN-LAST:event_jmMensualidadesActionPerformed
 
     private void jmPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPreciosActionPerformed
-//        mostrarPreciosForm mp = new mostrarPreciosForm(new javax.swing.JFrame(), true, us);
-//        mp.setVisible(true);
+        mostrarPreciosForm mp = new mostrarPreciosForm(new javax.swing.JFrame(), true, us);
+        mp.setVisible(true);
     }//GEN-LAST:event_jmPreciosActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed

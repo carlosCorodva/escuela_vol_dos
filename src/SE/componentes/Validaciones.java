@@ -7,6 +7,7 @@ package SE.componentes;
 
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -78,4 +79,19 @@ public class Validaciones {
         }
         return valor;
     }
+    
+    public static Long id_empleados(ArrayList<JoinEmpleados> lista) {
+        Long valor = null;
+        for (int i = 0; i < lista.size(); i++) {
+            if ("ACTIVO".equals(lista.get(i).getEstado()) || "INACTIVO".equals(lista.get(i).getEstado())) {
+                valor = lista.get(i).getId_usuario();
+//                System.out.println("for impresion: "+lista.get(i).getId_usuario()+" - "+lista.get(i).getApellidos_nombres());
+                System.out.println("valor: "+valor);
+            } else {
+                System.out.println("else");
+            }
+        }
+        return valor;
+    }
+    
 }
