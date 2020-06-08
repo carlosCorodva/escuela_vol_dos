@@ -6,8 +6,9 @@
 package SE.views.precios;
 
 import SE.componentes.Crud;
+import SE.componentes.FormatoNumeros;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,17 +23,16 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
      * Creates new form crearMensualidadesForm
      */
     Crud c = new Crud();
-    precios p = new precios();
+    gen_precios p = new gen_precios();
     JoinEmpleados us;
-    precios pre;
+    gen_precios pre;
 
-    public actualizarPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, precios precio) {
+    public actualizarPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario, gen_precios precio) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         us = usuario;
         pre=precio;
-        this.setLocationRelativeTo(null);
         formulario();
     }
 
@@ -54,8 +54,7 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
         txtvalor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        txtCodigo = new javax.swing.JTextField();
+        txtaPromo = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -64,6 +63,9 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
         lbSucursal = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
+        cbCodigo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -71,16 +73,19 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtvalor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtvalor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtvalorKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("VALOR");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PROMOCION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
-
-        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtaPromo.setColumns(20);
+        txtaPromo.setRows(5);
+        txtaPromo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PROMOCION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jScrollPane1.setViewportView(txtaPromo);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("CODIGO");
@@ -115,6 +120,20 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
         cbEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
 
+        cbCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NINGUNO", "2 X 1", "3 X 1", "4 X 1", "5 X 1" }));
+        cbCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCodigoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("TIPO");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("ESTADO");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,64 +142,77 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbIdUsuario)
-                            .addComponent(lbSucursal))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCodigo)
-                            .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(34, 34, 34))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(55, 55, 55))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(43, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(51, 51, 51)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(47, 47, 47))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addGap(138, 138, 138)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtvalor)
+                                        .addComponent(cbCodigo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1)))
+                        .addGap(55, 55, 55))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(lbIdUsuario))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(lbSucursal)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(34, 34, 34)
+                        .addComponent(lbIdUsuario))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lbSucursal))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbEmpresa)
-                        .addGap(103, 103, 103)))
+                        .addGap(103, 103, 103))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -211,8 +243,11 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
         lbIdUsuario.setText(us.getId_usuario().toString());
         
         txtvalor.setText(String.valueOf(pre.getValor()));
-        txtCodigo.setText(pre.getCodigo());
-        jTextArea1.setText(pre.getPromocion());
+        txtaPromo.setText(pre.getPromocion());
+        txtaPromo.setEditable(false);
+        cbCodigo.setSelectedItem(pre.getCodigo());
+        jComboBox1.setSelectedItem(pre.getPago());
+        jComboBox1.setEnabled(false);
         
         if ("A".equals(pre.getEstado_pre())) {
             cbEstado.setSelectedIndex(0);
@@ -220,11 +255,11 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
             cbEstado.setSelectedIndex(1);
         }
         
-        if ("MATRICULA".equals(pre.getPago())) {
-            jComboBox1.setSelectedIndex(1);
-        } else {
-            jComboBox1.setSelectedIndex(2);
-        }
+//        if ("MATRICULA".equals(pre.getPago())) {
+//            jComboBox1.setSelectedIndex(1);
+//        } else {
+//            jComboBox1.setSelectedIndex(2);
+//        }
         
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -234,23 +269,58 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         crear();
     }//GEN-LAST:event_jButton1ActionPerformed
+public void promocion() {
+        int x = cbCodigo.getSelectedIndex();
+        String promo = "";
+        switch (x) {
+            case 0:
+                promo = "NINGUNA";
+                break;
+            case 1:
+                promo = "DOS ALUMNOS POR FAMILIA";
+                break;
+            case 2:
+                promo = "TRES ALUMNOS POR FAMILIA";
+                break;
+            case 3:
+                promo = "CUATRO ALUMNOS POR FAMILIA";
+                break;
+            case 4:
+                promo = "CINCO ALUMNOS POR FAMILIA";
+                break;
+            default:
+                break;
+        }
+        txtaPromo.setText(promo);
+    }
+    private void cbCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCodigoActionPerformed
+        promocion();
+    }//GEN-LAST:event_cbCodigoActionPerformed
+
+    private void txtvalorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != '.') {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtvalorKeyTyped
 
     public void crear() {
-        if (txtCodigo.getText().length() < 1) {
-            JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO CODIGO!");
-        } else if (txtvalor.getText().length() < 1) {
+        if (txtvalor.getText().length() < 1) {
             JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO VALOR!");
-        } else if (jTextArea1.getText().length() < 4) {
+        } else if (txtaPromo.getText().length() < 4) {
             JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO PROMOCION!");
         } else if (jComboBox1.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UNA OPCION!");
         } else {
-            precios pr = new precios();
+            gen_precios pr = new gen_precios();
 
             try {
-                pr.setCodigo(txtCodigo.getText());
+                txtvalor.setText(FormatoNumeros.formato_numero(txtvalor.getText()));
+                
+                pr.setCodigo(cbCodigo.getSelectedItem().toString());
                 pr.setValor(Double.valueOf(txtvalor.getText()));
-                pr.setPromocion(jTextArea1.getText());
+                pr.setPromocion(txtaPromo.getText());
                 pr.setPago(jComboBox1.getSelectedItem().toString());
                 pr.setEstado_pre(cbEstado.getSelectedItem().toString());
                 pr.setId_creacion(Long.valueOf(lbIdUsuario.getText()));
@@ -318,19 +388,21 @@ public class actualizarPreciosForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbCodigo;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
-    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtaPromo;
     private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
 }

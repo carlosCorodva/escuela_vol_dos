@@ -6,8 +6,9 @@
 package SE.views.precios;
 
 import SE.componentes.Crud;
+import SE.componentes.FormatoNumeros;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
      * Creates new form crearMensualidadesForm
      */
     Crud c = new Crud();
-    precios p = new precios();
+    gen_precios p = new gen_precios();
     JoinEmpleados us;
 
     public crearPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
@@ -30,13 +31,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         us = usuario;
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
-        this.setLocationRelativeTo(null);
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
+        form();
     }
 
     public crearPreciosForm(java.awt.Frame parent, boolean modal) {
@@ -57,15 +52,16 @@ public class crearPreciosForm extends javax.swing.JDialog {
         txtvalor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        txtCodigo = new javax.swing.JTextField();
+        txtaPromo = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbTipo = new javax.swing.JComboBox<>();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbIdUsuario = new javax.swing.JLabel();
+        cbCodigo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -73,16 +69,20 @@ public class crearPreciosForm extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtvalor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtvalor.setText("0.00");
+        txtvalor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtvalorKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("VALOR");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PROMOCION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
-
-        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtaPromo.setColumns(20);
+        txtaPromo.setRows(5);
+        txtaPromo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PROMOCION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jScrollPane1.setViewportView(txtaPromo);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("CODIGO");
@@ -105,14 +105,25 @@ public class crearPreciosForm extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE....", "MATRICULA", "MENSUALIDAD" }));
+        cbTipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE....", "MATRICULA", "MENSUALIDAD" }));
 
         lbEmpresa.setText("empresa");
 
         lbSucursal.setText("sucursal");
 
         lbIdUsuario.setText("usaurio");
+
+        cbCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NINGUNO", "2 X 1", "3 X 1", "4 X 1", "5 X 1" }));
+        cbCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCodigoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("TIPO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,31 +136,32 @@ public class crearPreciosForm extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbEmpresa)
-                                .addGap(82, 82, 82)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbIdUsuario)
-                            .addComponent(lbSucursal)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jButton1)
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton2))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lbIdUsuario)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lbSucursal)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel2))))
                         .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(76, 76, 76))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57))))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtvalor, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cbCodigo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbTipo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 133, Short.MAX_VALUE)))
+                        .addGap(57, 57, 57))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,16 +171,20 @@ public class crearPreciosForm extends javax.swing.JDialog {
                     .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(lbIdUsuario))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(lbSucursal)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lbSucursal)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmpresa))
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEmpresa)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -192,6 +208,17 @@ public class crearPreciosForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void form() {
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+        txtaPromo.setEditable(false);
+        txtaPromo.setText("NINGUNA");
+
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -200,23 +227,51 @@ public class crearPreciosForm extends javax.swing.JDialog {
         crear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void promocion() {
+        int x = cbCodigo.getSelectedIndex();
+        String promo = "";
+        if (x == 0) {
+            promo = "NINGUNA";
+        } else if (x == 1) {
+            promo = "DOS ALUMNOS POR FAMILIA";
+        } else if (x == 2) {
+            promo = "TRES ALUMNOS POR FAMILIA";
+        } else if (x == 3) {
+            promo = "CUATRO ALUMNOS POR FAMILIA";
+        } else if (x == 4) {
+            promo = "CINCO ALUMNOS POR FAMILIA";
+        }
+        txtaPromo.setText(promo);
+    }
+    private void cbCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCodigoActionPerformed
+        promocion();
+    }//GEN-LAST:event_cbCodigoActionPerformed
+
+    private void txtvalorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorKeyTyped
+       char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != '.') {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtvalorKeyTyped
+
     public void crear() {
-        if (txtCodigo.getText().length() < 1) {
-            JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO CODIGO!");
-        } else if (txtvalor.getText().length() < 1) {
+        if (txtvalor.getText().length() < 1) {
             JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO VALOR!");
-        } else if (jTextArea1.getText().length() < 4) {
+        } else if (txtaPromo.getText().length() < 4) {
             JOptionPane.showMessageDialog(this, "NO DEJE EN BLANCO LA CAJA DE TEXTO PROMOCION!");
-        } else if (jComboBox1.getSelectedIndex() == 0) {
+        } else if (cbTipo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UNA OPCION!");
         } else {
-            precios pr = new precios();
+            gen_precios pr = new gen_precios();
 
             try {
-                pr.setCodigo(txtCodigo.getText());
+                txtvalor.setText(FormatoNumeros.formato_numero(txtvalor.getText()));
+                
+                pr.setCodigo(cbCodigo.getSelectedItem().toString());
                 pr.setValor(Double.valueOf(txtvalor.getText()));
-                pr.setPromocion(jTextArea1.getText());
-                pr.setPago(jComboBox1.getSelectedItem().toString());
+                pr.setPromocion(txtaPromo.getText());
+                pr.setPago(cbTipo.getSelectedItem().toString());
                 pr.setId_creacion(Long.valueOf(lbIdUsuario.getText()));
                 pr.setId_sucursal(Long.valueOf(lbSucursal.getText()));
                 String a = c.CrearPrecio(pr);
@@ -272,18 +327,19 @@ public class crearPreciosForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbCodigo;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
-    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtaPromo;
     private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
 }

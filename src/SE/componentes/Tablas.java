@@ -16,7 +16,7 @@ import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_mensualidad;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.util.ArrayList;
@@ -843,7 +843,7 @@ public class Tablas {
         }
     }
 
-    public static void cargarPrecios(JTable Tabla, ArrayList<precios> lista) {
+    public static void cargarPrecios(JTable Tabla, ArrayList<gen_precios> lista) {
 
         int[] a = {30, 50, 200, 72, 70, 30};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -953,14 +953,14 @@ public class Tablas {
 
     public static void cargarJoinMatriculasConducta(JTable Tabla, ArrayList<JoinMatriculas> lista) {
 
-        int[] a = {70, 100, 350, 350, 100, 80, 90, 90};
+        int[] a = {70, 100, 350, 350, 100, 80, 90, 200};
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         DefaultTableCellRenderer tcr1 = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
         tcr1.setHorizontalAlignment(SwingConstants.CENTER);
         model = VaciarTabla(Tabla);
         String[] Co = {"        ID", "CÉDULA", "APELLIDOS NOMBRES", "TELÉFONO",
-            "PARALELO", "PERIODO", "CONDUCTA", "ESTADO MATRIC."};
+            "PARALELO", "PERIODO", "CONDUCTA", "ESTADO DE MATRICULA"};
         String[] Filas = new String[8];
         model = new DefaultTableModel(null, Co);
         Tabla.setShowGrid(true);

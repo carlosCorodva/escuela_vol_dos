@@ -8,7 +8,7 @@ package SE.views.precios;
 import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,9 +24,9 @@ public class mostrarPreciosForm extends javax.swing.JDialog {
      * Creates new form mostrarMensualidades
      */
     Crud c = new Crud();
-    ArrayList<precios> listar = null;
-    precios p = new precios();
-    precios objeto = null;
+    ArrayList<gen_precios> listar = null;
+    gen_precios p = new gen_precios();
+    gen_precios objeto = null;
     JoinEmpleados us;
     
     public mostrarPreciosForm(java.awt.Frame parent, boolean modal, JoinEmpleados usuario) {
@@ -224,8 +224,8 @@ public class mostrarPreciosForm extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public precios devuelveObjetoEmpleado(String datos, ArrayList<precios> listarobj) {
-        precios objeto1 = null;
+    public gen_precios devuelveObjetoEmpleado(String datos, ArrayList<gen_precios> listarobj) {
+        gen_precios objeto1 = null;
         for (int i = 0; i < listarobj.size(); i++) {
             if (datos.equals(listarobj.get(i).getId_precios().toString())) {
                 objeto1 = listarobj.get(i);

@@ -14,7 +14,7 @@ import SE.entidades.ma_mensualidad;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
 import SE.entidades.mappers.Mappers;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.CallableStatement;
@@ -2913,7 +2913,7 @@ public class Crud {
         return valor;
     }
     
-    public String CrearPrecio(precios us) {
+    public String CrearPrecio(gen_precios us) {
         String valor = null;
         try {
             con = c.conectar();
@@ -2947,17 +2947,17 @@ public class Crud {
         return valor;
     }
     
-    public ArrayList<precios> mostrarPrecios(precios p) {
-        ArrayList<precios> valor = new ArrayList<precios>();
+    public ArrayList<gen_precios> mostrarPrecios(gen_precios p) {
+        ArrayList<gen_precios> valor = new ArrayList<gen_precios>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call mstrar_precios(?) }");
+                    "{ call gen_mostrar_precios(?) }");
             pro.setLong(1, p.getId_sucursal());
             rs = pro.executeQuery();
             while (rs.next()) {
-                precios obj = Mappers.getPreciosFromResultSet(rs);
+                gen_precios obj = Mappers.getPreciosFromResultSet(rs);
                 valor.add(obj);
             }
             con.commit();
@@ -2977,13 +2977,13 @@ public class Crud {
         }
         return valor;
     }
-    public String ActualizarPrecio(precios us) {
+    public String ActualizarPrecio(gen_precios us) {
         String valor = null;
         try {
             con = c.conectar();
             con.setAutoCommit(false);
             CallableStatement pro = con.prepareCall(
-                    "{ call actualizar_precio(?,?,?,?,?,?,?,?,?) }");
+                    "{ call gen_actualizar_precios(?,?,?,?,?,?,?,?,?) }");
             pro.setDouble(1, us.getValor());
             pro.setString(2, us.getPromocion());
             pro.setLong(3, us.getId_creacion());
@@ -3012,8 +3012,8 @@ public class Crud {
         }
         return valor;
     }
-    public ArrayList<precios> ComboValor(precios mp) {
-        ArrayList<precios> lista = new ArrayList<precios>();
+    public ArrayList<gen_precios> ComboValor(gen_precios mp) {
+        ArrayList<gen_precios> lista = new ArrayList<gen_precios>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
@@ -3023,7 +3023,7 @@ public class Crud {
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
-                precios obj = Mappers.getValorFromResultSet(rs);
+                gen_precios obj = Mappers.getValorFromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();
@@ -3044,8 +3044,8 @@ public class Crud {
         return lista;
     }
     
-    public ArrayList<precios> ComboMensualidad(precios mp) {
-        ArrayList<precios> lista = new ArrayList<precios>();
+    public ArrayList<gen_precios> ComboMensualidad(gen_precios mp) {
+        ArrayList<gen_precios> lista = new ArrayList<gen_precios>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
@@ -3056,7 +3056,7 @@ public class Crud {
             pro.execute();
             rs = pro.getResultSet();
             while (rs.next()) {
-                precios obj = Mappers.getValorFromResultSet(rs);
+                gen_precios obj = Mappers.getValorFromResultSet(rs);
                 lista.add(obj);
             }
             con.commit();

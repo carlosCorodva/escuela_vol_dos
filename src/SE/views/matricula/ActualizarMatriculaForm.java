@@ -9,7 +9,7 @@ import SE.componentes.Combos;
 import SE.componentes.Crud;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import SE.entidades.re_clase_eporte;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -42,8 +42,8 @@ public class ActualizarMatriculaForm extends javax.swing.JDialog {
     JoinMatriculas mat = null;
     ArrayList<JoinMatriculas> paralelo = null;
     JoinMatriculas jm = new JoinMatriculas();
-    ArrayList<precios> precio = null;
-    precios pr = new precios();
+    ArrayList<gen_precios> precio = null;
+    gen_precios pr = new gen_precios();
     int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 

@@ -10,7 +10,6 @@ import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.re_clase_eporte;
 import SE.entidades.us_permiso_curso;
-import SE.views.reportes.PromedioReporteAlumnosTodosForm;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -559,7 +558,7 @@ public class CalificacionForm extends javax.swing.JDialog {
     }
 
     public void guardar() {
-        ArrayList<String> queryA = new ArrayList<String>();
+        ArrayList<String> queryA = new ArrayList<>();
         String act = "";
         for (int i = 0; i < jtCalificacion.getRowCount(); i++) {
 
@@ -600,7 +599,7 @@ public class CalificacionForm extends javax.swing.JDialog {
         pf2 = cbFiltroMateria.getSelectedItem().toString();
         pf3 = cbFiltroCurso.getSelectedItem().toString();
 
-        if ("QUIMESTRE...".equals(pf1) || "MATERIAS...".equals(pf2) || "CURSOS...".equals(pf3)) {
+        if (pf1 == 0 || "MATERIAS...".equals(pf2) || "CURSOS...".equals(pf3)) {
             JOptionPane.showMessageDialog(this, "SELECCIONE LOS FILTROS CORRECTAMENTE");
             btnGuardar.setEnabled(false);
             btnImprimir.setEnabled(false);

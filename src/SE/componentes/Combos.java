@@ -11,7 +11,7 @@ import SE.entidades.join.JoinMaterias;
 import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import SE.entidades.us_permiso_curso;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -202,7 +202,7 @@ public class Combos {
         return model;
 
     }
-    private static Object[] arregloValor(ArrayList<precios> lista) {
+    private static Object[] arregloValor(ArrayList<gen_precios> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
         arreglo[0] = "MATRICULA...";
         for (int i = 0; i < lista.size(); i++) {
@@ -212,7 +212,7 @@ public class Combos {
 
     }
     
-    public static DefaultComboBoxModel listarComboValor(ArrayList<precios> lista) {
+    public static DefaultComboBoxModel listarComboValor(ArrayList<gen_precios> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloValor(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);
@@ -222,7 +222,7 @@ public class Combos {
         return model;
 
     }
-    private static Object[] arregloMensualidad(ArrayList<precios> lista) {
+    private static Object[] arregloMensualidad(ArrayList<gen_precios> lista) {
         Object[] arreglo = new Object[lista.size() + 1];
         arreglo[0] = "MENSUALIDAD...";
         for (int i = 0; i < lista.size(); i++) {
@@ -232,7 +232,7 @@ public class Combos {
 
     }
     
-    public static DefaultComboBoxModel listarComboMensualidad(ArrayList<precios> lista) {
+    public static DefaultComboBoxModel listarComboMensualidad(ArrayList<gen_precios> lista) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         Object[] arreglo = arregloMensualidad(lista);
         System.out.println(lista.size() + " tam " + arreglo.length);

@@ -9,7 +9,7 @@ package SE.entidades;
  *
  * @author carlos
  */
-public class precios {
+public class gen_precios {
     private Long id_precios;
     private double valor;
     private String promocion;
@@ -22,10 +22,10 @@ public class precios {
     private String pago;
     private Long id_sucursal;
 
-    public precios() {
+    public gen_precios() {
     }
 
-    public precios(Long id_precios, double valor, String promocion, String estado_pre, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String codigo, String pago, Long id_sucursal) {
+    public gen_precios(Long id_precios, double valor, String promocion, String estado_pre, Long id_creacion, String f_creacion, Long id_actualizacion, String f_actualizacion, String codigo, String pago, Long id_sucursal) {
         this.id_precios = id_precios;
         this.valor = valor;
         this.promocion = promocion;

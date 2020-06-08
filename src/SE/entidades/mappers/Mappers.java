@@ -17,7 +17,7 @@ import SE.entidades.join.JoinMatriculas;
 import SE.entidades.ma_mensualidad;
 import SE.entidades.ma_paralelo;
 import SE.entidades.ma_periodo;
-import SE.entidades.precios;
+import SE.entidades.gen_precios;
 import SE.entidades.us_permiso_curso;
 import SE.entidades.us_permiso_empleado;
 import java.sql.ResultSet;
@@ -425,8 +425,8 @@ public class Mappers {
         return obj;
     }
     
-    public static precios getPreciosFromResultSet(ResultSet rs) {
-        precios obj = new precios();
+    public static gen_precios getPreciosFromResultSet(ResultSet rs) {
+        gen_precios obj = new gen_precios();
         try {
             obj.setId_precios(rs.getLong("id_precios"));
             obj.setCodigo(rs.getString("codigo"));
@@ -441,8 +441,8 @@ public class Mappers {
         return obj;
     }
     
-    public static precios getValorFromResultSet(ResultSet rs) {
-        precios obj = new precios();
+    public static gen_precios getValorFromResultSet(ResultSet rs) {
+        gen_precios obj = new gen_precios();
         try {
             obj.setValor(rs.getDouble("valor"));
         } catch (SQLException ex) {
