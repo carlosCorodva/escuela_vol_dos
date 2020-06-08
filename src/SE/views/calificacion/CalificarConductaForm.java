@@ -32,8 +32,7 @@ public class CalificarConductaForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         us = usuario;
         mat=matricula;
-        txtAlumno.setText(matricula.getApellidos_nombres());
-        txtObservacion.setText(matricula.getMatricula_obs());
+        form();
     }
     
     public CalificarConductaForm(java.awt.Frame parent, boolean modal) {
@@ -142,6 +141,12 @@ public class CalificarConductaForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void form(){
+        cbConducta.setSelectedItem(mat.getConducta_general());
+        txtAlumno.setEditable(false);
+        txtAlumno.setText(mat.getApellidos_nombres());
+        txtObservacion.setText(mat.getMatricula_obs());
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed

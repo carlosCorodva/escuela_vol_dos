@@ -54,12 +54,11 @@ public class datosInformacion extends javax.swing.JDialog {
         jLabel3.setText("Si tiene algun problema de sistema por favor ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel4.setText("comunicarse a los siguientes contactos:");
+        jLabel4.setText("comunicarse a:");
 
         lbImagen.setText("jLabel1");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/cancelar32.png"))); // NOI18N
-        jButton1.setText("SALIR");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/ok 32.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -71,7 +70,7 @@ public class datosInformacion extends javax.swing.JDialog {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/gmail32.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel5.setText("0959756306");
+        jLabel5.setText("0991728562");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel6.setText("11ccordova11@gmail.com");
@@ -83,11 +82,11 @@ public class datosInformacion extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(79, 79, 79)

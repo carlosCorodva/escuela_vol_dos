@@ -48,12 +48,12 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="lbImagen" min="-2" pref="173" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -131,7 +131,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="comunicarse a los siguientes contactos:"/>
+            <Property name="text" type="java.lang.String" value="comunicarse a:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbImagen">
@@ -142,9 +142,8 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenesDos/cancelar32.png"/>
+              <Image iconType="3" name="/imagenesDos/ok 32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -169,7 +168,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="0959756306"/>
+            <Property name="text" type="java.lang.String" value="0991728562"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">

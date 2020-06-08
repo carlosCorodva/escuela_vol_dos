@@ -10,6 +10,7 @@ import SE.componentes.Crud;
 import SE.componentes.Tablas;
 import SE.entidades.join.JoinEmpleados;
 import SE.entidades.join.JoinMatriculas;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -35,19 +36,9 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         us = usuario;
-        lbSucursal.setVisible(false);
-        lbEmpresa.setVisible(false);
-        lbIdUsuario.setVisible(false);
         this.setLocationRelativeTo(null);
-        jToolBar1.setEnabled(false);
-        btnBuscar.setEnabled(false);
-        txtBuscar.setEnabled(false);
-        lbEmpresa.setText(us.getId_empresa().toString());
-        lbSucursal.setText(us.getId_sucursal().toString());
-        lbIdUsuario.setText(us.getId_usuario().toString());
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        listar = crud.listarAlumnosMatriculasConducta(je);
-        Tablas.cargarJoinMatriculasConducta(jtMatriculas, listar);
+        form();
+        tabla();
     }
 
     public ConductaGeneralMostrarForm(java.awt.Frame parent, boolean modal) {
@@ -66,25 +57,24 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtMatriculas = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        btnBuscar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        cbFiltro = new javax.swing.JComboBox<>();
         lbIdUsuario = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jtMatriculas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jtMatriculas.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -92,29 +82,16 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
 
             }
         ));
-        jtMatriculas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jtMatriculas.setRowHeight(25);
-        jtMatriculas.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jtTabla.setRowHeight(25);
+        jtTabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtMatriculasMousePressed(evt);
+                jtTablaMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jtMatriculas);
+        jScrollPane1.setViewportView(jtTabla);
 
         jToolBar1.setRollover(true);
-
-        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/buscar32.png"))); // NOI18N
-        btnBuscar.setText("  BUSCAR  ");
-        btnBuscar.setFocusable(false);
-        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnBuscar);
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/calificaion documento 32.png"))); // NOI18N
@@ -146,7 +123,7 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MATRICULAS");
+        jLabel1.setText("CONDUCTA GENERAL");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setOpaque(true);
 
@@ -160,19 +137,14 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
             }
         });
 
-        cbFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE...", "CEDULA", "APELLIDOS/NOMB" }));
-        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFiltroActionPerformed(evt);
-            }
-        });
-
         lbIdUsuario.setText("usaurio");
 
         lbEmpresa.setText("empresa");
 
         lbSucursal.setText("sucursal");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("BUSCAR:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,26 +153,26 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbSucursal)
-                        .addGap(53, 53, 53)
-                        .addComponent(lbEmpresa)
-                        .addGap(41, 41, 41)
-                        .addComponent(lbIdUsuario)
-                        .addGap(86, 86, 86)))
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(lbSucursal)
+                                .addGap(53, 53, 53)
+                                .addComponent(lbEmpresa)
+                                .addGap(41, 41, 41)
+                                .addComponent(lbIdUsuario))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +186,7 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbIdUsuario)
@@ -239,6 +211,16 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void form() {
+        lbSucursal.setVisible(false);
+        lbEmpresa.setVisible(false);
+        lbIdUsuario.setVisible(false);
+
+        jToolBar1.setEnabled(false);
+        lbEmpresa.setText(us.getId_empresa().toString());
+        lbSucursal.setText(us.getId_sucursal().toString());
+        lbIdUsuario.setText(us.getId_usuario().toString());
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int r = JOptionPane.showConfirmDialog(null, "¿DESEA SALIR DEL MODULO MATRICULAS?", "", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
@@ -258,77 +240,53 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         return objeto1;
     }
 
-    private void jtMatriculasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMatriculasMousePressed
+    public void tabla() {
+        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+        listar = crud.listarAlumnosMatriculasConducta(je);
+        Tablas.cargarJoinMatriculasConducta(jtTabla, listar);
+    }
+
+    private void jtTablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMousePressed
         int i = 0;
         try {
             if (evt.getClickCount() == 2) {
-                i = jtMatriculas.getSelectedRow();
-                objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+                i = jtTabla.getSelectedRow();
+                objeto = devuelveObjetoEmpleado(jtTabla.getValueAt(i, 0).toString(), listar);
                 if (objeto != null) {
                     System.out.println("holaaaaa");
                     CalificarConductaForm acc = new CalificarConductaForm(new javax.swing.JFrame(), true, us, objeto);
                     acc.setVisible(true);
                     listar.clear();
-                    cbFiltro.setSelectedIndex(0);
-//                        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                    je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                    listar = crud.listarAlumnosMatriculasConducta(je);
-                    Tablas.cargarJoinMatriculasConducta(jtMatriculas, listar);
+                    tabla();
                 }
             }
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             Logger.getLogger(ConductaGeneralMostrarForm.class.getName()).log(Level.SEVERE, null, e);
         }
-    }//GEN-LAST:event_jtMatriculasMousePressed
-    public void filtro() {
-        int pos = cbFiltro.getSelectedIndex();
-        String f = txtBuscar.getText();
-//        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        try {
-            if (pos == 0) {
-                listar = crud.listarAlumnosMatriculasConducta(je);
-            }
-            if (pos == 1) {
-                je.setCedula(f);
-                listar = crud.listarMatriculasConductaCedula(je);
-            }
-            if (pos == 2) {
-                je.setApellidos_nombres(f);
-                listar = crud.listarMatriculasConductaApellidosNombres(je);
-            }
-            Tablas.cargarJoinMatriculasConducta(jtMatriculas, listar);
-        } catch (Exception e) {
-            Logger.getLogger(ConductaGeneralMostrarForm.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-
-    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        int pos = cbFiltro.getSelectedIndex();
-        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-        if (pos == 0) {
-            txtBuscar.setText("");
-            txtBuscar.setEnabled(false);
-            btnBuscar.setEnabled(false);
-            listar = crud.listarAlumnosMatriculas(je);
-        }
-        if (pos == 1) {
-            txtBuscar.setText("");
-            txtBuscar.setEnabled(true);
-            btnBuscar.setEnabled(true);
-            listar = crud.listarAlumnosMatriculas(je);
-
-        }
-        if (pos == 2) {
-            txtBuscar.setText("");
-            txtBuscar.setEnabled(true);
-            btnBuscar.setEnabled(true);
-            listar = crud.listarAlumnosMatriculas(je);
-        }
-        Tablas.cargarJoinMatriculas(jtMatriculas, listar);
-    }//GEN-LAST:event_cbFiltroActionPerformed
-    int v = 0;
+    }//GEN-LAST:event_jtTablaMousePressed
+//    public void filtro() {
+//        int pos = cbFiltro.getSelectedIndex();
+//        String f = txtBuscar.getText();
+////        je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
+//        je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
+//        try {
+//            if (pos == 0) {
+//                listar = crud.listarAlumnosMatriculasConducta(je);
+//            }
+//            if (pos == 1) {
+//                je.setCedula(f);
+//                listar = crud.listarMatriculasConductaCedula(je);
+//            }
+//            if (pos == 2) {
+//                je.setApellidos_nombres(f);
+//                listar = crud.listarMatriculasConductaApellidosNombres(je);
+//            }
+//            Tablas.cargarJoinMatriculasConducta(jtTabla, listar);
+//        } catch (Exception e) {
+//            Logger.getLogger(ConductaGeneralMostrarForm.class.getName()).log(Level.SEVERE, null, e);
+//        }
+//    }
+//    int v = 0;
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
@@ -338,42 +296,30 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-//        filtro();
-//        int k = jtMatriculas.getRowCount();
-//        if (k == 0) {
-//            CrearMaatriculaForm ne = new CrearMaatriculaForm(new javax.swing.JFrame(), true, us);
-//            ne.setVisible(true);
-//            je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//            listar = crud.listarAlumnosMatriculasConducta(je);
-//            Tablas.cargarJoinMatriculasConducta(jtMatriculas, listar);
-//        } else {
-//
-//        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            filtro();
+
+        try {
+            String valor = txtBuscar.getText();
+            Tablas.filtro(valor, jtTabla);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        int i = jtMatriculas.getSelectedRow();
-        if (jtMatriculas.isRowSelected(i) == false) {
+        int i = jtTabla.getSelectedRow();
+        if (jtTabla.isRowSelected(i) == false) {
             JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
         } else {
-            objeto = devuelveObjetoEmpleado(jtMatriculas.getValueAt(i, 0).toString(), listar);
+            objeto = devuelveObjetoEmpleado(jtTabla.getValueAt(i, 0).toString(), listar);
             if (objeto != null) {
                 System.out.println("holaaaaa");
                 CalificarConductaForm acc = new CalificarConductaForm(new javax.swing.JFrame(), true, us, objeto);
                 acc.setVisible(true);
                 listar.clear();
-                cbFiltro.setSelectedIndex(0);
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMatriculasConducta(je);
-                Tablas.cargarJoinMatriculasConducta(jtMatriculas, listar);
+                tabla();
             }
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -437,14 +383,13 @@ public class ConductaGeneralMostrarForm extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTable jtMatriculas;
+    private javax.swing.JTable jtTabla;
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
