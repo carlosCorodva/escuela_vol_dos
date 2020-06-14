@@ -706,11 +706,9 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
             cbId.setSelectedIndex(0);
         }
         if (txtCedula.getText().length() == 13) {
-            String string = txtCedula.getText().substring(12);
-//            System.out.println("string: " + string);
-            int num = Integer.parseInt(string);
-//            System.out.println("num: " + num);
-            if (num != 1) {
+            String string = txtCedula.getText().substring(10);
+//            int num = Integer.parseInt(string);
+            if (!"001".equals(string)) {
                 cbId.setSelectedIndex(2);
             } else {
                 cbId.setSelectedIndex(1);

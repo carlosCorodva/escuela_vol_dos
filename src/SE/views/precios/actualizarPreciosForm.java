@@ -274,7 +274,7 @@ public void promocion() {
         String promo = "";
         switch (x) {
             case 0:
-                promo = "NINGUNA";
+                promo = "NINGUNO";
                 break;
             case 1:
                 promo = "DOS ALUMNOS POR FAMILIA";

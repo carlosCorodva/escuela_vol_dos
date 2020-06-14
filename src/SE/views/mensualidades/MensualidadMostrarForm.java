@@ -56,7 +56,6 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         mat = matricula;
         us = usuario;
-        System.out.println("valor: "+matricula.getValor_mat());
         formulario();
         tabla();
     }
@@ -68,10 +67,11 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     }
 
     public void tabla() {
-        me.setId_matricula(Long.valueOf(txtMatricula.getText()));
+        me.setId_matricula(mat.getId_matricula());
         me.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
         listar2 = crud.listarAlumnosMensualidadPorAlumno(me);
         Tablas.cargarJoinMensualidadesPorAlumnos(jtMensualidades, listar2);
+        
     }
 
     public void formulario() {
@@ -83,7 +83,6 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
-        txtMatricula.setVisible(false);
 
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
@@ -93,8 +92,8 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         txtAlumno.setText(mat.getApellidos_nombres());
         txtPeriodo.setText(mat.getPeriodo());
         txtcedula.setText(mat.getCedula());
-        txtMatricula.setText(mat.getId_matricula().toString());
         txtValMat.setText(""+mat.getValor_mat());
+        txtTotalRec.setText(""+mat.getValor_recaudado());
     }
 
     @SuppressWarnings("unchecked")
@@ -118,8 +117,10 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
         lbIdUsuario = new javax.swing.JLabel();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
-        txtMatricula = new javax.swing.JTextField();
         txtValMat = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtTotalRec = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -211,9 +212,17 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
 
         lbEmpresa.setText("empresa");
 
-        txtMatricula.setText("jTextField1");
-
+        txtValMat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtValMat.setText("jTextField1");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("VALOR DE MATRICULA");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("TOTAL RECAUDADO");
+
+        txtTotalRec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTotalRec.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,42 +232,46 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(lbIdUsuario)
-                                .addGap(156, 156, 156)
-                                .addComponent(lbSucursal)
-                                .addGap(122, 122, 122)
-                                .addComponent(lbEmpresa))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtAlumno)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
-                                .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(186, 186, 186))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTotalRec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
+                        .addComponent(lbIdUsuario)
+                        .addGap(82, 82, 82)
+                        .addComponent(lbSucursal)
+                        .addGap(46, 46, 46)
+                        .addComponent(lbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,23 +289,20 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
                         .addComponent(jLabel11)
                         .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lbIdUsuario))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbSucursal)
-                            .addComponent(lbEmpresa)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(7, 7, 7)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTotalRec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbIdUsuario)
+                    .addComponent(lbSucursal)
+                    .addComponent(lbEmpresa))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,22 +320,27 @@ public class MensualidadMostrarForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 public void total(){
+    tabla();
     try {
         double tot = 0.0;
         double resul = 0.0;
+        double total = 0.0;
+//        double matricula = Double.valueOf(txtValMat.getText());
         for (int i = 0; i < jtMensualidades.getRowCount(); i++) {
             tot = Double.valueOf(jtMensualidades.getValueAt(i, 3).toString());
             System.out.println("total: "+tot);
-            resul = resul +tot;
+            resul = resul +tot ;
         }
-        resul = resul + Double.valueOf(txtValMat.getText());
+        total = resul + Double.valueOf(txtValMat.getText());
         
-        System.out.println("result: "+resul);
+        System.out.println("result: "+total);
+        
+        txtTotalRec.setText(""+total);
         
         JoinMatriculas obj = new JoinMatriculas();
         obj.setId_empleado(Long.valueOf(lbIdUsuario.getText()));
         obj.setId_matricula(mat.getId_matricula());
-        obj.setValor_recaudado(resul);
+        obj.setValor_recaudado(total);
         
             crud.valorRecaudado(obj);
         
@@ -365,8 +380,8 @@ public void total(){
                         acc.setVisible(true);
                     }
                 }
-                tabla();
                 total();
+                tabla();
             }
         } catch (Exception e) {
             Logger.getLogger(MensualidadMostrarForm.class.getName()).log(Level.SEVERE, null, e);
@@ -519,6 +534,8 @@ public void total(){
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -529,8 +546,8 @@ public void total(){
     private javax.swing.JLabel lbSucursal;
     private javax.swing.JTextField txtAlumno;
     private javax.swing.JTextField txtCurso;
-    private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtPeriodo;
+    private javax.swing.JTextField txtTotalRec;
     private javax.swing.JTextField txtValMat;
     private javax.swing.JTextField txtcedula;
     // End of variables declaration//GEN-END:variables

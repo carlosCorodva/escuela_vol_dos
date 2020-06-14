@@ -67,7 +67,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
         jToolBar1 = new javax.swing.JToolBar();
         btnBuscar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -125,19 +124,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
             }
         });
         jToolBar1.add(btnActualizar);
-
-        btnImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesDos/impresora 32.png"))); // NOI18N
-        btnImprimir.setText("  MATRICULA  ");
-        btnImprimir.setFocusable(false);
-        btnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnImprimir);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir_32.png"))); // NOI18N
@@ -383,33 +369,10 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
                 acc.setVisible(true);
                 listar.clear();
                 cbFiltro.setSelectedIndex(0);
-//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-                listar = crud.listarAlumnosMensualidadTodos(je);
-                Tablas.cargarJoinMatriculas(jtMensualidades, listar);
+                tabla();
             }
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-//        int i = jtMensualidades.getSelectedRow();
-//        if (jtMensualidades.isRowSelected(i) == false) {
-//            JOptionPane.showMessageDialog(this, "SELECCIONE UN REGISTRO");
-//        } else {
-//            objeto = devuelveObjetoEmpleado(jtMensualidades.getValueAt(i, 0).toString(), listar);
-//            if (objeto != null) {
-//                System.out.println("holaaaaa");
-//                ReimprimirMtatriculaForm acc = new ReimprimirMtatriculaForm(new javax.swing.JFrame(), true, us, objeto);
-//                acc.setVisible(true);
-//                listar.clear();
-//                cbFiltro.setSelectedIndex(0);
-//                je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
-//                je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
-//                listar = crud.listarAlumnosMatriculas(je);
-//                Tablas.cargarJoinMatriculas(jtMensualidades, listar);
-//            }
-//        }
-    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,7 +434,6 @@ public class MostrarMensualidadesForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnImprimir;
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

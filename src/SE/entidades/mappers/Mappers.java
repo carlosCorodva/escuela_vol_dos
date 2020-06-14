@@ -299,6 +299,7 @@ public class Mappers {
             obj.setParentesco_dos(rs.getString("Parentesco_dos"));
             obj.setAnt_escuela(rs.getString("Ant_escuela"));
             obj.setValor_mat(rs.getDouble("valor_mat"));
+            obj.setValor_recaudado(rs.getDouble("valor_recaudado"));
             obj.setConducta_general(rs.getString("conducta_general"));
         } catch (SQLException ex) {
             Logger.getLogger(Mappers.class.getName()).log(Level.SEVERE, null, ex);
@@ -455,7 +456,7 @@ public class Mappers {
         ma_mensualidad obj = new ma_mensualidad();
         try {
             obj.setMensualidad(rs.getLong("mensualidad"));
-            obj.setIngreso(rs.getDouble("ingreso"));
+//            obj.setIngreso(rs.getDouble("ingreso"));
             obj.setDeuda(rs.getDouble("deuda"));
             obj.setValor_ref(rs.getDouble("valor_ref"));
             obj.setTotal(rs.getDouble("total"));

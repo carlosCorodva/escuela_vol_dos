@@ -213,7 +213,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
         txtaPromo.setEditable(false);
-        txtaPromo.setText("NINGUNA");
+        txtaPromo.setText("NINGUNO");
 
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
@@ -231,7 +231,7 @@ public class crearPreciosForm extends javax.swing.JDialog {
         int x = cbCodigo.getSelectedIndex();
         String promo = "";
         if (x == 0) {
-            promo = "NINGUNA";
+            promo = "NINGUNO";
         } else if (x == 1) {
             promo = "DOS ALUMNOS POR FAMILIA";
         } else if (x == 2) {

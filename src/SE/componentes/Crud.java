@@ -3013,7 +3013,7 @@ public class Crud {
         return valor;
     }
     public ArrayList<gen_precios> ComboValor(gen_precios mp) {
-        ArrayList<gen_precios> lista = new ArrayList<gen_precios>();
+        ArrayList<gen_precios> lista = new ArrayList<>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);
@@ -3110,7 +3110,7 @@ public class Crud {
     }
     
     public ArrayList<JoinMatriculas> listarAlumnosMensualidadTodos(JoinMatriculas je) {
-        ArrayList<JoinMatriculas> valor = new ArrayList<JoinMatriculas>();
+        ArrayList<JoinMatriculas> valor = new ArrayList<>();
         try {
             con = c.conectar();
             con.setAutoCommit(false);

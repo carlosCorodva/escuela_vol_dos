@@ -33,7 +33,7 @@ import SE.views.reportes.ReporteAlumnosperiodoActualForm;
 import SE.views.usuario.clave.ConfirmacionClaveForm;
 import SE.views.usuario.empleados.MostrarEmpleadosForm;
 import SE.views.usuario.empleados.NuevoEmpleadoDosForm;
-import SE.views.usuario.empleados.PermisosMostrarEmpleadosForm;
+import SE.views.usuario.permisos.cursos.PermisosMostrarEmpleadosForm;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;

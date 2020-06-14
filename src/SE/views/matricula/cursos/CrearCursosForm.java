@@ -75,6 +75,11 @@ public class CrearCursosForm extends javax.swing.JDialog {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 31, -1, -1));
 
         txtCurso.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtCurso.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCursoFocusLost(evt);
+            }
+        });
         jPanel1.add(txtCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 27, 87, -1));
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -217,6 +222,10 @@ public class CrearCursosForm extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCapacidadKeyTyped
+
+    private void txtCursoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCursoFocusLost
+        txtCurso.setText(txtCurso.getText().toUpperCase());
+    }//GEN-LAST:event_txtCursoFocusLost
 
     /**
      * @param args the command line arguments

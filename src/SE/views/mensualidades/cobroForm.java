@@ -51,7 +51,7 @@ public class cobroForm extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        txtValor = new javax.swing.JTextField();
+        txtDeuda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPago = new javax.swing.JTextField();
@@ -75,7 +75,7 @@ public class cobroForm extends javax.swing.JDialog {
             }
         });
 
-        txtValor.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtDeuda.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("VALOR");
@@ -118,7 +118,7 @@ public class cobroForm extends javax.swing.JDialog {
                         .addGap(8, 8, 8)))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(txtDeuda, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                     .addComponent(txtPago))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +140,7 @@ public class cobroForm extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDeuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCobrar))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -183,19 +183,21 @@ public class cobroForm extends javax.swing.JDialog {
         lbSucursal.setVisible(false);
         lbEmpresa.setVisible(false);
         lbIdUsuario.setVisible(false);
-        txtValor.setEditable(false);
+        txtDeuda.setEditable(false);
 
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
 
-        txtValor.setText("" + me.getDeuda());
+        txtDeuda.setText("" + me.getDeuda());
+        
     }
 
     public void cobro() {
         double result = 0.0;
+        double total = 0.0;
         String est = "";
-        double deuda = Double.valueOf(txtValor.getText());
+        double deuda = Double.valueOf(txtDeuda.getText());
         double pago = Double.valueOf(txtPago.getText());
 
         if (pago <= 0.0) {
@@ -205,21 +207,28 @@ public class cobroForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "NO PUEDE COBRAR EN CERO" + result);
         }
         if (deuda == pago) {
+            total = deuda + me.getTotal();
             result = deuda - pago;
             est = "PAGADO";
 
         }
         if (deuda > pago) {
             result = deuda - pago;
+            total = (deuda + me.getTotal())-result;
+            System.out.println("total: "+total);
             JOptionPane.showMessageDialog(this, "ADEUDA: $" + result);
             est = "ADEUDA";
 
         }
         if (deuda < pago) {
+            
+            total = deuda + me.getTotal();
+            System.out.println("total: "+total);
+            
             result = pago - deuda;
             JOptionPane.showMessageDialog(this, "SU CAMBIO ES: $" + result);
             est = "PAGADO";
-            pago = (pago + me.getTotal()) - result;
+//            pago = (pago + me.getTotal()) - result;
 
             
         }
@@ -233,13 +242,14 @@ public class cobroForm extends javax.swing.JDialog {
         obj.setId_mensualidad(me.getId_mensualidad());
         obj.setId_sucursal_men(Long.valueOf(lbSucursal.getText()));
         obj.setId_matricula(mat.getId_matricula());
-        obj.setTotal(pago);
+        obj.setTotal(total);
         obj.setEstado(est);
         obj.setId_actualizacion(Long.valueOf(lbIdUsuario.getText()));
 
         try {
             String a = crud.cobroMensualidad(obj);
             JOptionPane.showMessageDialog(this, a);
+            setVisible(false);
         } catch (Exception e) {
 
         }
@@ -309,7 +319,7 @@ public class cobroForm extends javax.swing.JDialog {
     private javax.swing.JLabel lbEmpresa;
     private javax.swing.JLabel lbIdUsuario;
     private javax.swing.JLabel lbSucursal;
+    private javax.swing.JTextField txtDeuda;
     private javax.swing.JTextField txtPago;
-    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

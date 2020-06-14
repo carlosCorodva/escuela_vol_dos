@@ -58,14 +58,12 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbIdUsuario = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObser = new javax.swing.JTextArea();
         lbSucursal = new javax.swing.JLabel();
         lbEmpresa = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         cbNivel = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtCapacidad = new javax.swing.JTextField();
@@ -105,9 +103,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
 
         lbIdUsuario.setText("jLabel2");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("ESTADO");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("OBSERVACION");
 
@@ -126,9 +121,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
         lbSucursal.setText("sucursal");
 
         lbEmpresa.setText("empresa");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("NIVEL");
 
         cbNivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIVEL...", "1", "2", "3", "4", "5", "6", "7" }));
@@ -152,13 +144,9 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(lbIdUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addGap(85, 85, 85)
                         .addComponent(lbSucursal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(23, 23, 23)
                         .addComponent(lbEmpresa))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +192,6 @@ public class ActualizarCursosForm extends javax.swing.JDialog {
                     .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
                     .addComponent(lbIdUsuario)
                     .addComponent(lbEmpresa)
                     .addComponent(lbSucursal))
@@ -371,9 +357,7 @@ public void form() {
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbNivel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

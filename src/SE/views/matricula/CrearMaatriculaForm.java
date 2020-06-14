@@ -172,7 +172,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         txtObservacion = new javax.swing.JTextArea();
         cbValor = new javax.swing.JComboBox<>();
         cbMensualidad = new javax.swing.JComboBox<>();
-        cbId = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtRepresentante = new javax.swing.JTextField();
@@ -401,8 +401,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         cbMensualidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbMensualidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MENSUALIDAD..." }));
 
-        cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA", "PASAPORTE" }));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("CEDULA");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -421,8 +421,8 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
-                                    .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(54, 54, 54)
+                                    .addComponent(jLabel4))
+                                .addGap(90, 90, 90)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                     .addComponent(txtAlumno)))
@@ -452,7 +452,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -952,6 +952,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
         cbxServicoBas.setEnabled(valor);
         cbxPartidaNac.setEnabled(valor);
         cbxEscuela.setEnabled(valor);
+        cbMensualidad.setEnabled(valor);
 
         cbParUno.setEnabled(valor);
         cbParDos.setEnabled(valor);
@@ -1238,7 +1239,6 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbId;
     private javax.swing.JComboBox<String> cbMensualidad;
     private javax.swing.JComboBox<String> cbParDos;
     private javax.swing.JComboBox<String> cbParUno;
@@ -1258,6 +1258,7 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
