@@ -37,6 +37,7 @@ public class MostrarMateriasForm extends javax.swing.JDialog {
         Tablas.cargarTablaMateria(jtMaterias, listar);
         us = usuario;
         lbIdUsuario.setText(us.getId_usuario().toString());
+        btnActualizar.setVisible(false);
     }
 
     public MostrarMateriasForm(java.awt.Frame parent, boolean modal) {

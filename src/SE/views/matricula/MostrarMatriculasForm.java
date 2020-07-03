@@ -44,7 +44,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         lbEmpresa.setText(us.getId_empresa().toString());
         lbSucursal.setText(us.getId_sucursal().toString());
         lbIdUsuario.setText(us.getId_usuario().toString());
-        
+
         tabla();
     }
 
@@ -265,7 +265,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void tabla(){
+    public void tabla() {
         je.setId_empresa(Long.valueOf(lbEmpresa.getText()));
         je.setId_sucursal(Long.valueOf(lbSucursal.getText()));
         listar = crud.listarAlumnosMatriculas(je);
@@ -306,8 +306,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
                 i = jtMatriculas.getSelectedRow();
                 if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                     JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
-                }
-                else if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
+                } else if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                     JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
 
                 } else {
@@ -411,8 +410,7 @@ public class MostrarMatriculasForm extends javax.swing.JDialog {
             if ("MATRICULADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                 JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
 
-            }
-            if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
+            } else if ("APROBADO-CERRADO".equals(jtMatriculas.getValueAt(i, 10).toString())) {
                 JOptionPane.showMessageDialog(this, "EL ALUMNO/A YA ESTA MATRICULADO/A");
 
             } else {

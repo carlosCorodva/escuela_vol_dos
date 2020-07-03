@@ -32,6 +32,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
 
     /**
      * Creates new form Registrar
+     *
      * @param parent
      * @param modal
      * @param usuario
@@ -91,7 +92,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
-        cbId = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jcLenguaje = new javax.swing.JCheckBox();
         jcMatematicas = new javax.swing.JCheckBox();
@@ -259,8 +260,8 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             }
         });
 
-        cbId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA", "P. NATURAL", "P. JURIDICA", "PASAPORTE" }));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("N° IDENTIFICACION");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -273,8 +274,8 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel2))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +322,9 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(cbxCopiaTitulo))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
@@ -343,8 +346,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                             .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)
-                                .addComponent(cbId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel7)))
                         .addGap(13, 13, 13)
                         .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -453,7 +455,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
@@ -514,7 +516,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     public boolean validarCedula(String cedula) {
         boolean estado = false;
         try {
-            id = cbId.getSelectedIndex();
+//            id = cbId.getSelectedIndex();
             boolean vc = ValidarIdentificacionEc.validarCedula(cedula);
             boolean pn = ValidarIdentificacionEc.validarRucPersonaNatural(cedula);
             boolean pj = ValidarIdentificacionEc.validarRucSociedadPrivada(cedula);
@@ -523,7 +525,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                 if (vc == false) {
                     JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
                     estado = false;
-                }else{
+                } else {
                     estado = true;
                 }
                 System.out.println(vc);
@@ -531,14 +533,14 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
                 if (pn == false) {
                     JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
                     estado = false;
-                }else{
+                } else {
                     estado = true;
                 }
             } else if (id == 2) {
                 if (pj == false) {
                     JOptionPane.showMessageDialog(this, "IDENTIFICACION NO VALIDA, REVISE IDENTIFICACION");
                     estado = false;
-                }else{
+                } else {
                     estado = true;
                 }
             } else {
@@ -705,55 +707,65 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
         String obs;
         Long cc, ct;
         String cedu = txtCedula.toString();
-        
+
         if (jcCiencias.isSelected() == true) {
             cn = "A";
-        } else {
+        }
+        if (jcCiencias.isSelected() == false) {
             cn = "I";
         }
         if (jcDesarrollo.isSelected() == true) {
             dhi = "A";
-        } else {
+        }
+        if (jcDesarrollo.isSelected() == false) {
             dhi = "I";
         }
         if (jcEFisica.isSelected() == true) {
             ef = "A";
-        } else {
+        }
+        if (jcEFisica.isSelected() == false) {
             ef = "I";
         }
         if (jcEstudios.isSelected() == true) {
             es = "A";
-        } else {
+        }
+        if (jcEstudios.isSelected() == false) {
             es = "I";
         }
         if (jcInformaticas.isSelected() == true) {
             inf = "A";
-        } else {
+        }
+        if (jcInformaticas.isSelected() == false) {
             inf = "I";
         }
         if (jcIngles.isSelected() == true) {
             ing = "A";
-        } else {
+        }
+        if (jcIngles.isSelected() == false) {
             ing = "I";
         }
         if (jcLenguaje.isSelected() == true) {
             ll = "A";
-        } else {
+        }
+        if (jcLenguaje.isSelected() == false) {
             ll = "I";
         }
         if (jcMatematicas.isSelected() == true) {
             m = "A";
-        } else {
+        }
+        if (jcMatematicas.isSelected() == false) {
             m = "I";
         }
         if (jcProyectos.isSelected() == true) {
             pe = "A";
-        } else {
+        }
+        if (jcProyectos.isSelected() == false) {
             pe = "I";
         }
         if (jcecArtistica.isSelected() == true) {
             eca = "A";
-        } else {
+        }
+        if (jcecArtistica.isSelected() == false) {
             eca = "I";
         }
 
@@ -789,11 +801,12 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN CARGO VALIDO");
         } else if (fecha == null) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UNA FECHA");
-        }else if(this.validarCedula(cedu) == false){
-            
-        } else {
+        } //        else if(this.validarCedula(cedu) == false){
+        //            
+        //        } 
+        else {
             String nombApe = txtApellidos.getText() + " " + txtNombres.getText();
-            
+
             JoinEmpleados obj = new JoinEmpleados();
             obj.setApellidos_nombres(nombApe);
             obj.setCedula(txtCedula.getText());
@@ -810,23 +823,23 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
             obj.setId_usuario(Long.valueOf(lbIdUsuario.getText()));
             obj.setId_sucursal(Long.valueOf(lbSucursal.getText()));
 
-            us_permiso_empleado us = new us_permiso_empleado();
-            us.setEstado_pe(ll);
-            us.setEstado_pe2(m);
-            us.setEstado_pe3(inf);
-            us.setEstado_pe4(cn);
-            us.setEstado_pe5(ing);
-            us.setEstado_pe6(eca);
-            us.setEstado_pe7(ef);
-            us.setEstado_pe8(pe);
-            us.setEstado_pe9(dhi);
-            us.setEstado_pe10(es);
+            us_permiso_empleado usp = new us_permiso_empleado();
+            usp.setEstado_pe(ll);
+            usp.setEstado_pe2(m);
+            usp.setEstado_pe3(inf);
+            usp.setEstado_pe4(cn);
+            usp.setEstado_pe5(es);
+            usp.setEstado_pe6(ing);
+            usp.setEstado_pe7(eca);
+            usp.setEstado_pe8(ef);
+            usp.setEstado_pe9(pe);
+            usp.setEstado_pe10(dhi);
 
             try {
                 String a = crud.CrearEmpleado(obj);
                 JOptionPane.showMessageDialog(this, a);
 
-                crud.CrearPermisosMaterias(us);
+                crud.CrearPermisosMaterias(usp);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
@@ -907,7 +920,6 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbCargo;
-    private javax.swing.JComboBox<String> cbId;
     private javax.swing.JCheckBox cbxCopiaCedula;
     private javax.swing.JCheckBox cbxCopiaTitulo;
     private com.toedter.calendar.JDateChooser dtFecha;
@@ -918,6 +930,7 @@ public class NuevoEmpleadoForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

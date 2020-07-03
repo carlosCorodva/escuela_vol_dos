@@ -1028,9 +1028,11 @@ public class CrearMaatriculaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
         } else if (cbMensualidad.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN VALOR VALIDO");
-        } else if (this.validarCedula(cedula) == false) {
-
-        } else {
+        }
+//        else if (this.validarCedula(cedula) == false) {
+//
+//        } 
+        else {
 
             imprimirMatricula();
 

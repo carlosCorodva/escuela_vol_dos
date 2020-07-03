@@ -963,9 +963,11 @@ public class ActualizarEmpleadoForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Seleccione un cargo válido");
         } else if (txtFecha.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fecha");
-        } else if (this.validarCedula(cedu) == false) {
-
-        } else {
+        } 
+//        else if (this.validarCedula(cedu) == false) {
+//
+//        } 
+        else {
             try {
                 JoinEmpleados obj = new JoinEmpleados();
                 obj.setApellidos_nombres(txtNombres.getText());
